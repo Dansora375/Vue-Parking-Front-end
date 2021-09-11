@@ -1,0 +1,30 @@
+.navegation{
+    display: inline-block;
+    position: fixed;
+    width: 20%;
+    background-color: var(--main-color);;
+    height: 100%;
+    
+}
+.navegation nav{
+    list-style: none;
+    font-weight: 700;
+    color: var(--secondary-color);
+    
+}
+.navegation nav li{
+    text-align: center;
+    width: 100%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.navegation .completed:hover{
+    background-color: var(--third-color);
+    cursor: pointer ;
+}
+
+.navegation .uncompleted{
+    font-weight:200 ;
+    color: var(--main-background-color);
+}

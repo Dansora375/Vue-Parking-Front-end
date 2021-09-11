@@ -1,0 +1,72 @@
+
+
+/* Definicion de variables */
+:root{
+    /* Variables de colores, tema */
+    --main-color:#22577A;
+    --secondary-color:#38A3A5;
+    --third-color:#57CC99;
+    --main-background-color:#80ed99;
+}
+
+
+
+body{
+    /* Eliminando el margin que viene por defecto en html */
+    margin: 0;
+    /* Definiendo el orden basico de colores */
+    background-color: var(--main-background-color);
+    color: var(--main-color);
+    /* Definiendo la fuente de letra que usara la pagina */
+    font-family: 'PT Sans Caption', sans-serif;
+    
+}
+
+/* las etiquetas input requieren una eliminacion de estilos anterior a su uso */
+input{
+    color: var(--main-color);
+    font-family: 'PT Sans Caption', sans-serif;
+    background:none;
+    border:none;
+    outline:0;
+}
+
+/* Zona de botones */
+
+/* las etiquetas button requieren una eliminacion de estilos anterior a su uso */
+button{
+    color: var(--main-color);
+    background: none;
+    border: none;
+    font-size: medium;
+    border-radius: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    cursor: pointer;
+}
+
+.cancelar{
+
+    border: 2px solid var(--main-color);
+    
+}
+.confirmar{
+    color: var(--secondary-color);
+    background-color: var(--main-color);
+}
+
+.cancelar:hover{
+    background-color: var(--main-background-color);
+}
+
+.cancelar:active{
+    color:var(--secondary-color)
+}
+
+.confirmar:hover{
+    background-color: var(--main-background-color);
+}
+
+.confirmar:active{
+    color:var(--primary-color)
+}
