@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VueParking-Parqueadero</title>
+
+    <!-- Lista de referencias a css usadas en esta pagina -->
+    <!-- Configuracion inicial de la vista -->
+    <link rel="stylesheet" href="../css/vistaParqueadero/inicial.css">
+    <!-- Configuracion del header -->
+    <link rel="stylesheet" href="../css/vistaParqueadero/header.css">
+    <!-- Configuracion del nav -->
+    <link rel="stylesheet" href="../css/vistaParqueadero/Navigator.css">
+    <!-- Configuracion de los sections -->
+    <link rel="stylesheet" href="../css/vistaParqueadero/sections.css">
+    <!-- Configuracion del popup de Add -->
+    <link rel="stylesheet" href="../css/vistaParqueadero/popup.css">
+
+
+    <!-- Importando la fuente desde google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans+Caption:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <nav>
+            <ul v-for='opcion of opcionesPark'>
+                {{opcion}}
+            </ul>
+        </nav>
+        <button v-on:click='hideDialog'>
+            Abrir
+        </button>
+        <dialog id="PruebaDialog">
+            <button v-on:click='hideDialog'>
+                Cancelar
+            </button>
+        </dialog>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <!-- <script src="../javascript/vistaParqueadero.js"></script> -->
+    <script src="../javascript/vueParking.js"></script>
+</body>
+</html>

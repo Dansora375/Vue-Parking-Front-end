@@ -1,4 +1,4 @@
-.add-popup-container{
+/* .add-popup-container{
     
     background-color: rgba(73, 72, 72, 0.5);
     display: flex;
@@ -18,6 +18,7 @@
     justify-content: space-between;
     
 }
+
 
 
 
@@ -77,8 +78,60 @@
     transition: all 0.5s ease;
     display: none;
 }
+ */
 
 
 
+
+#dialog-newParking{
+    background-color: var(--secondary-color);
+    color: var(--main-color);
+    padding: 15;
+    width: min-content;
+    
+
+    /* transition: all 0.5s ease; */
+}
+#dialog-newParking *{
+    width: 100%;
+}
+
+#dialog-newParking h1{
+    text-align: center;
+}
+
+#dialog-newParking textarea{
+    resize: none;
+
+}
+
+
+#dialog-newParking .buttons{
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-around;
+}
+
+
+/* Zona del input */
+#dialog-newParking input{
+    display: block;
+    border-bottom: 2px solid var(--main-color);
+    margin-top: 40px;
+}
+
+
+#dialog-newParking input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: var(--main-color);
+    opacity: 2; /* Firefox */
+}
+
+#dialog-newParking input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: var(--main-color);
+}
+
+#dialog-newParking input::-ms-input-placeholder { /* Microsoft Edge */
+    color: var(--main-color);
+}
 
 

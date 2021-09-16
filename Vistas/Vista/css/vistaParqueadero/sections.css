@@ -37,7 +37,7 @@
 .sections input{
 
     border-bottom: 2px solid var(--main-color);
-    width: 0px;
+    width: 30px;
     font-size: medium;
 
     transition: all 0.5s ease;
