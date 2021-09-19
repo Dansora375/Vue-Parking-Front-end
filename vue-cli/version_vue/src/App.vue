@@ -37,5 +37,9 @@ a{
   text-decoration: none;
   // color: $background-color;
 }
+.nav{
+
+  height: 100%;
+}
 
 </style>

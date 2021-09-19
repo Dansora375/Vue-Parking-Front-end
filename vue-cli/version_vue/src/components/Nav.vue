@@ -23,15 +23,10 @@ export default {
 <style scoped lang="scss">
 @import '@/views/scss/_theme.scss';
 .navegation{
-  position:absolute;
-  left: 0;
-  
-  top: 100;
-  // bottom: 0;
-  display: inline-block;
-  // display: inline-block;
+  position:fixed;
+
   width: 20%;
-  align-items: start;
+  // align-items: start;
   height: 100%;
 }
 .nav{
