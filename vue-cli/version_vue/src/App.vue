@@ -18,16 +18,24 @@ body{
   color: $main-color;
 }
 
-#nav {
-  padding: 30px;
+// #nav {
+//   padding: 0px;
+  
+//   a {
+//     font-weight: bold;
+//     color: $third-color;
+//     :visited{
+//       background: #42b983;
+//     }
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+//     &.router-link-exact-active {
+//       color: #42b983;
+//     }
+//   }
+// }
+a{
+  text-decoration: none;
+  // color: $background-color;
 }
+
 </style>

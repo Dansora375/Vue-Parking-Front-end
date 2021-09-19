@@ -37,7 +37,7 @@ header{
   /* Dado el backgroun de la etiqueta, toca cambiar el color del texto para ser legible */
   color: var(--secondary-color);
   padding-left: 200px;
-  padding-right: 200px;
+  padding-right: 200px; 
 
   /* Altura de la etiqueta */
   height: 100px;
