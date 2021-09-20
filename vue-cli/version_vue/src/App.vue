@@ -42,4 +42,12 @@ a{
   height: 100%;
 }
 
+input{
+    color: var(--main-color);
+    font-family: 'PT Sans Caption', sans-serif;
+    background:none;
+    border:none;
+    outline:0;
+}
+
 </style>

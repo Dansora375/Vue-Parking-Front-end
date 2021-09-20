@@ -3,6 +3,7 @@
     <nav class="nav">
       <router-link to="/" class="completed">Home</router-link>
       <router-link to="/about">About</router-link>
+      <router-link to="/vehicle_zone">zona de vehiculos</router-link>
     </nav>
   </div>
 </template>
@@ -28,8 +29,11 @@ export default {
   width: 20%;
   // align-items: start;
   height: 100%;
+  top: 0;
 }
 .nav{
+
+  padding-top:80px;
   background-color: $main-color;
   display: flex;
   
