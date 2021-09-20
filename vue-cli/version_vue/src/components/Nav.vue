@@ -24,13 +24,15 @@ export default {
 @import '@/views/scss/_theme.scss';
 .navegation{
   position:fixed;
-
+  padding-top: 100px;
+  top: 0;
   width: 20%;
+  background-color: $main-color;
   // align-items: start;
   height: 100%;
 }
 .nav{
-  background-color: $main-color;
+  
   display: flex;
   
   flex-direction: column;
