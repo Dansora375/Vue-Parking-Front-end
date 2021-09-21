@@ -21,18 +21,21 @@
 
     <!-- Importando la fuente desde google fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=PT+Sans+Caption:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans+Caption:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="add-popup-container ocultar">
-        <div class="add-popup">
+    <div id="app">
+        <dialog id="dialog-newParking">
             <h1>
                 Zona de ingreso al parqueadero
             </h1>
-
+    
             <input type="text" placeholder="Placa">
-            <input type="text" placeholder="Tipo de vehiculo">
+            <!-- <input type="text" placeholder="Tipo de vehiculo"> -->
+            <select name="select-vehicle" id="vehicle-type" v-for="opcion of opcionesPark">
+                {{opcion}}
+            </select>
             <div class="textArea">
                 <p>
                     Datos extra
@@ -43,51 +46,61 @@
                     <button class="confirmar">Confirmar</button>
                 </div>
             </div>
-            
-            
-        </div>
-    </div>
-
-
-
-    <header>
+        </dialog>
     
-            <img src="../../imagenes/car_logo_secondary.svg" class="SVG-secondary" alt="car logo icon hat minimalist">
-            <h1>
-                VUEPARKING
-            </h1>
-            <div>
-                <p>Nombre</p>
-                <p>Rol</p>
-            </div>
     
+    
+        <header>
         
-    </header>
-
-    <div class="navegation">
-        <nav>
-            <li class="completed">Parqueadero</li>
-            <li class="uncompleted">Vehiculos</li>
-            <li class="uncompleted">Residentes</li>
-            <li class="uncompleted">Hogares</li>
-        </nav>
-    </div>
-    <div class="sections">
-            <section class="superior-bar">
-            
-                <img src="../../imagenes/add.svg" class="SVG add">
+                <img src="../../imagenes/car_second.svg" class="SVG-secondary" alt="car logo icon hat minimalist">
+                <h1>
+                    VUEPARKING
+                </h1>
                 <div>
-                    <input type="text" name="search-bar">
-                    <img src="../../imagenes/Frame.svg" class="SVG search">
+                    <p>Nombre</p>
+                    <p>Rol</p>
                 </div>
+        
             
-            </section>      
-    </div>
+        </header>
+    
+        <div class="navegation">
+            <nav>
+                <li class="completed">Parqueadero</li>
+                <li class="uncompleted">Vehiculos</li>
+                <li class="uncompleted">Residentes</li>
+                <li class="uncompleted">Hogares</li>
+            </nav>
+        </div>
     
     
+        <div class="sections">
+                <section class="superior-bar">
+                
+                    <img src="../../imagenes/add.svg" class="SVG add" v-on:click="showDialogParking">
+                    <div>
+                        <input type="text" name="search-bar" >
+                        <img src="../../imagenes/Frame.svg" class="SVG search">
+                    </div>
+                
+                </section>   
+                
+                <section class="item">
+                    <img class="vehicle" src="" alt="">
+                    <div class="tiempo">
 
-    
-    
+                    </div>
+                    <div class="placa">
+
+                    </div>
+                    <img class="menu" src="" alt="">
+                </section>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <script src="../javascript/vistaParqueadero.js"></script>
+    <!-- <script src="../javascript/vueParking.js"></script> -->
 </body>
 </html>

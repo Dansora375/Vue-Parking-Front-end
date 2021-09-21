@@ -70,3 +70,9 @@ button{
 .confirmar:active{
     color:var(--primary-color)
 }
+
+
+
+dialog::backdrop {
+    background-color: rgba(212, 203, 203, 0.452);
+}

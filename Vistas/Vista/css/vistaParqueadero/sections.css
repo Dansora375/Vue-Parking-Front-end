@@ -2,6 +2,7 @@
 .sections{
     /* Separando la etiqueta del navegador, esto gracias al position:fixed */
     margin-left: 20%;
+    display: block;
 
     padding: 20px;
 }
@@ -37,7 +38,7 @@
 .sections input{
 
     border-bottom: 2px solid var(--main-color);
-    width: 0px;
+    width: 30px;
     font-size: medium;
 
     transition: all 0.5s ease;
