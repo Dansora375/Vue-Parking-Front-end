@@ -10,8 +10,6 @@
                     <p class="inf-estado doble-em">
                         {{inf_estado}}
                     </p>
-                    
-
                 </div>
                 <div class="parking-num">
                     <p class="sub-title  trescuatro-em">
@@ -22,44 +20,39 @@
                     </p>
                 </div>
             </div>
-            
             <img class="menu" :src=img_opcions alt="">
         </section>
     </div>
-        
 </template>
 
 <script>
-    import default_image from '@/assets/aparcamiento.svg';
-    import img_opcions from '@/assets/menu.svg';
-    export default {
-        name:"ZonaParqueadero",
-        props: {
-            // Mirar si se podria hacer un a arreglo para meter todas lasimagenes
-            img_route:{
-                
-                type:String,
-                // default: '@/assets/predefined_list.svg',
-                default:default_image
-            },
-            img_opcions:{
-                type:String,
-                default:img_opcions
-            },
-            inf_estado:{
-                // Se podria pensar en implementar un Boolean
-                type:String, 
-                default:"vacio"
-            },
-            parqueadero_numero:{
+import defaultImage from '@/assets/aparcamiento.svg';
+import imgOptions from '@/assets/menu.svg';
 
-                type:String,
-                default:"A1"
-
-            }
-            
-        }
-    }
+export default {
+  name: 'ZonaParqueadero',
+  props: {
+    // Mirar si se podria hacer un a arreglo para meter todas lasimagenes
+    img_route: {
+      type: String,
+      // default: '@/assets/predefined_list.svg',
+      default: defaultImage,
+    },
+    img_opcions: {
+      type: String,
+      default: imgOptions,
+    },
+    inf_estado: {
+      // Se podria pensar en implementar un Boolean
+      type: String,
+      default: 'vacio',
+    },
+    parqueadero_numero: {
+      type: String,
+      default: 'A1',
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -74,7 +67,7 @@
 
         display: flex;
         border: 2px solid $main-color;
-        justify-content: space-between; 
+        justify-content: space-between;
         align-items: center;
     }
 
@@ -82,13 +75,12 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        
     }
 
     .container-double{
 
         display: flex;
-        justify-content: space-between; 
+        justify-content: space-between;
         align-items: center;
         width: 80%;
     }
@@ -125,8 +117,6 @@
     .inf-estado {
         color:$secondary-color;
     }
-   
-
     @media (max-width: 530px){
         .tiempo-placa *{
             display: block;
