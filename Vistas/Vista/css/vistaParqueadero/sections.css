@@ -2,6 +2,7 @@
 .sections{
     /* Separando la etiqueta del navegador, esto gracias al position:fixed */
     margin-left: 20%;
+    display: block;
 
     padding: 20px;
 }

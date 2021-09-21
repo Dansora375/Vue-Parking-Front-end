@@ -2,6 +2,7 @@
   <div class="navegation">
     <nav class="nav">
       <router-link to="/" class="completed">Home</router-link>
+      <router-link to="/Vehicle_zone" class="completed">Vehicle zone</router-link>
       <router-link to="/about">About</router-link>
       <router-link to="/vehicle_zone">zona de vehiculos</router-link>
     </nav>
@@ -25,14 +26,15 @@ export default {
 @import '@/views/scss/_theme.scss';
 .navegation{
   position:fixed;
-
+  padding-top: 100px;
+  top: 0;
   width: 20%;
+  background-color: $main-color;
   // align-items: start;
   height: 100%;
   top: 0;
 }
 .nav{
-
   padding-top:80px;
   background-color: $main-color;
   display: flex;

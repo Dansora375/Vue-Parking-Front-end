@@ -38,10 +38,10 @@ a{
   // color: $background-color;
 }
 .nav{
-
   height: 100%;
 }
 
+/* las etiquetas input requieren una eliminacion de estilos anterior a su uso */
 input{
     color: var(--main-color);
     font-family: 'PT Sans Caption', sans-serif;

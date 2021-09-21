@@ -2,7 +2,7 @@
   <div>
     <header>
       <img src="@/assets/car_second.svg" class="SVG-secondary" alt="car logo icon hat minimalist">
-      <h1>
+      <h1 class="title">
         VUEPARKING
       </h1>
       <div>
@@ -35,9 +35,9 @@ header{
   /* Modificando el fondo del header*/
   background-color :$main-color;
   /* Dado el backgroun de la etiqueta, toca cambiar el color del texto para ser legible */
-  color: var(--secondary-color);
-  padding-left: 200px;
-  padding-right: 200px; 
+  color: $secondary-color;
+  padding-left: 20%;
+  padding-right: 20%; 
 
   /* Altura de la etiqueta */
   height: 100px;
@@ -48,9 +48,9 @@ header{
   justify-content: space-around;
   /* alineamiento horizontal */
   align-items: center;
-  height: 100%;
+  // height: 100%;
 
-  color: $secondary-color;
+  // color: $secondary-color;
 }
 
 /* Configuracion del Titulo de la barra superior */
@@ -63,5 +63,12 @@ header h1{
 .SVG-secondary{
     /* La relacion se mantiene, por lo que solo es necesario modificar un valor */
     width: 70px;
+}
+
+
+@media(max-width: 700px){
+  .title{
+    display: none;
+  }
 }
 </style>

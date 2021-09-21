@@ -1,11 +1,6 @@
 <template>
   <div>
-    <transition name="fade" class="letra_x" @click="show_input=false">
-      <img src="@/assets/letra-x.svg" v-if="show_input" alt="">
-    </transition>
-    
-    <input v-bind:class="{incoming_input:show_input}" @click="show_input=true" type="text" >
-
+    <input type="text" >
     <img src="@/assets/Frame.svg"  class="SVG search">
   </div>
 </template>
@@ -28,30 +23,35 @@
     width: 30px;
     font-size: medium;
     transition: all 0.5s ease;
+    color: $background-color;
   }
-  .search{
-    &:hover{
+  
+
+  .search:hover{
       background-color: $third-color;
     }
-    &:active{
+  .search:active{
       background-color:$secondary-color ;
-    }
-    
   }
   
   .incoming_input{
     width: 300px;
   }
 
+  input:focus{
+    width: 300px;
+    color: $main-color;
+  }
+
   img{
     width: 45px;
   }
+  
   .letra_x{
     display: inline-block;
     width: 30px;
     align-content: center;
   }
-
   .hide_letra_x{
     display: none;
   }
@@ -63,4 +63,11 @@
   .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
     opacity: 0;
   }
+
+  @media(max-width: 500px){
+    input:focus{
+      width: calc(100% - 50px);
+    }
+  }
+
 </style>
