@@ -37,7 +37,7 @@ header{
   /* Dado el backgroun de la etiqueta, toca cambiar el color del texto para ser legible */
   color: $secondary-color;
   padding-left: 20%;
-  padding-right: 20%; 
+  padding-right: 20%;
 
   /* Altura de la etiqueta */
   height: 100px;
@@ -64,7 +64,6 @@ header h1{
     /* La relacion se mantiene, por lo que solo es necesario modificar un valor */
     width: 70px;
 }
-
 
 @media(max-width: 700px){
   .title{

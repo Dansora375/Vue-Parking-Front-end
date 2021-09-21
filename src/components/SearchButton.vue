@@ -1,19 +1,22 @@
 <template>
   <div>
+    <!-- <transition name="fade" class="letra_x" @click="show_input=false">
+      <img src="@/assets/letra-x.svg" v-if="show_input" alt="">
+    </transition> -->
     <input type="text" >
     <img src="@/assets/Frame.svg"  class="SVG search">
   </div>
 </template>
 
 <script>
-  export default {
-    name:'SearchBar',
-    data() {
-      return {
-        show_input:false,
-      }
-    },
-  }
+export default {
+  name: 'SearchBar',
+  data() {
+    return {
+      show_input: false,
+    };
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -25,15 +28,12 @@
     transition: all 0.5s ease;
     color: $background-color;
   }
-  
-
-  .search:hover{
+ .search:hover{
       background-color: $third-color;
     }
   .search:active{
       background-color:$secondary-color ;
-  }
-  
+    }
   .incoming_input{
     width: 300px;
   }
@@ -46,7 +46,6 @@
   img{
     width: 45px;
   }
-  
   .letra_x{
     display: inline-block;
     width: 30px;
@@ -55,8 +54,6 @@
   .hide_letra_x{
     display: none;
   }
-
-
   .fade-enter-active, .fade-leave-active {
     transition: opacity .5s;
   }
@@ -69,5 +66,4 @@
       width: calc(100% - 50px);
     }
   }
-
 </style>
