@@ -20,13 +20,14 @@ export default {
 </script>
 
 <style scoped lang="scss">
+//importando Tema de la app(solo colores)
 @import '@/views/scss/_theme.scss';
 .navegation{
   position:fixed;
   padding-top: 100px;
   top: 0;
   width: 20%;
-  background-color: $main-color;
+  background-color: $main-color;//Llamando a la variable del color
   // align-items: start;
   height: 100%;
 }
