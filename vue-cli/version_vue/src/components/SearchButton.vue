@@ -1,11 +1,6 @@
 <template>
   <div>
-    <!-- <transition name="fade" class="letra_x" @click="show_input=false">
-      <img src="@/assets/letra-x.svg" v-if="show_input" alt="">
-    </transition> -->
-    
     <input type="text" >
-
     <img src="@/assets/Frame.svg"  class="SVG search">
   </div>
 </template>
@@ -37,7 +32,7 @@
     }
   .search:active{
       background-color:$secondary-color ;
-    }
+  }
   
   .incoming_input{
     width: 300px;
@@ -57,9 +52,6 @@
     width: 30px;
     align-content: center;
   }
-
-
-  
   .hide_letra_x{
     display: none;
   }
@@ -77,4 +69,5 @@
       width: calc(100% - 50px);
     }
   }
+
 </style>

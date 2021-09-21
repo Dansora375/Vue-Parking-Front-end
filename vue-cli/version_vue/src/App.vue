@@ -50,5 +50,4 @@ input{
     outline:0;
 }
 
-
 </style>
