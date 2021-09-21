@@ -2,6 +2,7 @@
   <div class="navegation">
     <nav class="nav">
       <router-link to="/" class="completed">Home</router-link>
+      <router-link to="/Vehicle_zone" class="completed">Vehicle zone</router-link>
       <router-link to="/about">About</router-link>
     </nav>
   </div>

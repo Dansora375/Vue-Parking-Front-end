@@ -38,15 +38,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .main_entrada{
-    margin-left: 20%;
-  }
+  
   .listado{
     margin-top: 20px;
   }
 
   .main_entrada{
     padding: 20px;
+    margin-left: 20%;
   }
 
   .superior-bar{

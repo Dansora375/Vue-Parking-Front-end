@@ -51,6 +51,7 @@
   img{
     width: 45px;
   }
+  
   .letra_x{
     display: inline-block;
     width: 30px;
