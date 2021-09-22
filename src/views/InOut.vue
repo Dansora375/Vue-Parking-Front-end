@@ -7,13 +7,10 @@
         <img src="@/assets/add.svg" alt="">
         <SearchBar></SearchBar>
       </div>
-      
       <div class="listado">
         <EntradaSalida class="listado"></EntradaSalida>
       </div>
-      
     </div>
-    
   </div>
 </template>
 
@@ -25,9 +22,8 @@ import Navbar from '@/components/Nav.vue';
 import SearchBar from '@/components/SearchButton.vue';
 import EntradaSalida from '@/components/EntradaSalida.vue';
 
-
 export default {
-  name: 'Home',
+  name: 'InOut',
   components: {
     Header,
     Navbar,
@@ -38,7 +34,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  
   .listado{
     margin-top: 20px;
   }

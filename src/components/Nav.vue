@@ -4,6 +4,7 @@
       <router-link to="/" class="completed">Home</router-link>
       <router-link to="/Vehicle_zone" class="completed">Vehicle zone</router-link>
       <router-link to="/about">About</router-link>
+      <router-link to="/Residentes">Residentes</router-link>
     </nav>
   </div>
 </template>
