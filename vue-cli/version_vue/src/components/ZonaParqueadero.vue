@@ -2,7 +2,7 @@
     <div>
         <section class="item">
             <img :src=img_route class="parking-img"  alt="parqueadero">
-            <div class="container_double">
+            <div class="container-double">
                 <div class="State-parking">
                     <p class="sub-title trescuatro-em">
                         ESTADO DE PARQUEADERO
@@ -10,8 +10,6 @@
                     <p class="inf-estado doble-em">
                         {{inf_estado}}
                     </p>
-                    
-
                 </div>
                 <div class="parking-num">
                     <p class="sub-title  trescuatro-em">
@@ -22,11 +20,9 @@
                     </p>
                 </div>
             </div>
-            
             <img class="menu" :src=img_opcions alt="">
         </section>
-    </div>
-        
+    </div>     
 </template>
 
 <script>
@@ -78,9 +74,9 @@
         align-items: center;
     }
 
-    .item div{
+    .item {
         display: flex;
-        flex-direction: column;
+        // flex-direction:colum ;
         align-items: center;
         
     }
@@ -88,21 +84,31 @@
     .container-double{
 
         display: flex;
+        // flex-direction:row;
         justify-content: space-between; 
+        // flex-direction: column;
         align-items: center;
-        width: 80%;
+        width: 50%;
     }
 
     .state-parking{
-            display:inline;
-        }
-        .parking-num{
-            display: inline;
+
+        display:block;
+        flex-direction: column;
+        // margin-right: 20px;
+        margin-left: 20px;
+     }
+        
+    .parking-num{
+            display: flex;
+            flex-direction: column;
+            margin-left: 20px;
+            margin-right: 20px;
         }
 
     .parking-img{
         width: 70px;
-        height: 70px;
+        
         padding-left: 10px;
     }
     .menu{
@@ -112,6 +118,7 @@
     .sub-title{
         color: $main-color;
         font-weight: bold;
+        // display: block;
     }
 
     .trescuatro-em{
@@ -124,12 +131,15 @@
 
     .inf-estado {
         color:$secondary-color;
+        display: block;
     }
    
 
     @media (max-width: 530px){
-        .tiempo-placa *{
-            display: block;
+        
+        .item div{
+
+            flex-direction:column;
         }
         .trescuatro-em{
             font-size: 0.5em;
@@ -137,14 +147,16 @@
         .doble-em{
             font-size: 1.5em;
         }
-        .data *{
-            display: none;
+        // .data *{
+        //     display: none;
+        // }
+        .menu{
+            width: 20px;
         }
-        .state-parking{
-            display: block;
-        }
-        .parking-num{
-            display: block;
+        .parking-img{
+            width: 50px;
+            padding-left: 0px;
+            padding-right: 8px;
         }
     }
 </style>

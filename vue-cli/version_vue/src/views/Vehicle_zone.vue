@@ -4,8 +4,10 @@
         <Navbar></Navbar>
             <div class=" cont-flex">            
                 <div class="superior-bar">
+                    
                     <img :src=imageAdd alt="" id="addImage">
-                    <SearchBar></SearchBar>
+                    
+                    <SearchBar class="search"></SearchBar>
                 </div>
                 <div class="vehicle-list">
                     <ZonaParqueadero></ZonaParqueadero>
@@ -47,6 +49,8 @@ export default {
 </script>
 
 <style  scoped>
+
+    
     #P_ocupado{
         
         width: 100%;
@@ -71,17 +75,22 @@ export default {
      */
    
     
-    .add_y_search{
+    .superior-bar{
          /* background:red; */
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
+        
     }
     #addImage{
          width: 100%;
         max-width: 40px;
+        
+        
         /* background:red; */
         
     }
+
+    
     .vehicle-list{
         
         padding-top: 20px;
@@ -97,6 +106,25 @@ export default {
   @media (max-width: 600px){
     .superior-bar{
       display: block;
+      /* align-items: flex-start; */
+      
+
+    }
+    /* .superior-bar:first-child{
+
+        
+    } */
+    #addImage{
+        display:block;  
+    }
+    .search{
+        display: flex;
+        /* margin-left: 85px; */
+        justify-content: flex-end;
+        
+        /* position: relative; */
+        /* right: 20px; */
+        
 
     }
   }
