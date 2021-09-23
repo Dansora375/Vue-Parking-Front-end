@@ -5,6 +5,8 @@
       <router-link to="/Vehicle_zone" class="completed">Vehicle zone</router-link>
       <router-link to="/about">About</router-link>
       <router-link to="/Residentes">Residentes</router-link>
+      <router-link to="/Hogares">Hogares</router-link>
+      
     </nav>
   </div>
 </template>
