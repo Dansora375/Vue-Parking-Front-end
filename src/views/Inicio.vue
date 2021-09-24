@@ -18,7 +18,7 @@
                 
                 <br/>
                 <router-link to="/" class="crear_y_olvidoContra"> 
-                <button class="confirmar" >Cree una aqui</button>
+                <button class="confirmar" >Iniciar Sesion</button>
                 </router-link>
                 
                 <div id="div_final">

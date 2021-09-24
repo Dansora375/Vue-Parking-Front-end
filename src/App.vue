@@ -20,7 +20,6 @@ body{
 
 // #nav {
 //   padding: 0px;
-  
 //   a {
 //     font-weight: bold;
 //     color: $third-color;
@@ -49,6 +48,5 @@ input{
     border:none;
     outline:0;
 }
-
 
 </style>

@@ -6,15 +6,14 @@
       <router-link to="/about">About</router-link>
       <router-link to="/inicio_sesion">Inicio Sesion</router-link>
       <router-link to="/Registrer">Registro</router-link>
+      <router-link to="/Residentes">Residentes</router-link>
     </nav>
   </div>
 </template>
 
 <script>
-
-
 export default {
-  name:"Navbar",
+  name: 'Navbar',
   // data(){
   //   return {
   //     opciones_nav: options_nav,
@@ -24,20 +23,19 @@ export default {
 </script>
 
 <style scoped lang="scss">
+//importando Tema de la app(solo colores)
 @import '@/views/scss/_theme.scss';
 .navegation{
   position:fixed;
   padding-top: 100px;
   top: 0;
   width: 20%;
-  background-color: $main-color;
+  background-color: $main-color;//Llamando a la variable del color
   // align-items: start;
   height: 100%;
 }
 .nav{
-  
   display: flex;
-  
   flex-direction: column;
 
 }
@@ -61,13 +59,11 @@ a{
 //     width: 20%;
 //     background-color: $main-color;
 //     // height: 100%;
-    
 // }
 // .navegation nav{
 //     list-style: none;
 //     font-weight: 700;
 //     color: $secondary-color;
-    
 // }
 // .navegation nav li{
 //     text-align: center;
