@@ -11,7 +11,7 @@
         <EntradaSalida class="listado"></EntradaSalida>
       </div>
     </div>
-    <div class="modal" v-if="showModalNewEntrada" >
+    <div class="modal" v-if="showModal" >
       <ModalNew></ModalNew>
   </div>
 
