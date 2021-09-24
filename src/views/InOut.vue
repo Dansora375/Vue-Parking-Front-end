@@ -4,7 +4,7 @@
     <Navbar class="nav"></Navbar>
     <div class="main_entrada">
       <div class="superior-bar">
-        <img src="@/assets/add.svg" @click="changeModal(true)" alt="">
+        <img class='add' src="@/assets/add.svg" @click="changeModal(true)" alt="">
         <SearchBar></SearchBar>
       </div>
       <div class="listado">
@@ -13,7 +13,7 @@
     </div>
   </div>
 
-  <div class="modal" v-if="showModalNewEntrada" >
+  <div class="modal" v-if="showModal" >
       <ModalNew></ModalNew>
   </div>
 </template>
@@ -50,6 +50,7 @@ export default {
     // ...mapMutations('changeShowModalNewEntrada'),
     changeModal(value) {
       // alert(value);
+
       this.$store.dispatch('changeModalNewEntrada', value);
     },
   },
@@ -89,6 +90,13 @@ export default {
     height: 100%;
     width: 100%;
     top: 0;
+  }
+
+  .add:hover{
+    background-color: $third-color;
+  }
+  .add:active{
+    background-color:$secondary-color ;
   }
 
 </style>
