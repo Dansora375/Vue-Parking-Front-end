@@ -1,7 +1,7 @@
 <template>
     <div>
         <section class="item">
-            <img v-bind:src=img_route class="vehicle"  alt="vehiculos">
+            <img src="@/assets/predefined_list.svg" class="vehicle"  alt="vehiculos">
             <div class="tiempo data">
                 <p class="hora-title trescuatro-em">
                     Hora de ingreso
@@ -42,11 +42,7 @@ import defaultImage from '@/assets/predefined_list.svg';
 export default {
   name: 'EntradaSalida',
   props: {
-    img_route: {
-      type: String,
-      // default: '@/assets/predefined_list.svg',
-      default: defaultImage,
-    },
+    
     hora_ingreso: {
       type: String,
       default: '00:00',

@@ -38,7 +38,7 @@
                 </div>
 
                 <div >
-                    <img :src=Img_logo alt="logo vue  parking" id="logo" />
+                    <img src="@/assets/car_logo.svg" alt="logo vue  parking" id="logo" />
                 </div>
             
         </div>
@@ -48,17 +48,12 @@
 </template>
 
 <script>
-import Logo from '@/assets/car_logo.svg';
 export default {
   name:'Inicio',
   
   props: {
 
-    Img_logo:{  
-
-      type: String,
-      default:Logo
-    }
+    
   }
   
   

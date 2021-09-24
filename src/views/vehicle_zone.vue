@@ -5,12 +5,14 @@
             <div class=" cont-flex">            
                 <div class="superior-bar">
                     
-                    <img :src=imageAdd alt="" id="addImage">
+                    <img src="@/assets/add.svg" alt="" id="addImage">
                     
                     <SearchBar class="search"></SearchBar>
                 </div>
                 <div class="vehicle-list">
                     <ZonaParqueadero></ZonaParqueadero>
+                    <!-- <ZonaParqueadero></ZonaParqueadero> -->
+                   
                 </div>
             </div>
         </div>
@@ -25,8 +27,6 @@ import Header from '@/components/Header.vue';
 import Navbar from '@/components/Nav.vue';
 import SearchBar from '@/components/SearchButton.vue';
 import ZonaParqueadero from '@/components/ZonaParqueadero.vue';
-import addImage from '@/assets/add.svg';
-// import {mapState} from 'vuex';
 
 export default {
   name: 'Vehicle_zone',
@@ -39,10 +39,7 @@ export default {
   },
   
   props:{
-        imageAdd:{
-            type: String,
-            default: addImage
-        }
+        
     },
 
      data(){
@@ -102,8 +99,8 @@ export default {
         
     }
     #addImage{
-         width: 100%;
-        max-width: 40px;
+         /* width: 100%; */
+        max-width: 50px;
         
         
         /* background:red; */
@@ -136,11 +133,13 @@ export default {
     } */
     #addImage{
         display:block;  
+        width: 40px;
     }
     .search{
         display: flex;
         /* margin-left: 85px; */
         justify-content: flex-end;
+        /* width: 35px; */
         
         /* position: relative; */
         /* right: 20px; */

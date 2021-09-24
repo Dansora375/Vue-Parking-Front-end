@@ -11,9 +11,9 @@
         <EntradaSalida class="listado"></EntradaSalida>
       </div>
     </div>
-    <div class="modal" v-if="showModal" >
+    <div class="modal" @click="changeModal(false)" v-if="showModal" >
       <ModalNew></ModalNew>
-  </div>
+    </div>
 
   </div>
 
