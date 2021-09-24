@@ -43,6 +43,26 @@ export default {
             type: String,
             default: addImage
         }
+    },
+
+     data(){
+
+        return{
+
+            info_vehicle_zone:[]
+        }
+    },
+    
+    created(){
+
+
+    },
+
+    methods:{
+
+        show_vehicleZ_data(){ 
+        this.axios.get()
+        }
     }
            
 };
