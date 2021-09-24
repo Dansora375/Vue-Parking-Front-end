@@ -20,29 +20,22 @@
                     </p>
                 </div>
             </div>
-            <div class="model-opcions">
-                <div class="opcion_M">
-                    Mas informacion
-                </div>
-                <div class="opcion_M">
-                    Vaciar Parqueadero
-                </div>
-                <div class="opcion_M">
-                    Llennar parqueadero
-                </div>
-                <div class="opcion_M" id="Bott_cancel">
-                    Cancelar
-                </div>
-            </div>
+            <Opcions_zona_P/>
+            
             <img class="menu" src="@/assets/menu.svg" alt="">
         </section>
     </div>     
 </template>
 
 <script>
-
+import Opcions_zona_P from '@/components/Opcions_zona_P'
 export default {
   name: 'ZonaParqueadero',
+
+  components: {
+
+      Opcions_zona_P
+  },
   props: {
     
     
@@ -135,48 +128,6 @@ export default {
 
 
     
-
-    .model-opcions{
-
-        position: absolute;
-        display: flex-flow;
-        background:white;
-        right: 25px;
-        top:70%;
-        border-radius:10px;
-        border:1px solid $main-color;
-        min-width:105px;
-        width: 25%;
-        // max-width: 250px;
-        background:$secondary-color;
-
-    }
-
-    .opcion_M{
-
-        color: $main-color;
-        border-bottom:1px solid $main-color;
-        padding: 5px;
-        font-size: 0.9em;
-        min-width:49px;
-        // border-radius:1.5px;
-    }
-
-    #Bott_cancel{
-
-        border-bottom:none;
-    }
-    
-
-
-
-
-
-
-
-
-
-
     @media (max-width: 530px){
         
         .item div{
@@ -201,10 +152,6 @@ export default {
             padding-right: 8px;
         }
         
-        .opcion_M{
-
-            padding: 2.5px;
-            font-size: 0.7em;
-        }
+        
     }
 </style>

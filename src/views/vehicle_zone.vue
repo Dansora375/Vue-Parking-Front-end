@@ -4,18 +4,17 @@
         <Navbar></Navbar>
             <div class=" cont-flex">            
                 <div class="superior-bar">
-                    
-                    <img src="@/assets/add.svg" alt="" id="addImage">
-                    
+                     <div class="prue">.</div>
                     <SearchBar class="search"></SearchBar>
                 </div>
                 <div class="vehicle-list">
-                    <ZonaParqueadero></ZonaParqueadero>
+                    <!-- <ZonaParqueadero></ZonaParqueadero> -->
                     <!-- <ZonaParqueadero></ZonaParqueadero> -->
                    
                 </div>
             </div>
-        </div>
+
+    </div>
     
     
   
@@ -68,11 +67,6 @@ export default {
 <style  scoped>
 
     
-    #P_ocupado{
-        
-        width: 100%;
-        max-width: 100px;
-    }
     .main {
         
         display:flex;
@@ -84,28 +78,15 @@ export default {
         margin-left: 20%;
         
         padding: 20px;
-         /* background:white; */
+       
     }
-     /* .cont-flex :first-child{
-         background:yellow;
-     }
-     */
-   
+  
     
-    .superior-bar{
-         /* background:red; */
-        display: flex;
-        justify-content: center;
-        
+    .prue{
+
+        color: transparent;
     }
-    #addImage{
-         /* width: 100%; */
-        max-width: 50px;
-        
-        
-        /* background:red; */
-        
-    }
+    
 
     
     .vehicle-list{
@@ -120,6 +101,8 @@ export default {
     justify-content: space-between;
   }
 
+
+
   @media (max-width: 600px){
     .superior-bar{
       display: block;
@@ -127,24 +110,16 @@ export default {
       
 
     }
-    /* .superior-bar:first-child{
-
-        
-    } */
+    
     #addImage{
         display:block;  
         width: 40px;
     }
     .search{
+        
         display: flex;
-        /* margin-left: 85px; */
         justify-content: flex-end;
-        /* width: 35px; */
         
-        /* position: relative; */
-        /* right: 20px; */
-        
-
     }
   }
 

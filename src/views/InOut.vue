@@ -4,8 +4,8 @@
     <Navbar class="nav"></Navbar>
     <div class="main_entrada">
       <div class="superior-bar">
-        <img src="@/assets/add.svg" @click="changeModal(true)" alt="">
-        <SearchBar></SearchBar>
+        <img src="@/assets/add.svg" @click="changeModal(true)" alt="" id="addImage">
+        <SearchBar class="search"></SearchBar>
       </div>
       <div class="listado">
         <EntradaSalida class="listado"></EntradaSalida>
@@ -40,8 +40,8 @@ export default {
     EntradaSalida,
     ModalNew,
   },
-  data() {
-  },
+  // data() {
+  // },
   computed: {
     // ...mapState('showModalNewEntrada'),
     showModal() {
@@ -79,6 +79,16 @@ export default {
     .superior-bar{
       display: block;
 
+    }
+    #addImage{
+        display:block;  
+        width: 40px;
+    }
+    .search{
+        
+        display: flex;
+        justify-content: flex-end;
+        
     }
   }
 
