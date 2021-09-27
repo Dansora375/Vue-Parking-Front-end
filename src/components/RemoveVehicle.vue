@@ -1,7 +1,7 @@
 <template>
   <div id="dialog-newParking">
     <h1 class="fillparking">
-      Llenar Parqueadero
+      Vaciar Parqueadero
     </h1>
     <div class="container">
       <div class="datos">
@@ -9,9 +9,7 @@
          <div class="warning">
           <img src= "@/assets/Warning.svg" class="Warning" alt="Warn">
           </div>
-          <div>
-          <label class= "WarnText"> Esta seguro que desea llenar este parqueadero?</label>
-          </div>
+          <label class= "WarnText"> Esta seguro que desea vaciar el parqueadero?</label>
         </div>
 
         <div class="Row1">
@@ -23,21 +21,12 @@
         <div class=line>________________________________________________________________</div>
 
       </div>
-
-      </div>
     </div>
 
     <!-- <select name="select-vehicle" id="vehicle-type" v-for="opcion of opcionesPark">
       {{opcion}}
     </select> -->
-    <div class="textArea">
-      <textarea name="" placeholder="Estado del vehiculo" id="" cols="500" rows="5"></textarea>
-      <div class="Buttons">
-        <button class="cancelar" @click="changeModal(false)">Cancelar</button>
-        <button class="confirmar">Confirmar</button>
-        </div>
       </div>
-
 </template>
 
 <script>
@@ -58,17 +47,19 @@ export default {
 
 .fillparking{
     background-color: $main-color;
-    color: white;
+    color: $background-color;
     width: 100%;
     margin:0 0;
 
 }
-
+.line{
+  font-weight: bold
+}
+.Row1{
+    margin-bottom:-15px
+}
 .WarnText{
     font-size:20px;
-}
-.row1{
-    justify-content:left;
 }
 
 .Rows{
@@ -94,14 +85,14 @@ input{
 
 }
 #dialog-newParking{
-  width: 35%;
-  height:30%;
+  width: 30%;
+  height:20%;
   padding: 30px;
   display: flex;
 
   align-items: flex-start;
   flex-direction: column;
-  background-color: $third-color;
+  background-color: $background-color;
 }
 
 textarea{
