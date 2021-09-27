@@ -1,49 +1,31 @@
 <template>
      <div class="main">
         <div class="cont-flex " >
-
             <form class="formulario" action="">
-
-
                 <input type="text"  name="Usuario"  placeholder="Nombre de Usuario">
-                
-                
-
                 <input type="password" name="contrseña" placeholder="Contraseña">
                 <a href="aquiva irecuperar contrasea" class="crear_y_olvidoContra">¿olvido la contraseña?</a>
-                
                 <br>
-
-                
-                
                 <br/>
                 <router-link to="/" class="crear_y_olvidoContra"> 
                 <button class="confirmar" >Iniciar Sesion</button>
-                </router-link>
-                
+                </router-link>  
                 <div id="div_final">
                     <span id="pregunta">¿Necesita una cuenta?</span>
                     <router-link to="/registrer" class="crear_y_olvidoContra"> Cree una aqui</router-link>
                 </div>
-
             </form>
         </div>
 
-
         <div class="cont-flex">
-            
                 <div >
                     <h1 class="contenido__title" >VUEPARKING</h1> 
                     <h1 class="contenido__title" > SYSTEM </h1>  
                 </div>
-
                 <div >
                     <img src="@/assets/car_logo.svg" alt="logo vue  parking" id="logo" />
                 </div>
-            
         </div>
-
-        
     </div>
 </template>
 
@@ -51,10 +33,7 @@
 export default {
   name:'Inicio',
   
-  props: {
-
-    
-  }
+ 
   
   
 }
@@ -63,13 +42,13 @@ export default {
 <style scoped lang="scss" >
 @import '@/views/scss/_theme.scss';
   /* las etiquetas input requieren una eliminacion de estilos anterior a su uso */
-input {
-  color: $main-color;
-  font-family: "PT Sans Caption", sans-serif;
-  background: none;
-  border: none;
-  outline: 0;
-}
+// input {
+//   color: $main-color;
+//   font-family: "PT Sans Caption", sans-serif;
+//   background: none;
+//   border: none;
+//   outline: 0;
+// }
 
 /* Zona de botones */
 
@@ -79,7 +58,7 @@ button {
   background: none;
   border: none;
   font-size: medium;
-  border-radius: 5px;
+  border-radius: 5px; 
   padding-top: 10px;
   padding-bottom: 10px;
   cursor: pointer;
@@ -125,19 +104,19 @@ propiedad para responsive */
  
 }
 
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
-  transition: background-color 5000s ease-in-out 0s;
-}
+// input:-webkit-autofill,
+// input:-webkit-autofill:hover,
+// input:-webkit-autofill:focus,
+// input:-webkit-autofill:active {
+//   transition: background-color 5000s ease-in-out 0s;
+// }
 
-/* Para cambiar el color de la letra despues de seleccionar el atocomplete o autofill */
-/*Change text in autofill textbox*/
+// /* Para cambiar el color de la letra despues de seleccionar el atocomplete o autofill */
+// /*Change text in autofill textbox*/
 
-input:-webkit-autofill {
-  -webkit-text-fill-color: $main-color !important;
-}
+// input:-webkit-autofill {
+//   -webkit-text-fill-color: $main-color !important;
+// }
 
 /*propiedad padding a los dos con clase .cont-flex (formulario y titulo y logo)*/
 .cont-flex {
@@ -212,10 +191,10 @@ NO es necesario ya que el anterior le da a los dos*/
 }
 
 /* pseudo elemento placeholder del input */
-::placeholder {
-  color: $secondary-color;
-  font-size: 1.2 rem;
-}
+// ::placeholder {
+//   color: $secondary-color;
+//   font-size: 1.2 rem;
+// }
 
 .formulario select {
   border: 2px solid $main-color;

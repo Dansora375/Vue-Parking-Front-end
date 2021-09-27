@@ -8,16 +8,21 @@
                     <SearchBar class="search"></SearchBar>
                 </div>
                 <div class="vehicle-list">
-                    <!-- <ZonaParqueadero></ZonaParqueadero> -->
-                    <!-- <ZonaParqueadero></ZonaParqueadero> -->
+                    <ZonaParqueadero></ZonaParqueadero>
+                    
                    
                 </div>
             </div>
+                <div class="modal">
+                     <info_parqueadero/>
+                </div>  
+           
+            <prueba/>
+            
 
     </div>
     
-    
-  
+
 </template>
 
 <script>
@@ -26,6 +31,8 @@ import Header from '@/components/Header.vue';
 import Navbar from '@/components/Nav.vue';
 import SearchBar from '@/components/SearchButton.vue';
 import ZonaParqueadero from '@/components/ZonaParqueadero.vue';
+import info_parqueadero from '@/components/Modal_Info_parqueadero.vue'
+import prueba from '@/components/prube.vue';
 
 export default {
   name: 'Vehicle_zone',
@@ -33,7 +40,9 @@ export default {
     Header,
     Navbar,
     SearchBar,
-    ZonaParqueadero
+    ZonaParqueadero,
+    info_parqueadero,
+    prueba
 
   },
   
@@ -99,6 +108,17 @@ export default {
     .superior-bar{
     display: flex;
     justify-content: space-between;
+  }
+
+  .modal{
+    position: fixed;
+    display: flex; /* establish flex container */
+    justify-content: center; /* center flex items horizontally, in this case */
+    align-items: center; /* center flex items vertically, in this case */
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 100%;
+    width: 100%;
+    top: 0;
   }
 
 

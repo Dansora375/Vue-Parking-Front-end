@@ -18,7 +18,7 @@
 <script>
 export default {
 
-    name:"Opcions_zona_P"
+    name:"Options_zona_P"
     
 }
     

@@ -20,7 +20,7 @@
                     </p>
                 </div>
             </div>
-            <Opcions_zona_P/>
+            <Options_zona_P/>
             
             <img class="menu" src="@/assets/menu.svg" alt="">
         </section>
@@ -28,13 +28,13 @@
 </template>
 
 <script>
-import Opcions_zona_P from '@/components/Opcions_zona_P'
+import Options_zona_P from '@/components/Options_zona_P.vue';
 export default {
   name: 'ZonaParqueadero',
 
   components: {
 
-      Opcions_zona_P
+      Options_zona_P
   },
   props: {
     
