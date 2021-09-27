@@ -84,7 +84,7 @@ button {
     
 
 
-.formulario select {
+  select {
 
 
     border: 2px solid $main-color;
@@ -95,7 +95,7 @@ button {
     box-shadow: 0 3px 0 1px $main-color;
     width: 100%;
 
-    height: 50px;
+    height: 50px;     
     font-size: 1.1rem;
     font-weight: 900;
     text-align-last: center;

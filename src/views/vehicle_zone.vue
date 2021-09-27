@@ -16,9 +16,12 @@
                 <div class="modal">
                      <info_parqueadero/>
                 </div>  
-           
-            <prueba/>
+                <!-- <div class="modal">
+                     <Ing_vclo_visitante/>
+                </div>  
+            -->
             
+
 
     </div>
     
@@ -32,7 +35,8 @@ import Navbar from '@/components/Nav.vue';
 import SearchBar from '@/components/SearchButton.vue';
 import ZonaParqueadero from '@/components/ZonaParqueadero.vue';
 import info_parqueadero from '@/components/Modal_Info_parqueadero.vue'
-import prueba from '@/components/prube.vue';
+import Ing_vclo_visitante from '@/components/Mdl_Ingreso_vclo_visitante.vue'
+
 
 export default {
   name: 'Vehicle_zone',
@@ -42,8 +46,7 @@ export default {
     SearchBar,
     ZonaParqueadero,
     info_parqueadero,
-    prueba
-
+    Ing_vclo_visitante
   },
   
   props:{

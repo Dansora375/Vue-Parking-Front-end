@@ -20,7 +20,7 @@
                     </p>
                 </div>
             </div>
-            <Options_zona_P/>
+            <Options_zona_P/>   
             
             <img class="menu" src="@/assets/menu.svg" alt="">
         </section>
