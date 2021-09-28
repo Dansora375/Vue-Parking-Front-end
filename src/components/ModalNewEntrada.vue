@@ -1,47 +1,49 @@
 <template>
-  <div id="dialog-newParking">
+  <div id="dialog-newParking" >
     <h1>
       Zona de ingreso al parqueadero
     </h1>
-    <input type="text" placeholder="Placa">
-    <input type="text" placeholder="Tipo de vehiculo">
-    <!-- <select name="select-vehicle" id="vehicle-type" v-for="opcion of opcionesPark">
-      {{opcion}}
-    </select> -->
+    <input type="text" placeholder="Placa" v-model="placa">
+    <select v-model="selected">
+      <option v-for="option in vehiculos" :key="option">
+        {{option}}
+      </option>
+    </select>
     <div class="textArea">
       <p>
           Datos extra
       </p>
-      <textarea name="" id="" cols="50" rows="10"></textarea>
+      <textarea name="" id="" cols="50" rows="10" v-model="extra"></textarea>
       <div class="buttons">
-        <button class="cancelar" @click="changeModal(false)">Cancelar</button>
-        <button class="confirmar">Confirmar</button>
+        <button class="cancelar" @click="changeModalNewEntrada(false)">Cancelar</button>
+        <button class="confirmar" @click="addNewEntrada({
+          placa: placa,
+          tipo: selected,
+          fecha: new Date(),
+          extra: extra,
+        })">Confirmar</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-// import { mapState, mapMutations } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'ModalNew',
   data() {
-    // return {
-    //   showModal: false,
-    // };
+    return {
+      placa: '',
+      selected: '',
+      extra: '',
+    };
   },
   computed: {
-    // ...mapState('showModalNewEntrada'),
-    showModal() {
-      return this.$store.getters.showModalNewEntrada;
-    },
+    ...mapGetters('entrada_salida', ['showModalNewEntrada', 'vehiculos']),
   },
   methods: {
-    // ...mapMutations('changeShowModalNewEntrada'),
-    changeModal(value) {
-      this.$store.dispatch('changeModalNewEntrada', value);
-    },
+    ...mapActions('entrada_salida', ['changeModalNewEntrada', 'addNewEntrada']),
   },
 };
 </script>
@@ -53,7 +55,7 @@ export default {
   padding: 10px;
   display: flex;
   flex-direction: column;
-  background-color: $third-color;
+  background-color: $background-color;
 }
 
 textarea{
