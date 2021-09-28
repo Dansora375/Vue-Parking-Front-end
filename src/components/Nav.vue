@@ -7,6 +7,8 @@
       <router-link to="/inicio_sesion">Inicio Sesion</router-link>
       <router-link to="/Registrer">Registro</router-link>
       <router-link to="/Residentes">Residentes</router-link>
+      <router-link to="/Hogares">Hogares</router-link>
+      
     </nav>
   </div>
 </template>
