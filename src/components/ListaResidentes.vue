@@ -106,6 +106,8 @@ input{
   background-color:$secondary-color ;
   display:flex;
   flex-wrap: wrap;
+      
+
 }
 .nombre-user{
   font-size: 2em;

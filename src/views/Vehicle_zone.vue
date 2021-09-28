@@ -4,28 +4,19 @@
         <Navbar></Navbar>
             <div class=" cont-flex">            
                 <div class="superior-bar">
-                     <div class="prue">.</div>
+                    
+                    <img :src=imageAdd alt="" id="addImage">
+                    
                     <SearchBar class="search"></SearchBar>
                 </div>
                 <div class="vehicle-list">
                     <ZonaParqueadero></ZonaParqueadero>
-                    
-                   
                 </div>
             </div>
-                <div class="modal">
-                     <info_parqueadero/>
-                </div>  
-                <!-- <div class="modal">
-                     <Ing_vclo_visitante/>
-                </div>  
-            -->
-            
-
-
-    </div>
+        </div>
     
-
+    
+  
 </template>
 
 <script>
@@ -34,9 +25,8 @@ import Header from '@/components/Header.vue';
 import Navbar from '@/components/Nav.vue';
 import SearchBar from '@/components/SearchButton.vue';
 import ZonaParqueadero from '@/components/ZonaParqueadero.vue';
-import info_parqueadero from '@/components/Modal_Info_parqueadero.vue'
-import Ing_vclo_visitante from '@/components/Mdl_Ingreso_vclo_visitante.vue'
-
+import addImage from '@/assets/add.svg';
+// import {mapState} from 'vuex';
 
 export default {
   name: 'Vehicle_zone',
@@ -44,13 +34,15 @@ export default {
     Header,
     Navbar,
     SearchBar,
-    ZonaParqueadero,
-    info_parqueadero,
-    Ing_vclo_visitante
+    ZonaParqueadero
+
   },
   
   props:{
-        
+        imageAdd:{
+            type: String,
+            default: addImage
+        }
     },
 
      data(){
@@ -79,6 +71,11 @@ export default {
 <style  scoped>
 
     
+    #P_ocupado{
+        
+        width: 100%;
+        max-width: 100px;
+    }
     .main {
         
         display:flex;
@@ -90,15 +87,28 @@ export default {
         margin-left: 20%;
         
         padding: 20px;
-       
+         /* background:white; */
     }
-  
+     /* .cont-flex :first-child{
+         background:yellow;
+     }
+     */
+   
     
-    .prue{
-
-        color: transparent;
+    .superior-bar{
+         /* background:red; */
+        display: flex;
+        justify-content: center;
+        
     }
-    
+    #addImage{
+         width: 100%;
+        max-width: 40px;
+        
+        
+        /* background:red; */
+        
+    }
 
     
     .vehicle-list{
@@ -113,19 +123,6 @@ export default {
     justify-content: space-between;
   }
 
-  .modal{
-    position: fixed;
-    display: flex; /* establish flex container */
-    justify-content: center; /* center flex items horizontally, in this case */
-    align-items: center; /* center flex items vertically, in this case */
-    background-color: rgba(0, 0, 0, 0.5);
-    height: 100%;
-    width: 100%;
-    top: 0;
-  }
-
-
-
   @media (max-width: 600px){
     .superior-bar{
       display: block;
@@ -133,16 +130,22 @@ export default {
       
 
     }
-    
+    /* .superior-bar:first-child{
+
+        
+    } */
     #addImage{
         display:block;  
-        width: 40px;
     }
     .search{
-        
         display: flex;
+        /* margin-left: 85px; */
         justify-content: flex-end;
         
+        /* position: relative; */
+        /* right: 20px; */
+        
+
     }
   }
 
