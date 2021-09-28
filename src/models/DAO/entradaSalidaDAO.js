@@ -6,7 +6,6 @@ export async function listaEntradas(completadas = false) {
   try {
     const lista = await this.axios.get('/entrada_vehiculo/lista', { params: { finalizadas: completadas } });
     const listaJson = await lista.json();
-
     return listaJson;
   } catch (error) {
     return {};

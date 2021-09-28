@@ -19,8 +19,6 @@
       </ModalNew>
     </div>
   </div>
-
-  
 </template>
 
 <script>
@@ -37,11 +35,6 @@ import ModalNew from '@/components/ModalNewEntrada.vue';
 
 export default {
   name: 'InOut',
-  created: {
-    function() {
-      // cargarDocs();
-    },
-  },
   components: {
     Header,
     Navbar,
@@ -81,14 +74,12 @@ export default {
 
     }
     #addImage{
-        display:block;  
+        display:block;
         width: 40px;
     }
     .search{
-        
-        display: flex;
-        justify-content: flex-end;
-        
+      display: flex;
+      justify-content: flex-end;
     }
   }
 

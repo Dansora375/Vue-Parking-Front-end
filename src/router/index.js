@@ -25,7 +25,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "vehicle_zone" */ '../views/Vehicle_zone.vue'),
   },
 
-{
+  {
     path: '/inicio_sesion',
     name: 'Inicio_sesion',
     // route level code-splitting
