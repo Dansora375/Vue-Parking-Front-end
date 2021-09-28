@@ -1,7 +1,12 @@
 <template>
     <div>
         <section class="item">
-            <img v-bind:src=img_route class="vehicle"  alt="vehiculos">
+            <!-- <img v-bind:src="img_route" class="vehicle"  alt="vehiculos"> -->
+            <img v-if="tipo === 'Carro'" v-bind:src="imgCarro" class="vehicle"  alt="vehiculos">
+            <img v-else-if="tipo === 'Moto'" v-bind:src="imgMoto" class="vehicle"  alt="vehiculos">
+            <img v-else v-bind:src="imgDefault" class="vehicle"  alt="vehiculos">
+            <!-- <img v-bind:src="img_route" class="vehicle"  alt="vehiculos">
+            <img v-bind:src="img_route" class="vehicle"  alt="vehiculos"> -->
             <div class="tiempo data">
                 <p class="hora-title trescuatro-em">
                     Hora de ingreso
@@ -32,21 +37,32 @@
                 </p>
             </div>
             <img class="menu" src="@/assets/menu.svg" alt="">
+            <!-- <select id="opciones_lista" name="" v-model="selected"> -->
+            <!-- </select> -->
         </section>
     </div>
 </template>
 
 <script>
-import defaultImage from '@/assets/predefined_list.svg';
+import DefaultVehicle from '@/assets/predefined_list.svg';
+import Carro from '@/assets/Car.svg';
+import Moto from '@/assets/Motorcycle.svg';
 
 export default {
   name: 'EntradaSalida',
+  data() {
+    return {
+      lista_opciones: [
+        'Terminar sesión',
+        'Cancelar',
+      ],
+      selected: '',
+      imgCarro: Carro,
+      imgMoto: Moto,
+      imgDefault: DefaultVehicle,
+    };
+  },
   props: {
-    img_route: {
-      type: String,
-      // default: '@/assets/predefined_list.svg',
-      default: defaultImage,
-    },
     hora_ingreso: {
       type: String,
       default: '00:00',
@@ -58,6 +74,10 @@ export default {
     placa: {
       type: String,
       default: 'AAA000',
+    },
+    tipo: {
+      type: String,
+      default: 'Default',
     },
   },
 };

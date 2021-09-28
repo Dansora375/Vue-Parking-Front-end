@@ -1,31 +1,67 @@
 <template>
-  <transition name="slide" appear>
-    <div class="modal" v-if="showModal">
-      <h1>Lorem Ipsum</h1>
+  <div id="dialog-newParking" >
+    <h1>
+      Zona de ingreso al parqueadero
+    </h1>
+    <input type="text" placeholder="Placa" v-model="placa">
+    <select v-model="selected">
+      <option v-for="option in vehiculos" :key="option">
+        {{option}}
+      </option>
+    </select>
+    <div class="textArea">
       <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        Voluptatem provident explicabo accusamus laudantium voluptatum
-        nobis sed nesciunt neque possimus molestiae?
+          Datos extra
       </p>
-      <button class="button" @click="showModal = false">
-        Close Modal
-      </button>
+      <textarea name="" id="" cols="50" rows="10" v-model="extra"></textarea>
+      <div class="buttons">
+        <button class="cancelar" @click="changeModalNewEntrada(false)">Cancelar</button>
+        <button class="confirmar" @click="addNewEntrada({
+          placa: placa,
+          tipo: selected,
+          fecha: new Date(),
+          extra: extra,
+        })">Confirmar</button>
+      </div>
     </div>
-  </transition>
+  </div>
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
+
 export default {
   name: 'ModalNew',
   data() {
     return {
-      showModal: false,
+      placa: '',
+      selected: '',
+      extra: '',
     };
+  },
+  computed: {
+    ...mapGetters('entrada_salida', ['showModalNewEntrada', 'vehiculos']),
+  },
+  methods: {
+    ...mapActions('entrada_salida', ['changeModalNewEntrada', 'addNewEntrada']),
   },
 };
 </script>
 
 <style lang="scss" scoped>
+@import '@/views/scss/_theme.scss';
+#dialog-newParking{
+  width: 320px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  background-color: $background-color;
+}
+
+textarea{
+  width: 100%;
+  resize: vertical;
+}
 // .modal-overlay {
 //  position: absolute;
 //  top: 0;
@@ -36,51 +72,51 @@ export default {
 //  background-color: rgba(0, 0, 0, 0.3);
 // }
 
-.modal {
- position: fixed;
- top: 50%;
- left: 50%;
- transform: translate(-50%, -50%);
- z-index: 99;
+// .modal {
+//  position: fixed;
+//  top: 50%;
+//  left: 50%;
+//  transform: translate(-50%, -50%);
+//  z-index: 99;
 
- width: 100%;
- max-width: 400px;
- background-color: #FFF;
- border-radius: 16px;
+//  width: 100%;
+//  max-width: 400px;
+//  background-color: #FFF;
+//  border-radius: 16px;
 
- padding: 25px;
+//  padding: 25px;
 
- h1 {
-  color: #222;
-  font-size: 32px;
-  font-weight: 900;
-  margin-bottom: 15px;
- }
- p {
-  color: #666;
-  font-size: 18px;
-  font-weight: 400;
-  margin-bottom: 15px;
- }
-}
+//  h1 {
+//   color: #222;
+//   font-size: 32px;
+//   font-weight: 900;
+//   margin-bottom: 15px;
+//  }
+//  p {
+//   color: #666;
+//   font-size: 18px;
+//   font-weight: 400;
+//   margin-bottom: 15px;
+//  }
+// }
 
-.fade-enter-active,
-.fade-leave-active {
- transition: opacity .5s;
-}
+// .fade-enter-active,
+// .fade-leave-active {
+//  transition: opacity .5s;
+// }
 
-.fade-enter,
-.fade-leave-to {
- opacity: 0;
-}
+// .fade-enter,
+// .fade-leave-to {
+//  opacity: 0;
+// }
 
-.slide-enter-active,
-.slide-leave-active {
- transition: transform .5s;
-}
+// .slide-enter-active,
+// .slide-leave-active {
+//  transition: transform .5s;
+// }
 
-.slide-enter,
-.slide-leave-to {
- transform: translateY(-50%) translateX(100vw);
-}
+// .slide-enter,
+// .slide-leave-to {
+//  transform: translateY(-50%) translateX(100vw);
+// }
 </style>
