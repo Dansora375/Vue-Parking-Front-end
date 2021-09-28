@@ -1,54 +1,41 @@
 <template>
-
-    
     <div class="vehicle_zone">
         <Header></Header>
-
-        <div class="main">
-            <!-- si se coloca primero el componente nav bar se descuadra la Configuracion con los flex -->
-            <div class=" cont-flex">
-                <div id="izquierdo-I"></div>
-            </div>
-            <!-- componenete nav -->
-            <Navbar></Navbar>
-            
-            <div class=" cont-flex">
-                
-                <div class="add_y_search">
-                    <img src="@/assets/add.svg"  alt="add" id="addImage">
-                    <SearchBar></SearchBar>
+        <Navbar></Navbar>
+            <div class=" cont-flex">            
+                <div class="superior-bar">
+                     <div class="prue">.</div>
+                    <SearchBar class="search"></SearchBar>
                 </div>
-
                 <div class="vehicle-list">
-                    <div class="list">
-                        <div class="image">
-                            <img src="@/assets/Aparcamiento_ocupado.svg" id="P_ocupado" alt="parqueadero ocupado">
-                        </div>
-                        <div class="estado_P">
-                            ocupado
-                        </div>
-                        <div class="Num_parquedero">
-                            
-                        </div>
-                        <div class="opcions">
-                            
-                        </div>
-
-                    </div>
+                    <ZonaParqueadero></ZonaParqueadero>
+                    
+                   
                 </div>
             </div>
-        </div>
+                <div class="modal">
+                     <info_parqueadero/>
+                </div>  
+                <!-- <div class="modal">
+                     <Ing_vclo_visitante/>
+                </div>  
+            -->
+            
+
+
+    </div>
     
-    
-  </div>
+
 </template>
 
 <script>
-// @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue';
+
 import Header from '@/components/Header.vue';
 import Navbar from '@/components/Nav.vue';
 import SearchBar from '@/components/SearchButton.vue';
+import ZonaParqueadero from '@/components/ZonaParqueadero.vue';
+import info_parqueadero from '@/components/Modal_Info_parqueadero.vue'
+import Ing_vclo_visitante from '@/components/Mdl_Ingreso_vclo_visitante.vue'
 
 
 export default {
@@ -56,91 +43,109 @@ export default {
   components: {
     Header,
     Navbar,
-    SearchBar
-    
+    SearchBar,
+    ZonaParqueadero,
+    info_parqueadero,
+    Ing_vclo_visitante
   },
+  
+  props:{
+        
+    },
+
+     data(){
+
+        return{
+
+            info_vehicle_zone:[]
+        }
+    },
+    
+    created(){
+
+
+    },
+
+    methods:{
+
+        show_vehicleZ_data(){ 
+        this.axios.get()
+        }
+    }
+           
 };
-
-
 </script>
 
-<style lang="scss" scoped>
+<style  scoped>
 
-    #P_ocupado{
-
-        
-        width: 100%;
-        max-width: 100px;
-    }
+    
     .main {
         
         display:flex;
-        // background: green ;
-        z-index: 1;
-        
-   
-    }
-
-    .main :first-child{
-
-        
-        flex:25;
         
     }
-
-    #izquierdo-I{
     
-        max-width: 40%;
-        height: 100%;
-       
-        // width: 100%; probar si no afecta despues
-        // background: red;
-    }
     .cont-flex{
+
+        margin-left: 20%;
         
-        flex: 100;
-        // background:white;
-
-
+        padding: 20px;
+       
     }
-    // .cont-flex :first-child{
+  
+    
+    .prue{
 
-    //     background:yellow;
-    // }
+        color: transparent;
+    }
     
 
-    .add-popup{
-
-        background:blue;
-        
-        
-    }
-
-    .list{
-
-        background:lightcoral
-    }
-
-    .add_y_search{
-        // background:red;
-
-        display: flex;
-        justify-content: space-between;
-
-    }
-
-    #addImage{
-
-         width: 100%;
-        max-width: 50px;
-        padding-right:500px ;
-        
-    }
+    
     .vehicle-list{
-        // background:red;
-
-        padding-top: 50px;
+        
+        padding-top: 20px;
+        /* background: orange; */
+        height: 100%;
     }
+
+    .superior-bar{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .modal{
+    position: fixed;
+    display: flex; /* establish flex container */
+    justify-content: center; /* center flex items horizontally, in this case */
+    align-items: center; /* center flex items vertically, in this case */
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 100%;
+    width: 100%;
+    top: 0;
+  }
+
+
+
+  @media (max-width: 600px){
+    .superior-bar{
+      display: block;
+      /* align-items: flex-start; */
+      
+
+    }
+    
+    #addImage{
+        display:block;  
+        width: 40px;
+    }
+    .search{
+        
+        display: flex;
+        justify-content: flex-end;
+        
+    }
+  }
+
     
     
 </style>

@@ -61,9 +61,13 @@ export default {
     opacity: 0;
   }
 
-  @media(max-width: 500px){
+  @media(max-width: 600px){
     input:focus{
       width: calc(100% - 50px);
     }
+    img{
+    width: 35px;
+  }
+
   }
 </style>

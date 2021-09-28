@@ -4,6 +4,8 @@
       <router-link to="/" class="completed">Home</router-link>
       <router-link to="/Vehicle_zone" class="completed">Vehicle zone</router-link>
       <router-link to="/about">About</router-link>
+      <router-link to="/inicio_sesion">Inicio Sesion</router-link>
+      <router-link to="/Registrer">Registro</router-link>
       <router-link to="/Residentes">Residentes</router-link>
       <router-link to="/Hogares">Hogares</router-link>
       
@@ -52,6 +54,8 @@ a{
     background-color:$third-color ;
   }
 }
+
+
 
 // .navegation{
 //     display: inline-block;

@@ -6,7 +6,7 @@
         VUEPARKING
       </h1>
       <div>
-        <p>{{nombre_usuario}}</p>
+        <p>{{ nombre_usuario }}</p>
         <p>{{ rol_usuario }}</p>
       </div>
     </header>
