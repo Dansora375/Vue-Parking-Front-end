@@ -5,7 +5,7 @@
     <div class="main_entrada">
       <div class="superior-bar">
         <img class='add' src="@/assets/add.svg" @click="changeShowModalNewEntrada(true)" alt="">
-        <SearchBar></SearchBar>
+        <SearchBar class="search"></SearchBar>
       </div>
       <div class="listado" >
         <!-- <EntradaSalida class="listado"></EntradaSalida> -->
@@ -19,6 +19,8 @@
       </ModalNew>
     </div>
   </div>
+
+  
 </template>
 
 <script>
@@ -77,6 +79,16 @@ export default {
     .superior-bar{
       display: block;
 
+    }
+    #addImage{
+        display:block;  
+        width: 40px;
+    }
+    .search{
+        
+        display: flex;
+        justify-content: flex-end;
+        
     }
   }
 

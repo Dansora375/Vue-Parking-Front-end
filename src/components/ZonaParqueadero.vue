@@ -1,8 +1,8 @@
 <template>
     <div>
         <section class="item">
-            <img :src=img_route class="parking-img"  alt="parqueadero">
-            <div class="container_double">
+            <img src="@/assets/aparcamiento.svg" class="parking-img"  alt="parqueadero">
+            <div class="container-double">
                 <div class="State-parking">
                     <p class="sub-title trescuatro-em">
                         ESTADO DE PARQUEADERO
@@ -20,28 +20,25 @@
                     </p>
                 </div>
             </div>
-            <img class="menu" :src=img_opcions alt="">
+            <Options_zona_P/>   
+            
+            <img class="menu" src="@/assets/menu.svg" alt="">
         </section>
-    </div>
+    </div>     
 </template>
 
 <script>
-import defaultImage from '@/assets/aparcamiento.svg';
-import imgOptions from '@/assets/menu.svg';
-
+import Options_zona_P from '@/components/Options_zona_P.vue';
 export default {
   name: 'ZonaParqueadero',
+
+  components: {
+
+      Options_zona_P
+  },
   props: {
-    // Mirar si se podria hacer un a arreglo para meter todas lasimagenes
-    img_route: {
-      type: String,
-      // default: '@/assets/predefined_list.svg',
-      default: defaultImage,
-    },
-    img_opcions: {
-      type: String,
-      default: imgOptions,
-    },
+    
+    
     inf_estado: {
       // Se podria pensar en implementar un Boolean
       type: String,
@@ -62,8 +59,10 @@ export default {
         font-size: medium;
     }
     .item{
+        margin-top: 10px    ;
         border-radius: 5px;
         padding:10px ;
+        position: relative;
 
         display: flex;
         border: 2px solid $main-color;
@@ -71,30 +70,37 @@ export default {
         align-items: center;
     }
 
-    .item div{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+    
 
     .container-double{
 
         display: flex;
-        justify-content: space-between;
+        // flex-direction:row;
+        justify-content: space-between; 
+        // flex-direction: column;
         align-items: center;
-        width: 80%;
+        width: 50%;
+
     }
 
     .state-parking{
-            display:inline;
-        }
-        .parking-num{
-            display: inline;
+
+        display:block;
+        flex-direction: column;
+        // margin-right: 20px;
+        margin-left: 20px;
+     }
+        
+    .parking-num{
+            display: flex;
+            flex-direction: column;
+            margin-left: 20px;
+            margin-right: 20px;
         }
 
     .parking-img{
         width: 70px;
-        height: 70px;
+        
         padding-left: 10px;
     }
     .menu{
@@ -104,6 +110,7 @@ export default {
     .sub-title{
         color: $main-color;
         font-weight: bold;
+        // display: block;
     }
 
     .trescuatro-em{
@@ -116,10 +123,16 @@ export default {
 
     .inf-estado {
         color:$secondary-color;
+        display: block;
     }
+
+
+    
     @media (max-width: 530px){
-        .tiempo-placa *{
-            display: block;
+        
+        .item div{
+
+            flex-direction:column;
         }
         .trescuatro-em{
             font-size: 0.5em;
@@ -127,14 +140,18 @@ export default {
         .doble-em{
             font-size: 1.5em;
         }
-        .data *{
-            display: none;
+        // .data *{
+        //     display: none;
+        // }
+        .menu{
+            width: 20px;
         }
-        .state-parking{
-            display: block;
+        .parking-img{
+            width: 50px;
+            padding-left: 0px;
+            padding-right: 8px;
         }
-        .parking-num{
-            display: block;
-        }
+        
+        
     }
 </style>
