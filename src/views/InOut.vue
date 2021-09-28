@@ -1,20 +1,23 @@
 <template>
-  <div class="home">
+  <div class="home" @keyup.esc="changeModal(false)">
     <Header nombre_usuario="Carlos" rol_usuario="Trabajador"></Header>
     <Navbar class="nav"></Navbar>
     <div class="main_entrada">
       <div class="superior-bar">
-        <img src="@/assets/add.svg" @click="changeModal(true)" alt="" id="addImage">
+        <img class='add' src="@/assets/add.svg" @click="changeShowModalNewEntrada(true)" alt="">
         <SearchBar class="search"></SearchBar>
       </div>
-      <div class="listado">
-        <EntradaSalida class="listado"></EntradaSalida>
+      <div class="listado" >
+        <!-- <EntradaSalida class="listado"></EntradaSalida> -->
+        <!-- eslint-disable-next-line max-len -->
+        <EntradaSalida class="listado" v-for="entrada in entradas" :key="entrada" v-bind:hora_ingreso="entrada.fecha.getHours() +':'+ entrada.fecha.getMinutes()" v-bind:fecha_ingreso="entrada.fecha.getDate()+'/'+(Number(entrada.fecha.getMonth())+1)+'/'+entrada.fecha.getFullYear()" v-bind:placa="entrada.placa" v-bind:tipo="entrada.tipo">
+        </EntradaSalida>
       </div>
     </div>
-    <div class="modal" @click="changeModal(false)" v-if="showModal" >
-      <ModalNew></ModalNew>
+    <div class="modal" v-if="showModalNewEntrada" >
+      <ModalNew>
+      </ModalNew>
     </div>
-
   </div>
 
   
@@ -24,6 +27,7 @@
 // @ is an alias to /src
 // import HelloWorld from '@/components/HelloWorld.vue';
 // import { mapState, mapMutations } from 'vuex';
+import { mapGetters, mapMutations } from 'vuex';
 
 import Header from '@/components/Header.vue';
 import Navbar from '@/components/Nav.vue';
@@ -33,6 +37,11 @@ import ModalNew from '@/components/ModalNewEntrada.vue';
 
 export default {
   name: 'InOut',
+  created: {
+    function() {
+      // cargarDocs();
+    },
+  },
   components: {
     Header,
     Navbar,
@@ -40,20 +49,11 @@ export default {
     EntradaSalida,
     ModalNew,
   },
-  // data() {
-  // },
   computed: {
-    // ...mapState('showModalNewEntrada'),
-    showModal() {
-      return this.$store.getters.showModalNewEntrada;
-    },
+    ...mapGetters('entrada_salida', ['showModalNewEntrada', 'entradas']),
   },
   methods: {
-    // ...mapMutations('changeShowModalNewEntrada'),
-    changeModal(value) {
-      // alert(value);
-      this.$store.dispatch('changeModalNewEntrada', value);
-    },
+    ...mapMutations('entrada_salida', ['changeShowModalNewEntrada', 'cargarDocs']),
   },
 };
 </script>
@@ -101,6 +101,13 @@ export default {
     height: 100%;
     width: 100%;
     top: 0;
+  }
+
+  .add:hover{
+    background-color: $third-color;
+  }
+  .add:active{
+    background-color:$secondary-color ;
   }
 
 </style>
