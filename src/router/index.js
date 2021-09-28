@@ -57,6 +57,23 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/Hogares.vue'),
   },
+  {
+    path: '/select_tower',
+    name: 'Select_tower',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Select_tower.vue'),
+  },
+
+  {
+    path: '/infoapto',
+    name: 'Info_apto',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Info_apto.vue'),
+  },
+
+  {
+    path: '/infovehiculoparqueado',
+    name: 'Info_vehiculo_parqueadero',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Info_vehiculo_parqueadero.vue'),
+  },
 ];
 
 const router = createRouter({

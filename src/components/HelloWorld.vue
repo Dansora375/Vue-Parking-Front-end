@@ -1,5 +1,7 @@
 <template>
   <div class="hello">
+      <link rel="shortcut icon" href="/@asssets/car_logo.svg" type="image/x-icon">
+
     <h1>{{ msg }}</h1>
     <p>
       For a guide and recipes on how to configure / customize this project,<br>
