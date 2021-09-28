@@ -13,9 +13,9 @@
                    
                 </div>
             </div>
-                <div class="modal">
+                <!-- <div class="modal">
                      <info_parqueadero/>
-                </div>  
+                </div>   -->
                 <!-- <div class="modal">
                      <Ing_vclo_visitante/>
                 </div>  
