@@ -48,6 +48,7 @@ export default {
         padding: 5px;
         font-size: 0.9em;
         min-width:49px;
+        cursor: pointer;
         // border-radius:1.5px;
     }
 

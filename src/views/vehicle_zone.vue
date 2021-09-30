@@ -1,14 +1,15 @@
 <template>
-    <div class="vehicle_zone">
-        <Header></Header>
+    <div class="vehicle_zone" @click="closeoptions">
+        <Header ></Header>
         <Navbar></Navbar>
             <div class=" cont-flex">            
                 <div class="superior-bar">
                      <div class="prue">.</div>
                     <SearchBar class="search"></SearchBar>
                 </div>
-                <div class="vehicle-list">
-                    <ZonaParqueadero></ZonaParqueadero>
+                <div class="vehicle-list" v-for="(item,index) in info_vehicle_zone" :key="index">
+                    <ZonaParqueadero  :inf_estado="item.ocupado ?  'Ocupado':'Vacio'" :parqueadero_numero="item.apartamento.tower + item.apartamento.apto_num" />
+                    <!-- <ZonaParqueadero></ZonaParqueadero> -->
                     
                    
                 </div>
@@ -37,6 +38,8 @@ import ZonaParqueadero from '@/components/ZonaParqueadero.vue';
 import info_parqueadero from '@/components/Modal_Info_parqueadero.vue'
 import Ing_vclo_visitante from '@/components/Mdl_Ingreso_vclo_visitante.vue'
 
+// ---------------------------------------
+
 
 export default {
   name: 'Vehicle_zone',
@@ -49,31 +52,43 @@ export default {
     Ing_vclo_visitante
   },
   
-  props:{
+    props:{
         
     },
 
-     data(){
+    data(){
 
         return{
 
-            info_vehicle_zone:[]
+            info_vehicle_zone:[],
+           
+            
         }
     },
     
     created(){
 
-
+        this.show_vehicleZ_data();
+        
     },
 
     methods:{
 
         show_vehicleZ_data(){ 
-        this.axios.get()
-        }
+            this.axios.get('/vehicle_zone')
+            .then(res => {
+                console.log(res.data)
+                this.info_vehicle_zone= res.data;
+                // return res.data;
+            })
+            .catch(e => {            
+                 console.log(e.response);
+            })
+    
+        },
+    
     }
-           
-};
+}
 </script>
 
 <style  scoped>
