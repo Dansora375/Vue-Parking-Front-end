@@ -1,46 +1,45 @@
 <template>
-    <div>
-        <section class="item">
-            <!-- <img v-bind:src="img_route" class="vehicle"  alt="vehiculos"> -->
-            <img v-if="tipo === 'Carro'" v-bind:src="imgCarro" class="vehicle"  alt="vehiculos">
-            <img v-else-if="tipo === 'Moto'" v-bind:src="imgMoto" class="vehicle"  alt="vehiculos">
-            <img v-else v-bind:src="imgDefault" class="vehicle"  alt="vehiculos">
-            <!-- <img v-bind:src="img_route" class="vehicle"  alt="vehiculos">
-            <img v-bind:src="img_route" class="vehicle"  alt="vehiculos"> -->
-            <div class="tiempo data">
-                <p class="hora-title trescuatro-em">
-                    Hora de ingreso
-                </p>
-                <p class="hora-ingreso doble-em">
-                    {{hora_ingreso}}
-                </p>
-                <p class="fecha-ingreso trescuatro-em">
-                    {{fecha_ingreso}}
-                </p>
+  <div>
+    <section class="item">
+      <!-- <img v-bind:src="img_route" class="vehicle"  alt="vehiculos"> -->
+      <img v-if="tipo === 'Carro'" v-bind:src="imgCarro" class="vehicle"  alt="vehiculos">
+      <img v-else-if="tipo === 'Moto'" v-bind:src="imgMoto" class="vehicle"  alt="vehiculos">
+      <img v-else v-bind:src="imgDefault" class="vehicle"  alt="vehiculos">
+      <!-- <img v-bind:src="img_route" class="vehicle"  alt="vehiculos">
+      <img v-bind:src="img_route" class="vehicle"  alt="vehiculos"> -->
+      <div class="tiempo data">
+        <p class="hora-title trescuatro-em">
+          Hora de ingreso
+        </p>
+        <p class="hora-ingreso doble-em">
+          {{date_ingreso.getHours()}}:{{date_ingreso.getMinutes()}}
+        </p>
+        <p class="fecha-ingreso trescuatro-em">
+          <!-- eslint-disable-next-line max-len -->
+          {{date_ingreso.getDate()+'/'+(Number(date_ingreso.getMonth())+1)+'/'+date_ingreso.getFullYear()}}
+        </p>
 
-            </div>
-            <div class="placa data">
-                <p class="placa-titulo trescuatro-em">
-                    Placa
-                </p>
-                <p class="placa-numero doble-em">
-                    {{placa}}
-                </p>
-            </div>
-
-            <div class="tiempo-placa">
-                <p class="hora-ingreso tiempo doble-em">
-                    00:00
-                </p>
-                <p class="placa-numero doble-em">
-                    GGG111
-                </p>
-            </div>
-            <img class="menu" src="@/assets/menu.svg" alt="">
-            <!-- <select id="opciones_lista" name="" v-model="selected"> -->
-            <!-- </select> -->
-        </section>
-    </div>
+      </div>
+      <div class="placa data">
+        <p class="placa-titulo trescuatro-em">
+          Placa
+        </p>
+        <p class="placa-numero doble-em">
+          {{placa}}
+        </p>
+      </div>
+      <img class="icon-menu" src="@/assets/menu.svg" alt="">
+      <!-- <div class='menu'>
+        <div class="drop-menu">
+          <p  class="drop-item">Mas info</p>
+          <p  class="drop-item">Terminar parqueo</p>
+          <p  class="drop-item">Cancelar</p>
+        </div>
+      </div> -->
+      <!-- <select id="opciones_lista" name="" v-model="selected"> -->
+      <!-- </select> -->
+    </section>
+  </div>
 </template>
 
 <script>
@@ -63,13 +62,9 @@ export default {
     };
   },
   props: {
-    hora_ingreso: {
-      type: String,
-      default: '00:00',
-    },
-    fecha_ingreso: {
-      type: String,
-      default: '00/00/0000',
+    date_ingreso: {
+      type: Date,
+      default: new Date(),
     },
     placa: {
       type: String,
@@ -129,6 +124,13 @@ export default {
     }
     .tiempo-placa *{
         display: none;
+    }
+    //Estilos del menu desplegable
+    .drop-menu{
+      // color: $main-color;
+      display: none;
+      position: absolute;
+      // left: 0;
     }
 
     @media (max-width: 530px){

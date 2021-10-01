@@ -21,19 +21,27 @@ export default {
       state.showModalNewEntrada = false;
     },
     createListEntradas(state, entradas) {
-      state.registroEntrada = entradas;
+      state.registrosEntrada = entradas;
     },
   },
   actions: {
-    async cargarDocs(context) {
-      const lista = await controller.obtainLista();
+    async cargarEntradas(context) {
+      const lista = await controller.ObtainLista();
       context.commit('createListEntradas', lista);
     },
     changeModalNewEntrada(context, value) {
       context.commit('changeShowModalNewEntrada', value);
     },
-    addNewEntrada(context, value) {
-      context.commit('addNewEntrada', value);
+    async addNewEntrada(context, value) {
+      const result = await controller.PostEntrada(value);
+      if (result.result) {
+        // console.log(value);
+        context.commit('addNewEntrada', value);
+      } else {
+        // eslint-disable-next-line no-alert
+        alert('No se ha podido subir el dato a la base: ');
+        console.log('Error al subir el dato  a la base : ', result.error);
+      }
     },
   },
   getters: {
@@ -45,6 +53,7 @@ export default {
     },
     entradas(state) {
       return state.registrosEntrada;
+      // return state.registrosEntrada;
     },
   },
 };

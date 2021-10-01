@@ -2,6 +2,7 @@ import * as Dao from '@/models/DAO/entradaSalidaDAO';
 
 export async function ObtainLista(completadas = false) {
   const lista = await Dao.listaEntradas(completadas);
+  // console.log(lista);
   return lista;
 }
 

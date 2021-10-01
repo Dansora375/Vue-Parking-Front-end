@@ -4,13 +4,13 @@
     <Navbar class="nav"></Navbar>
     <div class="main_entrada">
       <div class="superior-bar">
-        <img class='add' src="@/assets/add.svg" @click="changeShowModalNewEntrada(true)" alt="">
+        <img class='add' src="@/assets/add.svg" @click="changeModalNewEntrada(true)" alt="">
         <SearchBar class="search"></SearchBar>
       </div>
       <div class="listado" >
         <!-- <EntradaSalida class="listado"></EntradaSalida> -->
         <!-- eslint-disable-next-line max-len -->
-        <EntradaSalida class="listado" v-for="entrada in entradas" :key="entrada" v-bind:hora_ingreso="entrada.fecha.getHours() +':'+ entrada.fecha.getMinutes()" v-bind:fecha_ingreso="entrada.fecha.getDate()+'/'+(Number(entrada.fecha.getMonth())+1)+'/'+entrada.fecha.getFullYear()" v-bind:placa="entrada.placa" v-bind:tipo="entrada.tipo">
+        <EntradaSalida class="listado" v-for="(itemEntrada, index) in entradas" :key="index" v-bind:date_ingreso="transformToDate(itemEntrada)" v-bind:placa="itemEntrada.placa" v-bind:tipo="itemEntrada.tipo">
         </EntradaSalida>
       </div>
     </div>
@@ -25,7 +25,7 @@
 // @ is an alias to /src
 // import HelloWorld from '@/components/HelloWorld.vue';
 // import { mapState, mapMutations } from 'vuex';
-import { mapGetters, mapMutations } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 import Header from '@/components/Header.vue';
 import Navbar from '@/components/Nav.vue';
@@ -42,11 +42,18 @@ export default {
     EntradaSalida,
     ModalNew,
   },
+  mounted() {
+    this.$store.dispatch('entrada_salida/cargarEntradas');
+  },
   computed: {
     ...mapGetters('entrada_salida', ['showModalNewEntrada', 'entradas']),
+
   },
   methods: {
-    ...mapMutations('entrada_salida', ['changeShowModalNewEntrada', 'cargarDocs']),
+    ...mapActions('entrada_salida', ['changeModalNewEntrada', 'cargarDocs']),
+    transformToDate(item) {
+      return new Date(item.hora_entrada);
+    },
   },
 };
 </script>
