@@ -1,6 +1,7 @@
 <template>
   <div class="model-opcions">
-    <div class="opcion_M">
+      <slot></slot>
+    <!-- <div class="opcion_M">
         Mas informacion
     </div>
     <div class="opcion_M">
@@ -11,7 +12,7 @@
     </div>
     <div class="opcion_M" id="Bott_cancel">
         Cancelar
-    </div>
+    </div> -->
 </div>
 </template>
 

@@ -1,7 +1,7 @@
 <template>
     <div>
         <section class="item" >
-            <img v-if="inf_estado==='Ocupado'" :src=Img_ocupado class="parking-img"  alt="parqueadero" >
+            <img v-if="inf_estado==='Lleno'" :src=Img_ocupado class="parking-img"  alt="parqueadero" >
             <img  v-if="inf_estado==='Vacio'" :src=Img_vacio class="parking-img"  alt="parqueadero" >
             <div class="container-double">
                 <div class="State-parking" >
@@ -21,19 +21,21 @@
                     </p>
                 </div>
             </div>
-            <div class="modal" v-if="showOptions"> 
+            <slot >
+            </slot>
+            <!-- <div class="modal" v-if="showOptions"> 
             <Options_zona_P/>   
             </div>
-            <img class="menu" src="@/assets/menu.svg" alt=""  @click="changeShowOptions(true)">
+            <img class="menu" src="@/assets/menu.svg" alt=""  @click="changeShowOptions(true)"> -->
         </section>
     </div>     
 </template>
 
 <script>
-import Options_zona_P from '@/components/Options_zona_P.vue';
+// import Options_zona_P from '@/components/Options_zona_P.vue';
 import P_ocupado from '@/assets/P_ocupado.svg';
 import P_vacio from '@/assets/P_vacio.svg';
-import {mapGetters, mapMutations} from 'vuex';
+// import {mapGetters, mapMutations} from 'vuex';
 
 export default {
     name: 'ZonaParqueadero',
@@ -47,29 +49,22 @@ export default {
     },
     
 
-    components: {
+    // components: {
 
-        Options_zona_P
-    },
+    //     Options_zona_P
+    // },
 
-    computed: {
+    // computed: {
         
-        // ...mapState('options_zona_p',['showOptions']),
-        ...mapGetters('options_zona_p', ['showOptions'])
-    },
-    methods: {
+    //     // ...mapState('options_zona_p',['showOptions']),
+    //     ...mapGetters('options_zona_p', ['showOptions'])
+    // },
+    // methods: {
 
-      ...mapMutations('options_zona_p', [ 'changeShowOptions']),
+    //   ...mapMutations('options_zona_p', [ 'changeShowOptions']),
       
-    //   ImgChanging(){
-    //       if(this.inf_estado==='Ocupado'){
-
-    //           return Img_ocupado
-    //       }else{
-    //           return Img_vacio
-    //       }
-    //   }
-     },
+    
+    //  },
   
   props: {
     
@@ -82,6 +77,10 @@ export default {
     parqueadero_numero: {
       type: String,
       default: 'A1',
+    },
+    index:{
+        type: String,
+        default: '',
     }
     
   },
