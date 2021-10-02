@@ -39,35 +39,36 @@ export default {
         min-width:105px;
         width: 25%;
         background:$secondary-color;
+        z-index: 200;
 
     }
 
-    .opcion_M{
+    // .opcion_M{
 
-        color: $main-color;
-        border-bottom:1px solid $main-color;
-        padding: 5px;
-        font-size: 0.9em;
-        min-width:49px;
-        cursor: pointer;
-        // border-radius:1.5px;
-    }
+    //     color: $main-color;
+    //     border-bottom:1px solid $main-color;
+    //     padding: 5px;
+    //     font-size: 0.9em;
+    //     min-width:49px;
+    //     cursor: pointer;
+    //     // border-radius:1.5px;
+    // }
 
-    #Bott_cancel{
+    // #Bott_cancel{
 
-        border-bottom:none;
-    }
+    //     border-bottom:none;
+    // }
     
-    @media (max-width: 530px){
+    // @media (max-width: 530px){
 
-        .opcion_M{
+    //     .opcion_M{
 
-            padding: 2.5px;
-            font-size: 0.7em;
-        }
+    //         padding: 2.5px;
+    //         font-size: 0.7em;
+    //     }
 
 
 
-    }
+    // }
     
 </style>

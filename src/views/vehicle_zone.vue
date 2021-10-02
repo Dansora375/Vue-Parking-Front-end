@@ -1,5 +1,5 @@
 <template>
-    <div class="vehicle_zone" @click="close_options()">
+    <div class="vehicle_zone" @click="close_all_opt()">
         <Header ></Header>
         <Navbar></Navbar>
             <div class=" cont-flex" >            
@@ -8,20 +8,20 @@
                     <SearchBar class="search"></SearchBar>
                 </div>
                 <div class="vehicle-list" v-for="(item,index) in info_vehicle_zone" :key="item._id">
-                    <ZonaParqueadero  :inf_estado="item.ocupado ?  'Lleno':'Vacio'" :parqueadero_numero="item.apartamento.tower + item.apartamento.apto_num" :index="index">
+                    <ZonaParqueadero  :inf_estado="item.ocupado ?  'Lleno':'Vacio'" :parqueadero_numero="item.apartamento.tower + item.apartamento.apto_num" >
                         
-                            <div class="modal_2" v-if="item.state_options" > 
+                            <div class="modal_2" v-if="item.state_options"  > 
                                 <Options_zona_P>
                                     <div class="opcion_M">
                                         Mas informacion
                                     </div>
-                                    <div class="opcion_M">
+                                    <div class="opcion_M" v-show="item.ocupado">
                                         Vaciar Parqueadero
                                     </div>
-                                    <div class="opcion_M">
+                                    <div class="opcion_M" v-show="!item.ocupado">
                                         Llennar parqueadero
                                     </div>
-                                    <div class="opcion_M" id="Bott_cancel">
+                                    <div class="opcion_M" id="Bott_cancel" @click="close_option(index)">
                                         Cancelar
                                     </div>
                                 </Options_zona_P>   
@@ -112,7 +112,7 @@ export default {
         show_vehicleZ_data(){ 
             this.axios.get('/vehicle_zone')
             .then(res => {
-                console.log(res.data)
+                // console.log(res.data)
                 this.info_vehicle_zone= res.data;
                 // return res.data;
             })
@@ -130,13 +130,15 @@ export default {
             this.info_vehicle_zone[index].state_options=true;
 
         },
-        close_options(){
-            // this.info_vehicle_zone.forEach(element => {
-            //     element.state_options=false;
-            // });
-            
+        close_option(index){
+            this.info_vehicle_zone[index].state_options=false;
 
-        }
+        },
+        // close_all_opt(){
+        //     this.info_vehicle_zone.forEach(element => {
+        //         element.state_options=false;
+        //     });
+        // }
     
     }
 }
@@ -178,6 +180,11 @@ export default {
     display: flex;
     justify-content: space-between;
   }
+  .menu{
+      
+        width: 30px;
+        
+    }
 
   .modal{
     position: fixed;
@@ -209,6 +216,8 @@ export default {
         cursor: pointer;
         color: $main-color;
         border-bottom:1px solid $main-color;
+        position: relative;
+        z-index: 100;
 
     }
 
@@ -238,6 +247,9 @@ export default {
         justify-content: flex-end;
         
     }
+    .menu{
+            width: 20px;
+        }
      .opcion_M{
 
             padding: 2.5px;
