@@ -16,6 +16,10 @@
         </div>
 
         <div class="Rows">
+          <label for="Tel" >Teléfono : </label>
+          <input type="text" placeholder="Telefono" id="Tel">
+        </div>
+        <div class="Rows">
           <label for="apto" >Apartamento : </label>
           <input type="text" placeholder="Número de apartamento" id="apto">
         </div>
