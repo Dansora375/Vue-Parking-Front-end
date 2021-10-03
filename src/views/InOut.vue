@@ -4,17 +4,17 @@
     <Navbar class="nav"></Navbar>
     <div class="main_entrada">
       <div class="superior-bar">
-        <img class='add' src="@/assets/add.svg" @click="changeModalNewEntrada(true)" alt="">
+        <img class='add' src="@/assets/add.svg" @click="toggleModal(true)" alt="">
         <SearchBar class="search"></SearchBar>
       </div>
       <div class="listado" >
         <!-- <EntradaSalida class="listado"></EntradaSalida> -->
         <!-- eslint-disable-next-line max-len -->
-        <EntradaSalida class="listado" v-for="(itemEntrada, index) in entradas" :key="index" v-bind:date_ingreso="transformToDate(itemEntrada)" v-bind:placa="itemEntrada.placa" v-bind:tipo="itemEntrada.tipo">
+        <EntradaSalida class="listado" v-for="(itemEntrada, index) in entradas" :key="index" v-bind:date_ingreso="transformToDate(itemEntrada)" v-bind:placa="itemEntrada.placa" v-bind:index=index v-bind:tipo="itemEntrada.tipo">
         </EntradaSalida>
       </div>
     </div>
-    <div class="modal" v-if="showModalNewEntrada" >
+    <div class="modal" v-if="isActiveModal" >
       <ModalNew>
       </ModalNew>
     </div>
@@ -42,6 +42,18 @@ export default {
     EntradaSalida,
     ModalNew,
   },
+  provide() {
+    return {
+      isActiveModal: this.isActiveModal,
+      toggleModal: this.toggleModal,
+      toggleModal2: this.toggleModal2,
+    };
+  },
+  data() {
+    return {
+      isActiveModal: false,
+    };
+  },
   mounted() {
     this.$store.dispatch('entrada_salida/cargarEntradas');
   },
@@ -53,6 +65,13 @@ export default {
     ...mapActions('entrada_salida', ['changeModalNewEntrada', 'cargarDocs']),
     transformToDate(item) {
       return new Date(item.hora_entrada);
+    },
+
+    toggleModal(value) {
+      this.isActiveModal = value;
+    },
+    toggleModal2() {
+      this.isActiveModal = !this.isActiveModal;
     },
   },
 };

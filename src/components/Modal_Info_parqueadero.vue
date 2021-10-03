@@ -10,7 +10,6 @@
           <label for="residente" >Residente : </label>
           <input type="text" placeholder="Nombre del residente" id="residente">
         </div>
-        
         <div class="Rows">
           <label for="cedula" >C.C : </label>
           <input type="text" placeholder="Cedula" id="cedula">
@@ -25,7 +24,6 @@
           <label for="Torre" >Torre : </label>
           <input type="text" placeholder="Letra de la torre" id="Torre">
         </div>
-      
         <div class="Rows">
           <label for="Tel" >Teléfono : </label>
           <input type="text" placeholder="Telefono" id="Tel">

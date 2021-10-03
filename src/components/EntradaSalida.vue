@@ -28,14 +28,23 @@
           {{placa}}
         </p>
       </div>
-      <img class="icon-menu" src="@/assets/menu.svg" alt="">
-      <!-- <div class='menu'>
-        <div class="drop-menu">
-          <p  class="drop-item">Mas info</p>
-          <p  class="drop-item">Terminar parqueo</p>
-          <p  class="drop-item">Cancelar</p>
-        </div>
-      </div> -->
+      <!-- <img class="icon-menu" src="@/assets/menu.svg" alt="">  -->
+      <MenuDropDown>
+        <template v-slot:toggler>
+          <img class="icon-menu" src="@/assets/menu.svg" alt="">
+        </template>
+        <MenuDropDownContent class="menu-options">
+          <MenuDropDownItem>
+            Terminar parqueadero
+          </MenuDropDownItem>
+          <MenuDropDownItem>
+            Mas información
+          </MenuDropDownItem>
+          <MenuDropDownItem>
+            cancelar
+          </MenuDropDownItem>
+        </MenuDropDownContent>
+      </MenuDropDown>
       <!-- <select id="opciones_lista" name="" v-model="selected"> -->
       <!-- </select> -->
     </section>
@@ -47,8 +56,17 @@ import DefaultVehicle from '@/assets/predefined_list.svg';
 import Carro from '@/assets/Car.svg';
 import Moto from '@/assets/Motorcycle.svg';
 
+import MenuDropDownContent from './dropDown/MenuDropDownContent.vue';
+import MenuDropDown from './dropDown/MenuDropdown.vue';
+import MenuDropDownItem from './dropDown/MenuDropDownItem.vue';
+
 export default {
   name: 'EntradaSalida',
+  components: {
+    MenuDropDown,
+    MenuDropDownContent,
+    MenuDropDownItem,
+  },
   data() {
     return {
       lista_opciones: [
@@ -62,6 +80,9 @@ export default {
     };
   },
   props: {
+    index: {
+      type: Number,
+    },
     date_ingreso: {
       type: Date,
       default: new Date(),
@@ -125,12 +146,18 @@ export default {
     .tiempo-placa *{
         display: none;
     }
-    //Estilos del menu desplegable
-    .drop-menu{
-      // color: $main-color;
-      display: none;
-      position: absolute;
-      // left: 0;
+    .menu-options{
+
+        position: absolute;
+        display: flex-flow ;
+        right: 25px;
+        // top:10px;
+        border-radius:10px;
+        border:1px solid $main-color;
+        min-width:105px;
+        width: 25%;
+        background:$secondary-color;
+
     }
 
     @media (max-width: 530px){

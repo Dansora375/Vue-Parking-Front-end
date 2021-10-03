@@ -23,12 +23,18 @@ export default {
     createListEntradas(state, entradas) {
       state.registrosEntrada = entradas;
     },
+    // cambiarEstadoParking(state, index){
+    // }
   },
   actions: {
     async cargarEntradas(context) {
       const lista = await controller.ObtainLista();
       context.commit('createListEntradas', lista);
     },
+    // async cambiarEstadoParqueadero(context, index){
+
+    // }
+
     changeModalNewEntrada(context, value) {
       context.commit('changeShowModalNewEntrada', value);
     },

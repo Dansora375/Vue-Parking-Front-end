@@ -13,6 +13,7 @@
     "vue": "^3.2.19",
     "vue-axios": "^3.3.7",
     "vue-router": "^4.0.0-0",
+    "vue3-click-away": "^1.2.1",
     "vuex": "^4.0.0-0"
   },
   "devDependencies": {

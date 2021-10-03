@@ -17,13 +17,10 @@
 
 <script>
 export default {
-
-    name:"Options_zona_P"
-    
-}
-    
+  name: 'Options_zona_P',
+};
 </script>
-    
+
 <style lang="scss" scoped>
 @import '@/views/scss/_theme.scss';
 

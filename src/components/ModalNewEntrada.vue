@@ -15,7 +15,7 @@
       </p>
       <textarea name="" id="" cols="50" rows="10" v-model="extra"></textarea>
       <div class="buttons">
-        <button class="cancelar" @click="changeModalNewEntrada(false)">Cancelar</button>
+        <button class="cancelar" @click="toggleModal(false)">Cancelar</button>
         <button class="confirmar" @click="addNewEntrada({
           placa: placa,
           tipo: selected,
@@ -32,6 +32,7 @@ import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'ModalNew',
+  inject: ['isActiveModal', 'toggleModal'],
   data() {
     return {
       placa: '',
