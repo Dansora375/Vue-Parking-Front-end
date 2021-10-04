@@ -227,7 +227,6 @@ NO es necesario ya que el anterior le da a los dos*/
 
 .formulario button {
   margin-top: 35px;
-  border: 2px solid $main-color;
   width: 100%;
   text-align: center;
 }

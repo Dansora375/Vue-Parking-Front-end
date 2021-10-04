@@ -106,13 +106,16 @@ export default {
         font-size: medium;
     }
     .item{
+        margin-top: 10px ; 
         border-radius: 5px;
         padding:10px ;
+        position: relative;
 
         display: flex;
         border: 2px solid $main-color;
         align-items: center;
-        justify-content: space-between; align-items: center;
+        justify-content: space-between; 
+        align-items: center;
     }
 
     .item div{

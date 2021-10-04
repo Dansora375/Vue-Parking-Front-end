@@ -1,5 +1,5 @@
 <template>
-    <div class="vehicle_zone" @click="close_all_opt()">
+    <div class="vehicle_zone" >
         <Header ></Header>
         <Navbar></Navbar>
             <div class=" cont-flex" >            
@@ -8,9 +8,9 @@
                     <SearchBar class="search"></SearchBar>
                 </div>
                 <div class="vehicle-list" v-for="(item,index) in info_vehicle_zone" :key="item._id">
-                    <ZonaParqueadero  :inf_estado="item.ocupado ?  'Lleno':'Vacio'" :parqueadero_numero="item.apartamento.tower + item.apartamento.apto_num" >
+                    <ZonaParqueadero  :inf_estado="item.ocupado ?  'Lleno':'Vacio'" :parqueadero_numero="item.tower + item.apto_num" >
                         
-                            <div class="modal_2" v-if="item.state_options"  > 
+                            <!-- <div class="modal_2" v-if="item.state_options"  > 
                                 <Options_zona_P>
                                     <div class="opcion_M">
                                         Mas informacion
@@ -27,13 +27,13 @@
                                 </Options_zona_P>   
                                 
                             </div>
-                            <img class="menu" :src=Img_add alt="" @click=" open_option(index)"  > <!-- @click="changeShowOptions(true) -->
+                            <img class="menu" :src=Img_add alt="" @click=" open_option(index)"  > @click="changeShowOptions(true) -->
                         
 
                     </ZonaParqueadero>
                 </div>
             </div>
-                <!-- <div class="modal" v-for="(item,index) in info_vehicle_zone" :key="index" >
+                <!-- <div class="modal"  >
                      <info_parqueadero/>
                 </div>   -->
                 <!-- <div class="modal">
@@ -110,7 +110,7 @@ export default {
         ...mapMutations('options_zona_p', [ 'changeShowOptions']),
 
         show_vehicleZ_data(){ 
-            this.axios.get('/vehicle_zone')
+            this.axios.get('/entrada_vehiculo')
             .then(res => {
                 // console.log(res.data)
                 this.info_vehicle_zone= res.data;
@@ -122,18 +122,18 @@ export default {
     
         },
 
-        open_option(index){
-            // this.info_vehicle_zone.state_options=false;
-            this.info_vehicle_zone.forEach(element => {
-                element.state_options=false;
-            });
-            this.info_vehicle_zone[index].state_options=true;
+        // open_option(index){
+        //     // this.info_vehicle_zone.state_options=false;
+        //     this.info_vehicle_zone.forEach(element => {
+        //         element.state_options=false;
+        //     });
+        //     this.info_vehicle_zone[index].state_options=true;
 
-        },
-        close_option(index){
-            this.info_vehicle_zone[index].state_options=false;
+        // },
+        // close_option(index){
+        //     this.info_vehicle_zone[index].state_options=false;
 
-        },
+        // },
         // close_all_opt(){
         //     this.info_vehicle_zone.forEach(element => {
         //         element.state_options=false;

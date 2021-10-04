@@ -120,9 +120,9 @@ export default {
     top: 0;
   }
 
-  .add:hover{
-    background-color: $third-color;
-  }
+  // .add:hover{
+  //   background-color: $third-color;
+  // }
   .add:active{
     background-color:$secondary-color ;
   }

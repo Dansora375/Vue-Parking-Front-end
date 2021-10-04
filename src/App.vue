@@ -54,9 +54,9 @@ button {
   
 }
 
-.cancelar {
-  border: 2px solid $main-color;
-}
+// .cancelar {
+//   border: 2px solid $main-color;
+// }
 .confirmar {
   color: $secondary-color;
   background-color: $main-color;
@@ -78,11 +78,6 @@ button {
 .confirmar:active {
   color: $main-color;
 }
-
-
-
-    
-
 
   select {
 

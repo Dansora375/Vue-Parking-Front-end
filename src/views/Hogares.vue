@@ -30,8 +30,7 @@
         <li class ="Number">205</li>
       </ul>
     </div>
-    
-    
+
     <div class= 'apartments'>
     <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
     <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
@@ -59,8 +58,7 @@
         <li class ="Number">405</li>
       </ul>
     </div>
-    
-    
+
     <div class= 'apartments'>
     <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
     <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
@@ -79,21 +77,18 @@
         <li class ="Number">502</li>
         <li class ="Number">503</li>
         <li class ="Number">504</li>
-        <li class ="Number">505</li>     
+        <li class ="Number">505</li>
       </ul>
     </div>
-    
+
     <div class= 'apartments'>
     <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
     <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
     <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
     <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
     <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
-    
-    
+
     </div>
-    
-    
 
 </template>
 
@@ -123,8 +118,7 @@ export default {
   justify-content: space-between;
   border-radius:10px;
   line-height: 20px;
-  
-  
+
 }
 .menu{
   width:10px;
@@ -141,7 +135,7 @@ export default {
   font-weight: bold;
   justify-content: space-between;
   cursor:pointer;
-  
+
 }
 .boton1{
   background-color: $background-color;
@@ -179,15 +173,14 @@ input{
   font-weight: bold;
   margin: 5px 10px -10px 21%;
   list-style: none;
-  
-  
+
 }
 
 .Number{
-  
+
   padding-left: 60px;
   padding-right:57px;
-  
+
 }
 
 .apartments{
@@ -195,15 +188,13 @@ input{
   justify-content:left;
   padding: 10px;
   margin: 5px 10px 0 23%;
-  
+
 }
 .Apt-button{
   border-radius: 10px;
   margin:0 30px;
   padding-right:10px;
 
-  
-  
 }
 
 .Buildings{

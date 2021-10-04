@@ -28,12 +28,12 @@ export default {
     transition: all 0.5s ease;
     color: $background-color;
   }
- .search:hover{
-      background-color: $third-color;
-    }
-  .search:active{
-      background-color:$secondary-color ;
-    }
+//  .search:hover{
+//       background-color: $third-color;
+//     }
+//   .search:active{
+//       background-color:$secondary-color ;
+//     }
   .incoming_input{
     width: 300px;
   }

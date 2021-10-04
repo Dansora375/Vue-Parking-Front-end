@@ -1,26 +1,50 @@
 <template>
   <div id="dialog-newParking" >
     <h1>
-      Zona de ingreso al parqueadero
+      Ingreso parqueadero visitante
     </h1>
-    <input type="text" placeholder="Placa" v-model="placa">
-    <select v-model="selected">
-      <option v-for="option in vehiculos" :key="option">
+    <div class="Rows">
+      <label for="nombre" >Nombre : </label>
+      <input type="text" placeholder="Nombre del visitante" v-model="nombre" id="nombre">
+    </div>
+    <div class="Rows">
+      <label for="cedula" >Cedula : </label>
+      <input type="text" placeholder="Cedula del visitante" v-model="cedula" id="cedula">
+    </div>
+    <div class="Rows">
+      <label for="apto_num" >Apto : </label>
+      <input type="text" placeholder="Número de apartamento" v-model="apto_num" id="apto_num">
+    </div>
+    <div class="Rows">
+      <label for="tower" >Torre : </label>
+      <input type="text" placeholder="Letra de la torre" v-model="tower" id="tower">
+    </div>
+    <div class="Rows">
+      <label for="placa" >Placa : </label>
+      <input type="text" placeholder="Placa del vehiculo" v-model="placa"
+      id="placa">
+    </div>
+    <div class="Rows">
+      <select v-model="selected">
+        <option v-for="option in vehiculos" :key="option">
         {{option}}
-      </option>
-    </select>
+        </option>
+      </select>
+    </div>
     <div class="textArea">
-      <p>
-          Datos extra
-      </p>
-      <textarea name="" id="" cols="50" rows="10" v-model="extra"></textarea>
+      <h3>Datos extra</h3>
+      <textarea name="" id="" cols="500" rows="5" v-model="extra"></textarea>
       <div class="buttons">
         <button class="cancelar" @click="toggleModal(false)">Cancelar</button>
         <button class="confirmar" @click="addNewEntrada({
+          nombre:nombre,
+          cedula:cedula,
+          apto_num:apto_num,
+          tower:tower,
           placa: placa,
           tipo: selected,
           fecha: new Date(),
-          extra: extra,
+          extra: extra  
         })">Confirmar</button>
       </div>
     </div>
@@ -35,9 +59,13 @@ export default {
   inject: ['isActiveModal', 'toggleModal'],
   data() {
     return {
+      nombre:'',
+      cedula:'',
+      apto_num:'',
+      tower:'',
       placa: '',
       selected: '',
-      extra: '',
+      extra: ''
     };
   },
   computed: {
@@ -52,16 +80,99 @@ export default {
 <style lang="scss" scoped>
 @import '@/views/scss/_theme.scss';
 #dialog-newParking{
-  width: 320px;
-  padding: 10px;
+  width: 25%;
+  height:70%;
+  padding: 30px;
   display: flex;
+
+  border-radius: 5px;
+  align-items: flex-start;
   flex-direction: column;
   background-color: $background-color;
 }
 
+.cancelar{
+  background-color: $third-color;
+  border: none;
+}
+.confirmar{
+  border: none;
+}
+::placeholder{
+
+  color:$secondary-color;
+}
+.cancelar:hover {
+  background-color: $secondary-color  ;
+  // color:$third-color;
+}
+
+.cancelar:active {
+  color: $secondary-color;
+  background-color: $main-color;
+}
+
+.confirmar:hover {
+  background-color: $secondary-color;
+  color: $main-color;
+}
+
+.confirmar:active {
+  color: $secondary-color;
+  background-color: $main-color;
+}
+
+.Rows{
+  display:flex;
+
+  flex-wrap: wrap;
+  padding-top: 5px;
+
+}
+
+input{
+
+  padding-left: 5px;
+  // position:absolute;
+  // left: 25px;
+
+}
 textarea{
   width: 100%;
   resize: vertical;
+  align-items: center;
+  justify-content:center;
+  color:$main-color ;
+  font-weight: bold;
+
+}
+
+button{
+
+  padding: 2.5% 5% 2.5% 5%;
+
+}
+.buttons {
+
+    padding-top: 25px;
+    margin: 0px;
+    display:flex;
+    justify-content: space-between  ;
+
+}
+label{
+
+  font-weight: 900;
+
+}
+
+select{
+
+  font-size: 0.8rem;
+  height:25px;
+  width:160px;
+  margin: 0px;
+
 }
 // .modal-overlay {
 //  position: absolute;

@@ -98,11 +98,6 @@ button {
 
     
 
-.cancelar {
-
-    border: 2px solid $main-color;
-
-}
 
 .confirmar {
     color: $secondary-color;
@@ -285,7 +280,7 @@ NO es necesario ya que el anterior le da a los dos*/
 .formulario button {
 
     margin-top: 75px;
-    border: 2px solid $main-color;
+    // border: 1px solid $background-color;
     width: 100%;
     text-align: center;
 
