@@ -1,6 +1,6 @@
 <template>
   <!-- <div @click="toggle" v-on-clickaway="away"> -->
-    <div @click="toggle">
+    <div @click="toggle" class="model-opcions">
     <slot name ="toggler">
       <img>
     </slot>
@@ -25,7 +25,7 @@ export default {
       this.estadoMenu.activo = !this.estadoMenu.activo;
     },
     away() {
-      this.estadoMenu.activo = false;
+      this.estadoMenu.activo = !this.estadoMenu.activo;
     },
   },
   data() {
@@ -37,3 +37,4 @@ export default {
   },
 };
 </script>
+

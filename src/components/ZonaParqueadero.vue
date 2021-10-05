@@ -94,11 +94,12 @@ export default {
         font-size: medium;
     }
     .item{
-        margin-top: 10px    ;
+        margin-top: 10px;
         border-radius: 5px;
         padding:10px ;
         position: relative;
-
+        background:$third-color;
+        
         display: flex;
         border: 2px solid $main-color;
         justify-content: space-between;

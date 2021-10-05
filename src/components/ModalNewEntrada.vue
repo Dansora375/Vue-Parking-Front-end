@@ -36,7 +36,7 @@
       <textarea name="" id="" cols="500" rows="5" v-model="extra"></textarea>
       <div class="buttons">
         <button class="cancelar" @click="toggleModal(false)">Cancelar</button>
-        <button class="confirmar" @click="addNewEntrada({
+        <button class="confirmar" @click="agregarEntrada({
           nombre:nombre,
           cedula:cedula,
           apto_num:apto_num,
@@ -73,6 +73,11 @@ export default {
   },
   methods: {
     ...mapActions('entrada_salida', ['changeModalNewEntrada', 'addNewEntrada']),
+    agregarEntrada(value){
+      this.addNewEntrada(value);
+      this.toggleModal(false);
+
+    }
   },
 };
 </script>

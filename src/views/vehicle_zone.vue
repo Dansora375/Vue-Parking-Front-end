@@ -10,29 +10,18 @@
                 <div class="vehicle-list" v-for="(item,index) in info_vehicle_zone" :key="item._id">
                     <ZonaParqueadero  :inf_estado="item.ocupado ?  'Lleno':'Vacio'" :parqueadero_numero="item.tower + item.apto_num" >
                         
-                            <!-- <div class="modal_2" v-if="item.state_options"  > 
-                                <Options_zona_P>
-                                    <div class="opcion_M">
-                                        Mas informacion
-                                    </div>
-                                    <div class="opcion_M" v-show="item.ocupado">
-                                        Vaciar Parqueadero
-                                    </div>
-                                    <div class="opcion_M" v-show="!item.ocupado">
-                                        Llennar parqueadero
-                                    </div>
-                                    <div class="opcion_M" id="Bott_cancel" @click="close_option(index)">
-                                        Cancelar
-                                    </div>
-                                </Options_zona_P>   
+                            
                                 
-                            </div>
-                            <img class="menu" :src=Img_add alt="" @click=" open_option(index)"  > @click="changeShowOptions(true) -->
-                        
+                                
+                           
+                            <img class="menu" :src=Img_add alt="" @click=" open_option(index)"  > 
 
                     </ZonaParqueadero>
                 </div>
             </div>
+             <!-- <Options_zona_P>
+                                    
+                                </Options_zona_P>   -->
                 <!-- <div class="modal"  >
                      <info_parqueadero/>
                 </div>   -->

@@ -1,8 +1,6 @@
 <template>
   <div>
-    <p class="opcion-menu">
       <slot/>
-    </p>
   </div>
 </template>
 
@@ -23,5 +21,5 @@ export default {
         min-width:49px;
         cursor: pointer;
         // border-radius:1.5px;
-    }
+}
 </style>

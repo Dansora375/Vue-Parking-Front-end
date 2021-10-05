@@ -4,7 +4,7 @@
     <Navbar class="nav"></Navbar>
     <div class="main_entrada">
       <div class="superior-bar">
-        <img class='add' src="@/assets/add.svg" @click="toggleModal(true)" alt="">
+        <img class='addImage' src="@/assets/add.svg" @click="toggleModal(true)" alt="">
         <SearchBar class="search"></SearchBar>
       </div>
       <div class="listado" >
@@ -96,11 +96,11 @@ export default {
 
   @media (max-width: 600px){
     .superior-bar{
-      display: block;
+      display: flex;
 
     }
-    #addImage{
-        display:block;
+    .addImage{
+        display:inline;
         width: 40px;
     }
     .search{
