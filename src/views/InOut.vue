@@ -108,7 +108,13 @@ export default {
       justify-content: flex-end;
     }
   }
-
+  .superior-bar{
+    position: sticky;
+    top: 0px;
+    background:$background-color;
+    z-index: 20;
+    padding-bottom: 10px;
+  }
   .modal{
     position: fixed;
     display: flex; /* establish flex container */
@@ -118,6 +124,8 @@ export default {
     height: 100%;
     width: 100%;
     top: 0;
+    z-index:30;
+    
   }
 
   // .add:hover{

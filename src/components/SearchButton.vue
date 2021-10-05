@@ -4,7 +4,7 @@
       <img src="@/assets/letra-x.svg" v-if="show_input" alt="">
     </transition> -->
     <input type="text" >
-    <img src="@/assets/Frame.svg"  class="SVG search">
+    <img src="@/assets/Frame.svg"  class="SVG-search">
   </div>
 </template>
 
@@ -27,6 +27,11 @@ export default {
     font-size: medium;
     transition: all 0.5s ease;
     color: $background-color;
+  }
+  .SVG-search:hover{
+     background-color: $third-color;
+     border-radius: 25%;
+
   }
 //  .search:hover{
 //       background-color: $third-color;

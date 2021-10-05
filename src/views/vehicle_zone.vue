@@ -4,7 +4,7 @@
         <Navbar></Navbar>
             <div class=" cont-flex" >            
                 <div class="superior-bar">
-                     <div class="prue">.</div>
+                    <img class='Imageadd' src="@/assets/add.svg"  alt="">  <!-- @click="toggleModal(true)" -->
                     <SearchBar class="search"></SearchBar>
                 </div>
                 <div class="vehicle-list" v-for="(item,index) in info_vehicle_zone" :key="item._id">
@@ -168,6 +168,11 @@ export default {
     .superior-bar{
     display: flex;
     justify-content: space-between;
+     position: sticky;
+    top: 0px;
+    background:$background-color;
+    z-index: 5;
+    padding-bottom: 10px;
   }
   .menu{
       
@@ -215,21 +220,24 @@ export default {
         border-bottom:none;
 
     }
+    .Imageadd{
+        
+        width: 50px;
+    }
   
     
 
   @media (max-width: 600px){
     .superior-bar{
-      display: block;
-      /* align-items: flex-start; */
+      display: flex;
       
-
     }
     
-    #addImage{
-        display:block;  
+     .Imageadd{
+        
         width: 40px;
     }
+  
     .search{
         
         display: flex;
