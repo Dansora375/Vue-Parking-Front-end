@@ -1,5 +1,6 @@
 import { createStore } from 'vuex';
 import entradasModule from './modules/entradasModule';
+import options_zona_p from './modules/options_zona_p';
 // import entradasModule from './modules/entradasModule';
 
 export default createStore({
@@ -13,5 +14,6 @@ export default createStore({
   },
   modules: {
     entrada_salida: entradasModule,
+    options_zona_p
   },
 });

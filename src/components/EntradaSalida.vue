@@ -1,46 +1,57 @@
 <template>
-    <div>
-        <section class="item">
-            <!-- <img v-bind:src="img_route" class="vehicle"  alt="vehiculos"> -->
-            <img v-if="tipo === 'Carro'" v-bind:src="imgCarro" class="vehicle"  alt="vehiculos">
-            <img v-else-if="tipo === 'Moto'" v-bind:src="imgMoto" class="vehicle"  alt="vehiculos">
-            <img v-else v-bind:src="imgDefault" class="vehicle"  alt="vehiculos">
-            <!-- <img v-bind:src="img_route" class="vehicle"  alt="vehiculos">
-            <img v-bind:src="img_route" class="vehicle"  alt="vehiculos"> -->
-            <div class="tiempo data">
-                <p class="hora-title trescuatro-em">
-                    Hora de ingreso
-                </p>
-                <p class="hora-ingreso doble-em">
-                    {{hora_ingreso}}
-                </p>
-                <p class="fecha-ingreso trescuatro-em">
-                    {{fecha_ingreso}}
-                </p>
+  <div>
+    <section class="item">
+      <!-- <img v-bind:src="img_route" class="vehicle"  alt="vehiculos"> -->
+      <img v-if="tipo === 'Carro'" v-bind:src="imgCarro" class="vehicle"  alt="vehiculos">
+      <img v-else-if="tipo === 'Moto'" v-bind:src="imgMoto" class="vehicle"  alt="vehiculos">
+      <img v-else v-bind:src="imgDefault" class="vehicle"  alt="vehiculos">
+      <!-- <img v-bind:src="img_route" class="vehicle"  alt="vehiculos">
+      <img v-bind:src="img_route" class="vehicle"  alt="vehiculos"> -->
+      <div class="container-double">
 
-            </div>
-            <div class="placa data">
-                <p class="placa-titulo trescuatro-em">
-                    Placa
-                </p>
-                <p class="placa-numero doble-em">
-                    {{placa}}
-                </p>
-            </div>
+        <div class="tiempo-data">
+          <p class="hora-title trescuatro-em">
+            Hora de ingreso
+          </p>
+          <p class="hora-ingreso doble-em">
+            {{date_ingreso.getHours()}}:{{date_ingreso.getMinutes()}}
+          </p>
+          <p class="fecha-ingreso trescuatro-em">
+            <!-- eslint-disable-next-line max-len -->
+            {{date_ingreso.getDate()+'/'+(Number(date_ingreso.getMonth())+1)+'/'+date_ingreso.getFullYear()}}
+          </p>
 
-            <div class="tiempo-placa">
-                <p class="hora-ingreso tiempo doble-em">
-                    00:00
-                </p>
-                <p class="placa-numero doble-em">
-                    GGG111
-                </p>
-            </div>
-            <img class="menu" src="@/assets/menu.svg" alt="">
-            <!-- <select id="opciones_lista" name="" v-model="selected"> -->
-            <!-- </select> -->
-        </section>
-    </div>
+        </div>
+        <div class="placa-data">
+          <p class="placa-titulo trescuatro-em">
+            Placa
+          </p>
+          <p class="placa-numero doble-em">
+            {{placa}}
+          </p>
+        </div>
+      </div>
+      <!-- <img class="icon-menu" src="@/assets/menu.svg" alt="">  -->
+      <MenuDropDown>
+        <template v-slot:toggler>
+          <img class="icon-menu" src="@/assets/menu.svg" alt="">
+        </template>
+        <MenuDropDownContent class="menu-options">
+          <MenuDropDownItem class="opcion_menu">
+            Terminar parqueadero
+          </MenuDropDownItem>
+          <MenuDropDownItem class="opcion_menu">
+           Mas informacion
+          </MenuDropDownItem>
+          <MenuDropDownItem class="opcion_menu" id="Bott_cancel">
+            Cancelar
+          </MenuDropDownItem>
+        </MenuDropDownContent>
+      </MenuDropDown>
+      <!-- <select id="opciones_lista" name="" v-model="selected"> -->
+      <!-- </select> -->
+    </section>
+  </div>
 </template>
 
 <script>
@@ -48,8 +59,17 @@ import DefaultVehicle from '@/assets/predefined_list.svg';
 import Carro from '@/assets/Car.svg';
 import Moto from '@/assets/Motorcycle.svg';
 
+import MenuDropDownContent from './dropDown/MenuDropDownContent.vue';
+import MenuDropDown from './dropDown/MenuDropdown.vue';
+import MenuDropDownItem from './dropDown/MenuDropDownItem.vue';
+
 export default {
   name: 'EntradaSalida',
+  components: {
+    MenuDropDown,
+    MenuDropDownContent,
+    MenuDropDownItem,
+  },
   data() {
     return {
       lista_opciones: [
@@ -63,13 +83,12 @@ export default {
     };
   },
   props: {
-    hora_ingreso: {
-      type: String,
-      default: '00:00',
+    index: {
+      type: Number,
     },
-    fecha_ingreso: {
-      type: String,
-      default: '00/00/0000',
+    date_ingreso: {
+      type: Date,
+      default: new Date(),
     },
     placa: {
       type: String,
@@ -90,35 +109,55 @@ export default {
         font-size: medium;
     }
     .item{
+        margin-top: 10px ; 
         border-radius: 5px;
         padding:10px ;
+        position: relative;
+        background:$third-color;
 
         display: flex;
         border: 2px solid $main-color;
         align-items: center;
-        justify-content: space-between; align-items: center;
+        justify-content: space-between; 
+        align-items: center;
     }
 
-    .item div{
+    // .item div{
+    //     display: flex;
+    //     flex-direction: column;
+    //     align-items: center;
+    //     /* color: white; */
+    //     /* display: block; */
+    //     /* justify-content: center; */
+    // }
+    .container-double{
+
         display: flex;
-        flex-direction: column;
+        // flex-direction:row;
+        justify-content: space-between; 
+        // flex-direction: column;
         align-items: center;
-        /* color: white; */
-        /* display: block; */
-        /* justify-content: center; */
+        width: 50%;
+
     }
 
     .vehicle{
         width: 70px;
-        height: 70px;
+        padding-left: 10px;
     }
     .menu{
         width: 30px;
     }
 
-    .tiempo{
-        color: $third-color;
+    .tiempo-data{
+        color: $secondary-color;
         font-weight: bold;
+        display:block;
+        // text-shadow:-1px -1px 1px $main-color, 1px 1px 1px $main-color, -1px 1px 1px $main-color, 1px -1px 1px $main-color; 
+        text-shadow: -1.5px -1.5px 1px $main-color; 
+        flex-direction: column;
+        // margin-right: 20px;
+        margin-left: 20px;
     }
 
     .trescuatro-em{
@@ -130,8 +169,59 @@ export default {
     .tiempo-placa *{
         display: none;
     }
+    
+    .placa-data{
+      display: flex;
+      flex-direction: column;
+      margin-left: 20px;
+      margin-right: 20px;
+      font-weight: bold;
+    }
+    .placa-numero{
 
-    @media (max-width: 530px){
+      font-size: 1.8em;
+    }
+    .menu-options{
+
+      position: absolute;
+        display: flex-flow ;
+        right: 25px;
+        top:70%;
+        border-radius:10px;
+        border:1px solid $main-color;
+        min-width:105px;
+        width: 25%;
+        background:$secondary-color;
+        z-index: 10;
+    }
+    .opcion_menu{
+
+        color: $main-color;
+        border-bottom:1px solid $main-color;
+        padding: 5px;
+        
+        
+        font-size: 0.9em;
+        min-width:49px;
+        cursor: pointer;
+        // border-radius:1.5px;
+}
+        #Bott_cancel{
+
+        border-bottom:none;
+      }
+    
+    
+
+    .icon-menu{
+      width: 30px;
+    }
+
+    @media (max-width: 550px){
+        .item div{
+
+            flex-direction:column;
+        }
         .tiempo-placa *{
             display: block;
         }
@@ -144,5 +234,18 @@ export default {
         .data *{
             display: none;
         }
+        .icon-menu{
+        width: 20px;
+        }
+        .opcion_menu{
+          padding: 2.5px;
+          font-size: 0.7em;
+        }
+        .vehicle{
+        width: 50px;
+            padding-left: 0px;
+            padding-right: 8px;
+    }
+        
     }
 </style>

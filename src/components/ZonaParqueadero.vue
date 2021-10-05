@@ -1,14 +1,15 @@
 <template>
     <div>
-        <section class="item">
-            <img src="@/assets/aparcamiento.svg" class="parking-img"  alt="parqueadero">
+        <section class="item" >
+            <img v-if="inf_estado==='Lleno'" :src=Img_ocupado class="parking-img"  alt="parqueadero" >
+            <img  v-if="inf_estado==='Vacio'" :src=Img_vacio class="parking-img"  alt="parqueadero" >
             <div class="container-double">
-                <div class="State-parking">
-                    <p class="sub-title trescuatro-em">
+                <div class="State-parking" >
+                    <p class="sub-title trescuatro-em" >
                         ESTADO DE PARQUEADERO
                     </p>
-                    <p class="inf-estado doble-em">
-                        {{inf_estado}}
+                    <p class="inf-estado doble-em" >
+                        {{inf_estado}} 
                     </p>
                 </div>
                 <div class="parking-num">
@@ -20,22 +21,51 @@
                     </p>
                 </div>
             </div>
+            <slot >
+            </slot>
+            <!-- <div class="modal" v-if="showOptions"> 
             <Options_zona_P/>   
-            
-            <img class="menu" src="@/assets/menu.svg" alt="">
+            </div>
+            <img class="menu" src="@/assets/menu.svg" alt=""  @click="changeShowOptions(true)"> -->
         </section>
     </div>     
 </template>
 
 <script>
-import Options_zona_P from '@/components/Options_zona_P.vue';
+// import Options_zona_P from '@/components/Options_zona_P.vue';
+import P_ocupado from '@/assets/P_ocupado.svg';
+import P_vacio from '@/assets/P_vacio.svg';
+// import {mapGetters, mapMutations} from 'vuex';
+
 export default {
-  name: 'ZonaParqueadero',
+    name: 'ZonaParqueadero',
 
-  components: {
+    data() {
+        return {
+            Img_ocupado:P_ocupado,
+            Img_vacio:P_vacio
 
-      Options_zona_P
-  },
+        };
+    },
+    
+
+    // components: {
+
+    //     Options_zona_P
+    // },
+
+    // computed: {
+        
+    //     // ...mapState('options_zona_p',['showOptions']),
+    //     ...mapGetters('options_zona_p', ['showOptions'])
+    // },
+    // methods: {
+
+    //   ...mapMutations('options_zona_p', [ 'changeShowOptions']),
+      
+    
+    //  },
+  
   props: {
     
     
@@ -48,6 +78,11 @@ export default {
       type: String,
       default: 'A1',
     },
+    index:{
+        type: String,
+        default: '',
+    }
+    
   },
 };
 </script>
@@ -59,11 +94,12 @@ export default {
         font-size: medium;
     }
     .item{
-        margin-top: 10px    ;
+        margin-top: 10px;
         border-radius: 5px;
         padding:10px ;
         position: relative;
-
+        background:$third-color;
+        
         display: flex;
         border: 2px solid $main-color;
         justify-content: space-between;
@@ -125,6 +161,16 @@ export default {
         color:$secondary-color;
         display: block;
     }
+     .modal{
+    position: absolute;
+    display: flex; /* establish flex container */
+    justify-content: center; /* center flex items horizontally, in this case */
+    align-items: center; /* center flex items vertically, in this case */
+    // background-color: rgba(0, 0, 0, 0.5);
+    height: 100%;
+    width: 100%;
+    top: 0;
+  }
 
 
     

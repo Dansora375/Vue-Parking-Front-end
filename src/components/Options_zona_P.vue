@@ -1,5 +1,6 @@
 <template>
   <div class="model-opcions">
+      <slot></slot>
     <div class="opcion_M">
         Mas informacion
     </div>
@@ -17,13 +18,10 @@
 
 <script>
 export default {
-
-    name:"Options_zona_P"
-    
-}
-    
+  name: 'Options_zona_P',
+};
 </script>
-    
+
 <style lang="scss" scoped>
 @import '@/views/scss/_theme.scss';
 
@@ -38,6 +36,7 @@ export default {
         min-width:105px;
         width: 25%;
         background:$secondary-color;
+        z-index: 200;
 
     }
 
@@ -48,6 +47,7 @@ export default {
         padding: 5px;
         font-size: 0.9em;
         min-width:49px;
+        cursor: pointer;
         // border-radius:1.5px;
     }
 

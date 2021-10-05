@@ -4,17 +4,17 @@
     <Navbar class="nav"></Navbar>
     <div class="main_entrada">
       <div class="superior-bar">
-        <img class='add' src="@/assets/add.svg" @click="changeShowModalNewEntrada(true)" alt="">
+        <img class='addImage' src="@/assets/add.svg" @click="toggleModal(true)" alt="">
         <SearchBar class="search"></SearchBar>
       </div>
       <div class="listado" >
         <!-- <EntradaSalida class="listado"></EntradaSalida> -->
         <!-- eslint-disable-next-line max-len -->
-        <EntradaSalida class="listado" v-for="entrada in entradas" :key="entrada" v-bind:hora_ingreso="entrada.fecha.getHours() +':'+ entrada.fecha.getMinutes()" v-bind:fecha_ingreso="entrada.fecha.getDate()+'/'+(Number(entrada.fecha.getMonth())+1)+'/'+entrada.fecha.getFullYear()" v-bind:placa="entrada.placa" v-bind:tipo="entrada.tipo">
+        <EntradaSalida class="listado" v-for="(itemEntrada, index) in entradas" :key="index" v-bind:date_ingreso="transformToDate(itemEntrada)" v-bind:placa="itemEntrada.placa" v-bind:index=index v-bind:tipo="itemEntrada.tipo">
         </EntradaSalida>
       </div>
     </div>
-    <div class="modal" v-if="showModalNewEntrada" >
+    <div class="modal" v-if="isActiveModal" >
       <ModalNew>
       </ModalNew>
     </div>
@@ -25,7 +25,7 @@
 // @ is an alias to /src
 // import HelloWorld from '@/components/HelloWorld.vue';
 // import { mapState, mapMutations } from 'vuex';
-import { mapGetters, mapMutations } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 import Header from '@/components/Header.vue';
 import Navbar from '@/components/Nav.vue';
@@ -42,11 +42,37 @@ export default {
     EntradaSalida,
     ModalNew,
   },
+  provide() {
+    return {
+      isActiveModal: this.isActiveModal,
+      toggleModal: this.toggleModal,
+      toggleModal2: this.toggleModal2,
+    };
+  },
+  data() {
+    return {
+      isActiveModal: false,
+    };
+  },
+  mounted() {
+    this.$store.dispatch('entrada_salida/cargarEntradas');
+  },
   computed: {
     ...mapGetters('entrada_salida', ['showModalNewEntrada', 'entradas']),
+
   },
   methods: {
-    ...mapMutations('entrada_salida', ['changeShowModalNewEntrada', 'cargarDocs']),
+    ...mapActions('entrada_salida', ['changeModalNewEntrada', 'cargarDocs']),
+    transformToDate(item) {
+      return new Date(item.hora_entrada);
+    },
+
+    toggleModal(value) {
+      this.isActiveModal = value;
+    },
+    toggleModal2() {
+      this.isActiveModal = !this.isActiveModal;
+    },
   },
 };
 </script>
@@ -70,11 +96,11 @@ export default {
 
   @media (max-width: 600px){
     .superior-bar{
-      display: block;
+      display: flex;
 
     }
-    #addImage{
-        display:block;
+    .addImage{
+        display:inline;
         width: 40px;
     }
     .search{
@@ -82,7 +108,13 @@ export default {
       justify-content: flex-end;
     }
   }
-
+  .superior-bar{
+    position: sticky;
+    top: 0px;
+    background:$background-color;
+    z-index: 20;
+    padding-bottom: 10px;
+  }
   .modal{
     position: fixed;
     display: flex; /* establish flex container */
@@ -92,11 +124,13 @@ export default {
     height: 100%;
     width: 100%;
     top: 0;
+    z-index:30;
+    
   }
 
-  .add:hover{
-    background-color: $third-color;
-  }
+  // .add:hover{
+  //   background-color: $third-color;
+  // }
   .add:active{
     background-color:$secondary-color ;
   }
