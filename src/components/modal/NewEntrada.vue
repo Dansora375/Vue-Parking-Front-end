@@ -34,47 +34,81 @@
     <div class="textArea">
       <h3>Datos extra</h3>
       <textarea name="" id="" cols="500" rows="5" v-model="extra"></textarea>
-      <div class="buttons">
-        <button class="cancelar" @click="toggleModal(false)">Cancelar</button>
-        <button class="confirmar" @click="agregarEntrada({
-          nombre:nombre,
-          cedula:cedula,
-          apto_num:apto_num,
-          tower:tower,
-          placa: placa,
-          tipo: selected,
-          fecha: new Date(),
-          extra: extra,
-        })">Confirmar</button>
-      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapGetters, mapActions, mapMutations } from 'vuex';
 
 export default {
   name: 'ModalNew',
-  inject: ['isActiveModal', 'toggleModal'],
-  data() {
-    return {
-      nombre: '',
-      cedula: '',
-      apto_num: '',
-      tower: '',
-      placa: '',
-      selected: '',
-      extra: '',
-    };
-  },
+  inject: ['toggleModal'],
   computed: {
-    ...mapGetters('entrada_salida', ['showModalNewEntrada', 'vehiculos']),
+    ...mapGetters('entrada_salida', ['vehiculos', 'dataEntrada']),
+    nombre: {
+      get() {
+        return this.dataEntrada.nombre;
+      },
+      set(value) {
+        this.updateEntrada({ key: 'nombre', val: value });
+      },
+    },
+    cedula: {
+      get() {
+        return this.dataEntrada.cedula;
+      },
+      set(value) {
+        this.updateEntrada({ key: 'cedula', val: value });
+      },
+    },
+    apto_num: {
+      get() {
+        return this.dataEntrada.apto_num;
+      },
+      set(value) {
+        this.updateEntrada({ key: 'apto_num', val: value });
+      },
+    },
+    tower: {
+      get() {
+        return this.dataEntrada.tower;
+      },
+      set(value) {
+        this.updateEntrada({ key: 'tower', val: value });
+      },
+    },
+    placa: {
+      get() {
+        return this.dataEntrada.placa;
+      },
+      set(value) {
+        this.updateEntrada({ key: 'placa', val: value });
+      },
+    },
+    selected: {
+      get() {
+        return this.dataEntrada.selected;
+      },
+      set(value) {
+        this.updateEntrada({ key: 'selected', val: value });
+      },
+    },
+    extra: {
+      get() {
+        return this.dataEntrada.extra;
+      },
+      set(value) {
+        this.updateEntrada({ key: 'extra', val: value });
+      },
+    },
   },
   methods: {
+    ...mapMutations('entrada_salida', ['resetDataNewEntrada', 'updateEntrada']),
     ...mapActions('entrada_salida', ['changeModalNewEntrada', 'addNewEntrada']),
     agregarEntrada(value) {
       this.addNewEntrada(value);
+      this.resetDataNewEntrada();
       this.toggleModal(false);
     },
   },
@@ -84,15 +118,10 @@ export default {
 <style lang="scss" scoped>
 @import '@/views/scss/_theme.scss';
 #dialog-newParking{
-  width: 25%;
-  height:70%;
   padding: 30px;
   display: flex;
-
-  border-radius: 5px;
-  align-items: flex-start;
+  align-items: center;
   flex-direction: column;
-  background-color: $background-color;
 }
 
 .cancelar{
@@ -110,6 +139,13 @@ export default {
   background-color: $secondary-color  ;
   // color:$third-color;
 }
+.Rows{
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
 
 .cancelar:active {
   color: $secondary-color;
@@ -126,13 +162,13 @@ export default {
   background-color: $main-color;
 }
 
-.Rows{
-  display:flex;
+// .Rows{
+//   display:flex;
 
-  flex-wrap: wrap;
-  padding-top: 5px;
+//   flex-wrap: wrap;
+//   padding-top: 5px;
 
-}
+// }
 
 input{
 

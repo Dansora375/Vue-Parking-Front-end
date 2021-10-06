@@ -1,4 +1,3 @@
-
 <template>
   <div class="main"  id="mainRegistro">
     <div class="cont-flex">
@@ -51,14 +50,6 @@
         <div id="div_final">
           <span id="pregunta">¿Ya tiene una cuenta?</span>
           <router-link to="/inicio_sesion" id="inicio_sesion"> Ingrese aqui</router-link>
-          <div id="nav">
-             <router-link to="/">Home</router-link> |
-            <router-link to="/about">About</router-link>|
-            
-            
-
-      
-        </div>
         </div>
       </form>
     </div>
@@ -67,17 +58,18 @@
 
 <script>
 export default {
-    
-    
-    name:'Registrer',
-    
-  
-}
+  name: 'Registrer',
+  data() {
+    return {
+      identificacion: '',
+      nombre: '',
+      usuario: '',
+    };
+  },
+};
 </script>
 
-
 <style scoped lang="scss">
-  
 @import '@/views/scss/_theme.scss';
 
 /* las etiquetas input requieren una eliminacion de estilos anterior a su uso */
@@ -95,9 +87,6 @@ button {
     padding-bottom: 10px;
     cursor: pointer;
 }
-
-    
-
 
 .confirmar {
     color: $secondary-color;
@@ -128,7 +117,7 @@ button {
 
 }
 
-/* 
+/*
 propiedad para responsive */
     .main {
         display: flex;
@@ -159,14 +148,14 @@ propiedad para responsive */
     padding-top: 100px;
     /* No permitia que se diera responsive en el titulo y logo,       PROBAR */
 
-    /* margin-left: auto;        
+    /* margin-left: auto;
     margin-right: auto;
     width:100%;
      */
 
 }
 
-/* Para el padding que contiene al titulo y logo 
+/* Para el padding que contiene al titulo y logo
 NO es necesario ya que el anterior le da a los dos*/
 .cont-flex:first-child {
 
@@ -178,7 +167,6 @@ NO es necesario ya que el anterior le da a los dos*/
     max-width: auto;
 
 }
-
 
 /* distancia de separacion entre titulo y logo y pantalla */
 .cont-flex div {
@@ -193,8 +181,6 @@ NO es necesario ya que el anterior le da a los dos*/
     font-size: 80px;
     padding-left: 55px;
     padding-right: 50px;
-
-
 }
 
 #logo {
@@ -210,10 +196,7 @@ NO es necesario ya que el anterior le da a los dos*/
 
 /* --------------------------------------------- */
 
-
 .formulario {
-
-
     width: 80%;
     max-width: 400px;
     min-width: 350px;
@@ -228,7 +211,6 @@ NO es necesario ya que el anterior le da a los dos*/
 
 }
 
-
 .formulario input {
 
     font-size: 1.1rem;
@@ -236,16 +218,9 @@ NO es necesario ya que el anterior le da a los dos*/
     width: 100%;
     border-bottom: 2px solid $main-color;
     color: $main-color;
-    
-
 }
 
-
-
-
 .formulario select {
-
-
     // border: 2px solid $main-color;
     // border-radius: 7px;
     // color: $main-color;
@@ -273,9 +248,7 @@ NO es necesario ya que el anterior le da a los dos*/
     // background-size: 10px;
     // padding-right: 30px;
 
-
 }
-
 
 .formulario button {
 
@@ -292,10 +265,7 @@ NO es necesario ya que el anterior le da a los dos*/
     color: $main-color;
 }
 
-
 /* --------------------------------- */
-
-
 
 #div_final {
 
@@ -305,19 +275,16 @@ NO es necesario ya que el anterior le da a los dos*/
     margin-bottom: 50px;
 }
 
-
 #pregunta {
 
     color: $main-color;
 
 }
 
-
 #inicio_sesion {
 
     color: $secondary-color;
 }
-
 
 #inicio_sesion:hover {
 
@@ -353,7 +320,6 @@ NO es necesario ya que el anterior le da a los dos*/
   }
 
     .formulario {
-        
         width: 50%;
         min-width: 240px;
         /* Solo cambia el font size de el texto de pregunta e iniciar sesion */
@@ -371,12 +337,6 @@ NO es necesario ya que el anterior le da a los dos*/
         margin-top:40px;
     }
 
-
 }
 
 </style>
-
-
-
-
-

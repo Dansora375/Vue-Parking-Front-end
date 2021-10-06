@@ -6,16 +6,21 @@
         VUEPARKING
       </h1>
       <div>
-        <p>{{ nombre_usuario }}</p>
-        <p>{{ rol_usuario }}</p>
+        <p>{{ getUserData.user }}</p>
+        <p>{{ getUserData.type }}</p>
       </div>
     </header>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'Header',
+  computed: {
+    ...mapGetters(['getUserData']),
+  },
   props: {
     nombre_usuario: {
       type: String,

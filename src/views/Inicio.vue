@@ -1,69 +1,80 @@
 <template>
-     <div class="main">
-        <div class="cont-flex " >
-            <form class="formulario" action="">
-                <input type="text"  name="Usuario"  placeholder="Nombre de Usuario">
-                <input type="password" name="contrseña" placeholder="Contraseña">
-                <a href="aquiva irecuperar contrasea" class="crear_y_olvidoContra">¿olvido la contraseña?</a>
-                <br>
-                <br/>
-                <router-link to="/" class="crear_y_olvidoContra"> 
-                <button class="confirmar" >Iniciar Sesion</button>
-                </router-link>  
-                <div id="div_final">
-                    <span id="pregunta">¿Necesita una cuenta?</span>
-                    <router-link to="/registrer" class="crear_y_olvidoContra"> Cree una aqui</router-link>
-                </div>
-            </form>
+  <div class="main">
+    <div class="cont-flex " >
+      <form class="formulario" action="">
+        <input type="text"  name="Usuario"  placeholder="Nombre de Usuario" v-model="usuario">
+        <input type="password" name="contrseña" placeholder="Contraseña" v-model="contraseña">
+        <a href="aquiva irecuperar contrasea" class="olvido-contraseña">¿olvido la contraseña?</a>
+        <br><br/>
+        <!-- <router-link to="/" class="olvido-contraseña"> -->
+        <button class="confirmar" @click="loguin()" >Iniciar Sesion</button>
+        <!-- </router-link> -->
+        <div id="div_final">
+            <span id="pregunta">¿Necesita una cuenta?</span>
+            <router-link to="/registrer" class="olvido-contraseña"> Cree una aqui</router-link>
         </div>
-
-        <div class="cont-flex">
-                <div >
-                    <h1 class="contenido__title" >VUEPARKING</h1> 
-                    <h1 class="contenido__title" > SYSTEM </h1>  
-                </div>
-                <div >
-                    <img src="@/assets/car_logo.svg" alt="logo vue  parking" id="logo" />
-                </div>
-        </div>
+      </form>
     </div>
+
+    <div class="cont-flex">
+      <div >
+        <h1 class="contenido__title" >
+          VUEPARKING
+        </h1>
+        <h1 class="contenido__title" >
+          SYSTEM
+        </h1>
+      </div>
+      <div >
+        <img src="@/assets/car_logo.svg" alt="logo vue  parking" id="logo" />
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
+
 export default {
-  name:'Inicio',
-  
- 
-  
-  
-}
+  name: 'Inicio',
+  data() {
+    return {
+      usuario: '',
+      contraseña: '',
+    };
+  },
+  computed: {
+    ...mapGetters(['getUserData', 'getIsNotLogged']),
+  },
+  methods: {
+    ...mapActions(['loginWithUser']),
+    loguin() {
+      try {
+        this.loginWithUser({ user: this.usuario, password: this.contraseña });
+        // console.log(this.getUserData);
+        // alert(this.getUserData);
+        this.$router.push({ name: 'Home' });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  },
+};
 </script>
 
 <style scoped lang="scss" >
 @import '@/views/scss/_theme.scss';
-  /* las etiquetas input requieren una eliminacion de estilos anterior a su uso */
-// input {
-//   color: $main-color;
-//   font-family: "PT Sans Caption", sans-serif;
-//   background: none;
-//   border: none;
-//   outline: 0;
-// }
 
-/* Zona de botones */
-
-/* las etiquetas button requieren una eliminacion de estilos anterior a su uso */
 button {
   color: $main-color;
   background: none;
   border: none;
   font-size: medium;
-  border-radius: 5px; 
+  border-radius: 5px;
   padding-top: 10px;
   padding-bottom: 10px;
   cursor: pointer;
 }
-
 
 .cancelar {
   border: 2px solid $main-color;
@@ -89,19 +100,16 @@ button {
   color: $main-color;
 }
 
- 
-
 * {
   padding: 0;
   margin: 0;
 }
 
-/* 
+/*
 propiedad para responsive */
 .main {
   display: flex;
   flex-wrap: wrap-reverse;
- 
 }
 
 // input:-webkit-autofill,
@@ -122,16 +130,15 @@ propiedad para responsive */
 .cont-flex {
   flex: 1;
   padding-top: 80px;
-  
   /* No permitia que se diera responsive en el titulo y logo,       PROBAR */
 
-  /* margin-left: auto;        
+  /* margin-left: auto;
     margin-right: auto;
     width:100%;
      */
 }
 
-/* Para el padding que contiene al titulo y logo 
+/* Para el padding que contiene al titulo y logo
 NO es necesario ya que el anterior le da a los dos*/
 .cont-flex:first-child {
   /* Ponerle esto hacia que ocupara mas campo donde se encontraba el titulo */
@@ -145,8 +152,6 @@ NO es necesario ya que el anterior le da a los dos*/
 /* distancia de separacion entre titulo y logo y pantalla */
 .cont-flex div {
   padding-top: 125px;
-  
-  
 }
 
 .contenido__title {
@@ -163,7 +168,6 @@ NO es necesario ya que el anterior le da a los dos*/
   margin-right: auto;
   width: 100%;
   max-width: 160px;
-  
 }
 
 .formulario {
@@ -247,14 +251,14 @@ NO es necesario ya que el anterior le da a los dos*/
   color: $main-color;
 }
 
-.crear_y_olvidoContra {
+.olvido-contraseña {
   color: $secondary-color;
   text-align: right;
   padding-top: 10px;
   right: 0px;
 }
 
-.crear_y_olvidoContra:hover {
+.olvido-contraseña:hover {
   color: $main-color;
 }
 
@@ -277,7 +281,6 @@ NO es necesario ya que el anterior le da a los dos*/
   .cont-flex div {
     /* distancia de separacion entre titulo y logo */
     padding-top: 60px;
-    
   }
 
   .formulario {
@@ -300,7 +303,4 @@ NO es necesario ya que el anterior le da a los dos*/
     margin-top: 25px;
   }
 }
-
-
 </style>
-
