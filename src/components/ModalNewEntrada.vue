@@ -1,31 +1,31 @@
 <template>
   <div id="dialog-newParking" >
-    <h1>
+    <h2>
       Ingreso parqueadero visitante
-    </h1>
+    </h2>
     <div class="Rows">
-      <label for="nombre" >Nombre : </label>
+      <label for="nombre" >Nombre  </label>
       <input type="text" placeholder="Nombre del visitante" v-model="nombre" id="nombre">
     </div>
     <div class="Rows">
-      <label for="cedula" >Cedula : </label>
+      <label for="cedula" >Cedula  </label>
       <input type="text" placeholder="Cedula del visitante" v-model="cedula" id="cedula">
     </div>
     <div class="Rows">
-      <label for="apto_num" >Apto : </label>
+      <label for="apto_num" >Apto  </label>
       <input type="text" placeholder="Número de apartamento" v-model="apto_num" id="apto_num">
     </div>
     <div class="Rows">
-      <label for="tower" >Torre : </label>
+      <label for="tower" >Torre  </label>
       <input type="text" placeholder="Letra de la torre" v-model="tower" id="tower">
     </div>
     <div class="Rows">
-      <label for="placa" >Placa : </label>
+      <label for="placa" >Placa  </label>
       <input type="text" placeholder="Placa del vehiculo" v-model="placa"
       id="placa">
     </div>
-    <div class="Rows">
-      <select v-model="selected">
+    <div class="Rows" id="para_select">
+      <select v-model="selected" class="opt_select">
         <option v-for="option in vehiculos" :key="option">
         {{option}}
         </option>
@@ -87,7 +87,7 @@ export default {
 #dialog-newParking{
   width: 25%;
   height:70%;
-  padding: 30px;
+  padding: 0px 30px 60px 30px;
   display: flex;
 
   border-radius: 5px;
@@ -132,12 +132,15 @@ export default {
 
   flex-wrap: wrap;
   padding-top: 5px;
+  width: 100%;
 
 }
 
 input{
 
   padding-left: 5px;
+  width: 100%;
+  text-align: center;
   // position:absolute;
   // left: 25px;
 
@@ -168,6 +171,8 @@ button{
 label{
 
   font-weight: 900;
+  width: 100%;
+  text-align: center;
 
 }
 
@@ -178,6 +183,12 @@ select{
   width:160px;
   margin: 0px;
 
+}
+.opt_select{
+  width: 100%;
+}
+#para_select{
+  width: 100%;
 }
 // .modal-overlay {
 //  position: absolute;

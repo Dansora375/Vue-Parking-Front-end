@@ -7,15 +7,14 @@
                     <img class='Imageadd' src="@/assets/add.svg"  alt="">  <!-- @click="toggleModal(true)" -->
                     <SearchBar class="search"></SearchBar>
                 </div>
-                <div class="vehicle-list" v-for="(item,index) in info_vehicle_zone" :key="item._id">
+                <div class="vehicle_list" v-for="   (item,index) in resident_list" :key="item._id">
                     <ZonaParqueadero  :inf_estado="item.ocupado ?  'Lleno':'Vacio'" :parqueadero_numero="item.tower + item.apto_num" >
-                        
-                            
-                                
-                                
-                           
-                            <img class="menu" :src=Img_add alt="" @click=" open_option(index)"  > 
-
+                        <img class="menu" :src=Img_add alt="" @click=" open_option(index)"  > 
+                    </ZonaParqueadero>
+                </div>
+                <div class="vehicle-list" v-for="   (item,index) in ListVisitant" :key="item._id">
+                    <ZonaParqueadero  :inf_estado="item.ocupado ?  'Lleno':'Vacio'" :parqueadero_numero="item.tower + item.apto_num + ' -V' " >
+                        <img class="menu" :src=Img_add alt="" @click=" open_option(index)"  > 
                     </ZonaParqueadero>
                 </div>
             </div>
@@ -48,7 +47,7 @@ import ZonaParqueadero from '@/components/ZonaParqueadero.vue';
 import info_parqueadero from '@/components/Modal_Info_parqueadero.vue';
 import Ing_vclo_visitante from '@/components/Mdl_Ingreso_vclo_visitante.vue';
 import Image_add from '@/assets/menu.svg';
-import {mapGetters, mapMutations} from 'vuex';
+import {mapGetters, mapMutations, mapActions} from 'vuex';
 
 
 
@@ -76,40 +75,42 @@ export default {
 
         return{
 
-            info_vehicle_zone:[],
+            
             Img_add:Image_add
            
             
         }
     },
     
-    created(){
-
-        this.show_vehicleZ_data();
-        
-    },
+   created() {
+       this.$store.dispatch('entrada_salida/cargar_parq_list');
+       this.$store.dispatch('inf_resident/cargar_data_resi');
+       },
     computed: {
         
         // ...mapState('options_zona_p',['showOptions']),
-        ...mapGetters('options_zona_p', ['showOptions'])
+        ...mapGetters('inf_resident', ['showOptions','resident_list' ]),
+        ...mapGetters('entrada_salida', ['ListVisitant'])
     },
 
     methods:{
 
-        ...mapMutations('options_zona_p', [ 'changeShowOptions']),
+        ...mapMutations('inf_resident', ['changeShowOptions']),
+        ...mapActions('inf_resident',['cargar_data_resi','addNewResident']),
+        ...mapActions('entrada_salida',['cargar_parq_list'])
 
-        show_vehicleZ_data(){ 
-            this.axios.get('/entrada_vehiculo')
-            .then(res => {
-                // console.log(res.data)
-                this.info_vehicle_zone= res.data;
-                // return res.data;
-            })
-            .catch(e => {            
-                 console.log(e.response);
-            })
+        // show_vehicleZ_data(){ 
+        //     this.axios.get('/entrada_vehiculo')
+        //     .then(res => {
+        //         // console.log(res.data)
+        //         this.info_vehicle_zone= res.data;
+        //         // return res.data;
+        //     })
+        //     .catch(e => {            
+        //          console.log(e.response);
+        //     })
     
-        },
+        // },
 
         // open_option(index){
         //     // this.info_vehicle_zone.state_options=false;

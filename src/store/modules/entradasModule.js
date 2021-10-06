@@ -11,6 +11,7 @@ export default {
       // Agregar las nuevas opciones de vehiculos aqui
     ],
     registrosEntrada: [],
+    inf_visitant:[]
   },
   mutations: {
     changeShowModalNewEntrada(state, val) {
@@ -23,6 +24,9 @@ export default {
     createListEntradas(state, entradas) {
       state.registrosEntrada = entradas;
     },
+    createListVisitant(state, entrada){
+      state.inf_visitant=entrada;
+    }
     // cambiarEstadoParking(state, index){
     // }
   },
@@ -34,6 +38,10 @@ export default {
     // async cambiarEstadoParqueadero(context, index){
 
     // }
+    async cargar_parq_list(context){
+      const lista_R= await controller.Obt_Parq_list();
+      context.commit('createListVisitant', lista_R)
+    },
 
     changeModalNewEntrada(context, value) {
       context.commit('changeShowModalNewEntrada', value);
@@ -61,5 +69,8 @@ export default {
       return state.registrosEntrada;
       // return state.registrosEntrada;
     },
+    ListVisitant(state) {
+      return state.inf_visitant;
+    }
   },
 };
