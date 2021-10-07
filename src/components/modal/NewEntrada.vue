@@ -1,31 +1,31 @@
 <template>
   <div id="dialog-newParking" >
-    <h2>
+    <h1>
       Ingreso parqueadero visitante
-    </h2>
+    </h1>
     <div class="Rows">
-      <label for="nombre" >Nombre  </label>
+      <label for="nombre" >Nombre : </label>
       <input type="text" placeholder="Nombre del visitante" v-model="nombre" id="nombre">
     </div>
     <div class="Rows">
-      <label for="cedula" >Cedula  </label>
+      <label for="cedula" >Cedula : </label>
       <input type="text" placeholder="Cedula del visitante" v-model="cedula" id="cedula">
     </div>
     <div class="Rows">
-      <label for="apto_num" >Apto  </label>
+      <label for="apto_num" >Apto : </label>
       <input type="text" placeholder="Número de apartamento" v-model="apto_num" id="apto_num">
     </div>
     <div class="Rows">
-      <label for="tower" >Torre  </label>
+      <label for="tower" >Torre : </label>
       <input type="text" placeholder="Letra de la torre" v-model="tower" id="tower">
     </div>
     <div class="Rows">
-      <label for="placa" >Placa  </label>
+      <label for="placa" >Placa : </label>
       <input type="text" placeholder="Placa del vehiculo" v-model="placa"
       id="placa">
     </div>
-    <div class="Rows" id="para_select">
-      <select v-model="selected" class="opt_select">
+    <div class="Rows">
+      <select v-model="selected">
         <option v-for="option in vehiculos" :key="option">
         {{option}}
         </option>
@@ -34,47 +34,81 @@
     <div class="textArea">
       <h3>Datos extra</h3>
       <textarea name="" id="" cols="500" rows="5" v-model="extra"></textarea>
-      <div class="buttons">
-        <button class="cancelar" @click="toggleModal(false)">Cancelar</button>
-        <button class="confirmar" @click="agregarEntrada({
-          nombre:nombre,
-          cedula:cedula,
-          apto_num:apto_num,
-          tower:tower,
-          placa: placa,
-          tipo: selected,
-          fecha: new Date(),
-          extra: extra,
-        })">Confirmar</button>
-      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapGetters, mapActions, mapMutations } from 'vuex';
 
 export default {
   name: 'ModalNew',
-  inject: ['isActiveModal', 'toggleModal'],
-  data() {
-    return {
-      nombre: '',
-      cedula: '',
-      apto_num: '',
-      tower: '',
-      placa: '',
-      selected: '',
-      extra: '',
-    };
-  },
+  inject: ['toggleModal'],
   computed: {
-    ...mapGetters('entrada_salida', ['showModalNewEntrada', 'vehiculos']),
+    ...mapGetters('entrada_salida', ['vehiculos', 'dataEntrada']),
+    nombre: {
+      get() {
+        return this.dataEntrada.nombre;
+      },
+      set(value) {
+        this.updateEntrada({ key: 'nombre', val: value });
+      },
+    },
+    cedula: {
+      get() {
+        return this.dataEntrada.cedula;
+      },
+      set(value) {
+        this.updateEntrada({ key: 'cedula', val: value });
+      },
+    },
+    apto_num: {
+      get() {
+        return this.dataEntrada.apto_num;
+      },
+      set(value) {
+        this.updateEntrada({ key: 'apto_num', val: value });
+      },
+    },
+    tower: {
+      get() {
+        return this.dataEntrada.tower;
+      },
+      set(value) {
+        this.updateEntrada({ key: 'tower', val: value });
+      },
+    },
+    placa: {
+      get() {
+        return this.dataEntrada.placa;
+      },
+      set(value) {
+        this.updateEntrada({ key: 'placa', val: value });
+      },
+    },
+    selected: {
+      get() {
+        return this.dataEntrada.selected;
+      },
+      set(value) {
+        this.updateEntrada({ key: 'selected', val: value });
+      },
+    },
+    extra: {
+      get() {
+        return this.dataEntrada.extra;
+      },
+      set(value) {
+        this.updateEntrada({ key: 'extra', val: value });
+      },
+    },
   },
   methods: {
+    ...mapMutations('entrada_salida', ['resetDataNewEntrada', 'updateEntrada']),
     ...mapActions('entrada_salida', ['changeModalNewEntrada', 'addNewEntrada']),
     agregarEntrada(value) {
       this.addNewEntrada(value);
+      this.resetDataNewEntrada();
       this.toggleModal(false);
     },
   },
@@ -84,15 +118,10 @@ export default {
 <style lang="scss" scoped>
 @import '@/views/scss/_theme.scss';
 #dialog-newParking{
-  width: 25%;
-  height:70%;
-  padding: 0px 30px 60px 30px;
+  padding: 30px;
   display: flex;
-
-  border-radius: 5px;
-  align-items: flex-start;
+  align-items: center;
   flex-direction: column;
-  background-color: $background-color;
 }
 
 .cancelar{
@@ -110,6 +139,13 @@ export default {
   background-color: $secondary-color  ;
   // color:$third-color;
 }
+.Rows{
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
 
 .cancelar:active {
   color: $secondary-color;
@@ -126,20 +162,17 @@ export default {
   background-color: $main-color;
 }
 
-.Rows{
-  display:flex;
+// .Rows{
+//   display:flex;
 
-  flex-wrap: wrap;
-  padding-top: 5px;
-  width: 100%;
+//   flex-wrap: wrap;
+//   padding-top: 5px;
 
-}
+// }
 
 input{
 
   padding-left: 5px;
-  width: 100%;
-  text-align: center;
   // position:absolute;
   // left: 25px;
 
@@ -170,8 +203,6 @@ button{
 label{
 
   font-weight: 900;
-  width: 100%;
-  text-align: center;
 
 }
 
@@ -182,12 +213,6 @@ select{
   width:160px;
   margin: 0px;
 
-}
-.opt_select{
-  width: 100%;
-}
-#para_select{
-  width: 100%;
 }
 // .modal-overlay {
 //  position: absolute;

@@ -3,6 +3,37 @@
   <router-view/>
 </template>
 
+<script>
+import { mapGetters } from 'vuex';
+
+export default {
+  mounted() {
+    if (this.getIsNotLogged) {
+      // console.log(this.user);
+      this.$router.push({ name: 'Inicio_sesion' });
+    }
+  },
+  // beforeMount() {
+  //   window.addEventListener('beforeunload', this.preventNav);
+  // },
+
+  // beforeUnmount() {
+  //   window.removeEventListener('beforeunload', this.preventNav);
+  // },
+
+  methods: {
+    // preventNav(event) {
+    //   if (!this.isEditing) return;
+    //   event.preventDefault();
+    //   event.returnValue = '';
+    // },
+  },
+  computed: {
+    ...mapGetters(['getIsNotLogged', 'getUserData']),
+  },
+};
+</script>
+
 <style lang="scss">
 @import '@/views/scss/_theme.scss';
 
@@ -41,7 +72,7 @@ body{
 /* las etiquetas button requieren una eliminacion de estilos anterior a su uso */
 button {
   color: $main-color;
-  background: none; 
+  background: none;
   border: none;
   font-size: medium;
   border-radius: 5px;
@@ -51,7 +82,6 @@ button {
 
   border: 2px solid $main-color;
   text-align: center;
-  
 }
 
 // .cancelar {
@@ -80,8 +110,6 @@ button {
 }
 
   select {
-
-
     border: 2px solid $main-color;
     border-radius: 7px;
     color: $main-color;
@@ -90,7 +118,7 @@ button {
     box-shadow: 0 3px 0 1px $main-color;
     width: 100%;
 
-    height: 50px;     
+    height: 50px;
     font-size: 1.1rem;
     font-weight: 900;
     text-align-last: center;
@@ -108,12 +136,7 @@ button {
     background-repeat: no-repeat;
     background-size: 10px;
     padding-right: 30px;
-
-
 }
-
-
-
 // #nav {
 //   padding: 0px;
 //   a {

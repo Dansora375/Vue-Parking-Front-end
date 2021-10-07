@@ -14,10 +14,19 @@
         </EntradaSalida>
       </div>
     </div>
-    <div class="modal" v-if="isActiveModal" >
+    <Modal v-if="isActiveModal">
+      <NewEntrada>
+      </NewEntrada>
+      <template v-slot:confirmar>
+        <button class="confirmar" @click="agregarEntrada()">
+          Confirmar
+        </button>
+      </template>
+    </Modal>
+    <!-- <div class="modal" v-if="isActiveModal" >
       <ModalNew>
       </ModalNew>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -25,13 +34,15 @@
 // @ is an alias to /src
 // import HelloWorld from '@/components/HelloWorld.vue';
 // import { mapState, mapMutations } from 'vuex';
-import { mapGetters, mapActions } from 'vuex';
+import { mapGetters, mapActions, mapMutations } from 'vuex';
 
 import Header from '@/components/Header.vue';
 import Navbar from '@/components/Nav.vue';
 import SearchBar from '@/components/SearchButton.vue';
 import EntradaSalida from '@/components/EntradaSalida.vue';
-import ModalNew from '@/components/ModalNewEntrada.vue';
+// import ModalNew from '@/components/ModalNewEntrada.vue';
+import Modal from '@/components/modal/Modal.vue';
+import NewEntrada from '@/components/modal/NewEntrada.vue';
 
 export default {
   name: 'InOut',
@@ -40,7 +51,9 @@ export default {
     Navbar,
     SearchBar,
     EntradaSalida,
-    ModalNew,
+    // ModalNew,
+    Modal,
+    NewEntrada,
   },
   provide() {
     return {
@@ -62,7 +75,13 @@ export default {
 
   },
   methods: {
-    ...mapActions('entrada_salida', ['changeModalNewEntrada', 'cargarDocs']),
+    ...mapMutations('entrada_salida', ['resetDataNewEntrada']),
+    ...mapActions('entrada_salida', ['changeModalNewEntrada', 'cargarDocs', 'addNewEntradaFromStore']),
+    agregarEntrada() {
+      this.addNewEntradaFromStore();
+      this.resetDataNewEntrada();
+      this.toggleModal(false);
+    },
     transformToDate(item) {
       return new Date(item.hora_entrada);
     },
@@ -115,22 +134,21 @@ export default {
     z-index: 20;
     padding-bottom: 10px;
   }
-  .modal{
-    position: fixed;
-    display: flex; /* establish flex container */
-    justify-content: center; /* center flex items horizontally, in this case */
-    align-items: center; /* center flex items vertically, in this case */
-    background-color: rgba(0, 0, 0, 0.5);
-    height: 100%;
-    width: 100%;
-    top: 0;
-    z-index:30;
-    
-  }
-
-  // .add:hover{
-  //   background-color: $third-color;
+  // .modal{
+  //   position: fixed;
+  //   display: flex; /* establish flex container */
+  //   justify-content: center; /* center flex items horizontally, in this case */
+  //   align-items: center; /* center flex items vertically, in this case */
+  //   background-color: rgba(0, 0, 0, 0.5);
+  //   height: 100%;
+  //   width: 100%;
+  //   top: 0;
+  //   z-index:30;
   // }
+
+  .add:hover{
+    background-color: $third-color;
+  }
   .add:active{
     background-color:$secondary-color ;
   }

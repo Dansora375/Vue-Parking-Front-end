@@ -1,9 +1,27 @@
 import * as controller from '@/Controladores/EntradaController';
 
+const resetData = {
+  nombre: '',
+  cedula: '',
+  apto_num: '',
+  tower: '',
+  placa: '',
+  selected: '',
+  extra: '',
+};
 export default {
   namespaced: true,
   state: {
-    showModalNewEntrada: false,
+    dataNewEntrada: {
+      nombre: '',
+      cedula: '',
+      apto_num: '',
+      tower: '',
+      placa: '',
+      selected: '',
+      extra: '',
+    },
+    // showModalNewEntrada: false,
     vehicleOptions: [
       'Ninguno',
       'Carro',
@@ -14,8 +32,12 @@ export default {
     inf_visitant:[]
   },
   mutations: {
-    changeShowModalNewEntrada(state, val) {
-      state.showModalNewEntrada = val;
+    updateEntrada(state, values) {
+      const { key, val } = values;
+      state.dataNewEntrada[key] = val;
+    },
+    resetDataNewEntrada(state) {
+      state.dataNewEntrada = resetData;
     },
     addNewEntrada(state, val) {
       state.registrosEntrada.push(val);
@@ -43,9 +65,9 @@ export default {
       context.commit('createListVisitant', lista_R)
     },
 
-    changeModalNewEntrada(context, value) {
-      context.commit('changeShowModalNewEntrada', value);
-    },
+    // changeModalNewEntrada(context, value) {
+    //   context.commit('changeShowModalNewEntrada', value);
+    // },
     async addNewEntrada(context, value) {
       const result = await controller.PostEntrada(value);
       if (result.result) {
@@ -57,10 +79,37 @@ export default {
         console.log('Error al subir el dato  a la base : ', result.error);
       }
     },
+    async addNewEntradaFromStore({ dispatch, state }) {
+      await dispatch('addNewEntrada', state.dataNewEntrada);
+    },
   },
   getters: {
-    showModalNewEntrada(state) {
-      return state.showModalNewEntrada;
+    // getNombre(state) {
+    //   return state.dataNewEntrada.nombre;
+    // },
+    // getCedula(state) {
+    //   return state.dataNewEntrada.cedula;
+    // },
+    // getApto(state) {
+    //   return state.dataNewEntrada.apto_num;
+    // },
+    // getTower(state) {
+    //   return state.dataNewEntrada.tower;
+    // },
+    // getPlaca(state) {
+    //   return state.dataNewEntrada.placa;
+    // },
+    // getSelected(state) {
+    //   return state.dataNewEntrada.selected;
+    // },
+    // getExtra(state) {
+    //   return state.dataNewEntrada.extra;
+    // },
+    // showModalNewEntrada(state) {
+    //   return state.showModalNewEntrada;
+    // },
+    dataEntrada(state) {
+      return state.dataNewEntrada;
     },
     vehiculos(state) {
       return state.vehicleOptions;

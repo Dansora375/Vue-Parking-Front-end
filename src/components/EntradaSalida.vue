@@ -109,7 +109,7 @@ export default {
         font-size: medium;
     }
     .item{
-        margin-top: 10px ; 
+        margin-top: 10px ;
         border-radius: 5px;
         padding:10px ;
         position: relative;
@@ -118,7 +118,7 @@ export default {
         display: flex;
         border: 2px solid $main-color;
         align-items: center;
-        justify-content: space-between; 
+        justify-content: space-between;
         align-items: center;
     }
 
@@ -134,7 +134,7 @@ export default {
 
         display: flex;
         // flex-direction:row;
-        justify-content: space-between; 
+        justify-content: space-between;
         // flex-direction: column;
         align-items: center;
         width: 50%;
@@ -153,8 +153,7 @@ export default {
         color: $secondary-color;
         font-weight: bold;
         display:block;
-        // text-shadow:-1px -1px 1px $main-color, 1px 1px 1px $main-color, -1px 1px 1px $main-color, 1px -1px 1px $main-color; 
-        text-shadow: -1.5px -1.5px 1px $main-color; 
+        text-shadow: -1.5px -1.5px 1px $main-color;
         flex-direction: column;
         // margin-right: 20px;
         margin-left: 20px;
@@ -169,7 +168,7 @@ export default {
     .tiempo-placa *{
         display: none;
     }
-    
+
     .placa-data{
       display: flex;
       flex-direction: column;
@@ -199,8 +198,7 @@ export default {
         color: $main-color;
         border-bottom:1px solid $main-color;
         padding: 5px;
-        
-        
+
         font-size: 0.9em;
         min-width:49px;
         cursor: pointer;
@@ -210,42 +208,40 @@ export default {
 
         border-bottom:none;
       }
-    
-    
 
     .icon-menu{
       width: 30px;
     }
 
-    @media (max-width: 550px){
-        .item div{
+@media (max-width: 550px){
+  .item div{
 
-            flex-direction:column;
-        }
-        .tiempo-placa *{
-            display: block;
-        }
-        .trescuatro-em{
-            font-size: 0.5em;
-        }
-        .doble-em{
-            font-size: 1.5em;
-        }
-        .data *{
-            display: none;
-        }
-        .icon-menu{
-        width: 20px;
-        }
-        .opcion_menu{
-          padding: 2.5px;
-          font-size: 0.7em;
-        }
-        .vehicle{
-        width: 50px;
-            padding-left: 0px;
-            padding-right: 8px;
-    }
-        
-    }
+      flex-direction:column;
+  }
+  .tiempo-placa *{
+      display: block;
+  }
+  .trescuatro-em{
+      font-size: 0.5em;
+  }
+  .doble-em{
+      font-size: 1.5em;
+  }
+  .data *{
+      display: none;
+  }
+  .icon-menu{
+  width: 20px;
+  }
+  .opcion_menu{
+    padding: 2.5px;
+    font-size: 0.7em;
+  }
+  .vehicle{
+  width: 50px;
+      padding-left: 0px;
+      padding-right: 8px;
+  }
+
+}
 </style>

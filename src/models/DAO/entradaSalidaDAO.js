@@ -36,8 +36,16 @@ function ResPost(completed, error, data) {
 
 export async function nuevaEntrada(entrada) {
   try {
-    // console.log('post function', entrada);
-    const nEntrada = await axios.post('/entrada_vehiculo', { nombre: entrada.nombre, cedula: entrada.cedula, apto_num: entrada.apto_num, tower: entrada.tower, placa: entrada.placa, tipo: entrada.tipo, datos_extra: entrada.extra });
+    console.log('post function', entrada);
+    const nEntrada = await axios.post('/entrada_vehiculo', {
+      nombre: entrada.nombre,
+      cedula: entrada.cedula,
+      apto_num: entrada.apto_num,
+      tower: entrada.tower,
+      placa: entrada.placa,
+      tipo: entrada.tipo,
+      extra: entrada.extra,
+    });
     return new ResPost(true, {}, nEntrada);
   } catch (error) {
     return new ResPost(false, error, {});
