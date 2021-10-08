@@ -10,13 +10,18 @@
       <div class="listado" >
         <!-- <EntradaSalida class="listado"></EntradaSalida> -->
         <!-- eslint-disable-next-line max-len -->
-        <EntradaSalida class="listado" v-for="(itemEntrada, index) in entradas" :key="index" v-bind:date_ingreso="transformToDate(itemEntrada)" v-bind:placa="itemEntrada.placa" v-bind:index=index v-bind:tipo="itemEntrada.tipo">
+        <EntradaSalida class="listado" v-for="(itemEntrada, index) in entradas" :key="index" v-bind:date_ingreso="transformToDate(itemEntrada)" v-bind:placa="itemEntrada.placa" v-bind:index="index" v-bind:tipo="itemEntrada.tipo" v-bind:id="itemEntrada._id">
         </EntradaSalida>
       </div>
     </div>
-    <Modal v-if="isActiveModal">
+    <Modal ref="modal">
       <NewEntrada>
       </NewEntrada>
+      <!-- <div>
+        <h1>
+          gola mundo
+        </h1>
+      </div> -->
       <template v-slot:confirmar>
         <button class="confirmar" @click="agregarEntrada()">
           Confirmar
@@ -39,10 +44,10 @@ import { mapGetters, mapActions, mapMutations } from 'vuex';
 import Header from '@/components/Header.vue';
 import Navbar from '@/components/Nav.vue';
 import SearchBar from '@/components/SearchButton.vue';
-import EntradaSalida from '@/components/EntradaSalida.vue';
+import EntradaSalida from '@/components/entrada-vehiculos/EntradaSalida.vue';
 // import ModalNew from '@/components/ModalNewEntrada.vue';
 import Modal from '@/components/modal/Modal.vue';
-import NewEntrada from '@/components/modal/NewEntrada.vue';
+import NewEntrada from '@/components/entrada-vehiculos/NewEntrada.vue';
 
 export default {
   name: 'InOut',
@@ -57,8 +62,8 @@ export default {
   },
   provide() {
     return {
-      isActiveModal: this.isActiveModal,
-      toggleModal: this.toggleModal,
+      activeModal: this.isActiveModal,
+      // toggleModal: this.toggleModal,
       toggleModal2: this.toggleModal2,
     };
   },
@@ -84,10 +89,6 @@ export default {
     },
     transformToDate(item) {
       return new Date(item.hora_entrada);
-    },
-
-    toggleModal(value) {
-      this.isActiveModal = value;
     },
     toggleModal2() {
       this.isActiveModal = !this.isActiveModal;

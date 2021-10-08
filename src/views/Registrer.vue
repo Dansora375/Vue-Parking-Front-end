@@ -66,6 +66,9 @@ export default {
       usuario: '',
     };
   },
+  mounted() {
+    console.log('aqui si entra');
+  },
 };
 </script>
 

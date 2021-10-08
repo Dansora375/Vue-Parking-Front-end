@@ -40,7 +40,7 @@
           <MenuDropDownItem class="opcion_menu">
             Terminar parqueadero
           </MenuDropDownItem>
-          <MenuDropDownItem class="opcion_menu">
+          <MenuDropDownItem class="opcion_menu" @click="toggleModal(true)">
            Mas informacion
           </MenuDropDownItem>
           <MenuDropDownItem class="opcion_menu" id="Bott_cancel">
@@ -48,8 +48,37 @@
           </MenuDropDownItem>
         </MenuDropDownContent>
       </MenuDropDown>
+      <Modal ref="modal">
+        <EntradaInformation v-bind:index="this.index">
+        </EntradaInformation>
+      </Modal>
+      <!-- <Modal>
+        <p>
+          akjdhflaksdjhflaksdjfh
+        </p>
+        <template v-slot:confirmar>
+        <button class="confirmar" @click="">
+          Confirmar
+        </button>
+      </template>
+      </Modal> -->
       <!-- <select id="opciones_lista" name="" v-model="selected"> -->
       <!-- </select> -->
+      <!-- <MenuDropDown>
+        <template v-slot:toggler>
+          <button>
+            Hola mundo
+          </button>
+        </template>
+        <MenuDropDownContent>
+          <p>
+            hola mundo
+          </p>
+          <p>
+            adios mundo
+          </p>
+        </MenuDropDownContent>
+      </MenuDropDown> -->
     </section>
   </div>
 </template>
@@ -59,9 +88,12 @@ import DefaultVehicle from '@/assets/predefined_list.svg';
 import Carro from '@/assets/Car.svg';
 import Moto from '@/assets/Motorcycle.svg';
 
-import MenuDropDownContent from './dropDown/MenuDropDownContent.vue';
-import MenuDropDown from './dropDown/MenuDropdown.vue';
-import MenuDropDownItem from './dropDown/MenuDropDownItem.vue';
+import MenuDropDownContent from '../dropDown/MenuDropDownContent.vue';
+import MenuDropDown from '../dropDown/MenuDropdown.vue';
+import MenuDropDownItem from '../dropDown/MenuDropDownItem.vue';
+
+import Modal from '@/components/modal/Modal.vue';
+import EntradaInformation from '@/components/entrada-vehiculos/EntradaInformation.vue';
 
 export default {
   name: 'EntradaSalida',
@@ -69,6 +101,8 @@ export default {
     MenuDropDown,
     MenuDropDownContent,
     MenuDropDownItem,
+    Modal,
+    EntradaInformation,
   },
   data() {
     return {
@@ -92,11 +126,14 @@ export default {
     },
     placa: {
       type: String,
-      default: 'AAA000',
+      // default: 'AAA000',
     },
     tipo: {
       type: String,
       default: 'Default',
+    },
+    id: {
+      type: String,
     },
   },
 };

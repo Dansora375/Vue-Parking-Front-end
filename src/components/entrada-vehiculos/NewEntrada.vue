@@ -1,39 +1,46 @@
 <template>
   <div id="dialog-newParking" >
     <h1>
-      Ingreso parqueadero visitante
+      Ingreso parqueadero {{optionChoose}}
     </h1>
-    <div class="Rows">
-      <label for="nombre" >Nombre : </label>
-      <input type="text" placeholder="Nombre del visitante" v-model="nombre" id="nombre">
-    </div>
-    <div class="Rows">
-      <label for="cedula" >Cedula : </label>
-      <input type="text" placeholder="Cedula del visitante" v-model="cedula" id="cedula">
-    </div>
-    <div class="Rows">
-      <label for="apto_num" >Apto : </label>
-      <input type="text" placeholder="Número de apartamento" v-model="apto_num" id="apto_num">
-    </div>
-    <div class="Rows">
-      <label for="tower" >Torre : </label>
-      <input type="text" placeholder="Letra de la torre" v-model="tower" id="tower">
-    </div>
-    <div class="Rows">
-      <label for="placa" >Placa : </label>
-      <input type="text" placeholder="Placa del vehiculo" v-model="placa"
-      id="placa">
-    </div>
-    <div class="Rows">
-      <select v-model="selected">
-        <option v-for="option in vehiculos" :key="option">
-        {{option}}
-        </option>
-      </select>
-    </div>
-    <div class="textArea">
-      <h3>Datos extra</h3>
-      <textarea name="" id="" cols="500" rows="5" v-model="extra"></textarea>
+    <select v-model="optionChoose">
+      <option v-for="(optionEntrada, key) in optionsEntrada" :key="key">
+        {{optionEntrada}}
+      </option>
+    </select>
+    <div v-if="optionGet">
+       <div class="Rows">
+        <label for="nombre" >Nombre : </label>
+        <input type="text" placeholder="Nombre del visitante" v-model="nombre" id="nombre">
+      </div>
+      <div class="Rows">
+        <label for="cedula" >Cedula : </label>
+        <input type="text" placeholder="Cedula del visitante" v-model="cedula" id="cedula">
+      </div>
+      <div class="Rows">
+        <label for="apto_num" >Apto : </label>
+        <input type="text" placeholder="Número de apartamento" v-model="apto_num" id="apto_num">
+      </div>
+      <div class="Rows">
+        <label for="tower" >Torre : </label>
+        <input type="text" placeholder="Letra de la torre" v-model="tower" id="tower">
+      </div>
+      <div class="Rows">
+        <label for="placa" >Placa : </label>
+        <input type="text" placeholder="Placa del vehiculo" v-model="placa"
+        id="placa">
+      </div>
+      <div class="Rows">
+        <select v-model="selected">
+          <option v-for="option in vehiculos" :key="option">
+          {{option}}
+          </option>
+        </select>
+      </div>
+      <div class="textArea">
+        <h3>Datos extra</h3>
+        <textarea name="" id="" cols="500" rows="5" v-model="extra"></textarea>
+      </div>
     </div>
   </div>
 </template>
@@ -41,9 +48,20 @@
 <script>
 import { mapGetters, mapActions, mapMutations } from 'vuex';
 
+const opcionesEntrada = {
+  VISITANTE: 'Visitante',
+  RESIDENTE: 'Residente',
+};
+
 export default {
   name: 'ModalNew',
   inject: ['toggleModal'],
+  data() {
+    return {
+      optionsEntrada: opcionesEntrada,
+      optionChoose: opcionesEntrada.VISITANTE,
+    };
+  },
   computed: {
     ...mapGetters('entrada_salida', ['vehiculos', 'dataEntrada']),
     nombre: {
@@ -88,18 +106,24 @@ export default {
     },
     selected: {
       get() {
-        return this.dataEntrada.selected;
+        return this.dataEntrada.tipo;
       },
       set(value) {
-        this.updateEntrada({ key: 'selected', val: value });
+        this.updateEntrada({ key: 'tipo', val: value });
       },
     },
     extra: {
       get() {
-        return this.dataEntrada.extra;
+        return this.dataEntrada.datos_extra;
       },
       set(value) {
-        this.updateEntrada({ key: 'extra', val: value });
+        this.updateEntrada({ key: 'datos_extra', val: value });
+      },
+    },
+    optionGet: {
+      get() {
+        // console.log(this.optionEntrada);
+        return this.optionChoose === this.optionsEntrada.VISITANTE;
       },
     },
   },

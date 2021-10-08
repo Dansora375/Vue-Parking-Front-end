@@ -80,5 +80,5 @@ const router = createRouter({
   history: createWebHashHistory(),
   routes,
 });
-
+// router.currentRoute.ra
 export default router;

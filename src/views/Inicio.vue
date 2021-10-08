@@ -15,7 +15,6 @@
         </div>
       </form>
     </div>
-
     <div class="cont-flex">
       <div >
         <h1 class="contenido__title" >

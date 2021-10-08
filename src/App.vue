@@ -7,12 +7,18 @@
 import { mapGetters } from 'vuex';
 
 export default {
-  mounted() {
-    if (this.getIsNotLogged) {
-      // console.log(this.user);
-      this.$router.push({ name: 'Inicio_sesion' });
-    }
-  },
+  // mounted() {
+  //   if (this.getIsNotLogged) {
+  //     // console.log(this.user);
+  //     this.$router.push({ name: 'Inicio_sesion' });
+  //   }
+  // },
+  // updated() {
+  //   if (this.getIsNotLogged) {
+  //     // console.log(this.user);
+  //     this.$router.push({ name: 'Inicio_sesion' });
+  //   }
+  // },
   // beforeMount() {
   //   window.addEventListener('beforeunload', this.preventNav);
   // },

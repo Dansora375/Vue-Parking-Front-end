@@ -1,16 +1,15 @@
 <template>
-  <div class="modal">
+  <div class="modal" v-if="isActiveModal">
     <div id="dialog-modal">
-      <slot class="content">
-      </slot>
+      <div class="content">
+        <slot >
+        </slot>
+      </div>
       <div class="botones">
         <button class="cancelar" @click="toggle(false)">
           Cancelar
         </button>
         <slot name="confirmar">
-          <button class="confirmar" @click="agregarFuncionalidad()">
-            (Agregar funcionalidad)
-          </button>
         </slot>
       </div>
     </div>
@@ -22,7 +21,6 @@ import { mapActions, mapMutations } from 'vuex';
 
 export default {
   name: 'Modal',
-  inject: ['isActiveModal', 'toggleModal'],
   provide() {
     return {
       toggleModal: this.toggleModal,
@@ -40,6 +38,7 @@ export default {
         selected: '',
         extra: '',
       },
+      isActiveModal: false,
     };
   },
   methods: {
@@ -49,6 +48,9 @@ export default {
       this.addNewEntradaFromStore();
       this.resetDataNewEntrada();
       this.toggleModal(false);
+    },
+    toggleModal(value) {
+      this.isActiveModal = value;
     },
     toggle(value) {
       this.toggleModal(value);
@@ -80,6 +82,7 @@ export default {
   height: 100%;
   width: 100%;
   top: 0;
+  left: 0;
   z-index:30;
 }
 #dialog-modal{
@@ -88,9 +91,8 @@ export default {
   overflow-y:scroll;
   padding: 30px;
   display: flex;
-
   border-radius: 5px;
-  align-items: flex-start;
+  align-items: center;
   flex-direction: column;
   background-color: $background-color;
 }
@@ -99,6 +101,7 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  // background-color: black;
 }
 .cancelar{
   background-color: $third-color;
