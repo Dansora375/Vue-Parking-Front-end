@@ -1,9 +1,11 @@
 <template>
   <!-- <div @click="toggle" v-on-clickaway="away"> -->
-  <div @click="toggle" class="model-opcions" v-click-away="away">
-    <slot name ="toggler">
-      <img>
-    </slot>
+  <div  class="model-opcions" v-click-away="away">
+    <div @click="toggle">
+      <slot name ="toggler">
+        <img>
+      </slot>
+    </div>
     <!-- <slot>
     </slot> -->
     <slot/>

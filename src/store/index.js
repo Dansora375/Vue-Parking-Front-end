@@ -22,6 +22,10 @@ export default createStore({
         context.commit('login', usuario.data.data);
       }
     },
+    register(context, values) {
+      loginController.register(values);
+      console.log('hola mundo: \n', values);
+    },
   },
   getters: {
     getUserData(state) {

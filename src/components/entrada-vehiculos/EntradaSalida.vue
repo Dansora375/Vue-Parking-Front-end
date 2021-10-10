@@ -40,18 +40,38 @@
           <MenuDropDownItem class="opcion_menu">
             Terminar parqueadero
           </MenuDropDownItem>
-          <MenuDropDownItem class="opcion_menu" @click="toggleModal(true)">
-           Mas informacion
-          </MenuDropDownItem>
-          <MenuDropDownItem class="opcion_menu" id="Bott_cancel">
+
+          <Modal2>
+            <template v-slot:toggler>
+              <p class="opcion_menu">
+                Mas informacion
+              </p>
+            </template>
+            <ModalContent>
+              <EntradaInformation v-bind:index="this.index">
+              </EntradaInformation>
+              <div>
+                <h1>
+                  hola como estan
+                </h1>
+              </div>
+              <template v-slot:cancelar>
+                <button>
+                  Cancelar
+                </button>
+              </template>
+            </ModalContent>
+          </Modal2>
+
+          <!-- <MenuDropDownItem class="opcion_menu" id="Bott_cancel">
             Cancelar
-          </MenuDropDownItem>
+          </MenuDropDownItem> -->
         </MenuDropDownContent>
       </MenuDropDown>
-      <Modal ref="modal">
+      <!-- <Modal ref="modal">
         <EntradaInformation v-bind:index="this.index">
         </EntradaInformation>
-      </Modal>
+      </Modal> -->
       <!-- <Modal>
         <p>
           akjdhflaksdjhflaksdjfh
@@ -92,8 +112,10 @@ import MenuDropDownContent from '../dropDown/MenuDropDownContent.vue';
 import MenuDropDown from '../dropDown/MenuDropdown.vue';
 import MenuDropDownItem from '../dropDown/MenuDropDownItem.vue';
 
-import Modal from '@/components/modal/Modal.vue';
+import Modal2 from '@/components/modal/Modal2.vue';
+import ModalContent from '@/components/modal/ModalContent.vue';
 import EntradaInformation from '@/components/entrada-vehiculos/EntradaInformation.vue';
+// import ModalContent from '../modal/ModalContent.vue';
 
 export default {
   name: 'EntradaSalida',
@@ -101,7 +123,8 @@ export default {
     MenuDropDown,
     MenuDropDownContent,
     MenuDropDownItem,
-    Modal,
+    Modal2,
+    ModalContent,
     EntradaInformation,
   },
   data() {

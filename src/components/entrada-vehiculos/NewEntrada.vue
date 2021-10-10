@@ -55,7 +55,7 @@ const opcionesEntrada = {
 
 export default {
   name: 'ModalNew',
-  inject: ['toggleModal'],
+  inject: ['toggle', 'dataEntrada', 'updateEntrada'],
   data() {
     return {
       optionsEntrada: opcionesEntrada,
@@ -63,7 +63,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters('entrada_salida', ['vehiculos', 'dataEntrada']),
+    ...mapGetters('entrada_salida', ['vehiculos']),
     nombre: {
       get() {
         return this.dataEntrada.nombre;
@@ -128,7 +128,7 @@ export default {
     },
   },
   methods: {
-    ...mapMutations('entrada_salida', ['resetDataNewEntrada', 'updateEntrada']),
+    ...mapMutations('entrada_salida', []),
     ...mapActions('entrada_salida', ['changeModalNewEntrada', 'addNewEntrada']),
     agregarEntrada(value) {
       this.addNewEntrada(value);

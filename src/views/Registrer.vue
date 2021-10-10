@@ -17,39 +17,59 @@
           type="text"
           name="identificacion"
           placeholder="Número de identificacion"
-        />
+          onInput=""
+          v-model="dataRegistro.Cc"/>
         <input
           type="text"
           name="nombrecompleto"
           placeholder="Nombre completo"
-        />
-        <input type="text" name="Usuario" placeholder="Usuario" />
+          v-model="dataRegistro.name"/>
+        <input
+          type="text"
+          name="Usuario"
+          placeholder="Usuario"
+          v-model="dataRegistro.user"/>
 
-        <input type="email" name="correo" placeholder="Correo electrónico" />
-        <input type="email" name="repcorreo" placeholder="Repetir correo" />
+        <input
+          type="email"
+          name="correo"
+          placeholder="Correo electrónico"
+          v-model="dataRegistro.email"/>
+        <input
+          type="email"
+          name="repcorreo"
+          placeholder="Repetir correo"
+          v-model="dataRegistro.repEmail"/>
 
-        <input type="password" name="contrseña" placeholder="Contraseña" />
+        <input
+          type="password"
+          name="contraseña"
+          :class="{border_red: isSimilarPassword}"
+          placeholder="Contraseña"
+          v-model="dataRegistro.password"/>
+
         <input
           type="password"
           name="repcontsaseña"
           placeholder="Repetir contraseña"
-        />
-        <br />
-
-        <select name="rol">
-          <option selected disabled id="S_disabled">Rol</option>
-          <option value="gerente">Gerente</option>
-          <!-- Desactivar en un futuro -->
-          <option value="supervisor">Supervisor</option>
-          <option value="celador">Celador</option>
-        </select>
+          v-model="dataRegistro.repContraseña"/>
 
         <br />
-        <button class="confirmar">Registrarse</button>
+        <button class="confirmar" @click="registrar()">Registrarse</button>
 
         <div id="div_final">
           <span id="pregunta">¿Ya tiene una cuenta?</span>
+          <!-- <button>
+            ingrese aqui
+          </button> -->
           <router-link to="/inicio_sesion" id="inicio_sesion"> Ingrese aqui</router-link>
+        </div>
+        <div id="div_final">
+          <span id="pregunta">¿Ya tiene una cuenta?</span>
+          <button>
+            ingrese aqui
+          </button>
+          <!-- <router-link to="/inicio_sesion" id="inicio_sesion"> Ingrese aqui</router-link> -->
         </div>
       </form>
     </div>
@@ -57,17 +77,34 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
   name: 'Registrer',
   data() {
     return {
-      identificacion: '',
-      nombre: '',
-      usuario: '',
+      dataRegistro: {
+        Cc: '',
+        name: '',
+        user: '',
+        email: '',
+        repEmail: '',
+        password: '',
+        repContraseña: '',
+      },
+      isSimilarPassword: true,
     };
   },
-  mounted() {
-    console.log('aqui si entra');
+  computed: {
+    // dataRegistro: this.dataR,
+  },
+  methods: {
+    ...mapActions(['register']),
+    registrar() {
+      // console.log(this.dataRegistro);
+      this.register(this.dataRegistro);
+      // alert(this.dataRegistro);
+    },
   },
 };
 </script>
@@ -342,4 +379,7 @@ NO es necesario ya que el anterior le da a los dos*/
 
 }
 
+.border_red{
+  border-bottom-color: red;
+}
 </style>

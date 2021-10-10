@@ -7,11 +7,13 @@ export async function loginWithUser(username, password) {
   return user;
 }
 
-export async function register(Cedula, Nombre, user, email, contrasena, tipo = 'Guarda') {
-  const usuario = new User(Cedula, Nombre, user, email, contrasena, tipo);
-  if (usuario.validation) {
-    const result = await Dao.register(usuario);
-    return result;
-  }
-  return { result: false, error: 'El correo no es un correo', data: {} };
+export async function register(values) { 
+  const usuario = new User(values);
+  console.log('adiosMundo', usuario.data);
+  // alert(values);
+  // if (usuario.validation) {
+  //   const result = await Dao.register(usuario);
+  //   return result;
+  // }
+  // return { result: false, error: 'El correo no es un correo', data: {} };
 }

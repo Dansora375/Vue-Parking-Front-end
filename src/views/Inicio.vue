@@ -1,8 +1,8 @@
 <template>
   <div class="main">
     <div class="cont-flex " >
-      <form class="formulario" action="">
-        <input type="text"  name="Usuario"  placeholder="Nombre de Usuario" v-model="usuario">
+      <form class="formulario" action="" autocomplete="off">
+        <input type="text"  name="Usuario"  placeholder="Nombre de Usuario" v-model="usuario" >
         <input type="password" name="contrseña" placeholder="Contraseña" v-model="contraseña">
         <a href="aquiva irecuperar contrasea" class="olvido-contraseña">¿olvido la contraseña?</a>
         <br><br/>
