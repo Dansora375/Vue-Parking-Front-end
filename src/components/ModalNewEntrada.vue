@@ -73,6 +73,7 @@ export default {
   },
   methods: {
     ...mapActions('entrada_salida', ['changeModalNewEntrada', 'addNewEntrada']),
+    
     agregarEntrada(value) {
       this.addNewEntrada(value);
       this.toggleModal(false);

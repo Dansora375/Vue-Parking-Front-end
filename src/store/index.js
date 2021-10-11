@@ -8,6 +8,7 @@ import * as loginController from '@/Controladores/AuthenticationController';
 export default createStore({
   state: {
     userData: {},
+    
   },
   mutations: {
     login(state, user) {

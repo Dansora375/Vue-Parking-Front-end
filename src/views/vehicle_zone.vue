@@ -78,7 +78,6 @@ export default {
             
             Img_add:Image_add
            
-            
         }
     },
     
