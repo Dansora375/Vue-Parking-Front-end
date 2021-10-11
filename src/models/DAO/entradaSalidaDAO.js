@@ -44,7 +44,7 @@ export async function nuevaEntrada(entrada) {
       tower: entrada.tower,
       placa: entrada.placa,
       tipo: entrada.tipo,
-      extra: entrada.extra,
+      datos_extra: entrada.datos_extra,
     });
     return new ResPost(true, {}, nEntrada);
   } catch (error) {
@@ -52,3 +52,6 @@ export async function nuevaEntrada(entrada) {
   }
 }
 
+// export async function endEntrada(id){
+//   // try
+// }

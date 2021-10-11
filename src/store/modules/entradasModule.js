@@ -6,8 +6,8 @@ const resetData = {
   apto_num: '',
   tower: '',
   placa: '',
-  selected: '',
-  extra: '',
+  tipo: '',
+  datos_extra: '',
 };
 export default {
   namespaced: true,
@@ -18,8 +18,8 @@ export default {
       apto_num: '',
       tower: '',
       placa: '',
-      selected: '',
-      extra: '',
+      tipo: '',
+      datos_extra: '',
     },
     // showModalNewEntrada: false,
     vehicleOptions: [
@@ -40,8 +40,10 @@ export default {
       state.dataNewEntrada = resetData;
     },
     addNewEntrada(state, val) {
+      const data = val;
+      data.hora_entrada = new Date();
       state.registrosEntrada.push(val);
-      state.showModalNewEntrada = false;
+      // state.showModalNewEntrada = false;
     },
     createListEntradas(state, entradas) {
       state.registrosEntrada = entradas;
@@ -72,14 +74,16 @@ export default {
       const result = await controller.PostEntrada(value);
       if (result.result) {
         // console.log(value);
+
         context.commit('addNewEntrada', value);
       } else {
         // eslint-disable-next-line no-alert
         alert('No se ha podido subir el dato a la base: ');
-        console.log('Error al subir el dato  a la base : ', result.error);
+        console.error('Error al subir el dato  a la base : ', result.error);
       }
     },
     async addNewEntradaFromStore({ dispatch, state }) {
+      // console.log(state.dataNewEntrada);
       await dispatch('addNewEntrada', state.dataNewEntrada);
     },
   },

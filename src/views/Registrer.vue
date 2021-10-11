@@ -1,12 +1,12 @@
 <template>
   <div class="main"  id="mainRegistro">
     <div class="cont-flex">
-      <div>
+      <div class="div">
         <h1 class="contenido__title">VUEPARKING</h1>
         <h1 class="contenido__title">SYSTEM</h1>
       </div>
 
-      <div>
+      <div class="div">
         <img src="@/assets/car_logo.svg" alt="logo vue  parking" id="logo" />
       </div>
     </div>
@@ -17,98 +17,103 @@
           type="text"
           name="identificacion"
           placeholder="Número de identificacion"
-        />
+          onInput=""
+          v-model="dataRegistro.Cc"/>
         <input
           type="text"
           name="nombrecompleto"
           placeholder="Nombre completo"
-        />
-        <input type="text" name="Usuario" placeholder="Usuario" />
+          v-model="dataRegistro.name"/>
+        <input
+          type="text"
+          name="Usuario"
+          placeholder="Usuario"
+          v-model="dataRegistro.user"/>
 
-        <input type="email" name="correo" placeholder="Correo electrónico" />
-        <input type="email" name="repcorreo" placeholder="Repetir correo" />
+        <input
+          type="email"
+          name="correo"
+          placeholder="Correo electrónico"
+          v-model="dataRegistro.email"/>
+        <input
+          type="email"
+          name="repcorreo"
+          placeholder="Repetir correo"
+          v-model="dataRegistro.repEmail"/>
 
-        <input type="password" name="contrseña" placeholder="Contraseña" />
+        <input
+          type="password"
+          name="contraseña"
+          :class="{border_red: isSimilarPassword}"
+          placeholder="Contraseña"
+          v-model="dataRegistro.password"/>
+
         <input
           type="password"
           name="repcontsaseña"
           placeholder="Repetir contraseña"
-        />
-        <br />
-
-        <select name="rol">
-          <option selected disabled id="S_disabled">Rol</option>
-          <option value="gerente">Gerente</option>
-          <!-- Desactivar en un futuro -->
-          <option value="supervisor">Supervisor</option>
-          <option value="celador">Celador</option>
-        </select>
+          v-model="dataRegistro.repContraseña"/>
 
         <br />
-        <button class="confirmar">Registrarse</button>
+        <div class="confirmar button" @click="registrar()">
+          <p>
+             Registrarse
+          </p>
+        </div>
+        <!-- <button class="confirmar" @click="registrar()">Registrarse</button> -->
 
         <div id="div_final">
           <span id="pregunta">¿Ya tiene una cuenta?</span>
+          <!-- <button>
+            ingrese aqui
+          </button> -->
           <router-link to="/inicio_sesion" id="inicio_sesion"> Ingrese aqui</router-link>
         </div>
+        <!-- <div class="button-test button">
+          <p>
+            ingrese aqui
+          </p>
+        </div> -->
       </form>
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
   name: 'Registrer',
   data() {
     return {
-      identificacion: '',
-      nombre: '',
-      usuario: '',
+      dataRegistro: {
+        Cc: '',
+        name: '',
+        user: '',
+        email: '',
+        repEmail: '',
+        password: '',
+        repContraseña: '',
+      },
+      isSimilarPassword: true,
     };
+  },
+  computed: {
+    // dataRegistro: this.dataR,
+  },
+  methods: {
+    ...mapActions(['register']),
+    registrar() {
+      // console.log(this.dataRegistro);
+      this.register(this.dataRegistro);
+      // alert(this.dataRegistro);
+    },
   },
 };
 </script>
 
 <style scoped lang="scss">
 @import '@/views/scss/_theme.scss';
-
-/* las etiquetas input requieren una eliminacion de estilos anterior a su uso */
-
-/* Zona de botones */
-
-/* las etiquetas button requieren una eliminacion de estilos anterior a su uso */
-button {
-    color: $main-color;
-    background: none;
-    border: none;
-    font-size: medium;
-    border-radius: 5px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    cursor: pointer;
-}
-
-.confirmar {
-    color: $secondary-color;
-    background-color: $main-color;
-}
-
-.cancelar:hover {
-    background-color: $background-color;
-}
-
-.cancelar:active {
-    color: $secondary-color
-}
-
-.confirmar:hover {
-    background-color: $background-color;
-}
-
-.confirmar:active {
-    color: $secondary-color
-}
-
 /* ----------------------------------------- */
 
 * {
@@ -119,27 +124,79 @@ button {
 
 /*
 propiedad para responsive */
-    .main {
-        display: flex;
-        flex-wrap: wrap;
+.main {
+    display: flex;
+    flex-wrap: wrap;
 
 }
 
-// input:-webkit-autofill,
-// input:-webkit-autofill:hover,
-// input:-webkit-autofill:focus,
-// input:-webkit-autofill:active {
-//     transition: background-color 5000s ease-in-out 0s;
-// }
+/* las etiquetas input requieren una eliminacion de estilos anterior a su uso */
 
-// /* Para cambiar el color de la letra despues de seleccionar el atocomplete o autofill */
-// /*Change text in autofill textbox*/
+/* Zona de botones */
 
-// input:-webkit-autofill {
-//     -webkit-text-fill-color: $main-color !important;
-// }
+/* las etiquetas button requieren una eliminacion de estilos anterior a su uso */
 
-/* ---------------------------------------- */
+/* distancia de separacion entre titulo y logo y pantalla */
+.cont-flex .div{
+
+    padding-top: 145px;
+
+}
+
+.button div{
+  margin: 0;
+  padding-top: 0;
+}
+
+.button {
+  color: $main-color;
+  background: none;
+  border: none;
+  font-size: medium;
+  border-radius: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  cursor: pointer;
+}
+.button p{
+  // background: black;
+  // height: min-content;
+}
+
+.confirmar {
+  color: $secondary-color;
+  background-color: $main-color;
+}
+
+.confirmar:hover {
+  color: $background-color;
+  background-color: $secondary-color;
+}
+
+.confirmar:active {
+  font-size: 0.8em;
+  // color: $secondary-color
+}
+
+.cancelar:hover {
+  background-color: $background-color;
+}
+
+.cancelar:active {
+  color: $secondary-color
+}
+
+// Manejo de tests
+.button-test{
+  cursor: pointer;
+}
+.button-test:hover{
+  background-color:$third-color ;
+}
+
+.button-test:active{
+  background-color:$secondary-color ;
+}
 
 /*propiedad padding a los dos con clase .cont-flex (formulario y titulo y logo)*/
 .cont-flex {
@@ -147,11 +204,6 @@ propiedad para responsive */
     flex: 1;
     padding-top: 100px;
     /* No permitia que se diera responsive en el titulo y logo,       PROBAR */
-
-    /* margin-left: auto;
-    margin-right: auto;
-    width:100%;
-     */
 
 }
 
@@ -168,12 +220,6 @@ NO es necesario ya que el anterior le da a los dos*/
 
 }
 
-/* distancia de separacion entre titulo y logo y pantalla */
-.cont-flex div {
-
-    padding-top: 145px;
-
-}
 /* -------------------------------------------- */
 .contenido__title {
 
@@ -221,33 +267,7 @@ NO es necesario ya que el anterior le da a los dos*/
 }
 
 .formulario select {
-    // border: 2px solid $main-color;
-    // border-radius: 7px;
-    // color: $main-color;
-    // background: none;
     margin-top: 40px;
-    // box-shadow: 0 3px 0 1px $main-color;
-    // width: 100%;
-
-    // height: 50px;
-    // font-size: 1.1rem;
-    // font-weight: 900;
-    // text-align-last: center;
-    // cursor: pointer;
-
-    // /* Replace default styling (arrow) para quitarle la flechita */
-    // appearance: none;
-    // -webkit-appearance: none;
-    // -moz-appearance: none;
-
-    // /* Poniendo la flecha como fondo del select */
-    // background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="50"> <polygon points="0,0 100,0 50,50" style="fill:%23666666;" /></svg>  ');
-
-    // background-position: right 10px top 50%;
-    // background-repeat: no-repeat;
-    // background-size: 10px;
-    // padding-right: 30px;
-
 }
 
 .formulario button {
@@ -338,5 +358,4 @@ NO es necesario ya que el anterior le da a los dos*/
     }
 
 }
-
 </style>

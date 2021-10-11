@@ -1,73 +1,44 @@
 <template>
-  <div class="modal" v-if="isActiveModal">
-    <div id="dialog-modal">
-      <div class="content">
-        <slot >
+  <div class="modal" v-if="active">
+    <div class="content">
+
+      <!-- Zona de contenido -->
+      <div>
+        <slot>
         </slot>
       </div>
+
+      <!--Botones posibles, en este caso solo hay opcion para dos botones-->
       <div class="botones">
-        <button class="cancelar" @click="toggle(false)">
-          Cancelar
-        </button>
-        <slot name="confirmar">
-        </slot>
+        <div class="cancelar" @click="toggle(false)">
+          <slot name="cancelar">
+            <button>
+              Salir
+            </button>
+          </slot>
+        </div>
+        <div class="confirmar" @click="toggle(false)">
+          <slot name="confirmar">
+          </slot>
+        </div>
       </div>
+
     </div>
   </div>
 </template>
 
 <script>
-import { mapActions, mapMutations } from 'vuex';
 
 export default {
-  name: 'Modal',
-  provide() {
-    return {
-      toggleModal: this.toggleModal,
-      // dataEntrada: this.dataEntrada,
-    };
-  },
-  data() {
-    return {
-      dataEntrada: {
-        nombre: '',
-        cedula: '',
-        apto_num: '',
-        tower: '',
-        placa: '',
-        selected: '',
-        extra: '',
-      },
-      isActiveModal: false,
-    };
-  },
-  methods: {
-    ...mapMutations('entrada_salida', ['resetDataNewEntrada']),
-    ...mapActions('entrada_salida', ['changeModalNewEntrada', 'addNewEntradaFromStore']),
-    agregarEntrada() {
-      this.addNewEntradaFromStore();
-      this.resetDataNewEntrada();
-      this.toggleModal(false);
-    },
-    toggleModal(value) {
-      this.isActiveModal = value;
-    },
-    toggle(value) {
-      this.toggleModal(value);
-    },
-    agregarFuncionalidad() {
-      // eslint-disable-next-line no-alert
-      alert('Agregue un boton personalizado');
+  name: 'ModalContent',
+  inject: ['toggle', 'estadoModal'],
+  computed: {
+    active() {
+      console.log(this.estadoModal.activo);
+      // console.log(this.estadoModal.activo, 'Hola que tal que hace que hay de nuevo');
+      return this.estadoModal.activo;
     },
   },
-//   data() {
-//     return {
-//       estadoDialog: {
-//         isActivo: false,
-//       },
-//     };
-//   },
-// }
 };
 </script>
 
@@ -78,14 +49,20 @@ export default {
   display: flex; /* establish flex container */
   justify-content: center; /* center flex items horizontally, in this case */
   align-items: center; /* center flex items vertically, in this case */
+
   background-color: rgba(0, 0, 0, 0.5);
+
   height: 100%;
   width: 100%;
+
   top: 0;
   left: 0;
-  z-index:30;
+  right: 0;
+  bottom: 0;
+  z-index:200;
 }
-#dialog-modal{
+
+.content{
   width: 25%;
   height:70%;
   overflow-y:scroll;
@@ -95,12 +72,6 @@ export default {
   align-items: center;
   flex-direction: column;
   background-color: $background-color;
-}
-
-.content{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   // background-color: black;
 }
 .cancelar{
@@ -108,6 +79,7 @@ export default {
   border: none;
 }
 .confirmar{
+  width: auto;
   border: none;
 }
 ::placeholder{
@@ -137,6 +109,8 @@ export default {
 button{
 
   padding: 2.5% 5% 2.5% 5%;
+  width: 100%;
+  height: 100%;
 
   // display: inline;
   // background: black;

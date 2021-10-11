@@ -4,25 +4,36 @@
     <Navbar class="nav"></Navbar>
     <div class="main_entrada">
       <div class="superior-bar">
-        <img class='addImage' src="@/assets/add.svg" @click="toggleModal(true)" alt="">
+
+        <Modal2>
+          <template v-slot:toggler>
+            <img class='addImage' src="@/assets/add.svg" alt="">
+          </template>
+          <modal-content>
+            <NewEntrada>
+            </NewEntrada>
+            <template v-slot:cancelar>
+              <button @click="resetDataEntrada()">
+                Cancelar
+              </button>
+            </template>
+            <template v-slot:confirmar>
+              <button @click="agregarEntrada">
+                adios mundo
+              </button>
+            </template>
+          </modal-content>
+        </Modal2>
+
         <SearchBar class="search"></SearchBar>
       </div>
       <div class="listado" >
         <!-- <EntradaSalida class="listado"></EntradaSalida> -->
         <!-- eslint-disable-next-line max-len -->
-        <EntradaSalida class="listado" v-for="(itemEntrada, index) in entradas" :key="index" v-bind:date_ingreso="transformToDate(itemEntrada)" v-bind:placa="itemEntrada.placa" v-bind:index=index v-bind:tipo="itemEntrada.tipo">
+        <EntradaSalida class="listado" v-for="(itemEntrada, index) in entradas" :key="index" v-bind:date_ingreso="transformToDate(itemEntrada)" v-bind:placa="itemEntrada.placa" v-bind:index="index" v-bind:tipo="itemEntrada.tipo" v-bind:id="itemEntrada._id">
         </EntradaSalida>
       </div>
     </div>
-    <Modal v-if="isActiveModal">
-      <NewEntrada>
-      </NewEntrada>
-      <template v-slot:confirmar>
-        <button class="confirmar" @click="agregarEntrada()">
-          Confirmar
-        </button>
-      </template>
-    </Modal>
     <!-- <div class="modal" v-if="isActiveModal" >
       <ModalNew>
       </ModalNew>
@@ -39,10 +50,23 @@ import { mapGetters, mapActions, mapMutations } from 'vuex';
 import Header from '@/components/Header.vue';
 import Navbar from '@/components/Nav.vue';
 import SearchBar from '@/components/SearchButton.vue';
-import EntradaSalida from '@/components/EntradaSalida.vue';
+import EntradaSalida from '@/components/entrada-vehiculos/EntradaSalida.vue';
 // import ModalNew from '@/components/ModalNewEntrada.vue';
-import Modal from '@/components/modal/Modal.vue';
-import NewEntrada from '@/components/modal/NewEntrada.vue';
+// import Modal from '@/components/modal/Modal.vue';
+import NewEntrada from '@/components/entrada-vehiculos/NewEntrada.vue';
+
+import Modal2 from '@/components/modal/Modal2.vue';
+import ModalContent from '@/components/modal/ModalContent.vue';
+
+const resetData = {
+  nombre: '',
+  cedula: '',
+  apto_num: '',
+  tower: '',
+  placa: '',
+  tipo: '',
+  datos_extra: '',
+};
 
 export default {
   name: 'InOut',
@@ -52,19 +76,29 @@ export default {
     SearchBar,
     EntradaSalida,
     // ModalNew,
-    Modal,
+    // Modal,
     NewEntrada,
+    Modal2,
+    ModalContent,
   },
   provide() {
     return {
-      isActiveModal: this.isActiveModal,
-      toggleModal: this.toggleModal,
-      toggleModal2: this.toggleModal2,
+      dataEntrada: () => this.dataNewEntrada,
+      updateEntrada: this.updateEntrada,
     };
   },
   data() {
     return {
       isActiveModal: false,
+      dataNewEntrada: {
+        nombre: '',
+        cedula: '',
+        apto_num: '',
+        tower: '',
+        placa: '',
+        tipo: '',
+        datos_extra: '',
+      },
     };
   },
   mounted() {
@@ -75,22 +109,24 @@ export default {
 
   },
   methods: {
-    ...mapMutations('entrada_salida', ['resetDataNewEntrada']),
-    ...mapActions('entrada_salida', ['changeModalNewEntrada', 'cargarDocs', 'addNewEntradaFromStore']),
+    ...mapMutations('entrada_salida', []),
+    ...mapActions('entrada_salida', ['cargarDocs', 'addNewEntrada']),
     agregarEntrada() {
-      this.addNewEntradaFromStore();
-      this.resetDataNewEntrada();
-      this.toggleModal(false);
+      // console.log(this.dataNewEntrada);
+      this.addNewEntrada(this.dataNewEntrada);
+      this.resetDataEntrada();
+      // this.toggleModal(false);
     },
     transformToDate(item) {
       return new Date(item.hora_entrada);
     },
-
-    toggleModal(value) {
-      this.isActiveModal = value;
+    resetDataEntrada() {
+      this.dataNewEntrada = resetData;
+      // console.log(this.dataNewEntrada);
     },
-    toggleModal2() {
-      this.isActiveModal = !this.isActiveModal;
+    updateEntrada(values) {
+      const { key, val } = values;
+      this.dataNewEntrada[key] = val;
     },
   },
 };
@@ -131,7 +167,7 @@ export default {
     position: sticky;
     top: 0px;
     background:$background-color;
-    z-index: 20;
+    z-index: 10;
     padding-bottom: 10px;
   }
   // .modal{
