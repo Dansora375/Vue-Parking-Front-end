@@ -1,9 +1,6 @@
 <template>
   <div class="hello">
     <div class="container">
-      <div class="boton">
-        <button class="btel">Eliminar Residente</button>
-      </div>
       <div class="buscar">
         <form action="">
           <label for="buscar">Buscar</label>
@@ -11,36 +8,46 @@
         </form>
       </div>
     </div>
+    </div>
 <div class="usuario">
   <div class="icono">
-    <img src="@/assets/user.svg" alt="">
+    <img :src= imgUser>
   </div>
   <div>
-    <div class="nombre-user">Ricardo Mejía</div>
+    <div class="nombre-user">{{Nombre}}</div>
   </div>
-</div>
-<div class="usuario">
-  <div class="icono">
-    <img src="@/assets/user.svg" alt="">
-  </div>
-  <div>
-    <div class="nombre-user">Cristian Ramirez</div>
-  </div>
-</div>
-<div class="usuario">
-  <div class="icono">
-    <img src="@/assets/user.svg" alt="">
-  </div>
-  <div>
-    <div class="nombre-user">Cristian Santamaría</div>
-  </div>
-</div>
 </div>
 </template>
 
 <script>
+import user from '@/assets/user.svg'
 export default {
   name: 'ListaResidentes',
+  components:{
+
+  },
+  data(){
+
+        return{
+
+            imgUser:user
+           
+            
+        }
+    },
+    props:{
+      index: {
+      type: Number,
+    },
+    Nombre: {
+      type: String,
+      default:"Nombre" ,
+    },
+    
+    id: {
+      type: String,
+    },
+    }
 };
 </script>
 
