@@ -24,7 +24,7 @@ export default createStore({
     },
     register(context, values) {
       loginController.register(values);
-      console.log('hola mundo: \n', values);
+      // console.log('hola mundo: \n', values);
     },
   },
   getters: {
