@@ -15,18 +15,15 @@
           </button>
         </template>
         <modal-content>
-          <div>
-            <h1>
-              Crear opciones para nuevo parqueadero
-            </h1>
-          </div>
+          <new-hogar>
+          </new-hogar>
           <template v-slot:cancelar>
             <button>
               Cancelar
             </button>
           </template>
           <template v-slot:confirmar>
-            <button>
+            <button @click="agregarHogar()">
               Confirmar
             </button>
           </template>
@@ -61,6 +58,7 @@ import { mapGetters } from 'vuex';
 import Header from '@/components/Header.vue';
 import Navbar from '@/components/Nav.vue';
 import Hogares from '@/components/hogar/ListaHogares.vue';
+import NewHogar from '@/components/hogar/NewHogar.vue';
 
 import Modal2 from '@/components/modal/Modal2.vue';
 import ModalContent from '@/components/modal/ModalContent.vue';
@@ -74,20 +72,38 @@ export default {
     Hogares,
     Modal2,
     ModalContent,
+    NewHogar,
     // Infoapto,
   },
   created() {
     // console.log('inmounted: ');
     this.$store.dispatch('hogares_module/cargarHomes');
   },
+  provide() {
+    return {
+      dataHogar: () => this.dataNewHogar,
+      updateEntrada: this.updateEntrada,
+    };
+  },
   data() {
     return {
+      dataNewHogar: {
+        aptoNum: 0,
+        tower: '',
+      },
     };
   },
   computed: {
     ...mapGetters('hogares_module', ['getHogares']),
   },
   methods: {
+    updateEntrada(values) {
+      const { key, val } = values;
+      this.dataNewHogar[key] = val;
+    },
+    agregarHogar() {
+      console.log(this.dataNewHogar);
+    },
   },
 };
 </script>

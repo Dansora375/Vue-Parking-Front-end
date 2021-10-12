@@ -9,7 +9,7 @@
       </option>
     </select>
     <div v-if="optionGet">
-       <div class="Rows">
+      <div class="Rows">
         <label for="nombre" >Nombre : </label>
         <input type="text" placeholder="Nombre del visitante" v-model="nombre" id="nombre">
       </div>
