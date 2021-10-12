@@ -1,10 +1,10 @@
 <template>
-<div class= 'Hogares'>
-    <Header/>
-    <Nav/>
-    <SearchButton/>
-    </div>
-    <div class= 'Navigation'>
+
+
+<Header nombre_usuario="Carlos" rol_usuario="Trabajador"></Header>
+  <Navbar class="nav"></Navbar>
+<div class= 'hogares'> 
+  <div class= 'Navigation'>
     <div class = 'Navigation-Buttons'>
     <button class="boton1">Asignar Parqueadero</button>
     <button class="boton2">TORRE A <img class="menu" src="@/assets/menu.svg" alt=""></button>
@@ -15,83 +15,14 @@
           <input type="text">
         </form>
       </div>
-    </div>
-    <div>
-      <ul class = "Apt-numbers">
-        <li class ="Number">101</li>
-        <li class ="Number">102</li>
-        <li class ="Number">103</li>
-        <li class ="Number">104</li>
-        <li class ="Number">105</li>
-        <li class ="Number">201</li>
-        <li class ="Number">202</li>
-        <li class ="Number">203</li>
-        <li class ="Number">204</li>
-        <li class ="Number">205</li>
-      </ul>
-    </div>
-    
-    
-    <div class= 'apartments'>
-    <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
-    <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
-    <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
-    <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
-    <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
-    <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
-    <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
-    <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
-    <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
-    <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
-    </div>
-
-    <div>
-      <ul class = "Apt-numbers">
-        <li class ="Number">301</li>
-        <li class ="Number">302</li>
-        <li class ="Number">303</li>
-        <li class ="Number">304</li>
-        <li class ="Number">305</li>
-        <li class ="Number">401</li>
-        <li class ="Number">402</li>
-        <li class ="Number">403</li>
-        <li class ="Number">404</li>
-        <li class ="Number">405</li>
-      </ul>
-    </div>
-    
-    
-    <div class= 'apartments'>
-    <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
-    <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
-    <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
-    <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
-    <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
-    <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
-    <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
-    <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
-    <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
-    <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
-    </div>
-    <div>
-      <ul class = "Apt-numbers">
-        <li class ="Number">501</li>
-        <li class ="Number">502</li>
-        <li class ="Number">503</li>
-        <li class ="Number">504</li>
-        <li class ="Number">505</li>     
-      </ul>
-    </div>
-    
-    <div class= 'apartments'>
-    <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
-    <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
-    <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
-    <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
-    <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
-    
+    </div>    
+  <div class= "homes_row">
+    <div class="contenedor" v-for="(item, index) of apto" :key="index">
+    <Hogares :apto="item"></Hogares>
     
     </div>
+  </div>
+</div>
     
     
 
@@ -101,16 +32,53 @@
 // @ is an alias to /src
 
 import Header from '@/components/Header.vue';
-import Nav from '@/components/Nav.vue';
+import Navbar from '@/components/Nav.vue';
+import Hogares from '@/components/ListaHogares.vue';
+import Infoapto from '@/components/ModalInfoApto.vue';
+
+
 
 export default {
-  name: 'Home',
-  components: {
+  components:{
     Header,
-    Nav,
+    Navbar,
+    Hogares,
+    Infoapto
+    
+  },
+
+  
+  data(){
+    return{
+      showModal: false,
+      apto: [
+        {
+          numero: 102,
+          img: "@/assets/Torre.svg",
+        
+        },
+        {
+          numero: 102,
+          img: "@/assets/Torre.svg",
+        
+        },
+        
+        
+                
+      ]
+  }
+
+  
+  },
+  methods:{
+    showApto(){
+    this.showModal=true
+
+  }
   },
 };
 </script>
+  
 
 <style scoped lang="scss">
 @import '@/views/scss/_theme.scss';
@@ -126,15 +94,18 @@ export default {
   
   
 }
-.menu{
-  width:10px;
-  height:10px;
-  font-weight: bolder;
+.homes_row{
+  display: flex;
+  margin: -30px 10px 0 20% ;
+  
 }
+
+
 .boton2{
   background-color: $background-color;
   border-radius: 5px;
-  width: 90px;
+  line-height: 5px;
+  width: 100px;
   height: 30px;
   color:$main-color ;
   margin-left: 20px;
@@ -143,9 +114,19 @@ export default {
   cursor:pointer;
   
 }
+.menu{
+  margin-left: 95%;
+  margin-top: -15%;
+  width:10px;
+  height:20px;
+  font-weight: bolder;
+  
+}
+
 .boton1{
   background-color: $background-color;
   border-radius: 5px;
+  line-height:5px;
   width: 180px;
   height: 30px;
   color:$main-color ;
@@ -154,7 +135,8 @@ export default {
   cursor:pointer;
 }
 .Navigation-Buttons{
-  line-height: 40px;
+  line-height: 30px;
+  padding-top: 5px;
 }
 .buscar{
   padding-right: 15px;
@@ -172,45 +154,23 @@ input{
   margin-left: 5px;
   border-radius: 20px;
 }
-.Apt-numbers{
-  display:flex;
-  justify-content:left;
-  color: $main-color;
-  font-weight: bold;
-  margin: 5px 10px -10px 21%;
-  list-style: none;
-  
-  
-}
+.contenedor{
+  margin-right: -70px;
+  margin-left: -70px;
+  padding-bottom: 10%;
 
-.Number{
-  
-  padding-left: 60px;
-  padding-right:57px;
-  
-}
-
-.apartments{
-  display: flex;
-  justify-content:left;
-  padding: 10px;
-  margin: 5px 10px 0 23%;
-  
-}
-.Apt-button{
-  border-radius: 10px;
-  margin:0 30px;
-  padding-right:10px;
 
   
   
-}
-
-.Buildings{
-margin: -10px;
-cursor:pointer;
+  
 
 }
+
+  
+  
+
+
+
 
 // Arreglando algunos detalles
 
