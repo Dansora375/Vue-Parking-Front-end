@@ -1,13 +1,6 @@
 <template>
   <div class="hello">
-    <div class="container">
-      <div class="buscar">
-        <form action="">
-          <label for="buscar">Buscar</label>
-          <input type="text">
-        </form>
-      </div>
-    </div>
+    
     
 <div class="usuario">
   <div class="icono">
@@ -15,7 +8,7 @@
   </div>
   <div>
     <div class="nombre-user">{{Nombre}}</div>
-    
+    <div>
     <MenuDropDown>
         <template v-slot:toggler>
           <img class="icon-menu" src="@/assets/menu.svg" alt="">
@@ -44,7 +37,7 @@
            </MenuDropDownContent>
            
       </MenuDropDown>
-      
+      </div>
   </div>
 </div>
 
@@ -63,14 +56,20 @@ import user from '@/assets/user.svg'
 import MenuDropDownContent from '@/components/dropDown/MenuDropDownContent.vue';
 import MenuDropDown from '@/components//dropDown/MenuDropdown.vue';
 import MenuDropDownItem from '@/components//dropDown/MenuDropDownItem.vue';
-import EntradaInformation from '@/components/entrada-vehiculos/EntradaInformation.vue';
+;
+import NewResidente from '@/components/NewResidente.vue';
+import Modal2 from '@/components/modal/Modal2.vue';
+import ModalContent from '@/components/modal/ModalContent.vue';
+
 export default {
   name: 'ListaResidentes',
   components:{
     MenuDropDownContent,
     MenuDropDown,
     MenuDropDownItem,
-    EntradaInformation
+    NewResidente,
+    Modal2,
+    ModalContent
 
   },
   data(){
@@ -150,12 +149,12 @@ input{
 
 .usuario{
   margin: 20px ;
-  width: auto;
+  width: 500px;
   border-radius: 10px;
   background-color:$secondary-color ;
   display:flex;
-  flex-wrap: wrap;
-      
+  flex-direction: row;
+  
 
 }
 .nombre-user{

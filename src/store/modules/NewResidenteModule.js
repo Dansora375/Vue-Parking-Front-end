@@ -1,4 +1,4 @@
-import * as controller from '@/Controladores/EntradaController';
+import * as controller from '@/Controladores/NewResidenteController';
 
 const resetData = {
   nombre: '',
@@ -37,8 +37,8 @@ export default {
       data.nombre;
       data.cedula;
       data.apto_num;
-      data.towerr;
-      data.placar;
+      data.tower;
+      data.placa;
       state.registrosResidente.push(val);
       // state.showModalNewEntrada = false;
     },

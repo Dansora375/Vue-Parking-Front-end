@@ -3,9 +3,8 @@
     <!-- <img alt="Vue logo" src="../assets/logo.png"> -->
     <Header/>
     <Nav/>
-    <ListaResidentes />
-
-    <Modal2>
+    <div class="container">
+      <Modal2>
           <template v-slot:toggler>
             <img class='addImage' src="@/assets/add.svg" alt="">
           </template>
@@ -24,6 +23,16 @@
             </template>
           </modal-content>
         </Modal2>
+      <div class="buscar">
+        <form action="">
+          <label for="buscar">Buscar</label>
+          <input type="text">
+        </form>
+      </div>
+    </div>
+    <ListaResidentes />
+
+    
 
   </div>
 </template>
@@ -36,6 +45,8 @@ import Nav from '@/components/Nav.vue';
 import NewResidente from '@/components/NewResidente.vue';
 import Modal2 from '@/components/modal/Modal2.vue';
 import ModalContent from '@/components/modal/ModalContent.vue';
+
+
 
 
 export default {
