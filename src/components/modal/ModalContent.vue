@@ -11,14 +11,14 @@
       <!--Botones posibles, en este caso solo hay opcion para dos botones-->
       <div class="botones">
         <div class="cancelar" @click="toggle(false)">
-          <slot name="cancelar">
-            <button>
+          <slot name="cancelar" >
+            <button class="cancelar">
               Salir
             </button>
           </slot>
         </div>
         <div class="confirmar" @click="toggle(false)">
-          <slot name="confirmar">
+          <slot name="confirmar" class="confirmar">
           </slot>
         </div>
       </div>
@@ -77,18 +77,23 @@ export default {
 .cancelar{
   background-color: $third-color;
   border: none;
+  padding: 1% 4% 1% 4%;
+  border-radius: 5px;
 }
 .confirmar{
   width: auto;
   border: none;
+  padding: 1% 4% 1% 4%;
+  border-radius: 5px;
+  
 }
 ::placeholder{
 
   color:$secondary-color;
 }
 .cancelar:hover {
-  background-color: $secondary-color  ;
-  // color:$third-color;
+  background-color: $secondary-color ;
+  // color:$secondary-color;
 }
 
 .cancelar:active {
@@ -97,20 +102,20 @@ export default {
 }
 
 .confirmar:hover {
-  background-color: $secondary-color;
+  background-color:$secondary-color;
   color: $main-color;
 }
 
 .confirmar:active {
   color: $secondary-color;
-  background-color: $main-color;
+  background-color:$third-color;
 }
 
 button{
 
   padding: 2.5% 5% 2.5% 5%;
-  width: 100%;
-  height: 100%;
+  // width: 100%;
+  // height: 100%;
 
   // display: inline;
   // background: black;
@@ -122,7 +127,7 @@ button{
     margin: 0px;
     display:flex;
     flex-direction: row;
-    justify-content: space-around  ;
+    justify-content: space-between  ;
 
 }
 </style>

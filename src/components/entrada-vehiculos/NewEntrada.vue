@@ -31,7 +31,7 @@
         id="placa">
       </div>
       <div class="Rows">
-        <select v-model="selected">
+        <select v-model="selected" class="S_Vehicle">
           <option v-for="option in vehiculos" :key="option">
           {{option}}
           </option>
@@ -142,7 +142,7 @@ export default {
 <style lang="scss" scoped>
 @import '@/views/scss/_theme.scss';
 #dialog-newParking{
-  padding: 30px;
+  // padding: ;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -164,7 +164,7 @@ export default {
   // color:$third-color;
 }
 .Rows{
-  padding: 10px;
+  padding: 5px;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
@@ -186,13 +186,7 @@ export default {
   background-color: $main-color;
 }
 
-// .Rows{
-//   display:flex;
 
-//   flex-wrap: wrap;
-//   padding-top: 5px;
-
-// }
 
 input{
 
@@ -224,6 +218,9 @@ button{
     justify-content: space-between  ;
 
 }
+.S_Vehicle{
+  width:100%;
+}
 label{
 
   font-weight: 900;
@@ -235,7 +232,8 @@ select{
   font-size: 0.8rem;
   height:25px;
   width:160px;
-  margin: 0px;
+  margin: 10px;
+  // margin-bottom: 10px;
 
 }
 // .modal-overlay {

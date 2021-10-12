@@ -25,8 +25,8 @@
             </slot>
             <!-- <div class="modal" v-if="showOptions"> 
             <Options_zona_P/>   
-            </div>
-            <img class="menu" src="@/assets/menu.svg" alt=""  @click="changeShowOptions(true)"> -->
+            </div> -->
+            <!-- <img class="menu" src="@/assets/menu.svg" alt=""  @click="changeShowOptions(true)"> -->
         </section>
     </div>     
 </template>

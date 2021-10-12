@@ -23,6 +23,14 @@ export default {
       estadoMenu: this.estadoMenu,
     };
   },
+
+  data() {
+    return {
+      estadoMenu: {
+        activo: false,
+      },
+    };
+  },
   methods: {
     toggle() {
       // console.log(this.estadoMenu);
@@ -31,13 +39,6 @@ export default {
     away() {
       this.estadoMenu.activo = false;
     },
-  },
-  data() {
-    return {
-      estadoMenu: {
-        activo: false,
-      },
-    };
   },
 };
 </script>

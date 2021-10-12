@@ -52,13 +52,16 @@ input:-webkit-autofill:active {
 
 /* Para cambiar el color de la letra despues de seleccionar el atocomplete o autofill */
 /*Change text in autofill textbox*/
-
+// html{
+//   font-family:'PT Sans Caption', sans-serif;
+// }
 input:-webkit-autofill {
   -webkit-text-fill-color: $main-color !important;
 }
 
 body{
   background-color: $background-color;
+  font-family:'PT Sans Caption', sans-serif;
   margin: 0;
 }
 // Color de placeholder de los input
@@ -85,8 +88,9 @@ button {
   padding-top: 10px;
   padding-bottom: 10px;
   cursor: pointer;
+  font-family:'PT Sans Caption', sans-serif;
 
-  border: 2px solid $main-color;
+  // border: 2px solid $main-color;
   text-align: center;
 }
 
@@ -123,6 +127,7 @@ button {
     margin-top: 40px;
     box-shadow: 0 3px 0 1px $main-color;
     width: 100%;
+    font-family:'PT Sans Caption', sans-serif;
 
     height: 50px;
     font-size: 1.1rem;

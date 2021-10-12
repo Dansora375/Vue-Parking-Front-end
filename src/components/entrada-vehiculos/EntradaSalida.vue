@@ -43,7 +43,7 @@
 
           <Modal2>
             <template v-slot:toggler>
-              <p class="opcion_menu">
+              <p class="opcion_menu" id="bordeInferior">
                 Mas informacion
               </p>
             </template>
@@ -263,7 +263,10 @@ export default {
         min-width:49px;
         cursor: pointer;
         // border-radius:1.5px;
-}
+} 
+    #bordeInferior{
+      border-bottom:none;
+    }
         #Bott_cancel{
 
         border-bottom:none;

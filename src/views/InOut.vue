@@ -13,13 +13,13 @@
             <NewEntrada>
             </NewEntrada>
             <template v-slot:cancelar>
-              <button @click="resetDataEntrada()">
+              <button @click="resetDataEntrada()" id="btCancel">
                 Cancelar
               </button>
             </template>
             <template v-slot:confirmar>
-              <button @click="agregarEntrada">
-                adios mundo
+              <button @click="agregarEntrada" id="btAcept">
+                Aceptar
               </button>
             </template>
           </modal-content>
@@ -147,6 +147,17 @@ export default {
   .superior-bar{
     display: flex;
     justify-content: space-between;
+  }
+  #btAcept{
+    color:$third-color;
+    
+  }
+  #btAcept:hover{
+    color:$main-color;
+  }
+  
+  #btCancel:hover{
+    color:$background-color;  
   }
 
   @media (max-width: 600px){
