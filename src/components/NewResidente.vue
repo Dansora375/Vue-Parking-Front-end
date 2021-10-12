@@ -2,7 +2,7 @@
 <template>
   <div class="residente">
       <h1>
-      Ingreso de nuevos residentes {{optionChoose}}
+      Ingreso de nuevos residentes 
     </h1>
        <div class="Rows">
         <label for="nombre" >Nombre : </label>
@@ -27,24 +27,14 @@
       <div class="Rows">
         <label for="placa" >Placa : </label>
         <input type="text" placeholder="Placa del vehiculo" v-model="placa"
-        id="placa">
+        id="placar">
       </div>
-      <div class="Rows">
-        <select v-model="selected">
-          <option v-for="option in vehiculos" :key="option">
-          {{option}}
-          </option>
-        </select>
       </div>
-      <div class="textArea">
-        <h3>Datos extra</h3>
-        <textarea name="" id="" cols="500" rows="5" v-model="extra"></textarea>
-
-  </div>
 </template>
 
 <script>
 export default {
+    name:"NewResidente"
 
 }
 </script>

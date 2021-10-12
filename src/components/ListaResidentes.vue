@@ -8,29 +8,76 @@
         </form>
       </div>
     </div>
-    </div>
+    
 <div class="usuario">
   <div class="icono">
     <img :src= imgUser>
   </div>
   <div>
     <div class="nombre-user">{{Nombre}}</div>
+    
+    <MenuDropDown>
+        <template v-slot:toggler>
+          <img class="icon-menu" src="@/assets/menu.svg" alt="">
+        </template>
+        <MenuDropDownContent class="menu-options">
+          <MenuDropDownItem class="opcion_menu">
+            <Modal2>
+            <template v-slot:toggler>
+              <p class="opcion_menu">
+                Mas informacion
+              </p>
+            </template>
+            <ModalContent>
+              <EntradaInformation v-bind:index="this.index">
+              </EntradaInformation>
+              <template v-slot:cancelar>
+                <button>
+                  Cancelar
+                </button>
+              </template>
+            </ModalContent>
+          </Modal2>
+          
+
+          </MenuDropDownItem>
+           </MenuDropDownContent>
+           
+      </MenuDropDown>
+      
   </div>
+</div>
+
+
+          
+          <!-- <MenuDropDownItem class="opcion_menu" id="Bott_cancel">
+            Cancelar
+          </MenuDropDownItem> -->
+       
 </div>
 </template>
 
 <script>
 import user from '@/assets/user.svg'
+
+import MenuDropDownContent from '@/components/dropDown/MenuDropDownContent.vue';
+import MenuDropDown from '@/components//dropDown/MenuDropdown.vue';
+import MenuDropDownItem from '@/components//dropDown/MenuDropDownItem.vue';
+import EntradaInformation from '@/components/entrada-vehiculos/EntradaInformation.vue';
 export default {
   name: 'ListaResidentes',
   components:{
+    MenuDropDownContent,
+    MenuDropDown,
+    MenuDropDownItem,
+    EntradaInformation
 
   },
   data(){
 
-        return{
+   return{
 
-            imgUser:user
+      imgUser:user
            
             
         }
@@ -75,25 +122,19 @@ a {
 .container{
   margin: 20px;
   width: auto;
+  height: auto;
   border-radius: 10px;
   background-color:$secondary-color ;
   display: flex;
-  justify-content:space-between;
+  flex-direction: column;
 }
 .boton{
   margin-top: 5px;
 }
-.btel{
-  background-color: $background-color;
-  border-radius: 20px;
-  width: 100%;
-  height: 50px;
-  color:$main-color ;
-  margin-left: 20px;
-}
+
 .buscar{
-  padding-right: 15px;
-  padding-top: 10px;
+  display: flex;
+  margin-left: 1100px;
 }
 label{
   color:white;
@@ -101,9 +142,10 @@ label{
 input{
   background-color: $background-color;
   color:$main-color ;
-  height: 30px;
+  height: 10px;
   margin-left: 5px;
-  border-radius: 20px;
+  margin-top: 5px;
+  border-radius: 5px;
 }
 
 .usuario{
@@ -117,7 +159,7 @@ input{
 
 }
 .nombre-user{
-  font-size: 2em;
+  font-size: 1.5em;
   color:$main-color ;
   margin: 5px;
 }
