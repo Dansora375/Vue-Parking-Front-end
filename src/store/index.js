@@ -3,6 +3,7 @@ import entradasModule from './modules/entradasModule';
 // eslint-disable-next-line camelcase
 import options_zona_p from './modules/options_zona_p';
 // import entradasModule from './modules/entradasModule';
+import NewResidenteModule from './modules/NewResidenteModule';
 import * as loginController from '@/Controladores/AuthenticationController';
 
 export default createStore({
@@ -41,5 +42,6 @@ export default createStore({
   modules: {
     entrada_salida: entradasModule,
     options_zona: options_zona_p,
+    New_Residente:NewResidenteModule
   },
 });

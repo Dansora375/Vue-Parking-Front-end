@@ -6,15 +6,15 @@ const resetData = {
   apto_num: '',
   tower: '',
   placa: '',
-  tipo: '',
-  datos_extra: '',
+ 
 };
 export default {
   namespaced: true,
   state: {
-    dataNewEntrada: {
+    dataNewResidente: {
       nombre: '',
       cedula: '',
+      telefono: '',
       apto_num: '',
       tower: '',
       placa: '',
@@ -29,17 +29,21 @@ export default {
       const { key, val } = values;
       state.dataNewResidente[key] = val;
     },
-    resetDataNewEntrada(state) {
-      state.dataNewEntrada = resetData;
+    resetDataNewResidente(state) {
+      state.dataNewResidente = resetData;
     },
     addNewEntrada(state, val) {
       const data = val;
-      data.hora_entrada = new Date();
-      state.registrosEntrada.push(val);
+      data.nombre;
+      data.cedula;
+      data.apto_num;
+      data.towerr;
+      data.placar;
+      state.registrosResidente.push(val);
       // state.showModalNewEntrada = false;
     },
-    createListEntradas(state, entradas) {
-      state.registrosEntrada = entradas;
+    createListEntradas(state, entradasr) {
+      state.registrosResidente = entradasr;
     },
     // cambiarEstadoParking(state, index){
     // }
@@ -70,7 +74,7 @@ export default {
     },
     async addNewEntradaFromStore({ dispatch, state }) {
       // console.log(state.dataNewEntrada);
-      await dispatch('addNewEntrada', state.dataNewEntrada);
+      await dispatch('addNewEntrada', state.dataNewResidente);
     },
   },
   getters: {
@@ -98,14 +102,12 @@ export default {
     // showModalNewEntrada(state) {
     //   return state.showModalNewEntrada;
     // },
-    dataEntrada(state) {
-      return state.dataNewEntrada;
+    dataResidente(state) {
+      return state.dataNewResidente;
     },
-    vehiculos(state) {
-      return state.vehicleOptions;
-    },
+    
     entradas(state) {
-      return state.registrosEntrada;
+      return state.registrosResidente;
       // return state.registrosEntrada;
     },
   },
