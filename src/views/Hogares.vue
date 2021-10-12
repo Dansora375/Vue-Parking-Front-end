@@ -1,68 +1,93 @@
 <template>
-<div class= 'Hogares'>
-    <Header></Header>
+<Header></Header>
     <!-- <Nav/> -->
-    <Navbar></Navbar>
-    <SearchButton/>
-    </div>
-    <div class= 'Navigation'>
+<Navbar></Navbar>
+<div class="container">
+  <div class= 'Navigation'>
     <div class = 'Navigation-Buttons'>
-    <button class="boton1">Asignar Parqueadero</button>
-    <button class="boton2">TORRE A <img class="menu" src="@/assets/menu.svg" alt=""></button>
+      <button class="boton1 button">Asignar Parqueadero</button>
+      <!-- eslint-disable-next-line max-len -->
+      <button class="boton2 button">TORRE A <img class="menu" src="@/assets/menu.svg" alt=""></button>
+      <modal-2>
+        <template v-slot:toggler>
+          <button  class="button">
+            Crear hogar
+          </button>
+        </template>
+        <modal-content>
+          <div>
+            <h1>
+              Crear opciones para nuevo parqueadero
+            </h1>
+          </div>
+          <template v-slot:cancelar>
+            <button>
+              Cancelar
+            </button>
+          </template>
+          <template v-slot:confirmar>
+            <button>
+              Confirmar
+            </button>
+          </template>
+        </modal-content>
+      </modal-2>
     </div>
     <div class="buscar">
-        <form action="">
-          <label for="buscar">Buscar</label>
-          <input type="text">
-        </form>
-      </div>
-    </div>    
-  <div class= "homes_row">
-    <div class="contenedor" v-for="(item, index) of apto" :key="index">
-    <Hogares :apto="item"></Hogares>
-    
+      <form action="">
+        <label for="buscar">Buscar</label>
+        <input type="text">
+      </form>
     </div>
   </div>
-</div>
-    
-    
 
+  <div class="hogares">
+    <hogares v-for="(item, index) of getHogares" :key="index" v-bind:index="index">
+  </hogares>
+  </div>
+
+  <!-- <div class= "homes_row"> -->
+    <!-- <div class="contenedor" v-for="(item, index) of apto" :key="index">
+      <Hogares :apto="item"></Hogares>
+    </div> -->
+  <!-- </div> -->
+</div>
 </template>
 
 <script>
 // @ is an alias to /src
+import { mapGetters } from 'vuex';
 
 import Header from '@/components/Header.vue';
 import Navbar from '@/components/Nav.vue';
-import Hogares from '@/components/ListaHogares.vue';
-import Infoapto from '@/components/ModalInfoApto.vue';
+import Hogares from '@/components/hogar/ListaHogares.vue';
+
+import Modal2 from '@/components/modal/Modal2.vue';
+import ModalContent from '@/components/modal/ModalContent.vue';
+// import Infoapto from '@/components/ModalInfoApto.vue';
 
 export default {
+  name: 'Hogar',
   components: {
     Header,
     Navbar,
     Hogares,
-    Infoapto,
+    Modal2,
+    ModalContent,
+    // Infoapto,
+  },
+  created() {
+    // console.log('inmounted: ');
+    this.$store.dispatch('hogares_module/cargarHomes');
   },
   data() {
     return {
-      showModal: false,
-      apto: [
-        {
-          numero: 102,
-          img: '@/assets/Torre.svg',
-        },
-        {
-          numero: 102,
-          img: '@/assets/Torre.svg',
-        },
-      ],
     };
   },
+  computed: {
+    ...mapGetters('hogares_module', ['getHogares']),
+  },
   methods: {
-    showApto() {
-      this.showModal = true;
-    },
   },
 };
 </script>
@@ -70,35 +95,51 @@ export default {
 <style scoped lang="scss">
 @import '@/views/scss/_theme.scss';
 
+.container{
+  padding: 20px;
+  margin-left: 20%;
+}
+
 .Navigation{
   background-color: $main-color;
   display: flex;
-  height:45px;
-  margin: 5px 10px 0 21% ;
   justify-content: space-between;
-  border-radius:10px;
+  // flex-direction: column;
+  height:fit-content;
+  padding: 10px;
+  // margin: 5px 10px 0 21% ;
+  // justify-content: space-between;
+  border-radius:5px;
   line-height: 20px;
-
 }
-.homes_row{
+
+.Navigation-Buttons{
   display: flex;
-  margin: -30px 10px 0 20% ;
-  
+  justify-content: space-around;
+  line-height: 30px;
+  padding-top: 5px;
 }
+.prueba{
+   background: black;
+ }
 
-
-.boton2{
+// .homes_row{
+//   display: flex;
+//   margin: -30px 10px 0 20% ;
+// }
+.button{
   background-color: $background-color;
   border-radius: 5px;
   line-height: 5px;
-  width: 100px;
+  // width: 100px;
   height: 30px;
   color:$main-color ;
-  margin-left: 20px;
+  margin: 5px;
+  // margin-left: 20px;
   font-weight: bold;
-  justify-content: space-between;
+  justify-content: space-around;
   cursor:pointer;
-
+  // background: black;
 }
 .menu{
   margin-left: 95%;
@@ -106,45 +147,29 @@ export default {
   width:10px;
   height:20px;
   font-weight: bolder;
-  
 }
 
-.boton1{
-  background-color: $background-color;
-  border-radius: 5px;
-  line-height:5px;
-  width: 180px;
-  height: 30px;
-  color:$main-color ;
-  margin-left: 20px;
-  font-weight: bold;
-  cursor:pointer;
-}
-.Navigation-Buttons{
-  line-height: 30px;
-  padding-top: 5px;
-}
 .buscar{
   padding-right: 15px;
   padding-top: 10px;
   line-height: 0;
 }
-label{
-  color:white;
-  font-weight : bold;
-}
+
 input{
   background-color: $secondary-color;
   color:$main-color ;
   height: 20px;
-  margin-left: 5px;
-  border-radius: 20px;
+  // margin-left: 5px;
+  border-radius: 5px;
 }
-.contenedor{
-  margin-right: -70px;
-  margin-left: -70px;
-  padding-bottom: 10%;
-}
+// .contenedor{
+//   margin-right: -70px;
+//   margin-left: -70px;
+//   padding-bottom: 10%;
+// }
 // Arreglando algunos detalles
-
+.hogares{
+    display: flex;
+    flex-wrap: wrap;
+  }
 </style>

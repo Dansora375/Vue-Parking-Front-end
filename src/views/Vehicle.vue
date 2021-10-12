@@ -58,7 +58,7 @@ import Modal2 from '@/components/modal/Modal2.vue';
 import ModalContent from '@/components/modal/ModalContent.vue';
 
 export default {
-  name: 'InOut',
+  name: 'Vehicle',
   components: {
     Header,
     Navbar,

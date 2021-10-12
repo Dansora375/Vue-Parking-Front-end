@@ -50,11 +50,6 @@
             <ModalContent>
               <EntradaInformation v-bind:index="this.index">
               </EntradaInformation>
-              <div>
-                <h1>
-                  hola como estan
-                </h1>
-              </div>
               <template v-slot:cancelar>
                 <button>
                   Cancelar

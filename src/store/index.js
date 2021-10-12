@@ -3,6 +3,7 @@ import entradasModule from './modules/entradasModule';
 // eslint-disable-next-line camelcase
 import options_zona_p from './modules/options_zona_p';
 import vehiculosModule from './modules/vehiculosModule';
+import hogaresModule from './modules/hogaresModule';
 // import entradasModule from './modules/entradasModule';
 import * as loginController from '@/Controladores/AuthenticationController';
 
@@ -45,5 +46,6 @@ export default createStore({
     entrada_salida: entradasModule,
     options_zona: options_zona_p,
     vehiculos_module: vehiculosModule,
+    hogares_module: hogaresModule,
   },
 });

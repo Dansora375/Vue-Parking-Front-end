@@ -79,13 +79,11 @@ export default {
   border: none;
 }
 .confirmar{
+  color: white;
   width: auto;
   border: none;
 }
-::placeholder{
 
-  color:$secondary-color;
-}
 .cancelar:hover {
   background-color: $secondary-color  ;
   // color:$third-color;
@@ -123,6 +121,5 @@ button{
     display:flex;
     flex-direction: row;
     justify-content: space-around  ;
-
 }
 </style>
