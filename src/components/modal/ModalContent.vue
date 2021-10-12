@@ -34,7 +34,7 @@ export default {
   inject: ['toggle', 'estadoModal'],
   computed: {
     active() {
-      console.log(this.estadoModal.activo);
+      // console.log(this.estadoModal.activo);
       // console.log(this.estadoModal.activo, 'Hola que tal que hace que hay de nuevo');
       return this.estadoModal.activo;
     },

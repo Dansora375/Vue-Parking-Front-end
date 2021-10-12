@@ -2,8 +2,8 @@
   <div class="main">
     <div class="cont-flex " >
       <form class="formulario" action="" autocomplete="off">
-        <input type="text"  name="Usuario"  placeholder="Nombre de Usuario" v-model="usuario" >
-        <input type="password" name="contrseña" placeholder="Contraseña" v-model="contraseña">
+        <input type="text"   placeholder="Nombre de Usuario" v-model="usuario" >
+        <input type="password" placeholder="Contraseña" v-model="contraseña">
         <a href="aquiva irecuperar contrasea" class="olvido-contraseña">¿olvido la contraseña?</a>
         <br><br/>
         <!-- <router-link to="/" class="olvido-contraseña"> -->
@@ -52,7 +52,9 @@ export default {
         this.loginWithUser({ user: this.usuario, password: this.contraseña });
         // console.log(this.getUserData);
         // alert(this.getUserData);
-        this.$router.push({ name: 'Home' });
+        if (!this.getIsNotLogged) {
+          this.$router.push({ name: 'Home' });
+        }
       } catch (error) {
         console.log(error);
       }

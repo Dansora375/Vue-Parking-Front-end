@@ -80,7 +80,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'Registrer',
@@ -99,6 +99,7 @@ export default {
     };
   },
   computed: {
+    ...mapGetters(['getUserData', 'getIsNotLogged']),
     // dataRegistro: this.dataR,
   },
   methods: {
@@ -158,10 +159,10 @@ propiedad para responsive */
   padding-bottom: 10px;
   cursor: pointer;
 }
-.button p{
-  // background: black;
-  // height: min-content;
-}
+// .button p{
+//   // background: black;
+//   // height: min-content;
+// }
 
 .confirmar {
   color: $secondary-color;

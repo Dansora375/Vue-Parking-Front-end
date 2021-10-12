@@ -17,8 +17,8 @@ function ResRegister(completed, error, data) {
 
 export async function register(userData) {
   try {
-    const registro = await axios.post('/authentication/register', userData.data);
-    return new ResRegister(true, {}, registro);
+    const registro = await axios.post('/authentication/register', userData);
+    return new ResRegister(registro.data.created, {}, registro);
   } catch (error) {
     console.error(error);
     return new ResRegister(false, error, {});

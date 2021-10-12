@@ -1,7 +1,8 @@
 <template>
 <div class= 'Hogares'>
-    <Header/>
-    <Nav/>
+    <Header></Header>
+    <!-- <Nav/> -->
+    <Navbar></Navbar>
     <SearchButton/>
     </div>
     <div class= 'Navigation'>
@@ -96,13 +97,13 @@
 // @ is an alias to /src
 
 import Header from '@/components/Header.vue';
-import Nav from '@/components/Nav.vue';
+import Navbar from '@/components/Nav.vue';
 
 export default {
   name: 'Home',
   components: {
     Header,
-    Nav,
+    Navbar,
   },
 };
 </script>

@@ -1,13 +1,36 @@
 <template>
   <div class="navegation">
     <nav class="nav">
-      <router-link to="/" class="completed">Home</router-link>
-      <router-link to="/Vehicle_zone" class="completed">Parqueadero</router-link>
-      <!-- <router-link to="/about">About</router-link> -->
-      <!-- <router-link to="/inicio_sesion">Inicio Sesion</router-link>
-      <router-link to="/Registrer">Registro</router-link> -->
-      <router-link to="/Residentes">Residentes</router-link>
-      <router-link to="/Hogares">Hogares</router-link>
+      <router-link to="/" class="completed">
+        <img src="@/assets/iconos-navigation/entrada.svg" alt="">
+        <p>
+          Entrada y salida
+        </p>
+      </router-link>
+      <router-link to="/Vehicle_zone" class="completed">
+        <img src="@/assets/iconos-navigation/parqueadero2.svg" alt="">
+        <p>Parqueadero</p>
+      </router-link>
+
+      <router-link to="/Residentes">
+        <img src="@/assets/iconos-navigation/people.svg" alt="">
+        <p>
+          Residentes
+        </p>
+      </router-link>
+
+      <router-link to="/Hogares">
+        <img src="@/assets/iconos-navigation/home.svg" alt="">
+        <p>
+          Hogares
+        </p>
+      </router-link>
+      <router-link to="/vehiculos">
+        <img src="@/assets/iconos-navigation/vehicle.svg" alt="">
+        <p>
+          Vehiculos
+        </p>
+      </router-link>
     </nav>
   </div>
 </template>
@@ -54,6 +77,23 @@ a{
   }
 }
 
+p{
+  display: none;
+}
+
+@media (min-width: 950px){
+  img{
+    display: none;
+  }
+  p{
+    display: inline-block;
+  }
+}
+
+img{
+  width: 50px;
+  // display: none;
+}
 // .navegation{
 //     display: inline-block;
 //     // position: fixed;

@@ -1,5 +1,3 @@
-import validator from 'email-validator';
-
 // const types = {
 //   GUARDA: 'Guarda',
 //   SUPERVISOR: 'Supervisor',
@@ -22,9 +20,6 @@ export default function (values) {
   this.password = values.password;
   // this.type = decideType(tipo);
   // eslint-disable-next-line func-names
-  this.validation = function () {
-    validator.validate(this.email);
-  };
   this.data = {
     Cc: this.Cc,
     name: this.nombre,

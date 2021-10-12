@@ -28,6 +28,18 @@ app.mixin({
       this.$router.push({ name: 'Inicio_sesion' });
     }
   },
+  computed: {
+    userData() {
+      return this.$store.getUserData;
+    },
+  },
+  watch: {
+    userData(changed) {
+      if (Object.keys(changed).length === 0 && changed.constructor === Object) {
+        this.$router.push({ name: 'Home' });
+      }
+    },
+  },
   methods: {
     // toggleModal(value) {
     //   this.$refs.modal.toggleModal(value);

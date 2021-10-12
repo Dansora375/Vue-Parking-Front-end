@@ -19,7 +19,7 @@
             </template>
             <template v-slot:confirmar>
               <button @click="agregarEntrada">
-                adios mundo
+                Confirmar
               </button>
             </template>
           </modal-content>
@@ -182,10 +182,10 @@ export default {
   //   z-index:30;
   // }
 
-  .add:hover{
+  .addImage:hover{
     background-color: $third-color;
   }
-  .add:active{
+  .addImage:active{
     background-color:$secondary-color ;
   }
 

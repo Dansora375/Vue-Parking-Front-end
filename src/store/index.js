@@ -2,6 +2,7 @@ import { createStore } from 'vuex';
 import entradasModule from './modules/entradasModule';
 // eslint-disable-next-line camelcase
 import options_zona_p from './modules/options_zona_p';
+import vehiculosModule from './modules/vehiculosModule';
 // import entradasModule from './modules/entradasModule';
 import * as loginController from '@/Controladores/AuthenticationController';
 
@@ -23,7 +24,9 @@ export default createStore({
       }
     },
     register(context, values) {
-      loginController.register(values);
+      const res = loginController.register(values);
+      this.userData = res.data;
+      // this.$router.push({ name: 'Registro' });
       // console.log('hola mundo: \n', values);
     },
   },
@@ -41,5 +44,6 @@ export default createStore({
   modules: {
     entrada_salida: entradasModule,
     options_zona: options_zona_p,
+    vehiculos_module: vehiculosModule,
   },
 });

@@ -74,6 +74,12 @@ const routes = [
     name: 'Info_vehiculo_parqueadero',
     component: () => import(/* webpackChunkName: "about" */ '../views/Info_vehiculo_parqueadero.vue'),
   },
+
+  {
+    path: '/vehiculos',
+    name: 'Vehiculos',
+    component: () => import('../views/Vehicle.vue'),
+  },
 ];
 
 const router = createRouter({

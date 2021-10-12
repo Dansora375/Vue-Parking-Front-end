@@ -1,3 +1,4 @@
+import validator from 'email-validator';
 import * as Dao from '@/models/DAO/authenticationDAO';
 import User from '@/models/Objetos/User';
 
@@ -14,11 +15,16 @@ export async function register(values) {
   const usuario = new User({
     Cc, name, user, email, password,
   });
-  console.log('adiosMundo', usuario.data);
+  // console.log('adiosMundo', usuario.data);
   // alert(values);
-  // if (usuario.validation) {
-  //   const result = await Dao.register(usuario);
-  //   return result;
-  // }
+  // console.log('validacion', usuario.validation);
+  if (validator.validate(usuario.email)) {
+    console.log(usuario, 'es valido');
+    const result = await Dao.register(usuario.data);
+
+    console.log(result);
+    return result;
+  }
+  return { register: false, error: 'Error creando el dato', data: {} };
   // return { result: false, error: 'El correo no es un correo', data: {} };
 }
