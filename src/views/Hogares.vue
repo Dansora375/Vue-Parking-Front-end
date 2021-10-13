@@ -1,108 +1,138 @@
 <template>
-<div class= 'Hogares'>
-    <Header/>
-    <Nav/>
-    <SearchButton/>
-    </div>
-    <div class= 'Navigation'>
+<Header></Header>
+    <!-- <Nav/> -->
+<Navbar></Navbar>
+<div class="container">
+  <div class= 'Navigation'>
     <div class = 'Navigation-Buttons'>
-    <button class="boton1">Asignar Parqueadero</button>
-    <button class="boton2">TORRE A <img class="menu" src="@/assets/menu.svg" alt=""></button>
+      <button class="boton1 button">Asignar Parqueadero</button>
+      <!-- eslint-disable-next-line max-len -->
+      <!-- <button class="boton2 button" @click="cargarTorres()">TORRE A <img class="menu" src="@/assets/menu.svg" alt=""></button> -->
+      <select v-model="Torre" class="button">
+        <option v-for="(tower, index) of getTowers" :key="index">
+          {{tower.tower}}
+        </option>
+        <!-- <option disabled @click="alert('hola mundo')">
+          <button class="new-tower">
+            Crear torre nueva
+          </button>
+        </option> -->
+      </select>
+      <modal-2>
+        <template v-slot:toggler>
+          <button  class="button">
+            Crear hogar
+          </button>
+        </template>
+        <modal-content>
+          <new-hogar>
+          </new-hogar>
+          <template v-slot:cancelar>
+            <button>
+              Cancelar
+            </button>
+          </template>
+          <template v-slot:confirmar>
+            <button @click="agregarHogar()">
+              Confirmar
+            </button>
+          </template>
+        </modal-content>
+      </modal-2>
     </div>
     <div class="buscar">
-        <form action="">
-          <label for="buscar">Buscar</label>
-          <input type="text">
-        </form>
-      </div>
+      <form action="">
+        <label for="buscar">Buscar</label>
+        <input type="text">
+      </form>
     </div>
-    <div>
-      <ul class = "Apt-numbers">
-        <li class ="Number">101</li>
-        <li class ="Number">102</li>
-        <li class ="Number">103</li>
-        <li class ="Number">104</li>
-        <li class ="Number">105</li>
-        <li class ="Number">201</li>
-        <li class ="Number">202</li>
-        <li class ="Number">203</li>
-        <li class ="Number">204</li>
-        <li class ="Number">205</li>
-      </ul>
-    </div>
+  </div>
 
-    <div class= 'apartments'>
-    <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
-    <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
-    <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
-    <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
-    <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
-    <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
-    <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
-    <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
-    <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
-    <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
-    </div>
+  <div class="hogares">
+    <hogares v-for="(item, index) of getHogaresByTower" :key="index" v-bind:id="item._id" v-bind:aptoNum="item.apto_num">
+  </hogares>
+  </div>
 
-    <div>
-      <ul class = "Apt-numbers">
-        <li class ="Number">301</li>
-        <li class ="Number">302</li>
-        <li class ="Number">303</li>
-        <li class ="Number">304</li>
-        <li class ="Number">305</li>
-        <li class ="Number">401</li>
-        <li class ="Number">402</li>
-        <li class ="Number">403</li>
-        <li class ="Number">404</li>
-        <li class ="Number">405</li>
-      </ul>
-    </div>
-
-    <div class= 'apartments'>
-    <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
-    <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
-    <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
-    <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
-    <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
-    <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
-    <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
-    <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
-    <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
-    <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
-    </div>
-    <div>
-      <ul class = "Apt-numbers">
-        <li class ="Number">501</li>
-        <li class ="Number">502</li>
-        <li class ="Number">503</li>
-        <li class ="Number">504</li>
-        <li class ="Number">505</li>
-      </ul>
-    </div>
-
-    <div class= 'apartments'>
-    <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
-    <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
-    <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
-    <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
-    <button class = 'Apt-button'><img class="Buildings" src="@/assets/Buildings.svg" alt=""></button>
-
-    </div>
-
+  <!-- <div class= "homes_row"> -->
+    <!-- <div class="contenedor" v-for="(item, index) of apto" :key="index">
+      <Hogares :apto="item"></Hogares>
+    </div> -->
+  <!-- </div> -->
+</div>
 </template>
 
 <script>
 // @ is an alias to /src
+import { mapGetters, mapActions } from 'vuex';
 
 import Header from '@/components/Header.vue';
-import Nav from '@/components/Nav.vue';
+import Navbar from '@/components/Nav.vue';
+import Hogares from '@/components/hogar/ListaHogares.vue';
+import NewHogar from '@/components/hogar/NewHogar.vue';
+
+import Modal2 from '@/components/modal/Modal2.vue';
+import ModalContent from '@/components/modal/ModalContent.vue';
+// import Infoapto from '@/components/ModalInfoApto.vue';
 
 export default {
-  name: 'Home',
+  name: 'Hogar',
   components: {
     Header,
-    Nav,
+    Navbar,
+    Hogares,
+    Modal2,
+    ModalContent,
+    NewHogar,
+    // Infoapto,
+  },
+  created() {
+    // console.log('inmounted: ');
+    this.$store.dispatch('hogares_module/cargarHomes');
+    this.$store.dispatch('hogares_module/cargarTorres');
+  },
+  provide() {
+    return {
+      dataHogar: () => this.dataNewHogar,
+      updateEntrada: this.updateEntrada,
+      contraseña: () => this.contraseña,
+      updateContraseña: this.updateContraseña,
+    };
+  },
+  data() {
+    return {
+      dataNewHogar: {
+        aptoNum: 0,
+        tower: '',
+      },
+      Torre: '',
+      contraseña: '',
+    };
+  },
+  computed: {
+    ...mapGetters('hogares_module', ['getHogares', 'getTowers']),
+    ...mapGetters(['getUserData']),
+    getHogaresByTower() {
+      if (this.Torre !== '' && this.Torre !== null && this.Torre !== undefined) {
+        return this.getHogares.filter(
+          (dato) => dato.tower === this.Torre,
+        );
+      }
+      return this.getHogares;
+    },
+  },
+  methods: {
+    ...mapActions('hogares_module', ['crearHome']),
+    updateEntrada(values) {
+      const { key, val } = values;
+      this.dataNewHogar[key] = val;
+    },
+    agregarHogar() {
+      // eslint-disable-next-line max-len
+      this.crearHome({ ...this.dataNewHogar, user: this.getUserData.user, password: this.contraseña });
+    },
+    updateContraseña(values) {
+      this.contraseña = values;
+    },
   },
 };
 </script>
@@ -110,99 +140,94 @@ export default {
 <style scoped lang="scss">
 @import '@/views/scss/_theme.scss';
 
+.container{
+  padding: 20px;
+  margin-left: 20%;
+}
+
 .Navigation{
   background-color: $main-color;
   display: flex;
-  height:45px;
-  margin: 5px 10px 0 21% ;
   justify-content: space-between;
-  border-radius:10px;
+  // flex-direction: column;
+  height:fit-content;
+  padding: 10px;
+  // margin: 5px 10px 0 21% ;
+  // justify-content: space-between;
+  border-radius:5px;
   line-height: 20px;
+}
 
+.Navigation-Buttons{
+  display: flex;
+  justify-content: space-around;
+  line-height: 30px;
+  padding-top: 5px;
+}
+.prueba{
+  background: black;
+}
+.new-tower{
+  // background: $main-color;
+  cursor: pointer;
+}
+
+// .homes_row{
+//   display: flex;
+//   margin: -30px 10px 0 20% ;
+// }
+.button{
+  background-color: $background-color;
+  border-radius: 5px;
+  line-height: 5px;
+  // width: 100px;
+  height: 30px;
+  color:$main-color ;
+  margin: 5px;
+  // margin-left: 20px;
+  font-weight: bold;
+  justify-content: space-around;
+  cursor:pointer;
+  // background: black;
+}
+select{
+  padding: 0;
 }
 .menu{
+  margin-left: 95%;
+  margin-top: -15%;
   width:10px;
-  height:10px;
+  height:20px;
   font-weight: bolder;
 }
-.boton2{
-  background-color: $background-color;
-  border-radius: 5px;
-  width: 90px;
-  height: 30px;
-  color:$main-color ;
-  margin-left: 20px;
-  font-weight: bold;
-  justify-content: space-between;
-  cursor:pointer;
 
-}
-.boton1{
-  background-color: $background-color;
-  border-radius: 5px;
-  width: 180px;
-  height: 30px;
-  color:$main-color ;
-  margin-left: 20px;
-  font-weight: bold;
-  cursor:pointer;
-}
-.Navigation-Buttons{
-  line-height: 40px;
-}
 .buscar{
   padding-right: 15px;
   padding-top: 10px;
   line-height: 0;
 }
-label{
-  color:white;
-  font-weight : bold;
-}
+
 input{
   background-color: $secondary-color;
   color:$main-color ;
   height: 20px;
-  margin-left: 5px;
-  border-radius: 20px;
+  // margin-left: 5px;
+  border-radius: 5px;
 }
-.Apt-numbers{
-  display:flex;
-  justify-content:left;
-  color: $main-color;
-  font-weight: bold;
-  margin: 5px 10px -10px 21%;
-  list-style: none;
-
-}
-
-.Number{
-
-  padding-left: 60px;
-  padding-right:57px;
-
-}
-
-.apartments{
-  display: flex;
-  justify-content:left;
-  padding: 10px;
-  margin: 5px 10px 0 23%;
-
-}
-.Apt-button{
-  border-radius: 10px;
-  margin:0 30px;
-  padding-right:10px;
-
-}
-
-.Buildings{
-margin: -10px;
-cursor:pointer;
-
-}
-
+// .contenedor{
+//   margin-right: -70px;
+//   margin-left: -70px;
+//   padding-bottom: 10%;
+// }
 // Arreglando algunos detalles
+.hogares{
+    display: flex;
+    flex-wrap: wrap;
+  }
 
+@media (max-width: 900){
+  .Navigation-Buttons .button{
+    font-size: 0.2em;
+  }
+}
 </style>

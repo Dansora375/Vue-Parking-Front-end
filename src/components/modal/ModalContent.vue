@@ -63,8 +63,11 @@ export default {
 }
 
 .content{
-  width: 25%;
-  height:70%;
+  width: 300px;
+  min-width: 300px;
+  max-width: 90%;
+  height: fit-content;
+  max-height:70%;
   overflow-y:scroll;
   padding: 25px;
   display: flex;
@@ -81,16 +84,14 @@ export default {
   border-radius: 5px;
 }
 .confirmar{
+  color: white;
   width: auto;
   border: none;
   padding: 1% 4% 1% 4%;
   border-radius: 5px;
 
 }
-::placeholder{
 
-  color:$secondary-color;
-}
 .cancelar:hover {
   background-color: $secondary-color ;
   // color:$secondary-color;

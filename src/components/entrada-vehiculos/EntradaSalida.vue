@@ -50,7 +50,6 @@
             <ModalContent>
               <EntradaInformation v-bind:index="this.index">
               </EntradaInformation>
-
               <template v-slot:cancelar>
                 <button class="btCancel">
                   Cancelar
@@ -69,37 +68,6 @@
           </MenuDropDownItem> -->
         </MenuDropDownContent>
       </MenuDropDown>
-      <!-- <Modal ref="modal">
-        <EntradaInformation v-bind:index="this.index">
-        </EntradaInformation>
-      </Modal> -->
-      <!-- <Modal>
-        <p>
-          akjdhflaksdjhflaksdjfh
-        </p>
-        <template v-slot:confirmar>
-        <button class="confirmar" @click="">
-          Confirmar
-        </button>
-      </template>
-      </Modal> -->
-      <!-- <select id="opciones_lista" name="" v-model="selected"> -->
-      <!-- </select> -->
-      <!-- <MenuDropDown>
-        <template v-slot:toggler>
-          <button>
-            Hola mundo
-          </button>
-        </template>
-        <MenuDropDownContent>
-          <p>
-            hola mundo
-          </p>
-          <p>
-            adios mundo
-          </p>
-        </MenuDropDownContent>
-      </MenuDropDown> -->
     </section>
   </div>
 </template>
