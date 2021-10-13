@@ -1,9 +1,10 @@
 import { createStore } from 'vuex'
 import entradasModule from './modules/entradasModule'
 // eslint-disable-next-line camelcase
-import options_zona_p from './modules/options_zona_p'
+// import options_zona_p from './modules/options_zona_p'
 import vehiculosModule from './modules/vehiculosModule'
 import hogaresModule from './modules/hogaresModule'
+import inf_resident from './modules/inf_residentModule'
 // import entradasModule from './modules/entradasModule';
 import * as loginController from '@/Controladores/AuthenticationController'
 
@@ -45,8 +46,9 @@ export default createStore({
   },
   modules: {
     entrada_salida: entradasModule,
-    options_zona: options_zona_p,
+    // options_zona: options_zona_p,
     vehiculos_module: vehiculosModule,
-    hogares_module: hogaresModule
+    hogares_module: hogaresModule,
+    inf_resident
   }
 })

@@ -1,9 +1,11 @@
 <template>
   <div id="dialog-newParking">
+
     <div class="table">
-    <h1>
-      Agregar nuevo parqueadero
+      <h1>
+      Llenar Parqueadero
     </h1>
+
     <div class="container">
       <img src='@/assets/CrearParqueadero.svg' alt="" class="im">
     </div>
@@ -36,7 +38,7 @@
 import ImgParking from '@/assets/CrearParqueadero.svg'
 
 export default {
-  name: 'NewParking',
+  name: 'LlenarParking',
   data () {
     return {
 
@@ -53,9 +55,11 @@ export default {
 
   color:$secondary-color;
 }
-h1{
-  padding-top:20px ;
-}
+// h1{
+//   padding-top:20px ;
+//   position:absolute;
+//   margin:auto
+// }
 .table{
   display: table-cell;
   vertical-align: middle;
@@ -80,7 +84,7 @@ input{
 }
 #dialog-newParking{
   display: table;
-  height: 450px;
+  // height: 450px;
   align-items: center;
   flex-direction: column;
   vertical-align: middle;
@@ -96,6 +100,9 @@ label{
   width: 38%;
   padding-top: 20px;
   padding-bottom: 40px;
+}
+.title{
+  position: relative;
 }
 
 </style>

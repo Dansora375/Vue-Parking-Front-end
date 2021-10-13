@@ -50,6 +50,30 @@
                         </ModalContent>
                         <!-- </div> -->
                     </Modal2>
+                    <Modal2 >
+                        <template v-slot:toggler>
+                            <p class="opcion_menu" id="bordeInferior">
+                                Llenar parqueadero
+                            </p>
+                        </template>
+                        <!-- <div class="modal"> -->
+                        <ModalContent class="prueba_content ">
+                            <ModalLlenarParking >
+                            </ModalLlenarParking>
+
+                            <template v-slot:cancelar>
+                                <button class="btCancel">
+                                    Cancelar
+                                </button>
+                            </template>
+                            <template v-slot:confirmar>
+                                <button class="btAcept">
+                                    Confirmar
+                                </button>
+                         </template>
+                        </ModalContent>
+                        <!-- </div> -->
+                    </Modal2>
                 </MenuDropDownContent>
             </MenuDropDown>
         </section>
@@ -66,6 +90,7 @@ import MenuDropDown from '@/components/dropDown/MenuDropdown.vue'
 import Modal2 from '@/components/modal/Modal2.vue'
 import ModalContent from '@/components/modal/ModalContent.vue'
 import ModalInfResident from '@/components/Parking/ModalInfResident.vue'
+import ModalLlenarParking from '@/components/Parking/ModalLlenarparking.vue'
 // import { mapGetters, mapMutations } from 'vuex'
 
 export default {
@@ -75,7 +100,8 @@ export default {
     ModalContent,
     MenuDropDown,
     MenuDropDownContent,
-    ModalInfResident
+    ModalInfResident,
+    ModalLlenarParking
 
   },
   data () {
