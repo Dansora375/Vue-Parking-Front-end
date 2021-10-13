@@ -45,7 +45,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters('entrada_r', ['residentes']),
+    ...mapGetters('New_Residente', ['getNewResidente']),
     nombre: {
       get() {
         return this.dataResidente.nombre;

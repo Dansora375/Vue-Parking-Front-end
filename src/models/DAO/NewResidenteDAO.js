@@ -1,19 +1,19 @@
 import axios from 'axios';
 
 /**
- * @param {*} rcompletadas: referencia a lista con o sin entradas ya finalizadas
+ * @param {*} completadas: referencia a lista con o sin entradas ya finalizadas
  * @returns lista de datos desde el servidor
  */
-export async function listaEntradas(rcompletadas = false) {
+export async function listaResidentes() {
   try {
-    const lista = await axios.get('/entrada_vehiculo/lista', { params: { fin: rcompletadas } });
+    const lista = await axios.get('/residentInf', );
     // console.log('Datos de la lista l', lista);
-    return lista.data;
+    return { data: lista.data, completed: true };
   } catch (error) {
-    console.log(error);
-    return [{}];
+    return { data: error, completed: false };
   }
 }
+  
 
 function ResPost(completed, error, data) {
   this.result = completed;
@@ -21,9 +21,9 @@ function ResPost(completed, error, data) {
   this.data = data;
 }
 
-export async function nuevaResidente(entradar) {
+export async function nuevaResidente(entrada) {
   try {
-    console.log('post function', entradar);
+    console.log('post function', entrada);
     const nResidente = await axios.post('/residentInf', {
       nombre: entradar.nombre,
       cedula: entradar.cedula,

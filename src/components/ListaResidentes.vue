@@ -13,7 +13,7 @@
         <template v-slot:toggler>
           <img class="icon-menu" src="@/assets/menu.svg" alt="">
         </template>
-        <MenuDropDownContent class="menu-options">
+         <MenuDropDownContent class="menu-options">
           <MenuDropDownItem class="opcion_menu">
             <Modal2>
             <template v-slot:toggler>
@@ -21,21 +21,9 @@
                 Mas informacion
               </p>
             </template>
-            <ModalContent>
-              <EntradaInformation v-bind:index="this.index">
-              </EntradaInformation>
-              <template v-slot:cancelar>
-                <button>
-                  Cancelar
-                </button>
-              </template>
-            </ModalContent>
           </Modal2>
-          
-
           </MenuDropDownItem>
-           </MenuDropDownContent>
-           
+           </MenuDropDownContent>   
       </MenuDropDown>
       </div>
   </div>
@@ -93,7 +81,13 @@ export default {
     id: {
       type: String,
     },
-    }
+    },
+    computed: {
+    ...mapGetters('New_Residente', ['getNewResidente']),
+    residente() {
+      return this.getNewResidente[this.index];
+    },
+  },
 };
 </script>
 

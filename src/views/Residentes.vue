@@ -59,5 +59,93 @@ export default {
     Modal2,
     ModalContent
   },
+
+  created() {
+    // console.log('inmounted: ');
+    this.$store.dispatch('New_Residente/cargarResidentes');
+  },
+  provide() {
+    return {
+      dataResidente: () => this.dataNewResidente,
+      updateEntrada: this.updateEntrada,
+    };
+  },
+  data() {
+    return {
+      dataNewResidente: {
+        cedula: "",
+        tower: '',
+      },
+    };
+  },
+  computed: {
+    ...mapGetters('hogares_module', ['getHogares']),
+  },
+  methods: {
+    updateEntrada(values) {
+      const { key, val } = values;
+      this.dataNewHogar[key] = val;
+    },
+    agregarHogar() {
+      console.log(this.dataNewHogar);
+    },
+  },
 };
+
 </script>
+<style scoped lang="scss">
+@import '@/views/scss/_theme.scss';
+.container{
+  margin-left: 21%;
+  width: auto;
+  height: auto;
+  border-radius: 10px;
+  background-color:$secondary-color ;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+}
+.boton{
+  margin-top: 5px;
+}
+
+.buscar{
+  display: flex;
+  margin-left: 1100px;
+}
+label{
+  color:white;
+}
+input{
+  background-color: $background-color;
+  color:$main-color ;
+  height: 10px;
+  margin-left: 5px;
+  margin-top: 5px;
+  border-radius: 5px;
+}
+
+.usuario{
+  margin: 20px ;
+  width: 500px;
+  border-radius: 10px;
+  background-color:$secondary-color ;
+  display:flex;
+  flex-direction: row;
+  
+
+}
+.nombre-user{
+  font-size: 1.5em;
+  color:$main-color ;
+  margin: 5px;
+
+}
+
+
+
+.addImage{
+  width: 2%;
+  float: left;
+}
+</style>

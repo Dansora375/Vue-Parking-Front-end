@@ -1,9 +1,12 @@
 import * as Dao from '@/models/DAO/NewResidenteDAO';
 
-export async function ObtainLista(rcompletadas = false) {
-  const lista = await Dao.listaEntradas(rcompletadas);
-  // console.log(lista);
-  return lista;
+export async function ObtainLista() {
+  try {
+    const result = await Dao.listaResidentes();
+    return result;
+  } catch (error) {
+    return { data: error, completed: false };
+  }
 }
 
 export async function PostEntrada(entradar) {
