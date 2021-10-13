@@ -8,7 +8,7 @@
     </div>
 
     <!-- Zona de contenido -->
-    <div ref="data">
+    <div >
       <slot>
       </slot>
     </div>
@@ -21,26 +21,26 @@
 export default {
   name: 'Modal2',
   // funciones que se pueden inyectar a los componentes hijos
-  provide() {
+  provide () {
     return {
       estadoModal: this.estadoModal,
-      toggle: this.toggle,
-    };
+      toggle: this.toggle
+    }
   },
-  data() {
+  data () {
     return {
       estadoModal: {
-        activo: false,
-      },
-    };
+        activo: false
+      }
+    }
   },
   methods: {
-    toggle(value) {
+    toggle (value) {
       // console.log("hola como estan", value);
-      this.estadoModal.activo = value;
-    },
-  },
-};
+      this.estadoModal.activo = value
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

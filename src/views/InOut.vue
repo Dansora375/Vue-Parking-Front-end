@@ -1,5 +1,5 @@
 <template>
-  <div class="home" @keyup.esc="changeModal(false)">
+  <div class="home" >
     <Header nombre_usuario="Carlos" rol_usuario="Trabajador"></Header>
     <Navbar class="nav"></Navbar>
     <div class="main_entrada">
@@ -13,12 +13,12 @@
             <NewEntrada>
             </NewEntrada>
             <template v-slot:cancelar>
-              <button @click="resetDataEntrada()" id="btCancel">
+              <button @click="resetDataEntrada()" class="btCancel">
                 Cancelar
               </button>
             </template>
             <template v-slot:confirmar>
-              <button @click="agregarEntrada" id="btAcept">
+              <button @click="agregarEntrada" class="btAcept">
                 Aceptar
               </button>
             </template>
@@ -45,18 +45,18 @@
 // @ is an alias to /src
 // import HelloWorld from '@/components/HelloWorld.vue';
 // import { mapState, mapMutations } from 'vuex';
-import { mapGetters, mapActions, mapMutations } from 'vuex';
+import { mapGetters, mapActions } from 'vuex'
 
-import Header from '@/components/Header.vue';
-import Navbar from '@/components/Nav.vue';
-import SearchBar from '@/components/SearchButton.vue';
-import EntradaSalida from '@/components/entrada-vehiculos/EntradaSalida.vue';
+import Header from '@/components/Header.vue'
+import Navbar from '@/components/Nav.vue'
+import SearchBar from '@/components/SearchButton.vue'
+import EntradaSalida from '@/components/entrada-vehiculos/EntradaSalida.vue'
 // import ModalNew from '@/components/ModalNewEntrada.vue';
 // import Modal from '@/components/modal/Modal.vue';
-import NewEntrada from '@/components/entrada-vehiculos/NewEntrada.vue';
+import NewEntrada from '@/components/entrada-vehiculos/NewEntrada.vue'
 
-import Modal2 from '@/components/modal/Modal2.vue';
-import ModalContent from '@/components/modal/ModalContent.vue';
+import Modal2 from '@/components/modal/Modal2.vue'
+import ModalContent from '@/components/modal/ModalContent.vue'
 
 const resetData = {
   nombre: '',
@@ -65,8 +65,8 @@ const resetData = {
   tower: '',
   placa: '',
   tipo: '',
-  datos_extra: '',
-};
+  datos_extra: ''
+}
 
 export default {
   name: 'InOut',
@@ -79,15 +79,15 @@ export default {
     // Modal,
     NewEntrada,
     Modal2,
-    ModalContent,
+    ModalContent
   },
-  provide() {
+  provide () {
     return {
       dataEntrada: () => this.dataNewEntrada,
-      updateEntrada: this.updateEntrada,
-    };
+      updateEntrada: this.updateEntrada
+    }
   },
-  data() {
+  data () {
     return {
       isActiveModal: false,
       dataNewEntrada: {
@@ -97,39 +97,39 @@ export default {
         tower: '',
         placa: '',
         tipo: '',
-        datos_extra: '',
-      },
-    };
+        datos_extra: ''
+      }
+    }
   },
-  mounted() {
-    this.$store.dispatch('entrada_salida/cargarEntradas');
+  mounted () {
+    this.$store.dispatch('entrada_salida/cargarEntradas')
   },
   computed: {
-    ...mapGetters('entrada_salida', ['showModalNewEntrada', 'entradas']),
+    ...mapGetters('entrada_salida', ['showModalNewEntrada', 'entradas'])
 
   },
   methods: {
-    ...mapMutations('entrada_salida', []),
+
     ...mapActions('entrada_salida', ['cargarDocs', 'addNewEntrada']),
-    agregarEntrada() {
+    agregarEntrada () {
       // console.log(this.dataNewEntrada);
-      this.addNewEntrada(this.dataNewEntrada);
-      this.resetDataEntrada();
+      this.addNewEntrada(this.dataNewEntrada)
+      this.resetDataEntrada()
       // this.toggleModal(false);
     },
-    transformToDate(item) {
-      return new Date(item.hora_entrada);
+    transformToDate (item) {
+      return new Date(item.hora_entrada)
     },
-    resetDataEntrada() {
-      this.dataNewEntrada = resetData;
+    resetDataEntrada () {
+      this.dataNewEntrada = resetData
       // console.log(this.dataNewEntrada);
     },
-    updateEntrada(values) {
-      const { key, val } = values;
-      this.dataNewEntrada[key] = val;
-    },
-  },
-};
+    updateEntrada (values) {
+      const { key, val } = values
+      this.dataNewEntrada[key] = val
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -148,16 +148,16 @@ export default {
     display: flex;
     justify-content: space-between;
   }
-  #btAcept{
+  .btAcept{
     color:$third-color;
-    
+
   }
-  #btAcept:hover{
+  .btAcept:hover{
     color:$main-color;
   }
-  
-  #btCancel:hover{
-    color:$background-color;  
+
+  .btCancel:hover{
+    color:$background-color;
   }
 
   @media (max-width: 600px){

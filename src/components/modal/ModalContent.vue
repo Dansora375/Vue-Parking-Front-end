@@ -3,7 +3,7 @@
     <div class="content">
 
       <!-- Zona de contenido -->
-      <div>
+      <div >
         <slot>
         </slot>
       </div>
@@ -33,13 +33,13 @@ export default {
   name: 'ModalContent',
   inject: ['toggle', 'estadoModal'],
   computed: {
-    active() {
-      console.log(this.estadoModal.activo);
+    active () {
+      // console.log(this.estadoModal.activo)
       // console.log(this.estadoModal.activo, 'Hola que tal que hace que hay de nuevo');
-      return this.estadoModal.activo;
-    },
-  },
-};
+      return this.estadoModal.activo
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -66,7 +66,7 @@ export default {
   width: 25%;
   height:70%;
   overflow-y:scroll;
-  padding: 30px;
+  padding: 25px;
   display: flex;
   border-radius: 5px;
   align-items: center;
@@ -85,7 +85,7 @@ export default {
   border: none;
   padding: 1% 4% 1% 4%;
   border-radius: 5px;
-  
+
 }
 ::placeholder{
 
@@ -128,6 +128,11 @@ button{
     display:flex;
     flex-direction: row;
     justify-content: space-between  ;
+    position: sticky;
+    bottom: -30px;
+    background:$background-color;
+    padding-bottom: 20px;
+    // height: 400px;
 
 }
 </style>

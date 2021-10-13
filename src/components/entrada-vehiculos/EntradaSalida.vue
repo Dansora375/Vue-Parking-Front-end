@@ -41,7 +41,7 @@
             Terminar parqueadero
           </MenuDropDownItem>
 
-          <Modal2>
+          <Modal2 >
             <template v-slot:toggler>
               <p class="opcion_menu" id="bordeInferior">
                 Mas informacion
@@ -50,14 +50,15 @@
             <ModalContent>
               <EntradaInformation v-bind:index="this.index">
               </EntradaInformation>
-              <div>
-                <h1>
-                  hola como estan
-                </h1>
-              </div>
+
               <template v-slot:cancelar>
-                <button>
+                <button class="btCancel">
                   Cancelar
+                </button>
+              </template>
+              <template v-slot:confirmar>
+                <button class="btAcept">
+                  Ok
                 </button>
               </template>
             </ModalContent>
@@ -104,17 +105,17 @@
 </template>
 
 <script>
-import DefaultVehicle from '@/assets/predefined_list.svg';
-import Carro from '@/assets/Car.svg';
-import Moto from '@/assets/Motorcycle.svg';
+import DefaultVehicle from '@/assets/predefined_list.svg'
+import Carro from '@/assets/Car.svg'
+import Moto from '@/assets/Motorcycle.svg'
 
-import MenuDropDownContent from '../dropDown/MenuDropDownContent.vue';
-import MenuDropDown from '../dropDown/MenuDropdown.vue';
-import MenuDropDownItem from '../dropDown/MenuDropDownItem.vue';
+import MenuDropDownContent from '@/components/dropDown/MenuDropDownContent.vue'
+import MenuDropDown from '../dropDown/MenuDropdown.vue'
+import MenuDropDownItem from '../dropDown/MenuDropDownItem.vue'
 
-import Modal2 from '@/components/modal/Modal2.vue';
-import ModalContent from '@/components/modal/ModalContent.vue';
-import EntradaInformation from '@/components/entrada-vehiculos/EntradaInformation.vue';
+import Modal2 from '@/components/modal/Modal2.vue'
+import ModalContent from '@/components/modal/ModalContent.vue'
+import EntradaInformation from '@/components/entrada-vehiculos/EntradaInformation.vue'
 // import ModalContent from '../modal/ModalContent.vue';
 
 export default {
@@ -125,41 +126,41 @@ export default {
     MenuDropDownItem,
     Modal2,
     ModalContent,
-    EntradaInformation,
+    EntradaInformation
   },
-  data() {
+  data () {
     return {
       lista_opciones: [
         'Terminar sesión',
-        'Cancelar',
+        'Cancelar'
       ],
       selected: '',
       imgCarro: Carro,
       imgMoto: Moto,
-      imgDefault: DefaultVehicle,
-    };
+      imgDefault: DefaultVehicle
+    }
   },
   props: {
     index: {
-      type: Number,
+      type: Number
     },
     date_ingreso: {
       type: Date,
-      default: new Date(),
+      default: new Date()
     },
     placa: {
-      type: String,
+      type: String
       // default: 'AAA000',
     },
     tipo: {
       type: String,
-      default: 'Default',
+      default: 'Default'
     },
     id: {
-      type: String,
-    },
-  },
-};
+      type: String
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -263,7 +264,7 @@ export default {
         min-width:49px;
         cursor: pointer;
         // border-radius:1.5px;
-} 
+}
     #bordeInferior{
       border-bottom:none;
     }

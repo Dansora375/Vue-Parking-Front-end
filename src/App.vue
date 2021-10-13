@@ -4,7 +4,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters } from 'vuex'
 
 export default {
   // mounted() {
@@ -35,9 +35,9 @@ export default {
     // },
   },
   computed: {
-    ...mapGetters(['getIsNotLogged', 'getUserData']),
-  },
-};
+    ...mapGetters(['getIsNotLogged', 'getUserData'])
+  }
+}
 </script>
 
 <style lang="scss">
@@ -118,6 +118,17 @@ button {
 .confirmar:active {
   color: $main-color;
 }
+.btAcept{
+    color:$third-color;
+
+  }
+  .btAcept:hover{
+    color:$main-color;
+  }
+
+  .btCancel:hover{
+    color:$background-color;
+  }
 
   select {
     border: 2px solid $main-color;

@@ -18,27 +18,27 @@
 export default {
   name: 'MenuDropDown',
   // mixins: [clickaway],
-  provide() {
+  provide () {
     return {
-      estadoMenu: this.estadoMenu,
-    };
+      estadoMenu: this.estadoMenu
+    }
   },
 
-  data() {
+  data () {
     return {
       estadoMenu: {
-        activo: false,
-      },
-    };
+        activo: false
+      }
+    }
   },
   methods: {
-    toggle() {
+    toggle () {
       // console.log(this.estadoMenu);
-      this.estadoMenu.activo = !this.estadoMenu.activo;
+      this.estadoMenu.activo = !this.estadoMenu.activo
     },
-    away() {
-      this.estadoMenu.activo = false;
-    },
-  },
-};
+    away () {
+      this.estadoMenu.activo = false
+    }
+  }
+}
 </script>

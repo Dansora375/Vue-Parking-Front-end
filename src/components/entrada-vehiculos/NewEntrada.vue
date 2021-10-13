@@ -46,97 +46,93 @@
 </template>
 
 <script>
-import { mapGetters, mapActions, mapMutations } from 'vuex';
+import { mapGetters, mapActions } from 'vuex'
 
 const opcionesEntrada = {
   VISITANTE: 'Visitante',
-  RESIDENTE: 'Residente',
-};
+  RESIDENTE: 'Residente'
+}
 
 export default {
   name: 'ModalNew',
   inject: ['toggle', 'dataEntrada', 'updateEntrada'],
-  data() {
+  data () {
     return {
       optionsEntrada: opcionesEntrada,
-      optionChoose: opcionesEntrada.VISITANTE,
-    };
+      optionChoose: opcionesEntrada.VISITANTE
+    }
   },
   computed: {
     ...mapGetters('entrada_salida', ['vehiculos']),
     nombre: {
-      get() {
-        return this.dataEntrada.nombre;
+      get () {
+        return this.dataEntrada.nombre
       },
-      set(value) {
-        this.updateEntrada({ key: 'nombre', val: value });
-      },
+      set (value) {
+        this.updateEntrada({ key: 'nombre', val: value })
+      }
     },
     cedula: {
-      get() {
-        return this.dataEntrada.cedula;
+      get () {
+        return this.dataEntrada.cedula
       },
-      set(value) {
-        this.updateEntrada({ key: 'cedula', val: value });
-      },
+      set (value) {
+        this.updateEntrada({ key: 'cedula', val: value })
+      }
     },
     apto_num: {
-      get() {
-        return this.dataEntrada.apto_num;
+      get () {
+        return this.dataEntrada.apto_num
       },
-      set(value) {
-        this.updateEntrada({ key: 'apto_num', val: value });
-      },
+      set (value) {
+        this.updateEntrada({ key: 'apto_num', val: value })
+      }
     },
     tower: {
-      get() {
-        return this.dataEntrada.tower;
+      get () {
+        return this.dataEntrada.tower
       },
-      set(value) {
-        this.updateEntrada({ key: 'tower', val: value });
-      },
+      set (value) {
+        this.updateEntrada({ key: 'tower', val: value })
+      }
     },
     placa: {
-      get() {
-        return this.dataEntrada.placa;
+      get () {
+        return this.dataEntrada.placa
       },
-      set(value) {
-        this.updateEntrada({ key: 'placa', val: value });
-      },
+      set (value) {
+        this.updateEntrada({ key: 'placa', val: value })
+      }
     },
     selected: {
-      get() {
-        return this.dataEntrada.tipo;
+      get () {
+        return this.dataEntrada.tipo
       },
-      set(value) {
-        this.updateEntrada({ key: 'tipo', val: value });
-      },
+      set (value) {
+        this.updateEntrada({ key: 'tipo', val: value })
+      }
     },
     extra: {
-      get() {
-        return this.dataEntrada.datos_extra;
+      get () {
+        return this.dataEntrada.datos_extra
       },
-      set(value) {
-        this.updateEntrada({ key: 'datos_extra', val: value });
-      },
+      set (value) {
+        this.updateEntrada({ key: 'datos_extra', val: value })
+      }
     },
     optionGet: {
-      get() {
+      get () {
         // console.log(this.optionEntrada);
-        return this.optionChoose === this.optionsEntrada.VISITANTE;
-      },
-    },
+        return this.optionChoose === this.optionsEntrada.VISITANTE
+      }
+    }
   },
   methods: {
-    ...mapMutations('entrada_salida', []),
-    ...mapActions('entrada_salida', ['changeModalNewEntrada', 'addNewEntrada']),
-    agregarEntrada(value) {
-      this.addNewEntrada(value);
-      this.resetDataNewEntrada();
-      this.toggleModal(false);
-    },
-  },
-};
+
+    ...mapActions('entrada_salida', ['changeModalNewEntrada', 'addNewEntrada'])
+
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -185,8 +181,6 @@ export default {
   color: $secondary-color;
   background-color: $main-color;
 }
-
-
 
 input{
 
