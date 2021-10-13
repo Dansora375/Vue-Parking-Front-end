@@ -63,8 +63,11 @@ export default {
 }
 
 .content{
-  width: 25%;
-  height:70%;
+  width: 300px;
+  min-width: 300px;
+  max-width: 90%;
+  height: fit-content;
+  max-height:70%;
   overflow-y:scroll;
   padding: 30px;
   display: flex;

@@ -2,7 +2,7 @@
   <div class= 'Hogares'>
     <div class = "apartments">
       <div class ="Number">
-        {{hogar.apto_num}}
+        {{aptoNum}}
       </div>
 
       <Modal2>
@@ -58,12 +58,15 @@ export default {
     index: {
       type: Number,
     },
+    aptoNum: {
+      type: Number,
+    },
   },
   computed: {
     ...mapGetters('hogares_module', ['getHogares']),
-    hogar() {
-      return this.getHogares[this.index];
-    },
+    // hogar() {
+    //   return this.getHogares[this.index];
+    // },
   },
 };
 </script>

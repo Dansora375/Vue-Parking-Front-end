@@ -7,7 +7,17 @@
     <div class = 'Navigation-Buttons'>
       <button class="boton1 button">Asignar Parqueadero</button>
       <!-- eslint-disable-next-line max-len -->
-      <button class="boton2 button">TORRE A <img class="menu" src="@/assets/menu.svg" alt=""></button>
+      <!-- <button class="boton2 button" @click="cargarTorres()">TORRE A <img class="menu" src="@/assets/menu.svg" alt=""></button> -->
+      <select v-model="Torre" class="button">
+        <option v-for="(tower, index) of getTowers" :key="index">
+          {{tower.tower}}
+        </option>
+        <!-- <option disabled @click="alert('hola mundo')">
+          <button class="new-tower">
+            Crear torre nueva
+          </button>
+        </option> -->
+      </select>
       <modal-2>
         <template v-slot:toggler>
           <button  class="button">
@@ -39,7 +49,7 @@
   </div>
 
   <div class="hogares">
-    <hogares v-for="(item, index) of getHogares" :key="index" v-bind:index="index">
+    <hogares v-for="(item, index) of getHogaresByTower" :key="index" v-bind:id="item._id" v-bind:aptoNum="item.apto_num">
   </hogares>
   </div>
 
@@ -53,7 +63,7 @@
 
 <script>
 // @ is an alias to /src
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 import Header from '@/components/Header.vue';
 import Navbar from '@/components/Nav.vue';
@@ -78,11 +88,14 @@ export default {
   created() {
     // console.log('inmounted: ');
     this.$store.dispatch('hogares_module/cargarHomes');
+    this.$store.dispatch('hogares_module/cargarTorres');
   },
   provide() {
     return {
       dataHogar: () => this.dataNewHogar,
       updateEntrada: this.updateEntrada,
+      contraseña: () => this.contraseña,
+      updateContraseña: this.updateContraseña,
     };
   },
   data() {
@@ -91,18 +104,34 @@ export default {
         aptoNum: 0,
         tower: '',
       },
+      Torre: '',
+      contraseña: '',
     };
   },
   computed: {
-    ...mapGetters('hogares_module', ['getHogares']),
+    ...mapGetters('hogares_module', ['getHogares', 'getTowers']),
+    ...mapGetters(['getUserData']),
+    getHogaresByTower() {
+      if (this.Torre !== '' && this.Torre !== null && this.Torre !== undefined) {
+        return this.getHogares.filter(
+          (dato) => dato.tower === this.Torre,
+        );
+      }
+      return this.getHogares;
+    },
   },
   methods: {
+    ...mapActions('hogares_module', ['crearHome']),
     updateEntrada(values) {
       const { key, val } = values;
       this.dataNewHogar[key] = val;
     },
     agregarHogar() {
-      console.log(this.dataNewHogar);
+      // eslint-disable-next-line max-len
+      this.crearHome({ ...this.dataNewHogar, user: this.getUserData.user, password: this.contraseña });
+    },
+    updateContraseña(values) {
+      this.contraseña = values;
     },
   },
 };
@@ -136,8 +165,12 @@ export default {
   padding-top: 5px;
 }
 .prueba{
-   background: black;
- }
+  background: black;
+}
+.new-tower{
+  // background: $main-color;
+  cursor: pointer;
+}
 
 // .homes_row{
 //   display: flex;
@@ -156,6 +189,9 @@ export default {
   justify-content: space-around;
   cursor:pointer;
   // background: black;
+}
+select{
+  padding: 0;
 }
 .menu{
   margin-left: 95%;
@@ -188,4 +224,10 @@ input{
     display: flex;
     flex-wrap: wrap;
   }
+
+@media (max-width: 900){
+  .Navigation-Buttons .button{
+    font-size: 0.2em;
+  }
+}
 </style>

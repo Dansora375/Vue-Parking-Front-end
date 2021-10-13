@@ -32,6 +32,7 @@
         </p>
       </router-link>
     </nav>
+    <p id="cerrar-sesion">cerrarSesion</p>
   </div>
 </template>
 
@@ -122,4 +123,8 @@ img{
 //     font-weight:200 ;
 //     color: $background-color;
 // }
+
+#cerrar-sesion{
+  display: inline-block;
+}
 </style>
