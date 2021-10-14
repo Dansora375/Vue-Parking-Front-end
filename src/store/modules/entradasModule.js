@@ -1,4 +1,4 @@
-import * as controller from '@/Controladores/EntradaController';
+import * as controller from '@/Controladores/EntradaController'
 
 const resetData = {
   nombre: '',
@@ -7,8 +7,8 @@ const resetData = {
   tower: '',
   placa: '',
   tipo: '',
-  datos_extra: '',
-};
+  datos_extra: ''
+}
 export default {
   namespaced: true,
   state: {
@@ -19,65 +19,73 @@ export default {
       tower: '',
       placa: '',
       tipo: '',
-      datos_extra: '',
+      datos_extra: ''
     },
     // showModalNewEntrada: false,
     vehicleOptions: [
       'Ninguno',
       'Carro',
-      'Moto',
+      'Moto'
       // Agregar las nuevas opciones de vehiculos aqui
     ],
     registrosEntrada: [],
+    inf_visitant: []
   },
   mutations: {
-    updateEntrada(state, values) {
-      const { key, val } = values;
-      state.dataNewEntrada[key] = val;
+    updateEntrada (state, values) {
+      const { key, val } = values
+      state.dataNewEntrada[key] = val
     },
-    resetDataNewEntrada(state) {
-      state.dataNewEntrada = resetData;
+    resetDataNewEntrada (state) {
+      state.dataNewEntrada = resetData
     },
-    addNewEntrada(state, val) {
-      const data = val;
-      data.hora_entrada = new Date();
-      state.registrosEntrada.push(val);
+    addNewEntrada (state, val) {
+      const data = val
+      data.hora_entrada = new Date()
+      state.registrosEntrada.push(val)
       // state.showModalNewEntrada = false;
     },
-    createListEntradas(state, entradas) {
-      state.registrosEntrada = entradas;
+    createListEntradas (state, entradas) {
+      state.registrosEntrada = entradas
     },
+    createListVisitant (state, entrada) {
+      state.inf_visitant = entrada
+    }
     // cambiarEstadoParking(state, index){
     // }
   },
   actions: {
-    async cargarEntradas(context) {
-      const lista = await controller.ObtainLista();
-      context.commit('createListEntradas', lista);
+    async cargarEntradas (context) {
+      const lista = await controller.ObtainLista()
+      context.commit('createListEntradas', lista)
     },
     // async cambiarEstadoParqueadero(context, index){
 
     // }
+    async cargar_parq_list (context) {
+      const lista_R = await controller.Obt_Parq_list()
+      context.commit('createListVisitant', lista_R)
+    },
 
     // changeModalNewEntrada(context, value) {
     //   context.commit('changeShowModalNewEntrada', value);
     // },
-    async addNewEntrada(context, value) {
-      const result = await controller.PostEntrada(value);
+    async addNewEntrada (context, value) {
+      const result = await controller.PostEntrada(value)
       if (result.result) {
         // console.log(value);
 
-        context.commit('addNewEntrada', value);
+        context.commit('addNewEntrada', value)
       } else {
         // eslint-disable-next-line no-alert
-        alert('No se ha podido subir el dato a la base: ');
-        console.error('Error al subir el dato  a la base : ', result.error);
+        alert('No se ha podido subir el dato a la base: ')
+        console.error('Error al subir el dato  a la base : ', result.error)
       }
     },
-    async addNewEntradaFromStore({ dispatch, state }) {
+    async addNewEntradaFromStore ({ dispatch, state }) {
       // console.log(state.dataNewEntrada);
-      await dispatch('addNewEntrada', state.dataNewEntrada);
-    },
+      await dispatch('addNewEntrada', state.dataNewEntrada)
+    }
   },
   getters: {
     // getNombre(state) {
@@ -104,15 +112,18 @@ export default {
     // showModalNewEntrada(state) {
     //   return state.showModalNewEntrada;
     // },
-    dataEntrada(state) {
-      return state.dataNewEntrada;
+    dataEntrada (state) {
+      return state.dataNewEntrada
     },
-    vehiculos(state) {
-      return state.vehicleOptions;
+    vehiculos (state) {
+      return state.vehicleOptions
     },
-    entradas(state) {
-      return state.registrosEntrada;
+    entradas (state) {
+      return state.registrosEntrada
       // return state.registrosEntrada;
     },
-  },
-};
+    ListVisitant (state) {
+      return state.inf_visitant
+    }
+  }
+}

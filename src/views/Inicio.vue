@@ -111,6 +111,8 @@ propiedad para responsive */
 .main {
   display: flex;
   flex-wrap: wrap-reverse;
+  // vertical-align: middle;
+ 
 }
 
 // input:-webkit-autofill,
@@ -146,13 +148,18 @@ NO es necesario ya que el anterior le da a los dos*/
   /* flex: 2; */
 
   /*  para que quede centrado el titulo y logo*/
-  padding-top: 0px;
+  // vertical-align: middle;
+  position: relative;
+  vertical-align: middle;
+  // padding-top:100px;
   max-width: auto;
 }
 
 /* distancia de separacion entre titulo y logo y pantalla */
 .cont-flex div {
-  padding-top: 125px;
+  padding-top: 75px;
+  
+  
 }
 
 .contenido__title {
@@ -183,7 +190,8 @@ NO es necesario ya que el anterior le da a los dos*/
   padding-right: 45px;
 
   flex-direction: column;
-  padding-top: 280px;
+  padding-top: 125px;
+  
 }
 
 .formulario input {

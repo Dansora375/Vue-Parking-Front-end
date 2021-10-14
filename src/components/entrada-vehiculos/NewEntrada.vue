@@ -58,17 +58,17 @@
 </template>
 
 <script>
-import { mapGetters, mapActions, mapMutations } from 'vuex';
+import { mapGetters, mapActions } from 'vuex'
 
 const opcionesEntrada = {
   VISITANTE: 'Visitante',
-  RESIDENTE: 'Residente',
-};
+  RESIDENTE: 'Residente'
+}
 
 export default {
   name: 'ModalNew',
   inject: ['toggle', 'dataEntrada', 'updateEntrada'],
-  data() {
+  data () {
     return {
       optionsEntrada: opcionesEntrada,
       optionChoose: opcionesEntrada.VISITANTE,
@@ -84,28 +84,28 @@ export default {
     ...mapGetters('entrada_salida', ['vehiculos']),
     ...mapGetters('hogares_module', ['getHogares', 'getTowers']),
     nombre: {
-      get() {
-        return this.dataEntrada.nombre;
+      get () {
+        return this.dataEntrada.nombre
       },
-      set(value) {
-        this.updateEntrada({ key: 'nombre', val: value });
-      },
+      set (value) {
+        this.updateEntrada({ key: 'nombre', val: value })
+      }
     },
     cedula: {
-      get() {
-        return this.dataEntrada.cedula;
+      get () {
+        return this.dataEntrada.cedula
       },
-      set(value) {
-        this.updateEntrada({ key: 'cedula', val: value });
-      },
+      set (value) {
+        this.updateEntrada({ key: 'cedula', val: value })
+      }
     },
     apto_num: {
-      get() {
-        return this.dataEntrada.apto_num;
+      get () {
+        return this.dataEntrada.apto_num
       },
-      set(value) {
-        this.updateEntrada({ key: 'apto_num', val: value });
-      },
+      set (value) {
+        this.updateEntrada({ key: 'apto_num', val: value })
+      }
     },
     tower: {
       get() {
@@ -117,31 +117,31 @@ export default {
       },
     },
     placa: {
-      get() {
-        return this.dataEntrada.placa;
+      get () {
+        return this.dataEntrada.placa
       },
-      set(value) {
-        this.updateEntrada({ key: 'placa', val: value });
-      },
+      set (value) {
+        this.updateEntrada({ key: 'placa', val: value })
+      }
     },
     selected: {
-      get() {
-        return this.dataEntrada.tipo;
+      get () {
+        return this.dataEntrada.tipo
       },
-      set(value) {
-        this.updateEntrada({ key: 'tipo', val: value });
-      },
+      set (value) {
+        this.updateEntrada({ key: 'tipo', val: value })
+      }
     },
     extra: {
-      get() {
-        return this.dataEntrada.datos_extra;
+      get () {
+        return this.dataEntrada.datos_extra
       },
-      set(value) {
-        this.updateEntrada({ key: 'datos_extra', val: value });
-      },
+      set (value) {
+        this.updateEntrada({ key: 'datos_extra', val: value })
+      }
     },
     optionGet: {
-      get() {
+      get () {
         // console.log(this.optionEntrada);
         return this.optionChoose === this.optionsEntrada.VISITANTE;
       },
@@ -175,7 +175,7 @@ export default {
 <style lang="scss" scoped>
 @import '@/views/scss/_theme.scss';
 #dialog-newParking{
-  padding: 30px;
+  // padding: ;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -197,7 +197,7 @@ export default {
   // color:$third-color;
 }
 .Rows{
-  padding: 10px;
+  padding: 5px;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
@@ -218,14 +218,6 @@ export default {
   color: $secondary-color;
   background-color: $main-color;
 }
-
-// .Rows{
-//   display:flex;
-
-//   flex-wrap: wrap;
-//   padding-top: 5px;
-
-// }
 
 input{
 
@@ -257,6 +249,9 @@ button{
     justify-content: space-between  ;
 
 }
+.S_Vehicle{
+  width:100%;
+}
 label{
 
   font-weight: 900;
@@ -268,7 +263,8 @@ select{
   font-size: 0.8rem;
   height:25px;
   width:160px;
-  margin: 0px;
+  margin: 10px;
+  // margin-bottom: 10px;
 
 }
 // .modal-overlay {

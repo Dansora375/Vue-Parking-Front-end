@@ -3,7 +3,7 @@
     <div class="content">
 
       <!-- Zona de contenido -->
-      <div>
+      <div >
         <slot>
         </slot>
       </div>
@@ -11,14 +11,14 @@
       <!--Botones posibles, en este caso solo hay opcion para dos botones-->
       <div class="botones">
         <div class="cancelar" @click="toggle(false)">
-          <slot name="cancelar">
-            <button>
+          <slot name="cancelar" >
+            <button class="cancelar">
               Salir
             </button>
           </slot>
         </div>
         <div class="confirmar" @click="toggle(false)">
-          <slot name="confirmar">
+          <slot name="confirmar" class="confirmar">
           </slot>
         </div>
       </div>
@@ -33,13 +33,13 @@ export default {
   name: 'ModalContent',
   inject: ['toggle', 'estadoModal'],
   computed: {
-    active() {
-      // console.log(this.estadoModal.activo);
+    active () {
+      // console.log(this.estadoModal.activo)
       // console.log(this.estadoModal.activo, 'Hola que tal que hace que hay de nuevo');
-      return this.estadoModal.activo;
-    },
-  },
-};
+      return this.estadoModal.activo
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -69,7 +69,7 @@ export default {
   height: fit-content;
   max-height:70%;
   overflow-y:scroll;
-  padding: 30px;
+  padding: 25px;
   display: flex;
   border-radius: 5px;
   align-items: center;
@@ -80,16 +80,21 @@ export default {
 .cancelar{
   background-color: $third-color;
   border: none;
+  padding: 1% 4% 1% 4%;
+  border-radius: 5px;
 }
 .confirmar{
   color: white;
   width: auto;
   border: none;
+  padding: 1% 4% 1% 4%;
+  border-radius: 5px;
+
 }
 
 .cancelar:hover {
-  background-color: $secondary-color  ;
-  // color:$third-color;
+  background-color: $secondary-color ;
+  // color:$secondary-color;
 }
 
 .cancelar:active {
@@ -98,20 +103,20 @@ export default {
 }
 
 .confirmar:hover {
-  background-color: $secondary-color;
+  background-color:$secondary-color;
   color: $main-color;
 }
 
 .confirmar:active {
   color: $secondary-color;
-  background-color: $main-color;
+  background-color:$third-color;
 }
 
 button{
 
   padding: 2.5% 5% 2.5% 5%;
-  width: 100%;
-  height: 100%;
+  // width: 100%;
+  // height: 100%;
 
   // display: inline;
   // background: black;
@@ -123,6 +128,12 @@ button{
     margin: 0px;
     display:flex;
     flex-direction: row;
-    justify-content: space-around  ;
+    justify-content: space-between  ;
+    position: sticky;
+    bottom: -30px;
+    background:$background-color;
+    padding-bottom: 20px;
+    // height: 400px;
+
 }
 </style>

@@ -6,8 +6,8 @@
 
 <script>
 export default {
-  name: 'MenuDropDownItem',
-};
+  name: 'MenuDropDownItem'
+}
 </script>
 
 <style lang="scss" scoped>

@@ -1,61 +1,76 @@
 <template>
-    <div class="vehicle_zone" >
-        <Header ></Header>
-        <Navbar></Navbar>
-            <div class=" cont-flex" >            
-                <div class="superior-bar">
-                    <img class='Imageadd' src="@/assets/add.svg"  alt="">  <!-- @click="toggleModal(true)" -->
-                    <SearchBar class="search"></SearchBar>
-                </div>
-                <div class="vehicle-list" v-for="(item,index) in info_vehicle_zone" :key="item._id">
-                    <ZonaParqueadero  :inf_estado="item.ocupado ?  'Lleno':'Vacio'" :parqueadero_numero="item.tower + item.apto_num" >
-                        
-                            
-                                
-                                
-                           
-                            <img class="menu" :src=Img_add alt="" @click=" open_option(index)"  > 
+<div class="vehicle_zone" >
+    <Header ></Header>
+    <Navbar></Navbar>
+    <div class=" cont-flex" >
+        <div class="superior-bar">
+            <Modal2>
+                <template v-slot:toggler>
+                    <img class='Imageadd' src="@/assets/add.svg"  alt="">
+                </template>
+                <modal-content>
+                    <NewParking>
+                    </NewParking>
+                    <template v-slot:cancelar>
+                        <button class="btCancel">
+                        Cancelar
+                        </button>
+                    </template>
+                    <template v-slot:confirmar>
+                        <button @click="agregarEntrada" class="btAcept"> <!-- MIRAR LA FUNCIONALIDAD DEL BOTON -->
+                        Aceptar
+                        </button>
+                    </template>
+                </modal-content>
+            </Modal2>
+            <SearchBar class="search"></SearchBar>
+        </div>
+            <div class="vehicle_list">
+                <ZonaParqueadero  v-for=" (ItemResi,index) in resident_list" :key="index" :inf_estado="ItemResi.ocupado ?  'Lleno':'Vacio'" :index="index" :parqueadero_numero="ItemResi.residente.vehiculo[0].parqueadero.nombre_Parqueadero" tipoList="Residente" >
 
-                    </ZonaParqueadero>
-                </div>
+                </ZonaParqueadero>
             </div>
+
+            <div class="vehicle-list" >
+                <ZonaParqueadero v-for=" (ItemVisitant,index) in entradas" :key="index" :inf_estado="ItemVisitant.ocupado ?  'Lleno':'Vacio'" :parqueadero_numero="ItemVisitant.tower + ItemVisitant.apto_num + ' -V' "  >
+
+                </ZonaParqueadero>
+            </div>
+        </div>
              <!-- <Options_zona_P>
-                                    
+
                                 </Options_zona_P>   -->
                 <!-- <div class="modal"  >
                      <info_parqueadero/>
                 </div>   -->
                 <!-- <div class="modal">
                      <Ing_vclo_visitante/>
-                </div>  
+                </div>
             -->
-            
-
 
     </div>
-    
 
 </template>
 
 <script>
-import Options_zona_P from '@/components/Options_zona_P.vue';
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 
+import NewParking from '@/components/Parking/ModalNewParking.vue'
+import Header from '@/components/Header.vue'
+import Navbar from '@/components/Nav.vue'
+import SearchBar from '@/components/SearchButton.vue'
+import ZonaParqueadero from '@/components/Parking/ZonaParqueadero.vue'
+import info_parqueadero from '@/components/Modal_Info_parqueadero.vue'
+import Ing_vclo_visitante from '@/components/Mdl_Ingreso_vclo_visitante.vue'
 
-import Header from '@/components/Header.vue';
-import Navbar from '@/components/Nav.vue';
-import SearchBar from '@/components/SearchButton.vue';
-import ZonaParqueadero from '@/components/ZonaParqueadero.vue';
-import info_parqueadero from '@/components/Modal_Info_parqueadero.vue';
-import Ing_vclo_visitante from '@/components/Mdl_Ingreso_vclo_visitante.vue';
-import Image_add from '@/assets/menu.svg';
-import {mapGetters, mapMutations} from 'vuex';
-
-
-
+import Modal2 from '@/components/modal/Modal2.vue'
+import ModalContent from '@/components/modal/ModalContent.vue'
 
 // ---------------------------------------
+const resetData = {
+  NombreParqueadero: ''
 
-
+}
 export default {
   name: 'Vehicle_zone',
   components: {
@@ -63,103 +78,86 @@ export default {
     Navbar,
     SearchBar,
     ZonaParqueadero,
-    info_parqueadero,
-    Ing_vclo_visitante,
-    Options_zona_P
+    // info_parqueadero,
+    // Ing_vclo_visitante,
+
+    NewParking,
+    Modal2,
+    ModalContent
   },
-  
-    props:{
-        
-    },
-
-    data(){
-
-        return{
-
-            info_vehicle_zone:[],
-            Img_add:Image_add
-           
-            
-        }
-    },
-    
-    created(){
-
-        this.show_vehicleZ_data();
-        
-    },
-    computed: {
-        
-        // ...mapState('options_zona_p',['showOptions']),
-        ...mapGetters('options_zona_p', ['showOptions'])
-    },
-
-    methods:{
-
-        ...mapMutations('options_zona_p', [ 'changeShowOptions']),
-
-        show_vehicleZ_data(){ 
-            this.axios.get('/entrada_vehiculo')
-            .then(res => {
-                // console.log(res.data)
-                this.info_vehicle_zone= res.data;
-                // return res.data;
-            })
-            .catch(e => {            
-                 console.log(e.response);
-            })
-    
-        },
-
-        // open_option(index){
-        //     // this.info_vehicle_zone.state_options=false;
-        //     this.info_vehicle_zone.forEach(element => {
-        //         element.state_options=false;
-        //     });
-        //     this.info_vehicle_zone[index].state_options=true;
-
-        // },
-        // close_option(index){
-        //     this.info_vehicle_zone[index].state_options=false;
-
-        // },
-        // close_all_opt(){
-        //     this.info_vehicle_zone.forEach(element => {
-        //         element.state_options=false;
-        //     });
-        // }
-    
+  //   provide(){
+  //     dataEntrada: () => this.dataNewParking,
+  //     updateEntrada: this.updateEntrada
+  //   },
+  data () {
+    return {
+      dataNewParking: {
+        nombreParqueadero: ''
+      }
     }
+  },
+
+  mounted () {
+    this.$store.dispatch('entrada_salida/cargarEntradas')
+    this.$store.dispatch('inf_resident/cargar_data_resi')
+  },
+  computed: {
+
+    // ...mapState('options_zona_p',['showOptions']),
+    ...mapGetters('inf_resident', ['resident_list']),
+    ...mapGetters('entrada_salida', ['entradas'])
+  },
+
+  methods: {
+    // ...mapActions('')
+
+    // agregarEntrada () {
+    //   // console.log(this.dataNewEntrada);
+    //   this.addNewEntrada(this.dataNewEntrada)
+    //   this.resetDataEntrada()
+    //   // this.toggleModal(false);
+    // },
+    // resetDataEntrada () {
+    //   this.dataNewParking = resetData
+
+    // },
+    // updateEntrada (values) {
+    //   const { key, val } = values
+    //   this.dataNewParking[key] = val
+    // }
+    // ...mapMutations('inf_resident', ['changeShowOptions']),
+
+    // ...mapActions('inf_resident', ['cargar_data_resi']),
+    // ...mapActions('entrada_salida', ['cargar_parq_list'])
+
+  }
 }
 </script>
 
 <style lang="scss" scoped >
     @import '@/views/scss/_theme.scss';
-    
+
     .main {
-        
+
         display:flex;
-        
+
     }
-    
+
     .cont-flex{
 
         margin-left: 20%;
-        
+
         padding: 20px;
-       
+
     }
-  
-    
+
     .prue{
 
         color: transparent;
     }
-    
 
-    
     .vehicle-list{
-        
+
         padding-top: 20px;
         /* background: orange; */
         height: 100%;
@@ -175,9 +173,8 @@ export default {
     padding-bottom: 10px;
   }
   .menu{
-      
         width: 30px;
-        
+
     }
 
   .modal{
@@ -203,7 +200,6 @@ export default {
   }
   .opcion_M{
 
-      
        padding: 5px;
        font-size: 0.9em;
         min-width:49px;
@@ -216,44 +212,36 @@ export default {
     }
 
     #Bott_cancel{
-
         border-bottom:none;
 
     }
     .Imageadd{
-        
+
         width: 50px;
     }
-  
-    
 
   @media (max-width: 600px){
     .superior-bar{
       display: flex;
-      
+
     }
-    
      .Imageadd{
-        
         width: 40px;
+
     }
-  
     .search{
-        
         display: flex;
         justify-content: flex-end;
-        
+
     }
     .menu{
-            width: 20px;
-        }
-     .opcion_M{
+        width: 20px;
 
-            padding: 2.5px;
-            font-size: 0.7em;
-        }
+    }
+     .opcion_M{
+        padding: 2.5px;
+        font-size: 0.7em;
+    }
   }
 
-    
-    
 </style>

@@ -9,11 +9,11 @@ export default {
   name: 'MenuDropDownContent',
   inject: ['estadoMenu'],
   computed: {
-    active() {
-      return this.estadoMenu.activo;
-    },
-  },
-};
+    active () {
+      return this.estadoMenu.activo
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

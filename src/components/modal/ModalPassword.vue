@@ -31,48 +31,48 @@
 </template>
 
 <script>
-import Modal2 from '@/components/modal/Modal2.vue';
-import ModalContent from '@/components/modal/ModalContent.vue';
+import Modal2 from '@/components/modal/Modal2.vue'
+import ModalContent from '@/components/modal/ModalContent.vue'
 
 export default {
   name: 'ModalPassword',
   inject: ['contraseña', 'updateContraseña'],
   components: {
     Modal2,
-    ModalContent,
+    ModalContent
   },
   computed: {
     password: {
-      set(value) {
-        this.updateContraseña(value);
-      },
+      set (value) {
+        this.updateContraseña(value)
+      }
       // return this.contraseña;
-    },
+    }
   },
-  data() {
+  data () {
     return {
       fieldTypes: {
-        password: 'text',
-      },
-    };
+        password: 'text'
+      }
+    }
   },
   methods: {
-    handleType(event) {
-      const { type } = event;
+    handleType (event) {
+      const { type } = event
       // const { value } = srcElement;
 
       if (type === 'blur') {
-        this.fieldTypes.password = 'text';
+        this.fieldTypes.password = 'text'
       } else {
-        this.fieldTypes.password = 'password';
+        this.fieldTypes.password = 'password'
       }
     },
-    emptyPassword() {
+    emptyPassword () {
       // this.updateContraseña('');
-      this.fieldTypes.password = 'text';
-    },
-  },
-};
+      this.fieldTypes.password = 'text'
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
