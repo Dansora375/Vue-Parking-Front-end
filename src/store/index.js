@@ -53,7 +53,7 @@ export default createStore({
     hogares_module: hogaresModule,
     parqueadero_module: parqueadero,
     inf_resident,
-    options_zona: options_zona_p,
+    // options_zona: options_zona_p,
     New_Residente:NewResidenteModule
   },
 });
