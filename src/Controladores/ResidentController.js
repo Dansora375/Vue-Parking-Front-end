@@ -19,3 +19,8 @@ export async function AddIngresoResi (entrada) {
   const datos = await Dao.addEntradaResi(entrada)
   return datos
 }
+
+export async function listaResidentesParking () {
+  const lista = await Dao.listaResidentesParking();
+  return lista;
+} 

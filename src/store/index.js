@@ -5,6 +5,7 @@ import entradasModule from './modules/entradasModule'
 import vehiculosModule from './modules/vehiculosModule'
 import hogaresModule from './modules/hogaresModule'
 import inf_resident from './modules/inf_residentModule'
+import parqueadero from './modules/parqueaderoModule'
 // import entradasModule from './modules/entradasModule';
 import * as loginController from '@/Controladores/AuthenticationController'
 
@@ -49,6 +50,8 @@ export default createStore({
     // options_zona: options_zona_p,
     vehiculos_module: vehiculosModule,
     hogares_module: hogaresModule,
-    inf_resident
+    parqueadero_module: parqueadero,
+    inf_resident,
+    
   }
 })

@@ -48,3 +48,13 @@ export async function nuevo_resi (entrada) {
     return new ResPost(false, error, {})
   }
 }
+
+export async function listaResidentesParking () {
+  try {
+    const lista = await axios.get('/residentList');
+    console.log(lista);
+    return '';
+  } catch (error) {
+    return { data: error, completed: false };
+  }
+}

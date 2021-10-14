@@ -19,3 +19,12 @@ export async function nuevoParqueadero (entrada) {
     return new ResPost(false, error, {})
   }
 }
+
+export async function listaParqueaderosVisitantes() {
+  try {
+    const lista = await axios.get('/parqueaderoIngresoVis');
+    return lista.data;
+  } catch (error) {
+    return { data: `${error}`, completed: false};
+  }
+}

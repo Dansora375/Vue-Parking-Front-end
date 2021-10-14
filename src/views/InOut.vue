@@ -1,6 +1,6 @@
 <template>
   <div class="home" >
-    <Header nombre_usuario="Carlos" rol_usuario="Trabajador"></Header>
+    <Header></Header>
     <Navbar class="nav"></Navbar>
     <div class="main_entrada">
       <div class="superior-bar">
@@ -10,8 +10,8 @@
             <img class='addImage' src="@/assets/add.svg" alt="">
           </template>
           <modal-content>
-            <NewEntrada>
-            </NewEntrada>
+            <new-entrada>
+            </new-entrada>
             <template v-slot:cancelar>
               <button @click="resetDataEntrada()" class="btCancel">
                 Cancelar
@@ -27,11 +27,28 @@
 
         <SearchBar class="search"></SearchBar>
       </div>
-      <div class="listado" >
+      <div class="listado">
+          <div class="medio">
+
+            <h2 class="title">
+              Residentes
+            </h2>
+            <div class="content-medio residentes">
+            </div>
+          </div>
+
+          <div class="medio">
+            <h2 class="title">
+              Visitantes
+            </h2>
+            <div class="content-medio visitantes">
+              <EntradaSalida class="lista" v-for="(itemEntrada, index) in entradas" :key="index" v-bind:date_ingreso="transformToDate(itemEntrada)" v-bind:placa="itemEntrada.placa" v-bind:index="index" v-bind:tipo="itemEntrada.tipo" v-bind:id="itemEntrada._id">
+              </EntradaSalida>
+            </div>
+          </div>
         <!-- <EntradaSalida class="listado"></EntradaSalida> -->
-        <!-- eslint-disable-next-line max-len -->
-        <EntradaSalida class="listado" v-for="(itemEntrada, index) in entradas" :key="index" v-bind:date_ingreso="transformToDate(itemEntrada)" v-bind:placa="itemEntrada.placa" v-bind:index="index" v-bind:tipo="itemEntrada.tipo" v-bind:id="itemEntrada._id">
-        </EntradaSalida>
+        <!--  eslint-disable-next-line max-len -->
+        
       </div>
     </div>
     <!-- <div class="modal" v-if="isActiveModal" >
@@ -57,6 +74,7 @@ import NewEntrada from '@/components/entrada-vehiculos/NewEntrada.vue'
 
 import Modal2 from '@/components/modal/Modal2.vue'
 import ModalContent from '@/components/modal/ModalContent.vue'
+// import NewEntrada from '../components/entrada-vehiculos/NewEntrada.vue'
 
 const resetData = {
   nombre: '',
@@ -65,7 +83,8 @@ const resetData = {
   tower: '',
   placa: '',
   tipo: '',
-  datos_extra: ''
+  datos_extra: '',
+  parqueadero: ''
 }
 
 export default {
@@ -80,6 +99,7 @@ export default {
     NewEntrada,
     Modal2,
     ModalContent
+    // NewEntrada
   },
   provide () {
     return {
@@ -96,6 +116,7 @@ export default {
         apto_num: '',
         tower: '',
         placa: '',
+        parqueadero: '',
         tipo: '',
         datos_extra: ''
       }
@@ -135,9 +156,50 @@ export default {
 <style lang="scss" scoped>
 
 @import '@/views/scss/_theme.scss';
-  .listado{
-    margin-top: 20px;
-  }
+.home{
+  // z-index: 200;
+  // background: black;
+  height: 100vh;
+}
+.main_entrada{
+  // background: purple;
+  height: 70%;
+}
+.listado{
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  // background: black;
+}
+.medio{
+  // border: 10px solid black;
+  height: 50%;
+  width: 100%;
+  margin-bottom: 20px;
+  // flex-basis: 50%;
+}
+.content-medio{
+  overflow-x: auto;
+  // height: 30vh;
+  // max-height: 30%;
+  // height: 200px;
+}
+.residentes{
+  height: 85%;
+  // height:;
+  direction: rtl;
+  // background: yellow;
+}
+.visitantes{
+  height: 85%;
+  direction: ltr;
+  // 
+  
+}
+.title{
+  font-size: 2em;
+}
+  
 
   .main_entrada{
     padding: 20px;
@@ -199,5 +261,4 @@ export default {
   .addImage:active{
     background-color:$secondary-color ;
   }
-
 </style>

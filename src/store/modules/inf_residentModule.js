@@ -51,6 +51,9 @@ export default {
         alert('No se ha podido actualizar el dato a la base: ')
         console.error('Error al subir el dato  a la base : ', datosToaddIngr.error)
       }
+    },
+    async cargarListaResidentesParking (context) {
+      await controller.listaResidentesParking()
     }
 
     // async addNewResident (context, value) {

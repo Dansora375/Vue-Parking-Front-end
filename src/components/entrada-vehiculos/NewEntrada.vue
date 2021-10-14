@@ -49,10 +49,24 @@
           </option>
         </select>
       </div>
+      <div class="Rows">
+        <label for="tower" >Parqueadero : </label>
+        <select v-model="parqueadero">
+          <option v-for="(parking, index) of getListV" :key="index" v-bind:value="parking">
+            {{parking.nombre_Parqueadero}}
+          </option>
+        </select>
+      </div>
       <div class="textArea">
         <h3>Datos extra</h3>
         <textarea name="" id="" cols="500" rows="5" v-model="extra"></textarea>
       </div>
+    </div>
+
+    <div v-else>
+      <button @click="cargarListaResidentesParking()">
+        listaresidentes
+      </button>
     </div>
   </div>
 </template>
@@ -79,16 +93,25 @@ export default {
     // recargando los datos de torres y de apartamentos
     this.$store.dispatch('hogares_module/cargarHomes');
     this.$store.dispatch('hogares_module/cargarTorres');
+    this.$store.dispatch('parqueadero_module/cargarPV');
+    // this.$store
   },
   computed: {
     ...mapGetters('entrada_salida', ['vehiculos']),
     ...mapGetters('hogares_module', ['getHogares', 'getTowers']),
+    ...mapGetters('parqueadero_module', ['getListV']),
     nombre: {
       get () {
         return this.dataEntrada.nombre
       },
       set (value) {
         this.updateEntrada({ key: 'nombre', val: value })
+      }
+    },
+    parqueadero: {
+      set (value) {
+        // console.log(value);
+        this.updateEntrada({ key: 'parqueadero', val: value._id});
       }
     },
     cedula: {
@@ -158,8 +181,9 @@ export default {
     },
   },
   methods: {
-    ...mapMutations('entrada_salida', []),
+    // ...mapMutations('entrada_salida', []),
     ...mapActions('entrada_salida', ['changeModalNewEntrada', 'addNewEntrada']),
+    ...mapActions('inf_resident', ['cargarListaResidentesParking']),
     agregarEntrada(value) {
       this.addNewEntrada(value);
       this.resetDataNewEntrada();
@@ -168,6 +192,9 @@ export default {
     changeTower(event) {
       console.log(event.target.value);
     },
+    changeParking(data) {
+      console.log(data);
+    }
   },
 };
 </script>

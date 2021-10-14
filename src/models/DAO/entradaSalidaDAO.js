@@ -41,7 +41,8 @@ export async function nuevaEntrada (entrada) {
       tower: entrada.tower,
       placa: entrada.placa,
       tipo: entrada.tipo,
-      datos_extra: entrada.datos_extra
+      datos_extra: entrada.datos_extra,
+      parqueadero: entrada.parqueadero,
     })
     return new ResPost(true, {}, nEntrada)
   } catch (error) {
