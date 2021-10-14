@@ -81,7 +81,7 @@ export default {
         telefono: 0,
         apto_num:0,
         tower: "",
-        placa:''
+        
       },
     };
   },
@@ -93,8 +93,10 @@ export default {
       const { key, val } = values;
       this.dataNewResidente[key] = val;
     },
+    ...mapActions('New_Residente', ['crearResidente']),
     agregarResidente() {
       console.log(this.dataNewResidente);
+      this.crearResidente(this.dataNewResidente)
     },
   },
 };

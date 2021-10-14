@@ -22,11 +22,14 @@ export async function nuevoResidente(data) {
     telefono,
     apto_num,
     tower,
-    placa,
   }=data
   
 try {
-    const result = await Dao.nuevoResidente();
+    const result = await Dao.nuevoResidente( {nombre,
+      cedula,
+      telefono,
+      apto_num,
+      tower,});
 
   console.log(result);
   return result.data;

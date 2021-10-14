@@ -20,7 +20,6 @@ export async function nuevoResidente(data) {
       telefono,
       apto_num,
       tower,
-      placa
     }=data
  try {
       const result = await axios.post('/residentInf')
