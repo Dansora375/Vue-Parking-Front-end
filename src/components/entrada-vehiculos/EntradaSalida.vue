@@ -37,27 +37,45 @@
           <img class="icon-menu" src="@/assets/menu.svg" alt="">
         </template>
         <MenuDropDownContent class="menu-options">
-          <MenuDropDownItem class="opcion_menu">
-            Terminar parqueadero
-          </MenuDropDownItem>
-
-          <Modal2 >
+          <Modal2>
             <template v-slot:toggler>
-              <p class="opcion_menu" id="bordeInferior">
+              <p class="opcion_menu">
+            Terminar parqueadero
+              </p>
+            </template>
+            <ModalContent2>
+              <Entradatarifa v-bind:index="this.index">
+              </Entradatarifa>
+              <div>
+                <h1>
+                  Confirmar
+                </h1>
+              </div>
+              <template v-slot:cancelar>
+                <button>
+                  Cancelar
+                </button>
+              </template>
+            </ModalContent2>
+          </Modal2>
+
+          <Modal2>
+            <template v-slot:toggler>
+              <p class="opcion_menu">
                 Mas informacion
               </p>
             </template>
             <ModalContent>
               <EntradaInformation v-bind:index="this.index">
               </EntradaInformation>
+              <div>
+                <h1>
+                  hola como estan
+                </h1>
+              </div>
               <template v-slot:cancelar>
-                <button class="btCancel">
+                <button>
                   Cancelar
-                </button>
-              </template>
-              <template v-slot:confirmar>
-                <button class="btAcept">
-                  Ok
                 </button>
               </template>
             </ModalContent>
@@ -68,22 +86,55 @@
           </MenuDropDownItem> -->
         </MenuDropDownContent>
       </MenuDropDown>
+      <!-- <Modal ref="modal">
+        <EntradaInformation v-bind:index="this.index">
+        </EntradaInformation>
+      </Modal> -->
+      <!-- <Modal>
+        <p>
+          akjdhflaksdjhflaksdjfh
+        </p>
+        <template v-slot:confirmar>
+        <button class="confirmar" @click="">
+          Confirmar
+        </button>
+      </template>
+      </Modal> -->
+      <!-- <select id="opciones_lista" name="" v-model="selected"> -->
+      <!-- </select> -->
+      <!-- <MenuDropDown>
+        <template v-slot:toggler>
+          <button>
+            Hola mundo
+          </button>
+        </template>
+        <MenuDropDownContent>
+          <p>
+            hola mundo
+          </p>
+          <p>
+            adios mundo
+          </p>
+        </MenuDropDownContent>
+      </MenuDropDown> -->
     </section>
   </div>
 </template>
 
 <script>
-import DefaultVehicle from '@/assets/predefined_list.svg'
-import Carro from '@/assets/Car.svg'
-import Moto from '@/assets/Motorcycle.svg'
+import DefaultVehicle from '@/assets/predefined_list.svg';
+import Carro from '@/assets/Car.svg';
+import Moto from '@/assets/Motorcycle.svg';
 
-import MenuDropDownContent from '@/components/dropDown/MenuDropDownContent.vue'
-import MenuDropDown from '../dropDown/MenuDropdown.vue'
-import MenuDropDownItem from '../dropDown/MenuDropDownItem.vue'
+import MenuDropDownContent from '../dropDown/MenuDropDownContent.vue';
+import MenuDropDown from '../dropDown/MenuDropdown.vue';
+import MenuDropDownItem from '../dropDown/MenuDropDownItem.vue';
 
-import Modal2 from '@/components/modal/Modal2.vue'
-import ModalContent from '@/components/modal/ModalContent.vue'
-import EntradaInformation from '@/components/entrada-vehiculos/EntradaInformation.vue'
+import Modal2 from '@/components/modal/Modal2.vue';
+import ModalContent from '@/components/modal/ModalContent.vue';
+import ModalContent2 from '@/components/modal/ModalContent2.vue';
+import EntradaInformation from '@/components/entrada-vehiculos/EntradaInformation.vue';
+import Entradatarifa from '@/components/entrada-vehiculos/Entradatarifa.vue';
 // import ModalContent from '../modal/ModalContent.vue';
 
 export default {
@@ -94,41 +145,43 @@ export default {
     MenuDropDownItem,
     Modal2,
     ModalContent,
-    EntradaInformation
+    ModalContent2,
+    EntradaInformation,
+    Entradatarifa,
   },
-  data () {
+  data() {
     return {
       lista_opciones: [
         'Terminar sesión',
-        'Cancelar'
+        'Cancelar',
       ],
       selected: '',
       imgCarro: Carro,
       imgMoto: Moto,
-      imgDefault: DefaultVehicle
-    }
+      imgDefault: DefaultVehicle,
+    };
   },
   props: {
     index: {
-      type: Number
+      type: Number,
     },
     date_ingreso: {
       type: Date,
-      default: new Date()
+      default: new Date(),
     },
     placa: {
-      type: String
+      type: String,
       // default: 'AAA000',
     },
     tipo: {
       type: String,
-      default: 'Default'
+      default: 'Default',
     },
     id: {
-      type: String
-    }
-  }
-}
+      type: String,
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -233,9 +286,6 @@ export default {
         cursor: pointer;
         // border-radius:1.5px;
 }
-    #bordeInferior{
-      border-bottom:none;
-    }
         #Bott_cancel{
 
         border-bottom:none;
