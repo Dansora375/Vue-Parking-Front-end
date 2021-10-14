@@ -1,14 +1,18 @@
 <template>
-  <div class="hello">
+<div>
+<section class="item">
     
     
-<div class="usuario">
+<div class="conteiner">
   <div class="icono">
-    <img :src= imgUser>
+     <img :src= imgUser> 
   </div>
-  <div>
-    <div class="nombre-user">{{Nombre}}</div>
-    <div>
+  
+    <div class="nombre-user">{{Nombre}}
+
+    </div>
+    </div>
+    
     <MenuDropDown>
         <template v-slot:toggler>
           <img class="icon-menu" src="@/assets/menu.svg" alt="">
@@ -20,14 +24,21 @@
               <p class="opcion_menu">
                 Mas informacion
               </p>
+              <p class="opcion_menu">
+                Editar Residente
+              </p>
+              <p class="opcion_menu">
+                Eliminar Residente
+              </p>
             </template>
+            
           </Modal2>
           </MenuDropDownItem>
            </MenuDropDownContent>   
       </MenuDropDown>
-      </div>
-  </div>
-</div>
+      
+  
+
 
 
           
@@ -35,10 +46,13 @@
             Cancelar
           </MenuDropDownItem> -->
        
+  </section>
 </div>
+
 </template>
 
 <script>
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 import user from '@/assets/user.svg'
 
 import MenuDropDownContent from '@/components/dropDown/MenuDropDownContent.vue';
@@ -75,16 +89,15 @@ export default {
     },
     Nombre: {
       type: String,
-      default:"Nombre" ,
+      
     },
     
-    id: {
-      type: String,
-    },
+    
     },
     computed: {
     ...mapGetters('New_Residente', ['getNewResidente']),
     residente() {
+      console.log(this.getNewResidente[this.index]);
       return this.getNewResidente[this.index];
     },
   },
@@ -108,18 +121,31 @@ li {
 a {
   color: #42b983;
 }
-.hello{
-  margin-left:20%;
-}
+.item{
+        margin-top: 50px ;
+        border-radius: 5px;
+        padding:10px ;
+        position: relative;
+        background:$third-color;
+
+        display: flex;
+        border: 2px solid $main-color;
+        align-items: center;
+        justify-content: space-between;
+        align-items: center;
+    }
 
 .container{
-  margin: 20px;
-  width: auto;
-  height: auto;
-  border-radius: 10px;
-  background-color:$secondary-color ;
-  display: flex;
-  flex-direction: column;
+ 
+
+        display: flex;
+         flex-direction:column;
+        justify-content: space-between;
+        // flex-direction: column;
+        align-items: center;
+        width: 50%;
+
+    
 }
 .boton{
   margin-top: 5px;
@@ -141,16 +167,16 @@ input{
   border-radius: 5px;
 }
 
-.usuario{
-  margin: 20px ;
-  width: 500px;
-  border-radius: 10px;
-  background-color:$secondary-color ;
-  display:flex;
-  flex-direction: row;
+// .usuario{
+//   margin: 20px ;
+//   width: 500px;
+//   border-radius: 10px;
+//   background-color:$secondary-color ;
+//   display:flex;
+//   flex-direction: row;
   
 
-}
+// }
 .nombre-user{
   font-size: 1.5em;
   color:$main-color ;

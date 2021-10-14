@@ -9,7 +9,7 @@ export async function ObtainLista() {
   }
 }
 
-export async function PostEntrada(entradar) {
-  const result = await Dao.nuevaResidente(entradar);
+export async function PostEntrada(entrada) {
+  const result = await Dao.nuevaResidente(entrada);
   return result;
 }

@@ -10,15 +10,15 @@
       </div>
       <div class="Rows">
         <label for="cedula" >Cedula : </label>
-        <input type="text" placeholder="Cedula del residente" v-model="cedula" id="cedular">
+        <input type="number" placeholder="Cedula del residente" v-model="cedula" id="cedular">
       </div>
       <div class="Rows">
-        <label for="cedula" >Teléfono : </label>
-        <input type="text" placeholder="Telefono del residente" v-model="telefono" id="telefonor">
+        <label for="telefono" >Teléfono : </label>
+        <input type="number" placeholder="Telefono del residente" v-model="telefono" id="telefonor">
       </div>
       <div class="Rows">
-        <label for="apto_num" >Apto : </label>
-        <input type="text" placeholder="Número de apartamento" v-model="apto_num" id="apto_numr">
+        <label for="apto_num" >Apto Num : </label>
+        <input type="number" placeholder="Número de apartamento" v-model="apto_num" id="apto_numr">
       </div>
       <div class="Rows">
         <label for="tower" >Torre : </label>
@@ -97,15 +97,7 @@ export default {
     },
     
   },
-  methods: {
-    ...mapMutations('entrada_r', []),
-    ...mapActions('entrada_r', ['changeModalNewEntrada', 'addNewEntrada']),
-    agregarEntrada(value) {
-      this.addNewEntrada(value);
-      this.resetDataNewEntrada();
-      this.toggleModal(false);
-    },
-  },
+  
 };
 </script>
 

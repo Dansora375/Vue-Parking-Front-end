@@ -1,9 +1,6 @@
 import axios from 'axios';
 
-/**
- * @param {*} completadas: referencia a lista con o sin entradas ya finalizadas
- * @returns lista de datos desde el servidor
- */
+
 export async function listaResidentes() {
   try {
     const lista = await axios.get('/residentInf', );
@@ -25,12 +22,12 @@ export async function nuevaResidente(entrada) {
   try {
     console.log('post function', entrada);
     const nResidente = await axios.post('/residentInf', {
-      nombre: entradar.nombre,
-      cedula: entradar.cedula,
-      telefono: entradar.telefono,
-      apto_num: entradar.apto_num,
-      tower: entradar.tower,
-      placa: entradar.placa,
+      nombre: entrada.nombre,
+      cedula: entrada.cedula,
+      telefono: entrada.telefono,
+      apto_num: entrada.apto_num,
+      tower: entrada.tower,
+      placa: entrada.placa,
       
     });
     return new ResPost(true, {}, nResidente);

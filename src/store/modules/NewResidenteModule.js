@@ -13,17 +13,23 @@ export default {
 
   mutations: {
    
-    createListResidentes(state, entradasr) {
+    createListaResidentes(state, entradasr) {
       state.registrosResidente = entradasr;
-      console.log('datos: ', state.entradasr);
+      console.log('datos: ', state.registrosResidente);
     },
     // cambiarEstadoParking(state, index){
     // }
   },
   actions: {
     async cargarResidentes(context) {
+     
       const listaResidentes = await controller.ObtainLista();
-      context.commit('createListaResidentes', listaResidentes);
+      
+        context.commit('createListaResidentes', listaResidentes.data);
+        
+      
+      
+
     },
     // async cambiarEstadoParqueadero(context, index){
 

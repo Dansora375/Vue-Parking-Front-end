@@ -3,37 +3,37 @@
     <!-- <img alt="Vue logo" src="../assets/logo.png"> -->
     <Header/>
     <Nav/>
-    <div class="container">
-      <Modal2>
+     <div class="main_entrada">
+      <div class="superior-bar">
+
+        <Modal2>
           <template v-slot:toggler>
             <img class='addImage' src="@/assets/add.svg" alt="">
           </template>
           <modal-content>
-            <NewResidente>
-            </NewResidente>
+            <new-residente>
+            </new-residente>
             <template v-slot:cancelar>
-              <button @click="resetDataEntrada()">
+              <button >
                 Cancelar
               </button>
             </template>
             <template v-slot:confirmar>
-              <button @click="agregarEntrada">
-                Aceptar
+              <button @click="agregarResidente()">
+                Agregar
               </button>
             </template>
           </modal-content>
         </Modal2>
-      <div class="buscar">
-        <form action="">
-          <label for="buscar">Buscar</label>
-          <input type="text">
-        </form>
+
+        <SearchBar class="search"></SearchBar>
       </div>
-    </div>
-    <ListaResidentes />
-
     
-
+    <div class="hogares">
+    <lista-residentes v-for="(item, index) of getNewResidente" :key="index" v-bind:id="item._id" v-bind:Nombre="item.nombre">
+    </lista-residentes>
+  </div>
+  </div>
   </div>
 </template>
 
@@ -45,6 +45,8 @@ import Nav from '@/components/Nav.vue';
 import NewResidente from '@/components/NewResidente.vue';
 import Modal2 from '@/components/modal/Modal2.vue';
 import ModalContent from '@/components/modal/ModalContent.vue';
+import SearchBar from '@/components/SearchButton.vue'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 
 
 
@@ -57,7 +59,8 @@ export default {
     Nav,
     NewResidente,
     Modal2,
-    ModalContent
+    ModalContent,
+    SearchBar
   },
 
   created() {
@@ -73,21 +76,25 @@ export default {
   data() {
     return {
       dataNewResidente: {
-        cedula: "",
-        tower: '',
+        nombre: "",
+        cedula: 0,
+        telefono: 0,
+        apto_num:0,
+        tower: "",
+        placa:''
       },
     };
   },
   computed: {
-    ...mapGetters('hogares_module', ['getHogares']),
+    ...mapGetters('New_Residente', ['getNewResidente']),
   },
   methods: {
     updateEntrada(values) {
       const { key, val } = values;
-      this.dataNewHogar[key] = val;
+      this.dataNewResidente[key] = val;
     },
-    agregarHogar() {
-      console.log(this.dataNewHogar);
+    agregarResidente() {
+      console.log(this.dataNewResidente);
     },
   },
 };
@@ -95,6 +102,16 @@ export default {
 </script>
 <style scoped lang="scss">
 @import '@/views/scss/_theme.scss';
+.main_entrada{
+    padding: 20px;
+    margin-left: 20%;
+  }
+
+  .superior-bar{
+    display: flex;
+    justify-content: space-between;
+  }
+
 .container{
   margin-left: 21%;
   width: auto;
@@ -145,7 +162,7 @@ input{
 
 
 .addImage{
-  width: 2%;
-  float: left;
+  display:inline;
+  width: 40px;
 }
 </style>
