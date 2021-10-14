@@ -52,7 +52,7 @@
                         </ModalContent>
                         <!-- </div> -->
                     </Modal2>
-                    <Modal2 >
+                    <Modal2  v-if="inf_estado ==='Vacio'">
                         <template v-slot:toggler >
                             <p class="opcion_menu" id="bordeInferior">
                                 Llenar parqueadero
@@ -76,10 +76,10 @@
                         </ModalContent>
                         <!-- </div> -->
                     </Modal2>
-                    <Modal2 >
+                    <Modal2 v-if="inf_estado ==='Lleno'">
                         <template v-slot:toggler >
                             <p class="opcion_menu" id="bordeInferior">
-                                Vaciar parqeuadero
+                                Vaciar parqueadero
                             </p>
                         </template>
                         <!-- <div class="modal"> -->
@@ -143,7 +143,9 @@ export default {
   provide () {
     return {
       dataNewIngresoResi: () => this.dateIngrResident,
-      updateIngresoRes: this.updateIngresoRes
+      dataNewSalidaResi: () => this.dateSalidaResident,
+      updateIngresoRes: this.updateIngresoRes,
+      updateSalida: this.updateSalidaRes
     }
   },
   data () {
@@ -153,6 +155,10 @@ export default {
       Img_ocupadoMoto: ImgParkingMoto,
 
       dateIngrResident: {
+        id: '',
+        horaSalida: ''
+      },
+      dateSalidaResident: {
         id: '',
         horaSalida: ''
       }
@@ -167,7 +173,7 @@ export default {
     // }
   },
   methods: {
-    ...mapActions('inf_resident', ['AgregarEntradaResi']),
+    ...mapActions('inf_resident', ['AgregarEntradaResi', 'AgregarSalidaResi']),
     llenarParqueadero () {
       this.AgregarEntradaResi(this.dateIngrResident)
       this.resetDataEntrada()
@@ -178,10 +184,15 @@ export default {
     updateIngresoRes (values) {
       const { key, val } = values
       this.dateIngrResident[key] = val
+    },
+    VaciarParqueadero () {
+      this.AgregarSalidaResi(this.dateSalidaResident)
+      this.resetDataEntrada()
+    },
+    updateSalidaRes (values) {
+      const { key, val } = values
+      this.dateSalidaResident[key] = val
     }
-    // VaciarParqueadero(){
-
-    // }
 
     // newdateIngrResi () {
     //   this.dateIngrResi()

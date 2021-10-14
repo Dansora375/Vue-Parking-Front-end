@@ -62,7 +62,7 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'VaiciarParking',
-  inject: ['dataNewIngresoResi', 'updateIngresoRes'],
+  inject: ['dataNewSalidaResi', 'updateSalida'],
   data () {
     return {
 
@@ -84,8 +84,8 @@ export default {
 
   },
   mounted () {
-    this.updateIngresoRes({ key: 'horaSalida', val: this.dateEntradaResi })
-    this.updateIngresoRes({ key: 'id', val: this.info._id })
+    this.updateSalida({ key: 'horaSalida', val: this.dateEntradaResi })
+    this.updateSalida({ key: 'id', val: this.info._id })
   },
 
   computed: {
