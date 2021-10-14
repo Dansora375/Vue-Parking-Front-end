@@ -37,6 +37,7 @@
           <img class="icon-menu" src="@/assets/menu.svg" alt="">
         </template>
         <MenuDropDownContent class="menu-options">
+          
           <Modal2>
             <template v-slot:toggler>
               <p class="opcion_menu">
