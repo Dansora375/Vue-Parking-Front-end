@@ -26,7 +26,7 @@
             <SearchBar class="search"></SearchBar>
         </div>
             <div class="vehicle_list">
-                <ZonaParqueadero  v-for=" (ItemResi,index) in resident_list" :key="index" :inf_estado="ItemResi.ocupado ?  'Lleno':'Vacio'" :index="index" :parqueadero_numero="ItemResi.residente.vehiculo[0].parqueadero.nombre_Parqueadero" tipoList="Residente" >
+                <ZonaParqueadero  v-for=" (ItemResi,index) in resident_listNF" :key="index" :inf_estado="ItemResi.ocupado ?  'Lleno':'Vacio'" :index="index" :parqueadero_numero="ItemResi.residente.vehiculo[0].parqueadero.nombre_Parqueadero" tipoList="Residente" :tipoVehicle="ItemResi.residente.vehiculo[0].tipo" >
 
                 </ZonaParqueadero>
             </div>
@@ -68,7 +68,9 @@ import ModalContent from '@/components/modal/ModalContent.vue'
 
 // ---------------------------------------
 const resetData = {
-  NombreParqueadero: ''
+  nombreParqueadero: '',
+  tipoVehicle: '',
+  tipoPersonIngr: ''
 
 }
 export default {
@@ -85,46 +87,49 @@ export default {
     Modal2,
     ModalContent
   },
-  //   provide(){
-  //     dataEntrada: () => this.dataNewParking,
-  //     updateEntrada: this.updateEntrada
-  //   },
+  provide () {
+    return {
+      dataEntradaParking: () => this.dataNewParking,
+      updateEntradaParking: this.updateEntradaParking
+    }
+  },
   data () {
     return {
       dataNewParking: {
-        nombreParqueadero: ''
+        nombreParqueadero: '',
+        tipoVehicle: '',
+        tipoPersonIngr: ''
       }
     }
   },
 
   mounted () {
     this.$store.dispatch('entrada_salida/cargarEntradas')
-    this.$store.dispatch('inf_resident/cargar_data_resi')
+    this.$store.dispatch('inf_resident/cargar_data_resiNF')
   },
   computed: {
 
     // ...mapState('options_zona_p',['showOptions']),
-    ...mapGetters('inf_resident', ['resident_list']),
+    ...mapGetters('inf_resident', ['resident_listNF']),
     ...mapGetters('entrada_salida', ['entradas'])
   },
 
   methods: {
-    // ...mapActions('')
+    ...mapActions('parqueadero_module', ['addNewParking']),
 
-    // agregarEntrada () {
-    //   // console.log(this.dataNewEntrada);
-    //   this.addNewEntrada(this.dataNewEntrada)
-    //   this.resetDataEntrada()
-    //   // this.toggleModal(false);
-    // },
-    // resetDataEntrada () {
-    //   this.dataNewParking = resetData
-
-    // },
-    // updateEntrada (values) {
-    //   const { key, val } = values
-    //   this.dataNewParking[key] = val
-    // }
+    agregarEntrada () {
+      // console.log(this.dataNewEntrada);
+      this.addNewParking(this.dataNewParking)
+      this.resetDataEntrada()
+      // this.toggleModal(false);
+    },
+    resetDataEntrada () {
+      this.dataNewParking = resetData
+    },
+    updateEntradaParking (values) {
+      const { key, val } = values
+      this.dataNewParking[key] = val
+    }
     // ...mapMutations('inf_resident', ['changeShowOptions']),
 
     // ...mapActions('inf_resident', ['cargar_data_resi']),

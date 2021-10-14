@@ -8,7 +8,7 @@ function ResPost (completed, error, data) {
 
 export async function nuevoParqueadero (entrada) {
   try {
-    // console.log('post function', entrada)
+    console.log('post function', entrada)
     const nParqueadero = await axios.post('/parqueadero', {
       nombreParqueadero: entrada.nombreParqueadero,
       tipoVehicle: entrada.tipoVehicle,

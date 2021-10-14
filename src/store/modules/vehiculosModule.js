@@ -1,4 +1,4 @@
-import * as vehiculoController from '@/Controladores/vehiculosController';
+import * as vehiculoController from '@/Controladores/vehiculosController'
 
 // const listaV = [
 //   {
@@ -36,40 +36,40 @@ import * as vehiculoController from '@/Controladores/vehiculosController';
 //     updatedAt: '2021-10-11T20:59:25.860Z',
 //   },
 // ];
-async function getListaVehiculos() {
-  const lista = await vehiculoController.ObtainVehiculosLista();
+async function getListaVehiculos () {
+  const lista = await vehiculoController.ObtainVehiculosLista()
   if (lista.completado) {
-    return lista.data;
+    return lista.data
   }
-  console.error(lista.data);
-  return [];
+  console.error(lista.data)
+  return []
 }
 export default {
   namespaced: true,
   state: {
-    vehiculos: [],
+    vehiculos: []
   },
   mutations: {
-    addVehiculo(state, vehiculo) {
-      state.vehiculos.push(vehiculo);
+    addVehiculo (state, vehiculo) {
+      state.vehiculos.push(vehiculo)
     },
-    createListVehiculos(state, vehiculos) {
-      state.vehiculos = vehiculos;
-    },
+    createListVehiculos (state, vehiculos) {
+      state.vehiculos = vehiculos
+    }
   },
   actions: {
-    async cargarVehiculos(context) {
-      const listaVehiculos = await getListaVehiculos();
+    async cargarVehiculos (context) {
+      const listaVehiculos = await getListaVehiculos()
       // console.log(listaVehiculos);
-      context.commit('createListVehiculos', listaVehiculos);
-    },
+      context.commit('createListVehiculos', listaVehiculos)
+    }
   },
   getters: {
-    getVehiculos(state) {
-      return state.vehiculos;
+    getVehiculos (state) {
+      return state.vehiculos
     },
-    getVehiculoByIndex(state, index) {
-      return state.vehiculos[index];
-    },
-  },
-};
+    getVehiculoByIndex (state, index) {
+      return state.vehiculos[index]
+    }
+  }
+}

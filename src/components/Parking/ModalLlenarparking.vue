@@ -25,6 +25,7 @@
         </div>
       </div>
     </div>
+    <!-- Implementar lo del tipo list -->
     <!-- <div class="container">
       <div class="info">
         <p class="title">
@@ -61,6 +62,7 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'LlenarParking',
+  inject: ['dataNewIngresoResi', 'updateIngresoRes'],
   data () {
     return {
 
@@ -81,18 +83,23 @@ export default {
     // }
 
   },
+  mounted () {
+    this.updateIngresoRes({ key: 'horaSalida', val: this.dateEntradaResi })
+    this.updateIngresoRes({ key: 'id', val: this.info._id })
+  },
 
   computed: {
-    ...mapGetters('inf_resident', ['resident_list']),
+    ...mapGetters('inf_resident', ['resident_listNF']),
     ...mapGetters('entrada_salida', ['entradas']),
     info () {
       // console.log(this.entradas);
-      return this.resident_list[this.index]
+      return this.resident_listNF[this.index]
     },
 
     getTime () {
       return new Date(this.info.hora_entrada)
     }
+
   }
 }
 </script>
@@ -173,7 +180,7 @@ label{
   font-weight: bold;
   font-size: 1em;
   color: $third-color;
-  
+
 }
 
 </style>

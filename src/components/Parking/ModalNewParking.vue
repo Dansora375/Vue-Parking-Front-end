@@ -5,15 +5,28 @@
       Agregar nuevo parqueadero
     </h1>
     <div class="container">
-      <img src='@/assets/CrearParqueadero.svg' alt="" class="im">
+      <img src="@/assets/ImgNewParking.svg" alt="" class="Im">
     </div>
     <div >
 
       <div class="datos">
-
          <div class="Rows">
           <label for="Parqueadero" >Nuevo parqueadero : </label>
           <input type="text" placeholder="Nombre del parqueadero" id="Parqueadero" v-model="Parqueadero">
+        </div>
+         <div class="Rows">
+          <select v-model="selectedVehicle" class="S_Vehicle">
+          <option v-for="option1 in tipoVehicle" :key="option1">
+          {{option1}}
+          </option>
+        </select>
+        </div>
+        <div class="Rows">
+          <select v-model="selectedPerson" class="S_Vehicle">
+          <option v-for="option in tipoPersonIngr" :key="option">
+          {{option}}
+          </option>
+        </select>
         </div>
         <!-- Podria implementarse el elegir si es parqueadero de moto o carro -->
         <!-- <div class="Rows">
@@ -34,13 +47,42 @@
 
 <script>
 import ImgParking from '@/assets/CrearParqueadero.svg'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'NewParking',
+  inject: ['dataEntradaParking', 'updateEntradaParking'],
   data () {
     return {
 
       parqueaderoImg: ImgParking
+    }
+  },
+  computed: {
+    ...mapGetters('parqueadero_module', ['tipoVehicle', 'tipoPersonIngr']),
+    Parqueadero: {
+      get () {
+        return this.dataEntradaParking.nombreParqueadero
+      },
+      set (value) {
+        this.updateEntradaParking({ key: 'nombreParqueadero', val: value })
+      }
+    },
+    selectedVehicle: {
+      get () {
+        return this.dataEntradaParking.tipoVehicle
+      },
+      set (value) {
+        this.updateEntradaParking({ key: 'tipoVehicle', val: value })
+      }
+    },
+    selectedPerson: {
+      get () {
+        return this.dataEntradaParking.tipoPersonIngr
+      },
+      set (value) {
+        this.updateEntradaParking({ key: 'tipoPersonIngr', val: value })
+      }
     }
   }
 }
@@ -72,7 +114,7 @@ h1{
 
 input{
   padding-left: 5px;
-  font-size: 1.2em;
+  font-size: 1.05em;
   text-align:center;
   // position:absolute;
   // left: 25px;
@@ -89,13 +131,23 @@ input{
 label{
 
   font-weight: 900;
-  font-size: 1.2em;
+  font-size: 1.4em;
 
 }
-.im{
-  width: 38%;
-  padding-top: 20px;
-  padding-bottom: 40px;
+.container{
+  max-width: 125px;
+  padding-top: 5px;
+  padding-bottom: 15px;
+  margin: auto;
+}
+select{
+
+  font-size: 1rem;
+  height:30px;
+  width:160px;
+  margin: 10px;
+  // margin-bottom: 10px;
+
 }
 
 </style>

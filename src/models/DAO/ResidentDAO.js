@@ -23,6 +23,16 @@ export async function resiIngresolist () {
     return console.log(e.response)
   }
 }
+// SIN FILTRO S DE ACTVO
+export async function resiIngresolistNF () {
+  try {
+    const listR = await axios.get('/ingresoResidentNF')
+    // console.log(list_R.data);
+    return listR.data
+  } catch (e) {
+    return console.log(e.response)
+  }
+}
 
 function ResPost (completed, error, data) {
   this.result = completed
@@ -32,12 +42,24 @@ function ResPost (completed, error, data) {
 // Agregar entrada de residente
 export async function addEntradaResi (entrada) {
   try {
-    const ResidentEntrada = await axios.put('/ingresoResident', { id: entrada._id, horaSalida: entrada.cedula })
-    return ResPost(true, {}, ResidentEntrada)
+    // console.log(entrada)
+    const ResidentEntrada = await axios.put('/ingresoResident', { id: entrada.id, horaSalida: entrada.horaSalida })
+    return ResidentEntrada
   } catch (error) {
-    return new ResPost(false, error, {})
+    return console.log(error.response)
   }
 }
+// Agregar saldia de residente
+export async function addSalidaResi (entrada) {
+  try {
+    // console.log(entrada)
+    const ResidentEntrada = await axios.put('/saldiaResident', { id: entrada.id, horaSalida: entrada.horaSalida })
+    return ResidentEntrada
+  } catch (error) {
+    return console.log(error.response)
+  }
+}
+
 
 // PODRIA SERVIR PARA CREAR RESIDENTES PARA RICARDO
 export async function nuevo_resi (entrada) {

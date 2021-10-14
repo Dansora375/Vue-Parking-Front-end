@@ -53,25 +53,49 @@
         {{info.residente.vehiculo[0].color}}
       </p>
     </div>
-  <div class="info" v-show="TipoList=='Visitante'" >
+  <!-- <div class="info" v-show="TipoList=='Visitante'" >
       <p class="title">
         Hora entrada
       </p>
       <p class="data">
         {{getTime.getHours()}}:{{getTime.getMinutes()}}
         <br>
-        <!-- eslint-disable-next-line max-len -->
+
         {{getTime.getDate()+'/'+(Number(getTime.getMonth())+1)+'/'+getTime.getFullYear()}}
       </p>
-    </div>
-    <div class="info">
+    </div> -->
+    <!-- <div class="info" >
       <p class="title">
         Apartamento
       </p>
       <p class="data">
         {{info.residente.hogar[0].apto_num}}
       </p>
-    </div>
+    </div> -->
+    <!-- <div class="info" v-if="ComprobarHogarHabitando">
+      <p class="title">
+        Apartamento
+      </p>
+      <p class="data">
+        {{info.residente.hogar_habitando.apto_num}}
+      </p>
+    </div> -->
+    <!-- <div class="info" >
+      <p class="title">
+        Torre
+      </p>
+      <p class="data">
+        {{info.residente.hogar[0].tower}}
+      </p>
+    </div> -->
+    <!-- <div class="info" v-if="ComprobarHogarHabitando">
+      <p class="title">
+        Torre
+      </p>
+      <p class="data">
+        {{info.residente.hogar_habitando.tower}}
+      </p>
+    </div> -->
     <div class="info">
       <p class="title">
         Datos extra
@@ -110,15 +134,30 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('inf_resident', ['resident_list']),
+
+    ...mapGetters('inf_resident', ['resident_listNF']),
     ...mapGetters('entrada_salida', ['entradas']),
     info () {
       // console.log(this.entradas);
-      return this.resident_list[this.index]
+      return this.resident_listNF[this.index]
     },
 
     getTime () {
       return new Date(this.info.hora_entrada)
+    },
+    ComprobarHogarHabitando () {
+      if (this.info.residente.hogar_habitando) {
+        return true
+      } else {
+        return false
+      }
+    },
+    ComprobarHogar () {
+      if (this.info.residente.hogar === []) {
+        return false
+      } else {
+        return true
+      }
     }
   }
 }

@@ -11,7 +11,7 @@
     <div v-if="optionGet">
       <div class="Rows">
         <label for="nombre" >Nombre : </label>
-        <input type="text" placeholder="Nombre del visitante" v-model="nombre" id="nombre">
+        <input type="text" placeholder="Nombre del visitante" v-model="n  " id="nombre">
       </div>
       <div class="Rows">
         <label for="cedula" >Cedula : </label>

@@ -9,13 +9,23 @@ export async function list_entrada_resi (completadas = false) {
   const list = await Dao.resi_list_entradas(completadas)
   return list
 }
-//  ESta es la que utilizo para taer los ingresos de residentes
+//  ESta es la que utilizo para taer los ingresos de residentes FILTRANDO CON ACTIVO
 export async function IngResi_list () {
   const listResi = await Dao.resiIngresolist()
+  return listResi
+}
+//  ESta es la que utilizo para taer los ingresos de residentes SIN FILTRO
+export async function IngResi_listNF () {
+  const listResi = await Dao.resiIngresolistNF()
   return listResi
 }
 
 export async function AddIngresoResi (entrada) {
   const datos = await Dao.addEntradaResi(entrada)
+  return datos
+}
+
+export async function AddSalidaResidente (entrada) {
+  const datos = await Dao.addSalidaResi(entrada)
   return datos
 }
