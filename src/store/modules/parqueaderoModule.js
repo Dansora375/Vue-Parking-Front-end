@@ -22,26 +22,36 @@ export default {
       'Residente',
       'Visitante'
     ],
-    listaParqueaderosVisitantes: [],
+    listaParqueaderosVisitantes: []
+
   },
   mutations: {
-    createListParkingV(state, value) {
-      state.listaParqueaderosVisitantes = value;
+    addNewParqueadero (state, entrada) {
+      state.listaParqueaderosVisitantes.push(entrada)
     }
   },
   actions: {
-    async cargarPV(context) {
-      const lista = await controller.listaParqueaderosVisitantes();
-      if ( lista.completed ) {
-        context.commit('createListParkingV', lista.data);
-      } else  {
-        console.error(lista.data);
+    async addNewParking (context, value) {
+      console.log(value)
+      const result = await controller.PostParqueadero(value)
+      if (result.result) {
+        alert('Dato subido con exito')
+        context.commit('addNewParqueadero', value)
+      } else {
+        alert('No se ha podido subir el dato a la base: ')
+        console.error('Error al subir el dato  a la base : ', result.error)
       }
-    },
+    }
   },
   getters: {
-    getListV(state) {
-      return state.listaParqueaderosVisitantes
+    tipoVehicle (state) {
+      return state.tipoVehicleOptios
     },
+    tipoPersonIngr (state) {
+      return state.tipoPersonIngrOptions
+    },
+    getListV (state) {
+      return state.listaParqueaderosVisitantes
+    }
   }
 }

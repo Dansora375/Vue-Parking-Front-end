@@ -8,18 +8,29 @@ export default {
     data_resident: [],
     Entrada_data_resident: [],
     dataResidentParking: [],
+    data_residentNF: []
+
   },
   mutations: {
 
     cargarListaIngrResi (state, entrada) {
       state.data_resident = entrada
     },
-    createLista_EntradaResi (state, entrada) {
-      state.Entrada_data_resident = entrada
+
+    cargarListaIngrResiNF (state, entrada) {
+      state.data_residentNF = entrada
     },
+
     AddIngResidentUpdated (state, entrada) {
       const IngUpdated = entrada
-      const indiceDato = state.data_resident.findIndex(
+      const indiceDato = state.data_residentNF.findIndex(
+        el => el._id === IngUpdated._id
+      )
+      state.data_resident.splice(indiceDato, 1, entrada)
+    },
+    AddSaliResidentUpdated (state, entrada) {
+      const IngUpdated = entrada
+      const indiceDato = state.data_residentNF.findIndex(
         el => el._id === IngUpdated._id
       )
       state.data_resident.splice(indiceDato, 1, entrada)
@@ -27,6 +38,7 @@ export default {
     crearDataResidentParking(state, values) {
       state.dataResidentParking = values;
     }
+
     // add_resi (state, data) {
     //   state.Entrada_data_resident.push(data)
     //   state.showOptions = false
@@ -39,6 +51,10 @@ export default {
       const dataResi = await controller.IngResi_list()
       context.commit('cargarListaIngrResi', dataResi)
     },
+    async cargar_data_resiNF (context) {
+      const dataResi = await controller.IngResi_listNF()
+      context.commit('cargarListaIngrResiNF', dataResi)
+    },
 
     // Esta obtiene la lista de reidentes que tienen parqueadero
     async cargarData_EntradaResi (context) {
@@ -47,12 +63,25 @@ export default {
     },
     // Esta es para agregar un ingreso de residente
     async AgregarEntradaResi (context, values) {
-      const datosToaddIngr = await controller.AddIngresoResi(values)
-      if (datosToaddIngr.result) {
-        context.commit('AddIngResidentUpdated', datosToaddIngr)
+      const result = await controller.AddIngresoResi(values)
+      if (result.data) {
+        // console.log(values)
+        // console.log(result)
+        context.commit('AddIngResidentUpdated', result)
       } else {
         alert('No se ha podido actualizar el dato a la base: ')
-        console.error('Error al subir el dato  a la base : ', datosToaddIngr.error)
+        console.error('Error al subir el dato  a la base : ', result.error)
+      }
+    },
+    async AgregarSalidaResi (context, values) {
+      const result = await controller.AddSalidaResidente(values)
+      if (result.data) {
+        // console.log(values)
+        // console.log(result)
+        context.commit('AddSaliResidentUpdated', result)
+      } else {
+        alert('No se ha podido actualizar el dato a la base: ')
+        console.error('Error al subir el dato  a la base : ', result.error)
       }
     },
     async cargarListaResidentesParking (context) {
@@ -90,6 +119,9 @@ export default {
     residentListParking (state) {
       return state.dataResidentParking;
     },
+    resident_listNF (state) {
+      return state.data_residentNF
+    }
 
   }
 

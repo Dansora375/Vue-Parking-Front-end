@@ -1,8 +1,10 @@
 <template>
     <div>
         <section class="item" >
-            <img v-if="inf_estado==='Lleno'" :src=Img_ocupado class="parking-img"  alt="parqueadero" >
-            <img  v-if="inf_estado==='Vacio'" :src=Img_vacio class="parking-img"  alt="parqueadero" >
+                <img v-if="inf_estado ==='Lleno' && tipoVehicle==='Carro'" :src=Img_ocupado class="parking-img"  alt="parqueadero" >
+                <img  v-else-if="inf_estado==='Vacio'" :src=Img_vacio class="parking-img"  alt="parqueadero" >
+                <img v-else-if="inf_estado ==='Lleno' && tipoVehicle==='Moto'" :src=Img_ocupadoMoto class="parking-img"  alt="parqueadero" >
+                <img v-else :src=Img_vacio class="parking-img"  alt="parqueadero" >
             <div class="container-double">
                 <div class="State-parking" >
                     <p class="sub-title trescuatro-em" >
@@ -50,7 +52,7 @@
                         </ModalContent>
                         <!-- </div> -->
                     </Modal2>
-                    <Modal2 >
+                    <Modal2  v-if="inf_estado ==='Vacio'">
                         <template v-slot:toggler >
                             <p class="opcion_menu" id="bordeInferior">
                                 Llenar parqueadero
@@ -58,7 +60,7 @@
                         </template>
                         <!-- <div class="modal"> -->
                         <ModalContent class="prueba_content ">
-                            <ModalLlenarParking >
+                            <ModalLlenarParking :index="this.index" :tipoList="this.tipoList">
                             </ModalLlenarParking>
 
                             <template v-slot:cancelar>
@@ -67,7 +69,31 @@
                                 </button>
                             </template>
                             <template v-slot:confirmar>
-                                <button class="btAcept">
+                                <button class="btAcept" @click="llenarParqueadero">
+                                    Confirmar
+                                </button>
+                         </template>
+                        </ModalContent>
+                        <!-- </div> -->
+                    </Modal2>
+                    <Modal2 v-if="inf_estado ==='Lleno'">
+                        <template v-slot:toggler >
+                            <p class="opcion_menu" id="bordeInferior">
+                                Vaciar parqueadero
+                            </p>
+                        </template>
+                        <!-- <div class="modal"> -->
+                        <ModalContent class="prueba_content ">
+                            <ModalVaciarParking :index="this.index" :tipoList="this.tipoList">
+                            </ModalVaciarParking>
+
+                            <template v-slot:cancelar>
+                                <button class="btCancel">
+                                    Cancelar
+                                </button>
+                            </template>
+                            <template v-slot:confirmar>
+                                <button class="btAcept" @click="VaciarParqueadero">
                                     Confirmar
                                 </button>
                          </template>
@@ -82,8 +108,10 @@
 
 <script>
 // import Options_zona_P from '@/components/Options_zona_P.vue';
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 import ParqOcupado from '@/assets/P_ocupado.svg'
 import ParqVacio from '@/assets/P_vacio.svg'
+import ImgParkingMoto from '@/assets/ImgParkingMoto.svg'
 
 import MenuDropDownContent from '@/components/dropDown/MenuDropDownContent.vue'
 import MenuDropDown from '@/components/dropDown/MenuDropdown.vue'
@@ -91,7 +119,14 @@ import Modal2 from '@/components/modal/Modal2.vue'
 import ModalContent from '@/components/modal/ModalContent.vue'
 import ModalInfResident from '@/components/Parking/ModalInfResident.vue'
 import ModalLlenarParking from '@/components/Parking/ModalLlenarparking.vue'
+import ModalVaciarParking from '@/components/Parking/ModalVaciarParking.vue'
+
 // import { mapGetters, mapMutations } from 'vuex'
+
+const resetData = {
+  id: '',
+  horaSalida: ''
+}
 
 export default {
   name: 'ZonaParqueadero',
@@ -101,25 +136,63 @@ export default {
     MenuDropDown,
     MenuDropDownContent,
     ModalInfResident,
-    ModalLlenarParking
+    ModalLlenarParking,
+    ModalVaciarParking
 
+  },
+  provide () {
+    return {
+      dataNewIngresoResi: () => this.dateIngrResident,
+      dataNewSalidaResi: () => this.dateSalidaResident,
+      updateIngresoRes: this.updateIngresoRes,
+      updateSalida: this.updateSalidaRes
+    }
   },
   data () {
     return {
       Img_ocupado: ParqOcupado,
-      Img_vacio: ParqVacio
-      //   dateIngrResident: this.dateIngrResi
+      Img_vacio: ParqVacio,
+      Img_ocupadoMoto: ImgParkingMoto,
+
+      dateIngrResident: {
+        id: '',
+        horaSalida: ''
+      },
+      dateSalidaResident: {
+        id: '',
+        horaSalida: ''
+      }
 
     }
   },
 
   computed: {
-
+    //   ...mapGetters
     // dateIngrResi () {
     //   return new Date()
     // }
   },
   methods: {
+    ...mapActions('inf_resident', ['AgregarEntradaResi', 'AgregarSalidaResi']),
+    llenarParqueadero () {
+      this.AgregarEntradaResi(this.dateIngrResident)
+      this.resetDataEntrada()
+    },
+    resetDataEntrada () {
+      this.dateIngrResident = resetData
+    },
+    updateIngresoRes (values) {
+      const { key, val } = values
+      this.dateIngrResident[key] = val
+    },
+    VaciarParqueadero () {
+      this.AgregarSalidaResi(this.dateSalidaResident)
+      this.resetDataEntrada()
+    },
+    updateSalidaRes (values) {
+      const { key, val } = values
+      this.dateSalidaResident[key] = val
+    }
 
     // newdateIngrResi () {
     //   this.dateIngrResi()
@@ -141,6 +214,9 @@ export default {
       type: Number
     },
     tipoList: {
+      type: String
+    },
+    tipoVehicle: {
       type: String
     }
 
@@ -307,7 +383,7 @@ export default {
         font-size: 0.7em;
         }
         .parking-img{
-            width: 50px;
+            width: 38px;
             padding-left: 0px;
             padding-right: 8px;
         }
