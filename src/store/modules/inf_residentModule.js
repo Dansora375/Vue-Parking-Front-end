@@ -4,36 +4,55 @@ export default {
 
   namespaced: true,
   state: {
-
+    // Para enlistar ingreso residente
     data_resident: [],
     Entrada_data_resident: []
 
   },
   mutations: {
-    changeShowOptions (state, value) {
-      state.showOptions = value
-    },
-    createListaResi (state, entrada) {
+
+    cargarListaIngrResi (state, entrada) {
       state.data_resident = entrada
     },
     createLista_EntradaResi (state, entrada) {
       state.Entrada_data_resident = entrada
     },
-    add_resi (state, data) {
-      state.Entrada_data_resident.push(data)
-      state.showOptions = false
+    AddIngResidentUpdated (state, entrada) {
+      const IngUpdated = entrada
+      const indiceDato = state.data_resident.findIndex(
+        el => el._id === IngUpdated._id
+      )
+      state.data_resident.splice(indiceDato, 1, entrada)
     }
+    // add_resi (state, data) {
+    //   state.Entrada_data_resident.push(data)
+    //   state.showOptions = false
+    // }
 
   },
   actions: {
+    // Esta obtiene la lista de ingresos de residentes
     async cargar_data_resi (context) {
-      const data_resident = await controller.resiedents_list()
-      context.commit('createListaResi', data_resident)
+      const dataResi = await controller.IngResi_list()
+      context.commit('cargarListaIngrResi', dataResi)
     },
+
+    // Esta obtiene la lista de reidentes que tienen parqueadero
     async cargarData_EntradaResi (context) {
       const data_EntradaResi = await controller.list_entrada_resi()
       context.commit('createLista_EntradaResi', data_EntradaResi)
+    },
+    // Esta es para agregar un ingreso de residente
+    async AgregarEntradaResi (context, values) {
+      const datosToaddIngr = await controller.AddIngresoResi(values)
+      if (datosToaddIngr.result) {
+        context.commit('AddIngResidentUpdated', datosToaddIngr)
+      } else {
+        alert('No se ha podido actualizar el dato a la base: ')
+        console.error('Error al subir el dato  a la base : ', datosToaddIngr.error)
+      }
     }
+
     // async addNewResident (context, value) {
     //   const result = await controller.post_Resident(value)
     //   if (result.result) {

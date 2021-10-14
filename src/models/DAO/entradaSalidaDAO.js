@@ -33,7 +33,7 @@ function ResPost (completed, error, data) {
 
 export async function nuevaEntrada (entrada) {
   try {
-    console.log('post function', entrada)
+    // console.log('post function', entrada)
     const nEntrada = await axios.post('/entrada_vehiculo', {
       nombre: entrada.nombre,
       cedula: entrada.cedula,

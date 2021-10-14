@@ -9,8 +9,13 @@ export async function list_entrada_resi (completadas = false) {
   const list = await Dao.resi_list_entradas(completadas)
   return list
 }
+//  ESta es la que utilizo para taer los ingresos de residentes
+export async function IngResi_list () {
+  const listResi = await Dao.resiIngresolist()
+  return listResi
+}
 
-export async function resiedents_list () {
-  const list_resi = await Dao.resi_list()
-  return list_resi
+export async function AddIngresoResi (entrada) {
+  const datos = await Dao.addEntradaResi(entrada)
+  return datos
 }

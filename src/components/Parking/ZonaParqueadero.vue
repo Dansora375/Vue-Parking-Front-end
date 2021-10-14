@@ -28,7 +28,7 @@
                 <MenuDropDownContent class="menu-options">
                     <Modal2 >
                         <template v-slot:toggler>
-                            <p class="opcion_menu" id="bordeInferior">
+                            <p class="opcion_menu" >
                                 Mas informacion
                             </p>
                         </template>
@@ -51,7 +51,7 @@
                         <!-- </div> -->
                     </Modal2>
                     <Modal2 >
-                        <template v-slot:toggler>
+                        <template v-slot:toggler >
                             <p class="opcion_menu" id="bordeInferior">
                                 Llenar parqueadero
                             </p>
@@ -108,20 +108,24 @@ export default {
     return {
       Img_ocupado: ParqOcupado,
       Img_vacio: ParqVacio
+      //   dateIngrResident: this.dateIngrResi
 
     }
   },
 
-  // computed: {
+  computed: {
 
-  //     // ...mapState('options_zona_p',['showOptions']),
-  //     ...mapGetters('options_zona_p', ['showOptions'])
-  // },
-  // methods: {
+    // dateIngrResi () {
+    //   return new Date()
+    // }
+  },
+  methods: {
 
-  //   ...mapMutations('options_zona_p', [ 'changeShowOptions']),
+    // newdateIngrResi () {
+    //   this.dateIngrResi()
+    // }
 
-  //  },
+  },
 
   props: {
     inf_estado: {

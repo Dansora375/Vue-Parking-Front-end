@@ -69,7 +69,7 @@
         Apartamento
       </p>
       <p class="data">
-        <!-- {{info.residente.vehiculo[0].}} ARREGLAR LUEGO DE AHCERMERGE CON CAMBIOS EN APTO -->
+        {{info.residente.hogar[0].apto_num}}
       </p>
     </div>
     <div class="info">

@@ -1,22 +1,43 @@
 <template>
   <div id="dialog-newParking">
-
-    <div class="table">
-      <h1>
+    <div class="tableTI" id="title">
+      <h3>
       Llenar Parqueadero
-    </h1>
-
-    <div class="container">
-      <img src='@/assets/CrearParqueadero.svg' alt="" class="im">
+    </h3>
     </div>
-    <div >
-
-      <div class="datos">
-
-         <div class="Rows">
-          <label for="Parqueadero" >Nuevo parqueadero : </label>
-          <input type="text" placeholder="Nombre del parqueadero" id="Parqueadero" v-model="Parqueadero">
+    <div class="table">
+      <img src="@/assets/Warning.svg" alt="">
+      <h1>
+        ¿Esta seguro que desea llenar el parqueadero?
+      </h1>
+    <div class="container">
+      <div class="info">
+        <p class="title">
+          Fecha y hora
+        </p>
+        <div class="fechaHora">
+          <p class="data">
+            {{dateEntradaResi.getDate()+'/'+(Number(dateEntradaResi.getMonth())+1)+'/'+dateEntradaResi.getFullYear()}}
+          </p>
+          <p class="data">
+            {{dateEntradaResi.getHours()}}:{{dateEntradaResi.getMinutes()}}
+          </p>
         </div>
+      </div>
+    </div>
+    <!-- <div class="container">
+      <div class="info">
+        <p class="title">
+          hora
+        </p>
+        <p class="data">
+          {{dateEntradaResi.getHours()}}:{{dateEntradaResi.getMinutes()}}
+        </p>
+      </div>
+    </div> -->
+
+    <div>
+
         <!-- Podria implementarse el elegir si es parqueadero de moto o carro -->
         <!-- <div class="Rows">
           <select name="">
@@ -31,18 +52,46 @@
       </div>
     </div>
   </div>
-  </div>
+
 </template>
 
 <script>
 import ImgParking from '@/assets/CrearParqueadero.svg'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'LlenarParking',
   data () {
     return {
 
-      parqueaderoImg: ImgParking
+      parqueaderoImg: ImgParking,
+      dateEntradaResi: new Date()
+
+    }
+  },
+  props: {
+    index: {
+      type: Number
+    },
+    tipoList: {
+      type: String
+    }
+    // dateEntradaResi: {
+    //   type: Date
+    // }
+
+  },
+
+  computed: {
+    ...mapGetters('inf_resident', ['resident_list']),
+    ...mapGetters('entrada_salida', ['entradas']),
+    info () {
+      // console.log(this.entradas);
+      return this.resident_list[this.index]
+    },
+
+    getTime () {
+      return new Date(this.info.hora_entrada)
     }
   }
 }
@@ -61,8 +110,9 @@ export default {
 //   margin:auto
 // }
 .table{
-  display: table-cell;
-  vertical-align: middle;
+  display: block;
+  // vertical-align: middle;
+  position: relative;
 }
 
 .Rows{
@@ -72,6 +122,11 @@ export default {
   padding-top: 5px;
   font-size: 1em;
 
+}
+.fechaHora{
+  display: flex;
+  justify-content: space-evenly;
+  border-bottom: 1px solid $main-color ;
 }
 
 input{
@@ -101,8 +156,24 @@ label{
   padding-top: 20px;
   padding-bottom: 40px;
 }
-.title{
+#title{
   position: relative;
+  background:$main-color ;
+  color: white;
+}
+.info{
+  margin: 10px;
+}
+.title{
+  font-size: 1.3em;
+  font-weight: bold;
+  color: $secondary-color;
+}
+.data{
+  font-weight: bold;
+  font-size: 1em;
+  color: $third-color;
+  
 }
 
 </style>

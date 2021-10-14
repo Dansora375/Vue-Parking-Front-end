@@ -63,15 +63,15 @@
 
 <script>
 // @ is an alias to /src
-import { mapGetters, mapActions } from 'vuex';
+import { mapGetters, mapActions } from 'vuex'
 
-import Header from '@/components/Header.vue';
-import Navbar from '@/components/Nav.vue';
-import Hogares from '@/components/hogar/ListaHogares.vue';
-import NewHogar from '@/components/hogar/NewHogar.vue';
+import Header from '@/components/Header.vue'
+import Navbar from '@/components/Nav.vue'
+import Hogares from '@/components/hogar/ListaHogares.vue'
+import NewHogar from '@/components/hogar/NewHogar.vue'
 
-import Modal2 from '@/components/modal/Modal2.vue';
-import ModalContent from '@/components/modal/ModalContent.vue';
+import Modal2 from '@/components/modal/Modal2.vue'
+import ModalContent from '@/components/modal/ModalContent.vue'
 // import Infoapto from '@/components/ModalInfoApto.vue';
 
 export default {
@@ -82,59 +82,59 @@ export default {
     Hogares,
     Modal2,
     ModalContent,
-    NewHogar,
+    NewHogar
     // Infoapto,
   },
-  created() {
+  created () {
     // console.log('inmounted: ');
-    this.$store.dispatch('hogares_module/cargarHomes');
-    this.$store.dispatch('hogares_module/cargarTorres');
+    this.$store.dispatch('hogares_module/cargarHomes')
+    this.$store.dispatch('hogares_module/cargarTorres')
   },
-  provide() {
+  provide () {
     return {
       dataHogar: () => this.dataNewHogar,
       updateEntrada: this.updateEntrada,
       contraseña: () => this.contraseña,
-      updateContraseña: this.updateContraseña,
-    };
+      updateContraseña: this.updateContraseña
+    }
   },
-  data() {
+  data () {
     return {
       dataNewHogar: {
         aptoNum: 0,
-        tower: '',
+        tower: ''
       },
       Torre: '',
-      contraseña: '',
-    };
+      contraseña: ''
+    }
   },
   computed: {
     ...mapGetters('hogares_module', ['getHogares', 'getTowers']),
     ...mapGetters(['getUserData']),
-    getHogaresByTower() {
+    getHogaresByTower () {
       if (this.Torre !== '' && this.Torre !== null && this.Torre !== undefined) {
         return this.getHogares.filter(
-          (dato) => dato.tower === this.Torre,
-        );
+          (dato) => dato.tower === this.Torre
+        )
       }
-      return this.getHogares;
-    },
+      return this.getHogares
+    }
   },
   methods: {
     ...mapActions('hogares_module', ['crearHome']),
-    updateEntrada(values) {
-      const { key, val } = values;
-      this.dataNewHogar[key] = val;
+    updateEntrada (values) {
+      const { key, val } = values
+      this.dataNewHogar[key] = val
     },
-    agregarHogar() {
+    agregarHogar () {
       // eslint-disable-next-line max-len
-      this.crearHome({ ...this.dataNewHogar, user: this.getUserData.user, password: this.contraseña });
+      this.crearHome({ ...this.dataNewHogar, user: this.getUserData.user, password: this.contraseña })
     },
-    updateContraseña(values) {
-      this.contraseña = values;
-    },
-  },
-};
+    updateContraseña (values) {
+      this.contraseña = values
+    }
+  }
+}
 </script>
 
 <style scoped lang="scss">
