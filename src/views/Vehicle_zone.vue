@@ -1,118 +1,163 @@
 <template>
-    <div class="vehicle_zone">
-        <Header></Header>
-        <Navbar></Navbar>
-            <div class=" cont-flex">            
-                <div class="superior-bar">
-                    
-                    <img :src=imageAdd alt="" id="addImage">
-                    
-                    <SearchBar class="search"></SearchBar>
-                </div>
-                <div class="vehicle-list">
-                    <ZonaParqueadero></ZonaParqueadero>
-                </div>
+<div class="vehicle_zone" >
+    <Header ></Header>
+    <Navbar></Navbar>
+    <div class=" cont-flex" >
+        <div class="superior-bar">
+            <Modal2>
+                <template v-slot:toggler>
+                    <img class='Imageadd' src="@/assets/add.svg"  alt="">
+                </template>
+                <modal-content>
+                    <NewParking>
+                    </NewParking>
+                    <template v-slot:cancelar>
+                        <button class="btCancel">
+                        Cancelar
+                        </button>
+                    </template>
+                    <template v-slot:confirmar>
+                        <button @click="agregarEntrada" class="btAcept"> <!-- MIRAR LA FUNCIONALIDAD DEL BOTON -->
+                        Aceptar
+                        </button>
+                    </template>
+                </modal-content>
+            </Modal2>
+            <SearchBar class="search"></SearchBar>
+        </div>
+            <div class="vehicle_list">
+                <ZonaParqueadero  v-for=" (ItemResi,index) in resident_list" :key="index" :inf_estado="ItemResi.ocupado ?  'Lleno':'Vacio'" :index="index" :parqueadero_numero="ItemResi.residente.vehiculo[0].parqueadero.nombre_Parqueadero" tipoList="Residente" >
+
+                </ZonaParqueadero>
+            </div>
+
+            <div class="vehicle-list" >
+                <ZonaParqueadero v-for=" (ItemVisitant,index) in entradas" :key="index" :inf_estado="ItemVisitant.ocupado ?  'Lleno':'Vacio'" :parqueadero_numero="ItemVisitant.tower + ItemVisitant.apto_num + ' -V' "  >
+
+                </ZonaParqueadero>
             </div>
         </div>
-    
-    
-  
+             <!-- <Options_zona_P>
+
+                                </Options_zona_P>   -->
+                <!-- <div class="modal"  >
+                     <info_parqueadero/>
+                </div>   -->
+                <!-- <div class="modal">
+                     <Ing_vclo_visitante/>
+                </div>
+            -->
+
+    </div>
+
 </template>
 
 <script>
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 
-import Header from '@/components/Header.vue';
-import Navbar from '@/components/Nav.vue';
-import SearchBar from '@/components/SearchButton.vue';
-import ZonaParqueadero from '@/components/ZonaParqueadero.vue';
-import addImage from '@/assets/add.svg';
-// import {mapState} from 'vuex';
+import NewParking from '@/components/Parking/ModalNewParking.vue'
+import Header from '@/components/Header.vue'
+import Navbar from '@/components/Nav.vue'
+import SearchBar from '@/components/SearchButton.vue'
+import ZonaParqueadero from '@/components/Parking/ZonaParqueadero.vue'
+import info_parqueadero from '@/components/Modal_Info_parqueadero.vue'
+import Ing_vclo_visitante from '@/components/Mdl_Ingreso_vclo_visitante.vue'
 
+import Modal2 from '@/components/modal/Modal2.vue'
+import ModalContent from '@/components/modal/ModalContent.vue'
+
+// ---------------------------------------
+const resetData = {
+  NombreParqueadero: ''
+
+}
 export default {
   name: 'Vehicle_zone',
   components: {
     Header,
     Navbar,
     SearchBar,
-    ZonaParqueadero
+    ZonaParqueadero,
+    // info_parqueadero,
+    // Ing_vclo_visitante,
 
+    NewParking,
+    Modal2,
+    ModalContent
   },
-  
-  props:{
-        imageAdd:{
-            type: String,
-            default: addImage
-        }
-    },
-
-     data(){
-
-        return{
-
-            info_vehicle_zone:[]
-        }
-    },
-    
-    created(){
-
-
-    },
-
-    methods:{
-
-        show_vehicleZ_data(){ 
-        this.axios.get()
-        }
+  //   provide(){
+  //     dataEntrada: () => this.dataNewParking,
+  //     updateEntrada: this.updateEntrada
+  //   },
+  data () {
+    return {
+      dataNewParking: {
+        nombreParqueadero: ''
+      }
     }
-           
-};
+  },
+
+  mounted () {
+    this.$store.dispatch('entrada_salida/cargarEntradas')
+    this.$store.dispatch('inf_resident/cargar_data_resi')
+  },
+  computed: {
+
+    // ...mapState('options_zona_p',['showOptions']),
+    ...mapGetters('inf_resident', ['resident_list']),
+    ...mapGetters('entrada_salida', ['entradas'])
+  },
+
+  methods: {
+    // ...mapActions('')
+
+    // agregarEntrada () {
+    //   // console.log(this.dataNewEntrada);
+    //   this.addNewEntrada(this.dataNewEntrada)
+    //   this.resetDataEntrada()
+    //   // this.toggleModal(false);
+    // },
+    // resetDataEntrada () {
+    //   this.dataNewParking = resetData
+
+    // },
+    // updateEntrada (values) {
+    //   const { key, val } = values
+    //   this.dataNewParking[key] = val
+    // }
+    // ...mapMutations('inf_resident', ['changeShowOptions']),
+
+    // ...mapActions('inf_resident', ['cargar_data_resi']),
+    // ...mapActions('entrada_salida', ['cargar_parq_list'])
+
+  }
+}
 </script>
 
-<style  scoped>
+<style lang="scss" scoped >
+    @import '@/views/scss/_theme.scss';
 
-    
-    #P_ocupado{
-        
-        width: 100%;
-        max-width: 100px;
-    }
     .main {
-        
+
         display:flex;
-        
+
     }
-    
+
     .cont-flex{
 
         margin-left: 20%;
-        
+
         padding: 20px;
-         /* background:white; */
-    }
-     /* .cont-flex :first-child{
-         background:yellow;
-     }
-     */
-   
-    
-    .superior-bar{
-         /* background:red; */
-        display: flex;
-        justify-content: center;
-        
-    }
-    #addImage{
-         width: 100%;
-        max-width: 40px;
-        
-        
-        /* background:red; */
-        
+
     }
 
-    
+    .prue{
+
+        color: transparent;
+    }
+
     .vehicle-list{
-        
+
         padding-top: 20px;
         /* background: orange; */
         height: 100%;
@@ -121,34 +166,82 @@ export default {
     .superior-bar{
     display: flex;
     justify-content: space-between;
+     position: sticky;
+    top: 0px;
+    background:$background-color;
+    z-index: 5;
+    padding-bottom: 10px;
   }
+  .menu{
+        width: 30px;
+
+    }
+
+  .modal{
+    position: fixed;
+    display: flex; /* establish flex container */
+    justify-content: center; /* center flex items horizontally, in this case */
+    align-items: center; /* center flex items vertically, in this case */
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 100%;
+    width: 100%;
+    top: 0;
+  }
+
+  .modal_2{
+    position: absolute;
+    display: flex; /* establish flex container */
+    justify-content: center; /* center flex items horizontally, in this case */
+    align-items: center; /* center flex items vertically, in this case */
+    /* background-color: rgba(0, 0, 0, 0.5); */
+    height: 100%;
+    width: 100%;
+    top: 0;
+  }
+  .opcion_M{
+
+       padding: 5px;
+       font-size: 0.9em;
+        min-width:49px;
+        cursor: pointer;
+        color: $main-color;
+        border-bottom:1px solid $main-color;
+        position: relative;
+        z-index: 100;
+
+    }
+
+    #Bott_cancel{
+        border-bottom:none;
+
+    }
+    .Imageadd{
+
+        width: 50px;
+    }
 
   @media (max-width: 600px){
     .superior-bar{
-      display: block;
-      /* align-items: flex-start; */
-      
+      display: flex;
 
     }
-    /* .superior-bar:first-child{
+     .Imageadd{
+        width: 40px;
 
-        
-    } */
-    #addImage{
-        display:block;  
     }
     .search{
         display: flex;
-        /* margin-left: 85px; */
         justify-content: flex-end;
-        
-        /* position: relative; */
-        /* right: 20px; */
-        
 
+    }
+    .menu{
+        width: 20px;
+
+    }
+     .opcion_M{
+        padding: 2.5px;
+        font-size: 0.7em;
     }
   }
 
-    
-    
 </style>

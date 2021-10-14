@@ -42,7 +42,7 @@
     </div>
     <div class="buscar">
       <form action="">
-        <label for="buscar">Buscar</label>
+        <label class="bus" for="buscar">Buscar</label>
         <input type="text">
       </form>
     </div>
@@ -148,12 +148,15 @@ export default {
 .container{
   padding: 20px;
   margin-left: 20%;
+  // display: flex;
+  flex-wrap: wrap;
 }
 
 .Navigation{
   background-color: $main-color;
   display: flex;
   justify-content: space-between;
+  margin-top: -10px;
   // flex-direction: column;
   height:fit-content;
   padding: 10px;
@@ -184,11 +187,12 @@ export default {
 .button{
   background-color: $background-color;
   border-radius: 5px;
-  line-height: 5px;
+  line-height: 12px;
+  min-width: 107px;
   // width: 100px;
-  height: 30px;
+  height: 45px;
   color:$main-color ;
-  margin: 5px;
+  margin: 3px;
   // margin-left: 20px;
   font-weight: bold;
   justify-content: space-around;
@@ -207,17 +211,29 @@ select{
 }
 
 .buscar{
+  margin-top: 5px;
   padding-right: 15px;
   padding-top: 10px;
   line-height: 0;
+  color: $main-color;
+  
+}
+.bus{
+  font-size: 20px;
+  color: $secondary-color;
+  // margin-right: 50px;
+  padding: 25px;
+  flex-wrap: wrap;
 }
 
 input{
   background-color: $secondary-color;
   color:$main-color ;
   height: 20px;
+  width: 140px;
   // margin-left: 5px;
   border-radius: 5px;
+  
 }
 // .contenedor{
 //   margin-right: -70px;
@@ -234,5 +250,39 @@ input{
   .Navigation-Buttons .button{
     font-size: 0.2em;
   }
+}
+@media (max-width: 419px){
+  input{
+  background-color: $secondary-color;
+  color:$main-color ;
+  height: 20px;
+  width: 50px;
+  margin-top: 15px;
+  border-radius: 5px;
+  
+}
+.bus{
+  font-size: 10px;
+  color: $secondary-color;
+  // margin-right: 50px;
+  padding: 25px;
+  flex-wrap: wrap;
+}
+.button{
+  background-color: $background-color;
+  border-radius: 5px;
+  line-height: 12px;
+font-size: 8px;
+  min-width: 60px;
+  // width: 100px;
+  height: 39px;
+  color:$main-color ;
+  margin: 5px;
+  // margin-left: 20px;
+  font-weight: bold;
+  justify-content: space-around;
+  cursor:pointer;
+  // background: black;
+}
 }
 </style>
