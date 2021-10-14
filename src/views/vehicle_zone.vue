@@ -154,6 +154,27 @@ export default {
     .prue{
 
         color: transparent;
+         /* background:white; */
+    }
+     /* .cont-flex :first-child{
+         background:yellow;
+     }
+     */
+   
+    
+    .superior-bar{
+         /* background:red; */
+        display: flex;
+        justify-content: center;
+        
+    }
+    #addImage{
+         width: 100%;
+        max-width: 40px;
+        
+        
+        /* background:red; */
+        
     }
 
     .vehicle-list{
@@ -231,6 +252,7 @@ export default {
     }
     .search{
         display: flex;
+        /* margin-left: 85px; */
         justify-content: flex-end;
 
     }

@@ -1,46 +1,106 @@
 <template>
-  <div class="hello">
-    <div class="container">
-      <div class="boton">
-        <button class="btel">Eliminar Residente</button>
-      </div>
-      <div class="buscar">
-        <form action="">
-          <label for="buscar">Buscar</label>
-          <input type="text">
-        </form>
-      </div>
+<div>
+<section class="item">
+    
+    
+<div class="conteiner">
+  <div class="icono">
+     <img :src= imgUser> 
+  </div>
+  
+    <div class="nombre-user">{{Nombre}}
+
     </div>
-<div class="usuario">
-  <div class="icono">
-    <img src="@/assets/user.svg" alt="">
-  </div>
-  <div>
-    <div class="nombre-user">Ricardo Mejía</div>
-  </div>
+    </div>
+    
+    <MenuDropDown>
+        <template v-slot:toggler>
+          <img class="icon-menu" src="@/assets/menu.svg" alt="">
+        </template>
+         <MenuDropDownContent class="menu-options">
+          <MenuDropDownItem class="opcion_menu">
+            <Modal2>
+            <template v-slot:toggler>
+              <p class="opcion_menu">
+                Mas informacion
+              </p>
+              <p class="opcion_menu">
+                Editar Residente
+              </p>
+              <p class="opcion_menu">
+                Eliminar Residente
+              </p>
+            </template>
+            
+          </Modal2>
+          </MenuDropDownItem>
+           </MenuDropDownContent>   
+      </MenuDropDown>
+      
+  
+
+
+
+          
+          <!-- <MenuDropDownItem class="opcion_menu" id="Bott_cancel">
+            Cancelar
+          </MenuDropDownItem> -->
+       
+  </section>
 </div>
-<div class="usuario">
-  <div class="icono">
-    <img src="@/assets/user.svg" alt="">
-  </div>
-  <div>
-    <div class="nombre-user">Cristian Ramirez</div>
-  </div>
-</div>
-<div class="usuario">
-  <div class="icono">
-    <img src="@/assets/user.svg" alt="">
-  </div>
-  <div>
-    <div class="nombre-user">Cristian Santamaría</div>
-  </div>
-</div>
-</div>
+
 </template>
 
 <script>
+import { mapGetters, mapMutations, mapActions } from 'vuex'
+import user from '@/assets/user.svg'
+
+import MenuDropDownContent from '@/components/dropDown/MenuDropDownContent.vue';
+import MenuDropDown from '@/components//dropDown/MenuDropdown.vue';
+import MenuDropDownItem from '@/components//dropDown/MenuDropDownItem.vue';
+;
+import NewResidente from '@/components/NewResidente.vue';
+import Modal2 from '@/components/modal/Modal2.vue';
+import ModalContent from '@/components/modal/ModalContent.vue';
+
 export default {
   name: 'ListaResidentes',
+  components:{
+    MenuDropDownContent,
+    MenuDropDown,
+    MenuDropDownItem,
+    NewResidente,
+    Modal2,
+    ModalContent
+
+  },
+  data(){
+
+   return{
+
+      imgUser:user
+           
+            
+        }
+    },
+    props:{
+      index: {
+      type: Number,
+    },
+    Nombre: {
+      type: String,
+      
+    },
+    
+    
+    },
+    computed: {
+    ...mapGetters('New_Residente', ['getNewResidente']),
+    residente() {
+      console.log(this.getNewResidente[this.index]);
+      return this.getNewResidente[this.index];
+    },
+  },
 };
 </script>
 
@@ -61,32 +121,39 @@ li {
 a {
   color: #42b983;
 }
-.hello{
-  margin-left:20%;
-}
+.item{
+        margin-top: 50px ;
+        border-radius: 5px;
+        padding:10px ;
+        position: relative;
+        background:$third-color;
+
+        display: flex;
+        border: 2px solid $main-color;
+        align-items: center;
+        justify-content: space-between;
+        align-items: center;
+    }
 
 .container{
-  margin: 20px;
-  width: auto;
-  border-radius: 10px;
-  background-color:$secondary-color ;
-  display: flex;
-  justify-content:space-between;
+ 
+
+        display: flex;
+         flex-direction:column;
+        justify-content: space-between;
+        // flex-direction: column;
+        align-items: center;
+        width: 50%;
+
+    
 }
 .boton{
   margin-top: 5px;
 }
-.btel{
-  background-color: $background-color;
-  border-radius: 20px;
-  width: 100%;
-  height: 50px;
-  color:$main-color ;
-  margin-left: 20px;
-}
+
 .buscar{
-  padding-right: 15px;
-  padding-top: 10px;
+  display: flex;
+  margin-left: 1100px;
 }
 label{
   color:white;
@@ -94,23 +161,24 @@ label{
 input{
   background-color: $background-color;
   color:$main-color ;
-  height: 30px;
+  height: 10px;
   margin-left: 5px;
-  border-radius: 20px;
+  margin-top: 5px;
+  border-radius: 5px;
 }
 
-.usuario{
-  margin: 20px ;
-  width: auto;
-  border-radius: 10px;
-  background-color:$secondary-color ;
-  display:flex;
-  flex-wrap: wrap;
-      
+// .usuario{
+//   margin: 20px ;
+//   width: 500px;
+//   border-radius: 10px;
+//   background-color:$secondary-color ;
+//   display:flex;
+//   flex-direction: row;
+  
 
-}
+// }
 .nombre-user{
-  font-size: 2em;
+  font-size: 1.5em;
   color:$main-color ;
   margin: 5px;
 }

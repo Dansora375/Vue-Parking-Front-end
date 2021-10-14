@@ -7,7 +7,8 @@ import hogaresModule from './modules/hogaresModule'
 import inf_resident from './modules/inf_residentModule'
 import parqueadero from './modules/parqueaderoModule'
 // import entradasModule from './modules/entradasModule';
-import * as loginController from '@/Controladores/AuthenticationController'
+import NewResidenteModule from './modules/NewResidenteModule';
+import * as loginController from '@/Controladores/AuthenticationController';
 
 export default createStore({
   state: {
@@ -52,6 +53,7 @@ export default createStore({
     hogares_module: hogaresModule,
     parqueadero_module: parqueadero,
     inf_resident,
-    
-  }
-})
+    options_zona: options_zona_p,
+    New_Residente:NewResidenteModule
+  },
+});
