@@ -3,7 +3,7 @@
     <h1>
       Ingreso parqueadero {{optionChoose}}
     </h1>
-    <select v-model="optionChoose">
+    <select v-model="optionChoose" @click="resetear(optionChoose)">
       <option v-for="(optionEntrada, key) in optionsEntrada" :key="key">
         {{optionEntrada}}
       </option>
@@ -64,9 +64,26 @@
     </div>
 
     <div v-else>
-      <button @click="cargarListaResidentesParking()">
-        listaresidentes
-      </button>
+      <div class="Rows">
+        <label for="res">lista de residentes: </label>
+        <select id="res" v-model="residente" @click="$emit('type')">
+          <option v-for="(residentParking, index) of residentListParking" :key="index" v-bind:value="residentParking">
+            {{residentParking.nombre}}
+          </option>
+        </select>
+      </div>
+      
+      <div class="Rows" v-show="residente">
+        <label for="">
+          Parqueaderos:   
+        </label>
+        <select v-model="parqueaderoResidente">
+          <option v-for="(parqueadero, index) of getParqueaderos" :key="index" v-bind:value="parqueadero">
+            {{parqueadero.parqueadero.nombre_Parqueadero}}
+          </option>
+        </select>
+      </div>
+
     </div>
   </div>
 </template>
@@ -76,30 +93,40 @@ import { mapGetters, mapActions } from 'vuex'
 
 const opcionesEntrada = {
   VISITANTE: 'Visitante',
-  RESIDENTE: 'Residente'
-}
+  RESIDENTE: 'Residente',
+};
 
 export default {
   name: 'ModalNew',
-  inject: ['toggle', 'dataEntrada', 'updateEntrada'],
+  inject: ['toggle', 'dataEntrada', 'updateEntrada', 'agregarEntrada'],
   data () {
     return {
       optionsEntrada: opcionesEntrada,
       optionChoose: opcionesEntrada.VISITANTE,
       torre: '',
+      residente: '',
+      parqueaderoResidente: '',
     };
+  },
+  props: {
+    isVisitant: {
+      type:  Boolean,
+      default: true,
+    }
   },
   created() {
     // recargando los datos de torres y de apartamentos
     this.$store.dispatch('hogares_module/cargarHomes');
     this.$store.dispatch('hogares_module/cargarTorres');
     this.$store.dispatch('parqueadero_module/cargarPV');
+    this.$store.dispatch('inf_resident/cargarListaResidentesParking')
     // this.$store
   },
   computed: {
     ...mapGetters('entrada_salida', ['vehiculos']),
     ...mapGetters('hogares_module', ['getHogares', 'getTowers']),
     ...mapGetters('parqueadero_module', ['getListV']),
+    ...mapGetters('inf_resident', ['residentListParking']),
     nombre: {
       get () {
         return this.dataEntrada.nombre
@@ -179,21 +206,42 @@ export default {
       }
       return this.getHogares;
     },
+    getParqueaderos() {
+      try {
+        const list = this.residente.vehiculo.filter(
+          (dato) => dato.hasOwnProperty('parqueadero'),
+        );
+        // list.forEach(element => {
+        //   console.log(element);
+        // });
+        return list;
+      } catch (error) {
+        return [];
+      }
+    }
   },
   methods: {
     // ...mapMutations('entrada_salida', []),
     ...mapActions('entrada_salida', ['changeModalNewEntrada', 'addNewEntrada']),
     ...mapActions('inf_resident', ['cargarListaResidentesParking']),
-    agregarEntrada(value) {
-      this.addNewEntrada(value);
-      this.resetDataNewEntrada();
-      this.toggleModal(false);
-    },
+    // agregarEntrada(value) {
+    //   this.addNewEntrada(value);
+    //   this.resetDataNewEntrada();
+    //   this.toggleModal(false);
+    // },
     changeTower(event) {
       console.log(event.target.value);
     },
     changeParking(data) {
       console.log(data);
+    },
+    resetear(optionchoose) {
+      this.torre = '';
+      this.residente = '';
+      this.parqueaderoResidente = '';
+      this.$emit('reset');
+      this.$emit('type',optionchoose);
+      // console.log("hola mundo")
     }
   },
 };

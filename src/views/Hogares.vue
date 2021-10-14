@@ -18,34 +18,36 @@
           </button>
         </option> -->
       </select>
-      <modal-2>
-        <template v-slot:toggler>
-          <button  class="button">
-            Crear hogar
-          </button>
-        </template>
-        <modal-content>
-          <new-hogar>
-          </new-hogar>
-          <template v-slot:cancelar>
-            <button>
-              Cancelar
+      <div class="selection">
+        <modal-2>
+          <template v-slot:toggler>
+            <button  class="button">
+              Crear hogar
             </button>
           </template>
-          <template v-slot:confirmar>
-            <button @click="agregarHogar()">
-              Confirmar
-            </button>
-          </template>
-        </modal-content>
-      </modal-2>
+          <modal-content>
+            <new-hogar>
+            </new-hogar>
+            <template v-slot:cancelar>
+              <button>
+                Cancelar
+              </button>
+            </template>
+            <template v-slot:confirmar>
+              <button @click="agregarHogar()">
+                Confirmar
+              </button>
+            </template>
+          </modal-content>
+        </modal-2>
+      </div>
     </div>
-    <div class="buscar">
+    <!-- <div class="buscar">
       <form action="">
         <label class="bus" for="buscar">Buscar</label>
         <input type="text">
       </form>
-    </div>
+    </div> -->
   </div>
   <div>
     <button @click="cambiarOwner()">
@@ -145,18 +147,26 @@ export default {
 <style scoped lang="scss">
 @import '@/views/scss/_theme.scss';
 
+.selection{
+  max-width: 20%;
+}
+
 .container{
-  padding: 20px;
+  padding: 10px;
+  padding-right: 30px ;
   margin-left: 20%;
+  // width: 100%;
   // display: flex;
   flex-wrap: wrap;
 }
 
 .Navigation{
+  // padding: 10px;
   background-color: $main-color;
-  display: flex;
-  justify-content: space-between;
-  margin-top: -10px;
+  // display: flex;
+  width: 100%;
+  // justify-content: space-between;
+  // margin-top: -10px;
   // flex-direction: column;
   height:fit-content;
   padding: 10px;
@@ -167,8 +177,10 @@ export default {
 }
 
 .Navigation-Buttons{
+  width: 100%;
   display: flex;
-  justify-content: space-around;
+  flex-wrap: wrap;
+  justify-content: space-between;
   line-height: 30px;
   padding-top: 5px;
 }
@@ -251,7 +263,7 @@ input{
     font-size: 0.2em;
   }
 }
-@media (max-width: 419px){
+@media (max-width: 550px){
   input{
   background-color: $secondary-color;
   color:$main-color ;

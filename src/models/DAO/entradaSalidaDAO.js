@@ -50,6 +50,15 @@ export async function nuevaEntrada (entrada) {
   }
 }
 
-// export async function endEntrada(id){
-//   // try
-// }
+export async function endEntrada(data){
+  const {
+    id,
+    hora_salida,
+  } = data;
+  try {
+    const result = axios.put('/entrada_vehiculo/salida', { id, hora_salida })
+    return result.data;
+  } catch (error) {
+    return { data: `${error}`, completed: false };
+  }
+}

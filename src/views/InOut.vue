@@ -1,8 +1,8 @@
 <template>
-  <div class="home" >
+  <div class="home" v-on:reset=(resetDataEntrada)>
     <Header></Header>
     <Navbar class="nav"></Navbar>
-    <div class="main_entrada">
+    <div class="main_entrada" v-on:type="modificarTipo">
       <div class="superior-bar">
 
         <Modal2>
@@ -10,7 +10,7 @@
             <img class='addImage' src="@/assets/add.svg" alt="">
           </template>
           <modal-content>
-            <new-entrada>
+            <new-entrada @type="print">
             </new-entrada>
             <template v-slot:cancelar>
               <button @click="resetDataEntrada()" class="btCancel">
@@ -18,8 +18,11 @@
               </button>
             </template>
             <template v-slot:confirmar>
-              <button @click="agregarEntrada" class="btAcept">
-                Aceptar
+              <button v-if="esVisitante" @click="agregarEntrada" class="btAcept">
+                Aceptar V
+              </button>
+              <button v-else @click="agregarEntrada2" class="btAcept">
+                Aceptar R
               </button>
             </template>
           </modal-content>
@@ -104,8 +107,9 @@ export default {
   provide () {
     return {
       dataEntrada: () => this.dataNewEntrada,
-      updateEntrada: this.updateEntrada
-    }
+      updateEntrada: this.updateEntrada,
+      agregarEntrada: this.agregarEntrada2,
+    };
   },
   data () {
     return {
@@ -119,10 +123,12 @@ export default {
         parqueadero: '',
         tipo: '',
         datos_extra: ''
-      }
+      },
+      esVisitante: true,
     }
   },
   mounted () {
+    this.$store.dispatch('inf_resident/cargarListaResidentesParking')
     this.$store.dispatch('entrada_salida/cargarEntradas')
   },
   computed: {
@@ -138,6 +144,9 @@ export default {
       this.resetDataEntrada()
       // this.toggleModal(false);
     },
+    agregarEntrada2 (value) {
+      this.addNewEntrada(value);
+    },
     transformToDate (item) {
       return new Date(item.hora_entrada)
     },
@@ -148,6 +157,12 @@ export default {
     updateEntrada (values) {
       const { key, val } = values
       this.dataNewEntrada[key] = val
+    },
+    modificarTipo() {
+      console.log("hola");
+    },
+    print(data){
+      this.esVisitante = data.toLowerCase() === "visitante";
     }
   }
 }

@@ -52,9 +52,12 @@
                             <b>{{date_salida.getDate()+'/'+(Number(date_salida.getMonth())+1)+'/'+date_salida.getFullYear()}}</b>
                         </p>
                     </div>
+										<button class="confirmar" @click="confirmar()">
+											Confirmar finalización
+										</button>
+                	</div>
                 </div>
-                </div>
-                <h3>${{tarifa}}</h3>
+                <h3>${{tarifas}}</h3>
             </div>
         </div>
         <!-- <template slot:confirmar>
@@ -77,10 +80,9 @@ export default {
     index: {
       type: Number,
     },
-    date_salida: {
-      type: Date,
-      default: new Date(),
-    },
+  },
+  created() {
+    // this.date_salida = new Date()
   },
   data() {
     return {
@@ -93,6 +95,7 @@ export default {
       tarifa: '',
       horaPagar: '',
       horas_P: '',
+      // date_salida: '',
     };
   },
   computed: {
@@ -104,8 +107,10 @@ export default {
     getTime() {
       return new Date(this.info.hora_entrada);
     },
-
-    tarifa: function () {
+    date_salida() {
+			return new Date();
+    },
+    tarifas: function () {
         this.horaE = this.getTime.getTime();
         this.horaS = this.date_salida.getTime();
         this.horas_P = 0;
@@ -124,12 +129,24 @@ export default {
             return this.tarifa.toLocaleString('es-CO');
         }
     },
-  }
+  },
+	methods: {
+		confirmar() {
+			this.$emit('confirm', { horaSalida: this.horaS, tarifa: this.tarifa});
+		}
+	},
 }
 </script>
 
 <style lang="scss" scoped>
     @import '@/views/scss/_theme.scss';
+
+.confirmar{
+	background: $secondary-color;
+	color:$background-color;
+	border-radius: 5px;
+	margin: 5px;
+}
     .entradaMain{
     // background: black;
         display: flex;

@@ -6,8 +6,8 @@ export default {
   state: {
     // Para enlistar ingreso residente
     data_resident: [],
-    Entrada_data_resident: []
-
+    Entrada_data_resident: [],
+    dataResidentParking: [],
   },
   mutations: {
 
@@ -23,6 +23,9 @@ export default {
         el => el._id === IngUpdated._id
       )
       state.data_resident.splice(indiceDato, 1, entrada)
+    },
+    crearDataResidentParking(state, values) {
+      state.dataResidentParking = values;
     }
     // add_resi (state, data) {
     //   state.Entrada_data_resident.push(data)
@@ -53,7 +56,13 @@ export default {
       }
     },
     async cargarListaResidentesParking (context) {
-      await controller.listaResidentesParking()
+      const lista = await controller.listaResidentesParking()
+      if (lista.completed) {
+        // console.log(lista);
+        context.commit('crearDataResidentParking', lista.data);
+      } else {
+        console.error(lista.data);
+      }
     }
 
     // async addNewResident (context, value) {
@@ -73,11 +82,14 @@ export default {
       return state.showOptions
     },
     resident_list (state) {
-      return state.data_resident
+      return state.data_resident;
     },
     Entrada_resident_list (state) {
-      return state.Entrada_data_resident
-    }
+      return state.Entrada_data_resident;
+    },
+    residentListParking (state) {
+      return state.dataResidentParking;
+    },
 
   }
 

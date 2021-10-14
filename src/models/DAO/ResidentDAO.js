@@ -52,8 +52,8 @@ export async function nuevo_resi (entrada) {
 export async function listaResidentesParking () {
   try {
     const lista = await axios.get('/residentList');
-    console.log(lista);
-    return '';
+    // console.log(lista);
+    return { data: lista.data, completed: lista.statusText === 'OK'};
   } catch (error) {
     return { data: error, completed: false };
   }

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div >
     <section class="item">
       <!-- <img v-bind:src="img_route" class="vehicle"  alt="vehiculos"> -->
       <img v-if="tipo === 'Carro'" v-bind:src="imgCarro" class="vehicle"  alt="vehiculos">
@@ -41,23 +41,23 @@
           <Modal2>
             <template v-slot:toggler>
               <p class="opcion_menu">
-            Terminar parqueadero
+                Terminar parqueadero
               </p>
             </template>
-            <ModalContent2>
-              <Entradatarifa v-bind:index="this.index">
+            <ModalContent>
+              <Entradatarifa v-bind:index="this.index" @confirm="confirmar">
               </Entradatarifa>
-              <div>
-                <h1>
-                  Confirmar
-                </h1>
-              </div>
-              <template v-slot:cancelar>
+              <template v-slot:cancelar >
                 <button>
                   Cancelar
                 </button>
               </template>
-            </ModalContent2>
+              <template v-slot:confirmar v-if="estaConfirmado">
+                <button @click="deleteEntrada(index, id)">
+                  Terminar proceso
+                </button>
+              </template>
+            </ModalContent>
           </Modal2>
 
           <Modal2>
@@ -69,11 +69,6 @@
             <ModalContent>
               <EntradaInformation v-bind:index="this.index">
               </EntradaInformation>
-              <div>
-                <h1>
-                  hola como estan
-                </h1>
-              </div>
               <template v-slot:cancelar>
                 <button>
                   Cancelar
@@ -87,37 +82,6 @@
           </MenuDropDownItem> -->
         </MenuDropDownContent>
       </MenuDropDown>
-      <!-- <Modal ref="modal">
-        <EntradaInformation v-bind:index="this.index">
-        </EntradaInformation>
-      </Modal> -->
-      <!-- <Modal>
-        <p>
-          akjdhflaksdjhflaksdjfh
-        </p>
-        <template v-slot:confirmar>
-        <button class="confirmar" @click="">
-          Confirmar
-        </button>
-      </template>
-      </Modal> -->
-      <!-- <select id="opciones_lista" name="" v-model="selected"> -->
-      <!-- </select> -->
-      <!-- <MenuDropDown>
-        <template v-slot:toggler>
-          <button>
-            Hola mundo
-          </button>
-        </template>
-        <MenuDropDownContent>
-          <p>
-            hola mundo
-          </p>
-          <p>
-            adios mundo
-          </p>
-        </MenuDropDownContent>
-      </MenuDropDown> -->
     </section>
   </div>
 </template>
@@ -133,9 +97,10 @@ import MenuDropDownItem from '../dropDown/MenuDropDownItem.vue';
 
 import Modal2 from '@/components/modal/Modal2.vue';
 import ModalContent from '@/components/modal/ModalContent.vue';
-import ModalContent2 from '@/components/modal/ModalContent2.vue';
+// import ModalContent2 from '@/components/modal/ModalContent2.vue';
 import EntradaInformation from '@/components/entrada-vehiculos/EntradaInformation.vue';
 import Entradatarifa from '@/components/entrada-vehiculos/Entradatarifa.vue';
+import { mapGetters, mapActions } from 'vuex';
 // import ModalContent from '../modal/ModalContent.vue';
 
 export default {
@@ -146,7 +111,7 @@ export default {
     MenuDropDownItem,
     Modal2,
     ModalContent,
-    ModalContent2,
+    // ModalContent2,
     EntradaInformation,
     Entradatarifa,
   },
@@ -160,11 +125,14 @@ export default {
       imgCarro: Carro,
       imgMoto: Moto,
       imgDefault: DefaultVehicle,
+      isConfirmed: false,
+      dataForFinish: '',
     };
   },
   props: {
     index: {
       type: Number,
+      required: true,
     },
     date_ingreso: {
       type: Date,
@@ -181,6 +149,39 @@ export default {
     id: {
       type: String,
     },
+  },
+  computed: {
+    ...mapGetters('entrada_salida', ['entradas']),
+    estaConfirmado() {
+      return this.dataForFinish;
+    },
+    getIndex() {
+      return this.index;
+    },
+  },
+  methods: {
+    ...mapActions('entrada_salida', ['deleteEntrada']),
+    confirmar(value) {
+
+      this.dataForFinish = value;
+      console.log(value)
+    },
+    async deleteEntrada(ind, idd) {
+      if(this.estaConfirmado){
+        // const id = this.id;
+        // console.log(this.entradas[ind], id);
+        const data = { 'index': ind, 'id':idd , 'hora_salida': this.estaConfirmado.horaSalida  }; 
+        console.log(data);
+        const r= await this.deleteEntrada();
+        // const result = await this.deleteEntrada(data);
+        // if (!result.completed) {
+        //   alert("No se pudo modificar el dato en la base");
+        //   console.error(result.data);
+        // } else {
+        //   alert('Error modificando el dato en la base');
+        // }
+      }
+    }
   },
 };
 </script>

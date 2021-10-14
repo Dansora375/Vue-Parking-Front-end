@@ -50,6 +50,13 @@ export default {
     },
     createListVisitant (state, entrada) {
       state.inf_visitant = entrada
+    },
+    deleteEntrada (state, index) {
+      if (index > -1) {
+        state.registrosEntrada.splice(index, 1);
+      } else {
+        console.error(' index no debe de ser negativo');
+      }
     }
     // cambiarEstadoParking(state, index){
     // }
@@ -85,6 +92,20 @@ export default {
     async addNewEntradaFromStore ({ dispatch, state }) {
       // console.log(state.dataNewEntrada);
       await dispatch('addNewEntrada', state.dataNewEntrada)
+    },
+    async deleteEntrada(context, values) {
+      const {
+        index,
+        id,
+        hora_salida
+      } = values;
+      const result = await controller.endEntrada({ id, hora_salida});
+      if (result.completed) {
+        context.commit('deleteEntrada', index);
+        console.log(result);
+      } else {
+        console.error('Error al ejecutar la operacion');
+      } 
     }
   },
   getters: {
