@@ -10,6 +10,28 @@ export async function ObtainLista() {
 }
 
 export async function PostEntrada(entrada) {
-  const result = await Dao.nuevaResidente(entrada);
+  const result = await Dao.nuevoResidente(entrada);
   return result;
+}
+
+export async function nuevoResidente(data) {
+
+  const {
+    nombre,
+    cedula,
+    telefono,
+    apto_num,
+    tower,
+    placa,
+  }=data
+  
+try {
+    const result = await Dao.nuevoResidente();
+
+  console.log(result);
+  return result.data;
+} catch (error) {
+  // console.error(error);
+  return { data: error, completed: false };
+}
 }

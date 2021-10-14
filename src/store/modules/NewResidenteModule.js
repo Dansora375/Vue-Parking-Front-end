@@ -24,12 +24,8 @@ export default {
     async cargarResidentes(context) {
      
       const listaResidentes = await controller.ObtainLista();
-      
-        context.commit('createListaResidentes', listaResidentes.data);
+      context.commit('createListaResidentes', listaResidentes.data);
         
-      
-      
-
     },
     // async cambiarEstadoParqueadero(context, index){
 
