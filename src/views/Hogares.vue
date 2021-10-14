@@ -47,8 +47,13 @@
       </form>
     </div>
   </div>
-
+  <div>
+    <button @click="cambiarOwner()">
+      prueba owner
+    </button>
+  </div>
   <div class="hogares">
+    <!-- eslint-disable-next-line max-len -->
     <hogares v-for="(item, index) of getHogaresByTower" :key="index" v-bind:id="item._id" v-bind:aptoNum="item.apto_num">
   </hogares>
   </div>
@@ -121,7 +126,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions('hogares_module', ['crearHome']),
+    ...mapActions('hogares_module', ['crearHome', 'cambiarOwner']),
     updateEntrada(values) {
       const { key, val } = values;
       this.dataNewHogar[key] = val;

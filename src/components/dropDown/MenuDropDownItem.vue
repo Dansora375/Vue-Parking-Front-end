@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="opcion_menu">
       <slot/>
   </div>
 </template>
@@ -22,4 +22,15 @@ export default {
         cursor: pointer;
         // border-radius:1.5px;
 }
+// .opcion_menu{
+
+//         color: $main-color;
+//         border-bottom:10px solid $main-color;
+//         padding: 5px;
+
+//         font-size: 0.9em;
+//         min-width:49px;
+//         cursor: pointer;
+//         // border-radius:1.5px;
+// }
 </style>

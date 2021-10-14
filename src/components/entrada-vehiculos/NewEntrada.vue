@@ -10,6 +10,24 @@
     </select>
     <div v-if="optionGet">
       <div class="Rows">
+        <label for="tower" >Torre : </label>
+        <select v-model="tower">
+          <option v-for="(torre, index) of getTowers" :key="index">
+            {{torre.tower}}
+          </option>
+        </select>
+      </div>
+
+      <div class="Rows">
+        <label for="apto_num" >Apto : </label>
+        <select v-model="apto_num">
+          <option v-for="(hogar, index) in getHogaresByTower" :key="index">
+            {{hogar.apto_num}}
+          </option>
+        </select>
+      </div>
+
+      <div class="Rows">
         <label for="nombre" >Nombre : </label>
         <input type="text" placeholder="Nombre del visitante" v-model="nombre" id="nombre">
       </div>
@@ -17,20 +35,14 @@
         <label for="cedula" >Cedula : </label>
         <input type="text" placeholder="Cedula del visitante" v-model="cedula" id="cedula">
       </div>
-      <div class="Rows">
-        <label for="apto_num" >Apto : </label>
-        <input type="text" placeholder="Número de apartamento" v-model="apto_num" id="apto_num">
-      </div>
-      <div class="Rows">
-        <label for="tower" >Torre : </label>
-        <input type="text" placeholder="Letra de la torre" v-model="tower" id="tower">
-      </div>
+
       <div class="Rows">
         <label for="placa" >Placa : </label>
         <input type="text" placeholder="Placa del vehiculo" v-model="placa"
         id="placa">
       </div>
       <div class="Rows">
+        <label>Tipo : </label>
         <select v-model="selected">
           <option v-for="option in vehiculos" :key="option">
           {{option}}
@@ -60,10 +72,17 @@ export default {
     return {
       optionsEntrada: opcionesEntrada,
       optionChoose: opcionesEntrada.VISITANTE,
+      torre: '',
     };
+  },
+  created() {
+    // recargando los datos de torres y de apartamentos
+    this.$store.dispatch('hogares_module/cargarHomes');
+    this.$store.dispatch('hogares_module/cargarTorres');
   },
   computed: {
     ...mapGetters('entrada_salida', ['vehiculos']),
+    ...mapGetters('hogares_module', ['getHogares', 'getTowers']),
     nombre: {
       get() {
         return this.dataEntrada.nombre;
@@ -90,9 +109,10 @@ export default {
     },
     tower: {
       get() {
-        return this.dataEntrada.tower;
+        return this.torre;
       },
       set(value) {
+        this.torre = value;
         this.updateEntrada({ key: 'tower', val: value });
       },
     },
@@ -126,6 +146,16 @@ export default {
         return this.optionChoose === this.optionsEntrada.VISITANTE;
       },
     },
+    getHogaresByTower() {
+      // const torre = this.dataEntrada.tower;
+      // console.log(torre);
+      if (this.torre !== '' && this.torre !== null && this.torre !== undefined) {
+        return this.getHogares.filter(
+          (dato) => dato.tower === this.torre,
+        );
+      }
+      return this.getHogares;
+    },
   },
   methods: {
     ...mapMutations('entrada_salida', []),
@@ -134,6 +164,9 @@ export default {
       this.addNewEntrada(value);
       this.resetDataNewEntrada();
       this.toggleModal(false);
+    },
+    changeTower(event) {
+      console.log(event.target.value);
     },
   },
 };

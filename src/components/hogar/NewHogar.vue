@@ -66,7 +66,7 @@ export default {
         return this.dataHogar.tower;
       },
       set(value) {
-        this.updateEntrada({ key: 'tower', val: value});
+        this.updateEntrada({ key: 'tower', val: value });
       },
     },
   },

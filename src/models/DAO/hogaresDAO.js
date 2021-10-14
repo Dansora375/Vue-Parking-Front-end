@@ -55,3 +55,13 @@ export async function CreateHome(data) {
     return { data: error, completed: false };
   }
 }
+
+export async function ChangeOwner(data) {
+  try {
+    const result = await axios.put('/hogares/owner', data);
+    console.log(result.data);
+    return (result.data);
+  } catch (error) {
+    return { data: error, completed: false };
+  }
+}

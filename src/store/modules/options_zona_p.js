@@ -1,31 +1,18 @@
-
 export default {
 
-    namespaced: true,
-    state: {
-         showOptions: false,
-        
+  namespaced: true,
+  state: {
+    showOptions: false,
+  },
+  mutations: {
+    changeShowOptions(state, value) {
+      state.showOptions = value;
     },
-    mutations: {
-        changeShowOptions(state,value) {
-            state.showOptions = value;
-        },
+  },
+  getters: {
 
-    
+    showOptions(state) {
+      return state.showOptions;
     },
-    // actions: {
-
-      
-
-    // },
-    getters: {
-
-        showOptions(state) {
-            return state.showOptions;
-        }
-        
-
-
-    }
-
-}
+  },
+};

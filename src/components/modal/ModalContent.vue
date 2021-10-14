@@ -63,7 +63,7 @@ export default {
 }
 
 .content{
-  width: 300px;
+  width: 400px;
   min-width: 300px;
   max-width: 90%;
   height: fit-content;

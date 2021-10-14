@@ -38,3 +38,20 @@ export async function CreateHome(data) {
     return { data: error, completed: false };
   }
 }
+
+export async function ChangeOwner(data) {
+  // Filtrando los datos que se necesitan
+  const sendData = {
+    homeId: data.homeId,
+    homeOwnerId: data.homeOwnerId,
+    user: data.user,
+    password: data.password,
+  };
+
+  try {
+    const result = await Dao.ChangeOwner(sendData);
+    return result;
+  } catch (error) {
+    return { data: error, completed: false };
+  }
+}

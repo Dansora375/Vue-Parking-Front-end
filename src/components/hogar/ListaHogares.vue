@@ -5,26 +5,57 @@
         {{aptoNum}}
       </div>
 
-      <Modal2>
+      <!-- // lista de opciones al presionar en un hogar -->
+      <menu-drop-down>
         <template v-slot:toggler>
           <div class="Buildings">
             <img class="" src="@/assets/Torre.svg" alt="torre">
           </div>
         </template>
-        <ModalContent>
-          <div>
-            <h1>
-              hola como estan
-            </h1>
-          </div>
-          <template v-slot:cancelar>
-            <button>
-              Cancelar
-            </button>
-          </template>
-        </ModalContent>
-      </Modal2>
+        <menu-drop-down-content>
+          <Modal2>
+            <template v-slot:toggler>
+              <menu-drop-down-item>
+                mas informacion
+              </menu-drop-down-item>
+            </template>
+            <ModalContent>
+              <div>
+                <h1>
+                  hola como estan
+                </h1>
+              </div>
+              <template v-slot:cancelar>
+                <button>
+                  Cancelar
+                </button>
+              </template>
+            </ModalContent>
+          </Modal2>
 
+          <Modal2>
+            <template v-slot:toggler>
+              <menu-drop-down-item>
+                Modificar representante
+              </menu-drop-down-item>
+            </template>
+            <ModalContent>
+              <div>
+                <!-- agregar componente de cambio de residente -->
+                <h1>
+                  hola como estan
+                </h1>
+              </div>
+              <template v-slot:cancelar>
+                <button>
+                  Cancelar
+                </button>
+              </template>
+            </ModalContent>
+          </Modal2>
+
+        </menu-drop-down-content>
+      </menu-drop-down>
       <!-- <div class="Buildings">
         <img class="" @click="showApto()" src='@/assets/Torre.svg' alt="torre">
       </div> -->
@@ -38,6 +69,10 @@ import { mapGetters } from 'vuex';
 
 import Modal2 from '@/components/modal/Modal2.vue';
 import ModalContent from '@/components/modal/ModalContent.vue';
+
+import MenuDropDownContent from '../dropDown/MenuDropDownContent.vue';
+import MenuDropDown from '../dropDown/MenuDropdown.vue';
+import MenuDropDownItem from '../dropDown/MenuDropDownItem.vue';
 // import Infoapto from '@/components/ModalInfoApto.vue';
 
 export default {
@@ -45,6 +80,9 @@ export default {
   components: {
     Modal2,
     ModalContent,
+    MenuDropDown,
+    MenuDropDownContent,
+    MenuDropDownItem,
   },
 
   data() {

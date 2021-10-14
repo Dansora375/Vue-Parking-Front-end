@@ -23,7 +23,7 @@ export default {
     async cargarHomes(context) {
       const listaHogares = await hogaresController.ObtainListHomes();
       if (listaHogares.completed) {
-        console.log(listaHogares.data);
+        // console.log(listaHogares.data);
         context.commit('createListHomes', listaHogares.data);
       } else {
         console.error(listaHogares.data);
@@ -41,6 +41,15 @@ export default {
     async crearHome(context, data) {
       const result = await hogaresController.CreateHome(data);
       console.log('En module', result);
+    },
+    async cambiarOwner() {
+      const result = await hogaresController.ChangeOwner({
+        homeId: '6166e0705587cfea2f97e2a4',
+        homeOwnerId: '61670f3c583516ee675aca12',
+        user: 'Cristian2024',
+        password: '48596712',
+      });
+      console.log(result);
     },
   },
   getters: {

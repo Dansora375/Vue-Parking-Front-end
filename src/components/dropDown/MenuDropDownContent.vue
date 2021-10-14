@@ -18,18 +18,17 @@ export default {
 
 <style lang="scss" scoped>
 @import '@/views/scss/_theme.scss';
- .model-opcions{
+.model-opcions{
 
-        position: absolute;
-        display: flex-flow ;
-        right: 25px;
-        top:70%;
-        border-radius:10px;
-        border:1px solid $main-color;
-        min-width:105px;
-        width: 25%;
-        background:$secondary-color;
-        z-index: 200;
-
-    }
+  position: absolute;
+  display: flex-flow ;
+  right: 25px;
+  top:70%;
+  border-radius:10px;
+  border:1px solid $main-color;
+  min-width:105px;
+  width: 25%;
+  background:$secondary-color;
+  z-index: 200;
+}
 </style>
