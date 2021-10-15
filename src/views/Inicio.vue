@@ -11,7 +11,7 @@
         <!-- </router-link> -->
         <div id="div_final">
             <span id="pregunta">¿Necesita una cuenta?</span>
-            <router-link to="/registrer" class="olvido-contraseña"> Cree una aqui</router-link>
+            <router-link to="/register" class="olvido-contraseña"> Cree una aqui</router-link>
         </div>
       </form>
     </div>
@@ -42,6 +42,7 @@ export default {
       contraseña: '',
     };
   },
+  
   computed: {
     ...mapGetters(['getUserData', 'getIsNotLogged']),
   },
@@ -52,9 +53,6 @@ export default {
         this.loginWithUser({ user: this.usuario, password: this.contraseña });
         // console.log(this.getUserData);
         // alert(this.getUserData);
-        if (!this.getIsNotLogged) {
-          this.$router.push({ name: 'Home' });
-        }
       } catch (error) {
         console.log(error);
       }

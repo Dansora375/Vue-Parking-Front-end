@@ -67,7 +67,7 @@
           <!-- <button>
             ingrese aqui
           </button> -->
-          <router-link to="/inicio_sesion" id="inicio_sesion"> Ingrese aqui</router-link>
+          <router-link to="/login" id="inicio_sesion"> Ingrese aqui</router-link>
         </div>
         <!-- <div class="button-test button">
           <p>

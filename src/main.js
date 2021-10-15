@@ -8,6 +8,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
+
 axios.defaults.baseURL = 'http://localhost:3000/api'
 
 const app = createApp(App)
@@ -18,25 +19,43 @@ const app = createApp(App)
   // .use(VueCookies)
   .use(VueClickAway)
 
-app.mixin({
-  created () {
-    // console.log(this.$router.currentRoute.value.name);
-    // eslint-disable-next-line max-len
-    // if (this.$cookies.isKey('user') && this.$router.currentRoute.value.name !== 'Registrer' && this.$router.currentRoute.value.name !== 'Inicio_sesion') {
-    if (this.$store.getters.getIsNotLogged && this.$router.currentRoute.value.name !== 'Registrer') {
-      // console.log(this.user);
-      this.$router.push({ name: 'Inicio_sesion' })
+
+router.beforeEach((to, from, next) => {
+  // validando que no se encuentre en inicio o registro
+  
+  let datoNext = ''
+  // console.log(to.path)
+  if (to.path !== '/login' && to.path !== '/register') {
+    // ahora se valida si el usuario esta logueado
+    
+    if (store.getters.getIsNotLogged){
+      datoNext = '/login';
+    } else {
+      datoNext = true;
     }
-  },
+  } else {
+    datoNext = ''
+  }
+  // console.log('dato: ',datoNext);
+  if (datoNext){
+    next(datoNext);
+  } else {
+    next()
+  }
+    
+});
+
+app.mixin({
   computed: {
-    userData () {
-      return this.$store.getUserData
+    userData() {
+      return store.state.userData;
     }
   },
   watch: {
     userData (changed) {
-      if (Object.keys(changed).length === 0 && changed.constructor === Object) {
-        this.$router.push({ name: 'Home' })
+      // console.log(changed !== {});
+      if (changed !== {}) {
+        router.push({ name: 'Home' })
       }
     }
   },

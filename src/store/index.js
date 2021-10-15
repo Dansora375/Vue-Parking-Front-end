@@ -12,8 +12,8 @@ import * as loginController from '@/Controladores/AuthenticationController';
 
 export default createStore({
   state: {
-    userData: {}
-
+    userData: {},
+    dataTest: true,
   },
   mutations: {
     login (state, user) {

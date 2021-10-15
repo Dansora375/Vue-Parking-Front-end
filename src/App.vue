@@ -26,7 +26,6 @@ export default {
   // beforeUnmount() {
   //   window.removeEventListener('beforeunload', this.preventNav);
   // },
-
   methods: {
     // preventNav(event) {
     //   if (!this.isEditing) return;
