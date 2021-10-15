@@ -13,23 +13,41 @@ import * as loginController from '@/Controladores/AuthenticationController';
 export default createStore({
   state: {
     userData: {},
-    dataTest: true,
+    isAuthenticating: false,
   },
   mutations: {
     login (state, user) {
       state.userData = user
+    },
+    authenticating( state , val){
+      state.isAuthenticating = val;
     }
   },
   actions: {
     async loginWithUser (context, { user, password }) {
-      const usuario = await loginController.loginWithUser(user, password)
-      if (usuario.data.correctPassword) {
-        // this.$cookies.set('user', usuario.data.data);
-        context.commit('login', usuario.data.data)
+      
+      try {
+        if (!this.state.isAuthenticating){
+          context.commit('authenticating', true);
+          const usuario = await loginController.loginWithUser(user, password)
+          if (usuario.data.correctPassword) {
+            // this.$cookies.set('user', usuario.data.data);
+            context.commit('login', usuario.data.data)
+          }
+        }
+      } catch (error) {
+        console.log(error);
+      } finally {
+        context.commit('authenticating', false);
       }
+      
+      
     },
-    register (context, values) {
-      const res = loginController.register(values)
+    async register (context, values) {
+      context.commit('authenticating', true);
+      console.log('hola',this.state.isAuthenticating)
+      const res = await loginController.register(values)
+      context.commit('authenticating', false);
       this.userData = res.data
       // this.$router.push({ name: 'Registro' });
       // console.log('hola mundo: \n', values);
