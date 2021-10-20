@@ -37,7 +37,7 @@
           <img class="icon-menu" src="@/assets/menu.svg" alt="">
         </template>
         <MenuDropDownContent class="menu-options">
-          
+
           <Modal2>
             <template v-slot:toggler>
               <p class="opcion_menu">
@@ -87,20 +87,20 @@
 </template>
 
 <script>
-import DefaultVehicle from '@/assets/predefined_list.svg';
-import Carro from '@/assets/Car.svg';
-import Moto from '@/assets/Motorcycle.svg';
+import DefaultVehicle from '@/assets/predefined_list.svg'
+import Carro from '@/assets/Car.svg'
+import Moto from '@/assets/Motorcycle.svg'
 
-import MenuDropDownContent from '../dropDown/MenuDropDownContent.vue';
-import MenuDropDown from '../dropDown/MenuDropdown.vue';
-import MenuDropDownItem from '../dropDown/MenuDropDownItem.vue';
+import MenuDropDownContent from '../dropDown/MenuDropDownContent.vue'
+import MenuDropDown from '../dropDown/MenuDropdown.vue'
+import MenuDropDownItem from '../dropDown/MenuDropDownItem.vue'
 
-import Modal2 from '@/components/modal/Modal2.vue';
-import ModalContent from '@/components/modal/ModalContent.vue';
+import Modal2 from '@/components/modal/Modal2.vue'
+import ModalContent from '@/components/modal/ModalContent.vue'
 // import ModalContent2 from '@/components/modal/ModalContent2.vue';
-import EntradaInformation from '@/components/entrada-vehiculos/EntradaInformation.vue';
-import Entradatarifa from '@/components/entrada-vehiculos/Entradatarifa.vue';
-import { mapGetters, mapActions } from 'vuex';
+import EntradaInformation from '@/components/entrada-vehiculos/EntradaInformation.vue'
+import Entradatarifa from '@/components/entrada-vehiculos/Entradatarifa.vue'
+import { mapGetters, mapActions } from 'vuex'
 // import ModalContent from '../modal/ModalContent.vue';
 
 export default {
@@ -113,66 +113,65 @@ export default {
     ModalContent,
     // ModalContent2,
     EntradaInformation,
-    Entradatarifa,
+    Entradatarifa
   },
-  data() {
+  data () {
     return {
       lista_opciones: [
         'Terminar sesión',
-        'Cancelar',
+        'Cancelar'
       ],
       selected: '',
       imgCarro: Carro,
       imgMoto: Moto,
       imgDefault: DefaultVehicle,
       isConfirmed: false,
-      dataForFinish: '',
-    };
+      dataForFinish: ''
+    }
   },
   props: {
     index: {
       type: Number,
-      required: true,
+      required: true
     },
     date_ingreso: {
       type: Date,
-      default: new Date(),
+      default: new Date()
     },
     placa: {
-      type: String,
+      type: String
       // default: 'AAA000',
     },
     tipo: {
       type: String,
-      default: 'Default',
+      default: 'Default'
     },
     id: {
-      type: String,
-    },
+      type: String
+    }
   },
   computed: {
     ...mapGetters('entrada_salida', ['entradas']),
-    estaConfirmado() {
-      return this.dataForFinish;
+    estaConfirmado () {
+      return this.dataForFinish
     },
-    getIndex() {
-      return this.index;
-    },
+    getIndex () {
+      return this.index
+    }
   },
   methods: {
     ...mapActions('entrada_salida', ['deleteEntrada']),
-    confirmar(value) {
-
-      this.dataForFinish = value;
+    confirmar (value) {
+      this.dataForFinish = value
       console.log(value)
     },
-    async deleteEntrada(ind, idd) {
-      if(this.estaConfirmado){
+    async deleteEntrada (ind, idd) {
+      if (this.estaConfirmado) {
         // const id = this.id;
         // console.log(this.entradas[ind], id);
-        const data = { 'index': ind, 'id':idd , 'hora_salida': this.estaConfirmado.horaSalida  }; 
-        console.log(data);
-        const r= await this.deleteEntrada();
+        const data = { index: ind, id: idd, hora_salida: this.estaConfirmado.horaSalida }
+        console.log(data)
+        const r = await this.deleteEntrada()
         // const result = await this.deleteEntrada(data);
         // if (!result.completed) {
         //   alert("No se pudo modificar el dato en la base");
@@ -182,8 +181,8 @@ export default {
         // }
       }
     }
-  },
-};
+  }
+}
 </script>
 
 <style lang="scss" scoped>

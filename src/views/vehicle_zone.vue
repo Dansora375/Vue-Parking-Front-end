@@ -25,29 +25,24 @@
             </Modal2>
             <SearchBar class="search"></SearchBar>
         </div>
-            <div class="vehicle_list">
+        <div class="subMenu">
+          <button class="buttonMenu" id="Bt_default" @click="showParkResi">Residentes</button>
+          <button class="buttonMenu" @click="showParkVisitant">Visitantes</button>
+        </div>
+        <div v-show="showResidentPark">
+            <div class="vehicle_list" >
                 <ZonaParqueadero  v-for=" (ItemResi,index) in resident_listNF" :key="index" :inf_estado="ItemResi.ocupado ?  'Lleno':'Vacio'" :index="index" :parqueadero_numero="ItemResi.residente.vehiculo[0].parqueadero.nombre_Parqueadero" tipoList="Residente" :tipoVehicle="ItemResi.residente.vehiculo[0].tipo" >
-
                 </ZonaParqueadero>
             </div>
-
+        </div>
+        <div v-show="showVisitantPark">
             <div class="vehicle-list" >
-                <ZonaParqueadero v-for=" (ItemVisitant,index) in entradas" :key="index" :inf_estado="ItemVisitant.ocupado ?  'Lleno':'Vacio'" :parqueadero_numero="ItemVisitant.tower + ItemVisitant.apto_num + ' -V' "  >
+                <ZonaParqueadero v-for=" (ItemVisitant,index) in entradas" :key="index" :inf_estado="ItemVisitant.ocupado ?  'Lleno':'Vacio'" :index="index" :parqueadero_numero="ItemVisitant.tower + ItemVisitant.apto_num + ' -V' " tipoList="Visitante" :tipoVehicle="ItemVisitant.tower" >
 
                 </ZonaParqueadero>
             </div>
         </div>
-             <!-- <Options_zona_P>
-
-                                </Options_zona_P>   -->
-                <!-- <div class="modal"  >
-                     <info_parqueadero/>
-                </div>   -->
-                <!-- <div class="modal">
-                     <Ing_vclo_visitante/>
-                </div>
-            -->
-
+    </div>
     </div>
 
 </template>
@@ -99,6 +94,14 @@ export default {
         nombreParqueadero: '',
         tipoVehicle: '',
         tipoPersonIngr: ''
+      },
+      showResidentPark: {
+        type: Boolean,
+        default: true
+      },
+      showVisitantPark: {
+        type: Boolean,
+        default: false
       }
     }
   },
@@ -106,6 +109,7 @@ export default {
   mounted () {
     this.$store.dispatch('entrada_salida/cargarEntradas')
     this.$store.dispatch('inf_resident/cargar_data_resiNF')
+    this.showParkResi()
   },
   computed: {
 
@@ -129,6 +133,20 @@ export default {
     updateEntradaParking (values) {
       const { key, val } = values
       this.dataNewParking[key] = val
+    },
+    showParkResi () {
+      this.showResidentPark = true
+      this.showVisitantPark = false
+      const ButtonR = document.getElementById('Bt_default')
+      ButtonR.style.fontWeight = 'bold'
+      ButtonR.style.borderBottom = '3px solid #22577A'
+    },
+    showParkVisitant () {
+      this.showVisitantPark = true
+      this.showResidentPark = false
+      const ButtonR = document.getElementById('Bt_default')
+      ButtonR.style.fontWeight = null
+      ButtonR.style.borderBottom = null
     }
     // ...mapMutations('inf_resident', ['changeShowOptions']),
 
@@ -161,25 +179,13 @@ export default {
         color: transparent;
          /* background:white; */
     }
-     /* .cont-flex :first-child{
-         background:yellow;
-     }
-     */
-   
-    
-    .superior-bar{
-         /* background:red; */
-        display: flex;
-        justify-content: center;
-        
-    }
+
     #addImage{
          width: 100%;
         max-width: 40px;
-        
-        
+
         /* background:red; */
-        
+
     }
 
     .vehicle-list{
@@ -246,6 +252,26 @@ export default {
         width: 50px;
     }
 
+    .subMenu{
+      display: flex;
+      justify-content: space-around;
+      position: sticky;
+      top: 20px;
+      background:$background-color;
+      padding-bottom: 10px;
+      // background:Red;
+
+    }
+    .buttonMenu{
+      width: 50%;
+      border-bottom: 1px solid $main-color;
+
+    }
+    .buttonMenu:focus{
+      font-weight: bold;
+      border-bottom: 3px solid $main-color;
+    }
+
   @media (max-width: 600px){
     .superior-bar{
       display: flex;
@@ -268,6 +294,10 @@ export default {
      .opcion_M{
         padding: 2.5px;
         font-size: 0.7em;
+    }
+    .buttonMenu{
+      font-size: 0.8em;
+
     }
   }
 

@@ -178,8 +178,9 @@ label{
 }
 .data{
   font-weight: bold;
-  font-size: 1em;
+  font-size: 1.3em;
   color: $third-color;
+  text-shadow: -1.5px -1.5px 1px $main-color;
 
 }
 

@@ -72,10 +72,10 @@
           </option>
         </select>
       </div>
-      
+
       <div class="Rows" v-show="residente">
         <label for="">
-          Parqueaderos:   
+          Parqueaderos:
         </label>
         <select v-model="parqueaderoResidente">
           <option v-for="(parqueadero, index) of getParqueaderos" :key="index" v-bind:value="parqueadero">
@@ -93,8 +93,8 @@ import { mapGetters, mapActions } from 'vuex'
 
 const opcionesEntrada = {
   VISITANTE: 'Visitante',
-  RESIDENTE: 'Residente',
-};
+  RESIDENTE: 'Residente'
+}
 
 export default {
   name: 'ModalNew',
@@ -105,20 +105,20 @@ export default {
       optionChoose: opcionesEntrada.VISITANTE,
       torre: '',
       residente: '',
-      parqueaderoResidente: '',
-    };
+      parqueaderoResidente: ''
+    }
   },
   props: {
     isVisitant: {
-      type:  Boolean,
-      default: true,
+      type: Boolean,
+      default: true
     }
   },
-  created() {
+  created () {
     // recargando los datos de torres y de apartamentos
-    this.$store.dispatch('hogares_module/cargarHomes');
-    this.$store.dispatch('hogares_module/cargarTorres');
-    this.$store.dispatch('parqueadero_module/cargarPV');
+    this.$store.dispatch('hogares_module/cargarHomes')
+    this.$store.dispatch('hogares_module/cargarTorres')
+    this.$store.dispatch('parqueadero_module/cargarPV')
     this.$store.dispatch('inf_resident/cargarListaResidentesParking')
     // this.$store
   },
@@ -138,7 +138,7 @@ export default {
     parqueadero: {
       set (value) {
         // console.log(value);
-        this.updateEntrada({ key: 'parqueadero', val: value._id});
+        this.updateEntrada({ key: 'parqueadero', val: value._id })
       }
     },
     cedula: {
@@ -158,13 +158,13 @@ export default {
       }
     },
     tower: {
-      get() {
-        return this.torre;
+      get () {
+        return this.torre
       },
-      set(value) {
-        this.torre = value;
-        this.updateEntrada({ key: 'tower', val: value });
-      },
+      set (value) {
+        this.torre = value
+        this.updateEntrada({ key: 'tower', val: value })
+      }
     },
     placa: {
       get () {
@@ -193,30 +193,30 @@ export default {
     optionGet: {
       get () {
         // console.log(this.optionEntrada);
-        return this.optionChoose === this.optionsEntrada.VISITANTE;
-      },
+        return this.optionChoose === this.optionsEntrada.VISITANTE
+      }
     },
-    getHogaresByTower() {
+    getHogaresByTower () {
       // const torre = this.dataEntrada.tower;
       // console.log(torre);
       if (this.torre !== '' && this.torre !== null && this.torre !== undefined) {
         return this.getHogares.filter(
-          (dato) => dato.tower === this.torre,
-        );
+          (dato) => dato.tower === this.torre
+        )
       }
-      return this.getHogares;
+      return this.getHogares
     },
-    getParqueaderos() {
+    getParqueaderos () {
       try {
         const list = this.residente.vehiculo.filter(
-          (dato) => dato.hasOwnProperty('parqueadero'),
-        );
+          (dato) => dato.hasOwnProperty('parqueadero')
+        )
         // list.forEach(element => {
         //   console.log(element);
         // });
-        return list;
+        return list
       } catch (error) {
-        return [];
+        return []
       }
     }
   },
@@ -229,22 +229,22 @@ export default {
     //   this.resetDataNewEntrada();
     //   this.toggleModal(false);
     // },
-    changeTower(event) {
-      console.log(event.target.value);
+    changeTower (event) {
+      console.log(event.target.value)
     },
-    changeParking(data) {
-      console.log(data);
+    changeParking (data) {
+      console.log(data)
     },
-    resetear(optionchoose) {
-      this.torre = '';
-      this.residente = '';
-      this.parqueaderoResidente = '';
-      this.$emit('reset');
-      this.$emit('type',optionchoose);
+    resetear (optionchoose) {
+      this.torre = ''
+      this.residente = ''
+      this.parqueaderoResidente = ''
+      this.$emit('reset')
+      this.$emit('type', optionchoose)
       // console.log("hola mundo")
     }
-  },
-};
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -302,7 +302,7 @@ input{
 
 }
 textarea{
-  width: 100%;
+  width: 95%;
   resize: vertical;
   align-items: center;
   justify-content:center;

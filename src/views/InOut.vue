@@ -51,7 +51,7 @@
           </div>
         <!-- <EntradaSalida class="listado"></EntradaSalida> -->
         <!--  eslint-disable-next-line max-len -->
-        
+
       </div>
     </div>
     <!-- <div class="modal" v-if="isActiveModal" >
@@ -108,8 +108,8 @@ export default {
     return {
       dataEntrada: () => this.dataNewEntrada,
       updateEntrada: this.updateEntrada,
-      agregarEntrada: this.agregarEntrada2,
-    };
+      agregarEntrada: this.agregarEntrada2
+    }
   },
   data () {
     return {
@@ -124,7 +124,7 @@ export default {
         tipo: '',
         datos_extra: ''
       },
-      esVisitante: true,
+      esVisitante: true
     }
   },
   mounted () {
@@ -145,7 +145,7 @@ export default {
       // this.toggleModal(false);
     },
     agregarEntrada2 (value) {
-      this.addNewEntrada(value);
+      this.addNewEntrada(value)
     },
     transformToDate (item) {
       return new Date(item.hora_entrada)
@@ -158,11 +158,11 @@ export default {
       const { key, val } = values
       this.dataNewEntrada[key] = val
     },
-    modificarTipo() {
-      console.log("hola");
+    modificarTipo () {
+      console.log('hola')
     },
-    print(data){
-      this.esVisitante = data.toLowerCase() === "visitante";
+    print (data) {
+      this.esVisitante = data.toLowerCase() === 'visitante'
     }
   }
 }
@@ -208,13 +208,12 @@ export default {
 .visitantes{
   height: 85%;
   direction: ltr;
-  // 
-  
+  //
+
 }
 .title{
   font-size: 2em;
 }
-  
 
   .main_entrada{
     padding: 20px;

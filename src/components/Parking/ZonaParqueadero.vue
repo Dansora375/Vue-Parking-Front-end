@@ -34,7 +34,7 @@
                                 Mas informacion
                             </p>
                         </template>
-                        <!-- <div class="modal"> -->
+
                         <ModalContent class="prueba_content ">
                             <ModalInfResident :index="this.index" :tipoList="this.tipoList">
                             </ModalInfResident>
