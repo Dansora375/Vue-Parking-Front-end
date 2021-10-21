@@ -118,7 +118,7 @@ export default {
     // recargando los datos de torres y de apartamentos
     this.$store.dispatch('hogares_module/cargarHomes')
     this.$store.dispatch('hogares_module/cargarTorres')
-    this.$store.dispatch('parqueadero_module/cargarPV')
+    // this.$store.dispatch('parqueadero_module/cargarPV');
     this.$store.dispatch('inf_resident/cargarListaResidentesParking')
     // this.$store
   },
@@ -208,6 +208,7 @@ export default {
     },
     getParqueaderos () {
       try {
+        console.log(this.residente)
         const list = this.residente.vehiculo.filter(
           (dato) => dato.hasOwnProperty('parqueadero')
         )
@@ -216,6 +217,7 @@ export default {
         // });
         return list
       } catch (error) {
+        console.log(error)
         return []
       }
     }

@@ -10,7 +10,7 @@
             <img class='addImage' src="@/assets/add.svg" alt="">
           </template>
           <modal-content>
-            <new-entrada @type="print">
+            <new-entrada @type="changeOption">
             </new-entrada>
             <template v-slot:cancelar>
               <button @click="resetDataEntrada()" class="btCancel">
@@ -30,33 +30,24 @@
 
         <SearchBar class="search"></SearchBar>
       </div>
-      <div class="listado">
-          <div class="medio">
 
-            <h2 class="title">
-              Residentes
-            </h2>
-            <div class="content-medio residentes">
+      <div class="opciones">
+        <button v-bind:class="{ opcion_activa: esVisitante }" @click="changeOption('visitante')">
+          Visitantes
+        </button>
+        <button v-bind:class="{ opcion_activa: !esVisitante }" @click="changeOption('residente')">
+          Residentes
+        </button>
+      </div>
 
-            <div class="content-medio visitantes">
-              <EntradaSalida class="lista" v-for="(itemIngreso, index) in residentIngresoList" :key="index" v-bind:date_ingreso="transformToDate(itemIngreso)" v-bind:placa="itemIngreso.placa" v-bind:index="index" v-bind:tipo="itemIngreso.tipo" v-bind:id="itemIngreso._id">
-              </EntradaSalida>
-            </div>
-            </div>
-          </div>
+      <div class="listado" v-if="esVisitante">
+        <entrada-salida  class="lista" v-for="(itemEntrada, index) in entradas" :key="index" v-bind:date_ingreso="transformToDate(itemEntrada)" v-bind:placa="itemEntrada.placa" v-bind:index="index" v-bind:tipo="itemEntrada.tipo" v-bind:id="itemEntrada._id" v-bind:visitante="true">
+        </entrada-salida>
+      </div>
 
-          <div class="medio">
-            <h2 class="title">
-              Visitantes
-            </h2>
-            <div class="content-medio visitantes">
-              <EntradaSalida class="lista" v-for="(itemEntrada, index) in entradas" :key="index" v-bind:date_ingreso="transformToDate(itemEntrada)" v-bind:placa="itemEntrada.placa"  v-bind:tipo="itemEntrada.tipo" v-bind:id="itemEntrada._id">
-              </EntradaSalida>
-            </div>
-          </div>
-        <!-- <EntradaSalida class="listado"></EntradaSalida> -->
-        <!--  eslint-disable-next-line max-len -->
-
+      <div class="listado" v-else >
+        <entrada-salida  class="lista" v-for="(itemEntrada, index) in entradas" :key="index" v-bind:date_ingreso="transformToDate(itemEntrada)" v-bind:placa="itemEntrada.placa" v-bind:index="index" v-bind:tipo="itemEntrada.tipo" v-bind:id="itemEntrada._id" v-bind:visitante="false">
+        </entrada-salida>
       </div>
     </div>
     <!-- <div class="modal" v-if="isActiveModal" >
@@ -168,7 +159,8 @@ export default {
     modificarTipo () {
       console.log('hola')
     },
-    print (data) {
+    changeOption (data) {
+      // console.log(data, data.toLowerCase() === "visitante");
       this.esVisitante = data.toLowerCase() === 'visitante'
     }
   }
@@ -178,6 +170,9 @@ export default {
 <style lang="scss" scoped>
 
 @import '@/views/scss/_theme.scss';
+.opcion_activa{
+  border-bottom: 2px solid $main-color;
+}
 .home{
   // z-index: 200;
   // background: black;
@@ -282,4 +277,16 @@ export default {
   .addImage:active{
     background-color:$secondary-color ;
   }
+.opciones{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  // margin: 15px;
+
+}
+.opciones button{
+
+  width: 45%;
+  // background: black;
+}
 </style>
