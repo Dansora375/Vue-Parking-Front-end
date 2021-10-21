@@ -54,8 +54,13 @@ app.mixin({
   watch: {
     userData (changed) {
       // console.log(changed !== {});
-      if (changed !== {}) {
+      // console.log( store.getters.getIsNotLogged, changed);
+      
+      if (!store.getters.getIsNotLogged) {
         router.push({ name: 'Home' })
+      } else {
+        console.log('aqui')
+        router.push({ name: 'Login'})
       }
     }
   },

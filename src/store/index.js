@@ -21,7 +21,12 @@ export default createStore({
     },
     authenticating( state , val){
       state.isAuthenticating = val;
-    }
+    },
+    terminarSesion( state ) {
+      
+      state.userData = {};
+      // console.log(state.userData);
+    },
   },
   actions: {
     async loginWithUser (context, { user, password }) {
@@ -51,6 +56,10 @@ export default createStore({
       this.userData = res.data
       // this.$router.push({ name: 'Registro' });
       // console.log('hola mundo: \n', values);
+    },
+    terminarSesion (context) {
+      // console.log('hola mundo');
+      context.commit('terminarSesion');
     }
   },
   getters: {

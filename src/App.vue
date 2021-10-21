@@ -176,9 +176,9 @@ a{
   text-decoration: none;
   // color: $background-color;
 }
-.nav{
-  height: 100%;
-}
+// .nav{
+//   height: 100%;
+// }
 
 /* las etiquetas input requieren una eliminacion de estilos anterior a su uso */
 input{

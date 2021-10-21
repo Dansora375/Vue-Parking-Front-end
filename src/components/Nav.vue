@@ -1,44 +1,94 @@
 <template>
-  <div class="navegation">
-    <nav class="nav">
-      <router-link to="/" class="completed">
-        <img src="@/assets/iconos-navigation/entrada.svg" alt="">
-        <p>
-          Entrada y salida
-        </p>
-      </router-link>
-      <router-link to="/Vehicle_zone" class="completed">
-        <img src="@/assets/iconos-navigation/parqueadero2.svg" alt="">
-        <p>Parqueadero</p>
-      </router-link>
+  <div class="fixed">
+    <div class="navegation">
+      <nav class="nav">
+        <router-link to="/" class="completed">
+          <img src="@/assets/iconos-navigation/entrada.svg" alt="">
+          <p>
+            Entrada y salida
+          </p>
+        </router-link>
+        <router-link to="/Vehicle_zone" class="completed">
+          <img src="@/assets/iconos-navigation/parqueadero2.svg" alt="">
+          <p>Parqueadero</p>
+        </router-link>
 
-      <router-link to="/Residentes">
-        <img src="@/assets/iconos-navigation/people.svg" alt="">
-        <p>
-          Residentes
-        </p>
-      </router-link>
+        <router-link to="/Residentes">
+          <img src="@/assets/iconos-navigation/people.svg" alt="">
+          <p>
+            Residentes
+          </p>
+        </router-link>
 
-      <router-link to="/Hogares">
-        <img src="@/assets/iconos-navigation/home.svg" alt="">
-        <p>
-          Hogares
-        </p>
-      </router-link>
-      <router-link to="/vehiculos">
-        <img src="@/assets/iconos-navigation/vehicle.svg" alt="">
-        <p>
-          Vehiculos
-        </p>
-      </router-link>
-    </nav>
-    <p id="cerrar-sesion">cerrarSesion</p>
+        <router-link to="/Hogares">
+          <img src="@/assets/iconos-navigation/home.svg" alt="">
+          <p>
+            Hogares
+          </p>
+        </router-link>
+        <router-link to="/vehiculos">
+          <img src="@/assets/iconos-navigation/vehicle.svg" alt="">
+          <p>
+            Vehiculos
+          </p>
+        </router-link>
+
+        <router-link to="/vehiculos" v-if="isGerente">
+          <img src="@/assets/iconos-navigation/vehicle.svg" alt="">
+          <p>
+            afklsjhdlkfahjsd
+          </p>
+        </router-link>
+      </nav>
+      <div>
+        <button id="cerrar-sesion" @click="terminarSesionMethod">cerrar sesión</button>
+      </div>
+      
+    </div>
   </div>
+  
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
 export default {
   name: 'Navbar',
+  computed: {
+    ...mapGetters(['getIsNotLogged','getUserData']),
+    isGerente ( ) {
+      const usuario = this.getUserData;
+      try {
+        // console.log('hola')
+        // console.log(usuario.type.toLowerCase(), 'hola')
+        return usuario.type.toLowerCase() === 'gerente'; 
+        // console.log(usuario);
+        // return true;
+      } catch (error) {
+        console.error(error);
+        return false
+      }
+    },
+  },
+  methods: {
+    ...mapActions(['terminarSesion']),
+    terminarSesionMethod() {
+      // console.log(this.getUserData);
+      const val = 'Error, no se pudo cerrar sesión';
+      try {
+        this.terminarSesion();
+        // console.log(this.getIsNotLogged)
+        if (!this.getIsNotLogged) {
+          alert(val);
+          console.error(val);
+        }
+      } catch (error) {
+        alert(val);
+        console.error(error);
+      }
+    }
+      
+  },
+  
   // data(){
   //   return {
   //     opciones_nav: options_nav,
@@ -50,19 +100,29 @@ export default {
 <style scoped lang="scss">
 //importando Tema de la app(solo colores)
 @import '@/views/scss/_theme.scss';
-.navegation{
+.fixed{
   position:fixed;
   padding-top: 100px;
+  height: 100%;
   top: 0;
   width: 20%;
+}
+.navegation{
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   background-color: $main-color;//Llamando a la variable del color
   // align-items: start;
-  height: 100%;
+  height: calc(100vh - 100px);
 }
 .nav{
   display: flex;
   flex-direction: column;
 
+}
+#cerrar-sesion{
+  color: black;
 }
 a{
   width: 100%;
@@ -72,7 +132,7 @@ a{
   &:hover{
     color: $background-color;
   }
-  &:active{
+  &:active{display: flex;
     color: $background-color;
     background-color:$third-color ;
   }
