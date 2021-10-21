@@ -42,7 +42,7 @@ export async function nuevaEntrada (entrada) {
       placa: entrada.placa,
       tipo: entrada.tipo,
       datos_extra: entrada.datos_extra,
-      parqueadero: entrada.parqueadero,
+      parqueadero: entrada.parqueadero
     })
     return new ResPost(true, {}, nEntrada)
   } catch (error) {
@@ -50,15 +50,15 @@ export async function nuevaEntrada (entrada) {
   }
 }
 
-export async function endEntrada(data){
+export async function endEntrada (data) {
   const {
     id,
-    hora_salida,
-  } = data;
+    hora_salida
+  } = data
   try {
     const result = axios.put('/entrada_vehiculo/salida', { id, hora_salida })
-    return result.data;
+    return result.data
   } catch (error) {
-    return { data: `${error}`, completed: false };
+    return { data: `${error}`, completed: false }
   }
 }

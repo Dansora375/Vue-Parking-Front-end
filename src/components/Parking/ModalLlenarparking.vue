@@ -84,7 +84,7 @@ export default {
 
   },
   mounted () {
-    this.updateIngresoRes({ key: 'horaSalida', val: this.dateEntradaResi })
+    this.updateIngresoRes({ key: 'horaEntrada', val: this.dateEntradaResi })
     this.updateIngresoRes({ key: 'id', val: this.info._id })
   },
 

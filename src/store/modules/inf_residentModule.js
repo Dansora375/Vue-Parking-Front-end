@@ -5,17 +5,13 @@ export default {
   namespaced: true,
   state: {
     // Para enlistar ingreso residente
-    data_resident: [],
+
     Entrada_data_resident: [],
     dataResidentParking: [],
     data_residentNF: []
 
   },
   mutations: {
-
-    cargarListaIngrResi (state, entrada) {
-      state.data_resident = entrada
-    },
 
     cargarListaIngrResiNF (state, entrada) {
       state.data_residentNF = entrada
@@ -26,17 +22,17 @@ export default {
       const indiceDato = state.data_residentNF.findIndex(
         el => el._id === IngUpdated._id
       )
-      state.data_resident.splice(indiceDato, 1, entrada)
+      state.data_residentNF.splice(indiceDato, 1, entrada)
     },
     AddSaliResidentUpdated (state, entrada) {
       const IngUpdated = entrada
       const indiceDato = state.data_residentNF.findIndex(
         el => el._id === IngUpdated._id
       )
-      state.data_resident.splice(indiceDato, 1, entrada)
+      state.data_residentNF.splice(indiceDato, 1, entrada)
     },
-    crearDataResidentParking(state, values) {
-      state.dataResidentParking = values;
+    crearDataResidentParking (state, values) {
+      state.dataResidentParking = values
     }
 
     // add_resi (state, data) {
@@ -46,11 +42,7 @@ export default {
 
   },
   actions: {
-    // Esta obtiene la lista de ingresos de residentes
-    async cargar_data_resi (context) {
-      const dataResi = await controller.IngResi_list()
-      context.commit('cargarListaIngrResi', dataResi)
-    },
+
     async cargar_data_resiNF (context) {
       const dataResi = await controller.IngResi_listNF()
       context.commit('cargarListaIngrResiNF', dataResi)
@@ -67,7 +59,7 @@ export default {
       if (result.data) {
         // console.log(values)
         // console.log(result)
-        context.commit('AddIngResidentUpdated', result)
+        context.commit('AddIngResidentUpdated', values)
       } else {
         alert('No se ha podido actualizar el dato a la base: ')
         console.error('Error al subir el dato  a la base : ', result.error)
@@ -78,7 +70,7 @@ export default {
       if (result.data) {
         // console.log(values)
         // console.log(result)
-        context.commit('AddSaliResidentUpdated', result)
+        context.commit('AddSaliResidentUpdated', values)
       } else {
         alert('No se ha podido actualizar el dato a la base: ')
         console.error('Error al subir el dato  a la base : ', result.error)
@@ -88,9 +80,9 @@ export default {
       const lista = await controller.listaResidentesParking()
       if (lista.completed) {
         // console.log(lista);
-        context.commit('crearDataResidentParking', lista.data);
+        context.commit('crearDataResidentParking', lista.data)
       } else {
-        console.error(lista.data);
+        console.error(lista.data)
       }
     }
 
@@ -110,14 +102,12 @@ export default {
     showOptions (state) {
       return state.showOptions
     },
-    resident_list (state) {
-      return state.data_resident;
-    },
+
     Entrada_resident_list (state) {
-      return state.Entrada_data_resident;
+      return state.Entrada_data_resident
     },
     residentListParking (state) {
-      return state.dataResidentParking;
+      return state.dataResidentParking
     },
     resident_listNF (state) {
       return state.data_residentNF

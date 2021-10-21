@@ -1,35 +1,35 @@
 /* eslint-disable camelcase */
-import axios from 'axios';
+import axios from 'axios'
 
 // eslint-disable-next-line import/prefer-default-export
-export async function listaHogares() {
+export async function listaHogares () {
   try {
-    const lista = await axios.get('/hogares');
-    return { data: lista.data, completed: true };
+    const lista = await axios.get('/hogares')
+    return { data: lista.data, completed: true }
   } catch (error) {
-    return { data: error, completed: false };
+    return { data: error, completed: false }
   }
 }
 
-export async function CreateHome(data) {
+export async function CreateHome (data) {
   const {
     aptoNum,
     tower,
     home_owner,
     user,
-    password,
-  } = data;
+    password
+  } = data
   const sendData = {
     aptoNum,
     tower,
     user,
-    password,
-  };
+    password
+  }
   if (home_owner !== undefined) {
-    sendData.home_owner = home_owner;
+    sendData.home_owner = home_owner
   }
   try {
-    const result = axios.post('/hogares', sendData);
+    const result = axios.post('/hogares', sendData)
     // if (home_owner !== undefined) {
     //   // sendData.home_owner = home_owner;
     //   result = await axios.post('/hogares', {
@@ -48,20 +48,20 @@ export async function CreateHome(data) {
     //     // home_owner,
     //   });
     // }
-    console.log(result);
-    return result.data;
+    console.log(result)
+    return result.data
   } catch (error) {
     // console.error(error);
-    return { data: error, completed: false };
+    return { data: error, completed: false }
   }
 }
 
-export async function ChangeOwner(data) {
+export async function ChangeOwner (data) {
   try {
-    const result = await axios.put('/hogares/owner', data);
-    console.log(result.data);
-    return (result.data);
+    const result = await axios.put('/hogares/owner', data)
+    console.log(result.data)
+    return (result.data)
   } catch (error) {
-    return { data: error, completed: false };
+    return { data: error, completed: false }
   }
 }

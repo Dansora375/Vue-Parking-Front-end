@@ -52,10 +52,10 @@
                             <b>{{date_salida.getDate()+'/'+(Number(date_salida.getMonth())+1)+'/'+date_salida.getFullYear()}}</b>
                         </p>
                     </div>
-										<button class="confirmar" @click="confirmar()">
-											Confirmar finalización
-										</button>
-                	</div>
+                        <button class="confirmar" @click="confirmar()">
+                            Confirmar finalización
+                        </button>
+                    </div>
                 </div>
                 <h3>${{tarifas}}</h3>
             </div>
@@ -69,22 +69,22 @@
 
 <script>
 
-import { mapGetters } from 'vuex';
+import { mapGetters } from 'vuex'
 
-import Carro from '@/assets/Car.svg';
-import Moto from '@/assets/Motorcycle.svg';
-import DefaultVehicle from '@/assets/predefined_list.svg';
+import Carro from '@/assets/Car.svg'
+import Moto from '@/assets/Motorcycle.svg'
+import DefaultVehicle from '@/assets/predefined_list.svg'
 
 export default {
   props: {
     index: {
-      type: Number,
-    },
+      type: Number
+    }
   },
-  created() {
+  created () {
     // this.date_salida = new Date()
   },
-  data() {
+  data () {
     return {
       imgCarro: Carro,
       imgMoto: Moto,
@@ -94,59 +94,61 @@ export default {
       horaP: '',
       tarifa: '',
       horaPagar: '',
-      horas_P: '',
+      horas_P: ''
       // date_salida: '',
-    };
+    }
   },
   computed: {
     ...mapGetters('entrada_salida', ['entradas']),
-    info() {
+    info () {
       // console.log(this.entradas);
-      return this.entradas[this.index];
+      return this.entradas[this.index]
     },
-    getTime() {
-      return new Date(this.info.hora_entrada);
+    getTime () {
+      return new Date(this.info.hora_entrada)
     },
-    date_salida() {
-			return new Date();
+    date_salida () {
+      return new Date()
     },
     tarifas: function () {
-        this.horaE = this.getTime.getTime();
-        this.horaS = this.date_salida.getTime();
-        this.horas_P = 0;
-        this.horaP = 0;
-        this.horaPagar = 0;
-        this.tarifa = 0;
-        this.horaP = (this.horaS - this.horaE);
-        this.horas_P = parseInt(((this.horaP/1000)/60)/60);
-        if(this.horas_P<8){
-            this.tarifa = 0;
-            return this.tarifa;
-        }
-        if(this.horas_P>8){
-            this.horaPagar = (this.horas_P-8);
-            this.tarifa = (this.horaPagar)*(3000);
-            return this.tarifa.toLocaleString('es-CO');
-        }
+      this.horaE = this.getTime.getTime()
+      this.horaS = this.date_salida.getTime()
+      this.horas_P = 0
+      this.horaP = 0
+      this.horaPagar = 0
+      this.tarifa = 0
+      this.horaP = (this.horaS - this.horaE)
+      this.horas_P = parseInt(((this.horaP / 1000) / 60) / 60)
+      if (this.horas_P < 8) {
+        this.tarifa = 0
+        return this.tarifa
+      }
+      if (this.horas_P > 8) {
+        this.horaPagar = (this.horas_P - 8)
+        this.tarifa = (this.horaPagar) * (3000)
+        return this.tarifa.toLocaleString('es-CO')
+      } else {
+        return 'Algo salio mal al crear la tarifa'
+      }
     },
-  },
-	methods: {
-		confirmar() {
-			this.$emit('confirm', { horaSalida: this.horaS, tarifa: this.tarifa});
-		}
-	},
+    methods: {
+      confirmar () {
+        this.$emit('confirm', { horaSalida: this.horaS, tarifa: this.tarifa })
+      }
+    }
+  }
 }
 </script>
 
 <style lang="scss" scoped>
     @import '@/views/scss/_theme.scss';
 
-.confirmar{
-	background: $secondary-color;
-	color:$background-color;
-	border-radius: 5px;
-	margin: 5px;
-}
+    .confirmar{
+        background: $secondary-color;
+        color:$background-color;
+        border-radius: 5px;
+        margin: 5px;
+    }
     .entradaMain{
     // background: black;
         display: flex;

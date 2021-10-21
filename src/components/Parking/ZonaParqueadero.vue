@@ -128,6 +128,11 @@ const resetData = {
   horaSalida: ''
 }
 
+const resetDataIngreso = {
+  id: '',
+  horaEntrada: ''
+}
+
 export default {
   name: 'ZonaParqueadero',
   components: {
@@ -156,7 +161,7 @@ export default {
 
       dateIngrResident: {
         id: '',
-        horaSalida: ''
+        horaEntrada: ''
       },
       dateSalidaResident: {
         id: '',
@@ -179,7 +184,7 @@ export default {
       this.resetDataEntrada()
     },
     resetDataEntrada () {
-      this.dateIngrResident = resetData
+      this.dateIngrResident = resetDataIngreso
     },
     updateIngresoRes (values) {
       const { key, val } = values

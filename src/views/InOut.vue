@@ -37,6 +37,11 @@
               Residentes
             </h2>
             <div class="content-medio residentes">
+
+            <div class="content-medio visitantes">
+              <EntradaSalida class="lista" v-for="(itemIngreso, index) in residentIngresoList" :key="index" v-bind:date_ingreso="transformToDate(itemIngreso)" v-bind:placa="itemIngreso.placa" v-bind:index="index" v-bind:tipo="itemIngreso.tipo" v-bind:id="itemIngreso._id">
+              </EntradaSalida>
+            </div>
             </div>
           </div>
 
@@ -45,7 +50,7 @@
               Visitantes
             </h2>
             <div class="content-medio visitantes">
-              <EntradaSalida class="lista" v-for="(itemEntrada, index) in entradas" :key="index" v-bind:date_ingreso="transformToDate(itemEntrada)" v-bind:placa="itemEntrada.placa" v-bind:index="index" v-bind:tipo="itemEntrada.tipo" v-bind:id="itemEntrada._id">
+              <EntradaSalida class="lista" v-for="(itemEntrada, index) in entradas" :key="index" v-bind:date_ingreso="transformToDate(itemEntrada)" v-bind:placa="itemEntrada.placa"  v-bind:tipo="itemEntrada.tipo" v-bind:id="itemEntrada._id">
               </EntradaSalida>
             </div>
           </div>
@@ -130,9 +135,11 @@ export default {
   mounted () {
     this.$store.dispatch('inf_resident/cargarListaResidentesParking')
     this.$store.dispatch('entrada_salida/cargarEntradas')
+    this.$store.dispatch('ResiIngreso/cargar_data_resi')
   },
   computed: {
-    ...mapGetters('entrada_salida', ['showModalNewEntrada', 'entradas'])
+    ...mapGetters('entrada_salida', ['showModalNewEntrada', 'entradas']),
+    ...mapGetters('ResiIngreso', ['residentIngresoList'])
 
   },
   methods: {

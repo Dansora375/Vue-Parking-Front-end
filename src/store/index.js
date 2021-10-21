@@ -6,29 +6,30 @@ import vehiculosModule from './modules/vehiculosModule'
 import hogaresModule from './modules/hogaresModule'
 import inf_resident from './modules/inf_residentModule'
 import parqueadero from './modules/parqueaderoModule'
+import ResiIngreso from './modules/ResiIngresoDAO'
+
 // import entradasModule from './modules/entradasModule';
-import NewResidenteModule from './modules/NewResidenteModule';
-import * as loginController from '@/Controladores/AuthenticationController';
+import NewResidenteModule from './modules/NewResidenteModule'
+import * as loginController from '@/Controladores/AuthenticationController'
 
 export default createStore({
   state: {
     userData: {},
-    isAuthenticating: false,
+    isAuthenticating: false
   },
   mutations: {
     login (state, user) {
       state.userData = user
     },
-    authenticating( state , val){
-      state.isAuthenticating = val;
+    authenticating (state, val) {
+      state.isAuthenticating = val
     }
   },
   actions: {
     async loginWithUser (context, { user, password }) {
-      
       try {
-        if (!this.state.isAuthenticating){
-          context.commit('authenticating', true);
+        if (!this.state.isAuthenticating) {
+          context.commit('authenticating', true)
           const usuario = await loginController.loginWithUser(user, password)
           if (usuario.data.correctPassword) {
             // this.$cookies.set('user', usuario.data.data);
@@ -36,18 +37,16 @@ export default createStore({
           }
         }
       } catch (error) {
-        console.log(error);
+        console.log(error)
       } finally {
-        context.commit('authenticating', false);
+        context.commit('authenticating', false)
       }
-      
-      
     },
     async register (context, values) {
-      context.commit('authenticating', true);
-      console.log('hola',this.state.isAuthenticating)
+      context.commit('authenticating', true)
+      console.log('hola', this.state.isAuthenticating)
       const res = await loginController.register(values)
-      context.commit('authenticating', false);
+      context.commit('authenticating', false)
       this.userData = res.data
       // this.$router.push({ name: 'Registro' });
       // console.log('hola mundo: \n', values);
@@ -71,7 +70,9 @@ export default createStore({
     hogares_module: hogaresModule,
     parqueadero_module: parqueadero,
     inf_resident,
+    ResiIngreso,
+
     // options_zona: options_zona_p,
-    New_Residente:NewResidenteModule
-  },
-});
+    New_Residente: NewResidenteModule
+  }
+})

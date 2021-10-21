@@ -8,7 +8,7 @@ function ResPost (completed, error, data) {
 
 export async function nuevoParqueadero (entrada) {
   try {
-    console.log('post function', entrada)
+    // console.log('post function', entrada)
     const nParqueadero = await axios.post('/parqueadero', {
       nombreParqueadero: entrada.nombreParqueadero,
       tipoVehicle: entrada.tipoVehicle,
@@ -20,11 +20,11 @@ export async function nuevoParqueadero (entrada) {
   }
 }
 
-export async function listaParqueaderosVisitantes() {
+export async function listaParqueaderosVisitantes () {
   try {
-    const lista = await axios.get('/parqueaderoIngresoVis');
-    return lista.data;
+    const lista = await axios.get('/parqueaderoIngresoVis')
+    return lista.data
   } catch (error) {
-    return { data: `${error}`, completed: false};
+    return { data: `${error}`, completed: false }
   }
 }

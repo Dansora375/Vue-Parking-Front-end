@@ -53,9 +53,9 @@ export default {
     },
     deleteEntrada (state, index) {
       if (index > -1) {
-        state.registrosEntrada.splice(index, 1);
+        state.registrosEntrada.splice(index, 1)
       } else {
-        console.error(' index no debe de ser negativo');
+        console.error(' index no debe de ser negativo')
       }
     }
     // cambiarEstadoParking(state, index){
@@ -93,19 +93,19 @@ export default {
       // console.log(state.dataNewEntrada);
       await dispatch('addNewEntrada', state.dataNewEntrada)
     },
-    async deleteEntrada(context, values) {
+    async deleteEntrada (context, values) {
       const {
         index,
         id,
         hora_salida
-      } = values;
-      const result = await controller.endEntrada({ id, hora_salida});
+      } = values
+      const result = await controller.endEntrada({ id, hora_salida })
       if (result.completed) {
-        context.commit('deleteEntrada', index);
-        console.log(result);
+        context.commit('deleteEntrada', index)
+        console.log(result)
       } else {
-        console.error('Error al ejecutar la operacion');
-      } 
+        console.error('Error al ejecutar la operacion')
+      }
     }
   },
   getters: {

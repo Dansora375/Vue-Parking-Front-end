@@ -16,16 +16,15 @@ export async function Obt_Parq_list () {
   return ParVisitant_list
 }
 
-export async function endEntrada(data){
+export async function endEntrada (data) {
   const {
     id,
-    hora_salida,
-  } = data;
+    hora_salida
+  } = data
   try {
-    const result = Dao.endEntrada({ id, hora_salida });
-    return result;
+    const result = Dao.endEntrada({ id, hora_salida })
+    return result
   } catch (error) {
-    return { data: `${error}`, completed: false };
+    return { data: `${error}`, completed: false }
   }
 }
-

@@ -80,11 +80,11 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'Registrer',
-  data() {
+  data () {
     return {
       dataRegistro: {
         Cc: '',
@@ -93,24 +93,24 @@ export default {
         email: '',
         repEmail: '',
         password: '',
-        repContraseña: '',
+        repContraseña: ''
       },
-      isSimilarPassword: true,
-    };
+      isSimilarPassword: true
+    }
   },
   computed: {
-    ...mapGetters(['getUserData', 'getIsNotLogged']),
+    ...mapGetters(['getUserData', 'getIsNotLogged'])
     // dataRegistro: this.dataR,
   },
   methods: {
     ...mapActions(['register']),
-    registrar() {
+    registrar () {
       // console.log(this.dataRegistro);
-      this.register(this.dataRegistro);
+      this.register(this.dataRegistro)
       // alert(this.dataRegistro);
-    },
-  },
-};
+    }
+  }
+}
 </script>
 
 <style scoped lang="scss">
@@ -154,6 +154,7 @@ propiedad para responsive */
   background: none;
   border: none;
   font-size: medium;
+  margin-top: 40px;
   border-radius: 5px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -253,6 +254,7 @@ NO es necesario ya que el anterior le da a los dos*/
     display: flex;
     padding-left: 30px;
     padding-right: 45px;
+    padding-top: 55px;
 
     flex-direction: column;
 
@@ -322,6 +324,7 @@ NO es necesario ya que el anterior le da a los dos*/
 
         font-size: 36px;
         padding-left: 45px;
+
     }
 
     #logo {
@@ -332,12 +335,12 @@ NO es necesario ya que el anterior le da a los dos*/
     .cont-flex div {
 
         /* distancia de separacion entre titulo y logo */
-        padding-top: 70px;
+        padding-top: 10px;
 
     }
     .cont-flex{
 
-    padding-top: 60px ;
+    padding-top: 10px ;
   }
 
     .formulario {
@@ -357,6 +360,11 @@ NO es necesario ya que el anterior le da a los dos*/
 
         margin-top:40px;
     }
+    .cont-flex .div{
+
+    padding-top: 70px;
+
+}
 
 }
 </style>

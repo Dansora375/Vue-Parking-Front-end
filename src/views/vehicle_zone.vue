@@ -27,11 +27,11 @@
         </div>
         <div class="subMenu">
           <button class="buttonMenu" id="Bt_default" @click="showParkResi">Residentes</button>
-          <button class="buttonMenu" @click="showParkVisitant">Visitantes</button>
+          <button class="buttonMenu" id="Bt_default2"  @click="showParkVisitant">Visitantes</button>
         </div>
         <div v-show="showResidentPark">
             <div class="vehicle_list" >
-                <ZonaParqueadero  v-for=" (ItemResi,index) in resident_listNF" :key="index" :inf_estado="ItemResi.ocupado ?  'Lleno':'Vacio'" :index="index" :parqueadero_numero="ItemResi.residente.vehiculo[0].parqueadero.nombre_Parqueadero" tipoList="Residente" :tipoVehicle="ItemResi.residente.vehiculo[0].tipo" >
+                <ZonaParqueadero  v-for=" (ItemResi,index) in resident_listNF" :key="index" :inf_estado="ItemResi.Ocupado ?  'Lleno':'Vacio'" :index="index" :parqueadero_numero="ItemResi.nombre_Parqueadero" tipoList="Residente" :tipoVehicle="ItemResi.tipoVehicle" >
                 </ZonaParqueadero>
             </div>
         </div>
@@ -140,6 +140,9 @@ export default {
       const ButtonR = document.getElementById('Bt_default')
       ButtonR.style.fontWeight = 'bold'
       ButtonR.style.borderBottom = '3px solid #22577A'
+      const ButtonTwo = document.getElementById('Bt_default2')
+      ButtonTwo.style.fontWeight = null
+      ButtonTwo.style.borderBottom = null
     },
     showParkVisitant () {
       this.showVisitantPark = true
@@ -147,6 +150,10 @@ export default {
       const ButtonR = document.getElementById('Bt_default')
       ButtonR.style.fontWeight = null
       ButtonR.style.borderBottom = null
+
+      const ButtonTwo = document.getElementById('Bt_default2')
+      ButtonTwo.style.fontWeight = 'bold'
+      ButtonTwo.style.borderBottom = '3px solid #22577A'
     }
     // ...mapMutations('inf_resident', ['changeShowOptions']),
 
@@ -267,10 +274,7 @@ export default {
       border-bottom: 1px solid $main-color;
 
     }
-    .buttonMenu:focus{
-      font-weight: bold;
-      border-bottom: 3px solid $main-color;
-    }
+   
 
   @media (max-width: 600px){
     .superior-bar{

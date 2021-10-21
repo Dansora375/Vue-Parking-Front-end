@@ -26,7 +26,7 @@ export default {
   },
   actions: {
     async addNewParking (context, value) {
-      console.log(value)
+      // console.log(value)
       const result = await controller.PostParqueadero(value)
       if (result.result) {
         alert('Dato subido con exito')

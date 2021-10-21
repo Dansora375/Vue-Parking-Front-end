@@ -7,9 +7,9 @@ export async function PostParqueadero (entrada) {
 
 export async function listaParqueaderosVisitantes () {
   try {
-    const lista = await Dao.listaParqueaderosVisitantes();
-    return lista;
+    const lista = await Dao.listaParqueaderosVisitantes()
+    return lista
   } catch (error) {
-    return { data: `${error}`, completed: false };
+    return { data: `${error}`, completed: false }
   }
 }
