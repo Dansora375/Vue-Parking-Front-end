@@ -33,12 +33,11 @@ export default {
     },
     crearDataResidentParking (state, values) {
       state.dataResidentParking = values
-    }
+    },
 
-    // add_resi (state, data) {
-    //   state.Entrada_data_resident.push(data)
-    //   state.showOptions = false
-    // }
+    add_resi (state, data) {
+      state.Entrada_data_resident.push(data)
+    }
 
   },
   actions: {
@@ -84,17 +83,17 @@ export default {
       } else {
         console.error(lista.data)
       }
-    }
+    },
 
-    // async addNewResident (context, value) {
-    //   const result = await controller.post_Resident(value)
-    //   if (result.result) {
-    //     context.commit('add_resi', value)
-    //   } else {
-    //     alert('No se ha podido subir el dato del residente a la base: ')
-    //     console.log('Error al subir el dato del resiedente a la base : ', result.error)
-    //   }
-    // }
+    async addNewResident (context, value) {
+      const result = await controller.post_Resident(value)
+      if (result.result) {
+        context.commit('add_resi', value)
+      } else {
+        alert('No se ha podido subir el dato del residente a la base: ')
+        console.log('Error al subir el dato del resiedente a la base : ', result.error)
+      }
+    }
 
   },
   getters: {
