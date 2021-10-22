@@ -74,6 +74,11 @@
                   Cancelar
                 </button>
               </template>
+              <template v-slot:confirmar>
+                <button class="btAcept">
+                    OK
+                </button>
+              </template>
             </ModalContent>
           </Modal2>
 

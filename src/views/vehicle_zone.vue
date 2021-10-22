@@ -274,7 +274,6 @@ export default {
       border-bottom: 1px solid $main-color;
 
     }
-   
 
   @media (max-width: 600px){
     .superior-bar{

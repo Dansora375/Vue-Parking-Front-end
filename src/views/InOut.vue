@@ -32,20 +32,20 @@
       </div>
 
       <div class="opciones">
-        <button v-bind:class="{ opcion_activa: esVisitante }" @click="changeOption('visitante')">
-          Visitantes
-        </button>
-        <button v-bind:class="{ opcion_activa: !esVisitante }" @click="changeOption('residente')">
+        <button id="Bt_default" class="buttonMenu" @click="showParkResi">
           Residentes
+        </button>
+        <button id="Bt_default2" class="buttonMenu" @click="showParkVisitant" >
+          Visitantes
         </button>
       </div>
 
-      <div class="listado" v-if="esVisitante">
-        <entrada-salida  class="lista" v-for="(itemEntrada, index) in entradas" :key="index" v-bind:date_ingreso="transformToDate(itemEntrada)" v-bind:placa="itemEntrada.placa" v-bind:index="index" v-bind:tipo="itemEntrada.tipo" v-bind:id="itemEntrada._id" v-bind:visitante="true">
+      <div class="listado" v-show="showResidentIng" >
+        <entrada-salida  class="lista" v-for="(itemEntradaResi, index) in residentIngresoList" :key="index" v-bind:date_ingreso="transformToDate(itemEntradaResi)" v-bind:placa="itemEntradaResi.residente.vehiculo[0].placa" v-bind:index="index" v-bind:tipo="itemEntradaResi.residente.vehiculo[0].tipo" v-bind:id="itemEntradaResi._id" v-bind:visitante="true">
         </entrada-salida>
       </div>
 
-      <div class="listado" v-else >
+      <div class="listado" v-show="showVisitantIng" >
         <entrada-salida  class="lista" v-for="(itemEntrada, index) in entradas" :key="index" v-bind:date_ingreso="transformToDate(itemEntrada)" v-bind:placa="itemEntrada.placa" v-bind:index="index" v-bind:tipo="itemEntrada.tipo" v-bind:id="itemEntrada._id" v-bind:visitante="false">
         </entrada-salida>
       </div>
@@ -120,13 +120,22 @@ export default {
         tipo: '',
         datos_extra: ''
       },
-      esVisitante: true
+      esVisitante: true,
+      showResidentIng: {
+        type: Boolean,
+        default: true
+      },
+      showVisitantIng: {
+        type: Boolean,
+        default: false
+      }
     }
   },
   mounted () {
     this.$store.dispatch('inf_resident/cargarListaResidentesParking')
     this.$store.dispatch('entrada_salida/cargarEntradas')
     this.$store.dispatch('ResiIngreso/cargar_data_resi')
+    this.showParkResi()
   },
   computed: {
     ...mapGetters('entrada_salida', ['showModalNewEntrada', 'entradas']),
@@ -159,10 +168,32 @@ export default {
     modificarTipo () {
       console.log('hola')
     },
-    changeOption (data) {
-      // console.log(data, data.toLowerCase() === "visitante");
-      this.esVisitante = data.toLowerCase() === 'visitante'
+
+    showParkResi () {
+      this.showResidentIng = true
+      this.showVisitantIng = false
+      const ButtonR = document.getElementById('Bt_default')
+      ButtonR.style.fontWeight = 'bold'
+      ButtonR.style.borderBottom = '3px solid #22577A'
+      const ButtonTwo = document.getElementById('Bt_default2')
+      ButtonTwo.style.fontWeight = null
+      ButtonTwo.style.borderBottom = null
+    },
+    showParkVisitant () {
+      this.showVisitantIng = true
+      this.showResidentIng = false
+      const ButtonR = document.getElementById('Bt_default')
+      ButtonR.style.fontWeight = null
+      ButtonR.style.borderBottom = null
+
+      const ButtonTwo = document.getElementById('Bt_default2')
+      ButtonTwo.style.fontWeight = 'bold'
+      ButtonTwo.style.borderBottom = '3px solid #22577A'
     }
+    // changeOption (data) {
+    //   // console.log(data, data.toLowerCase() === "visitante");
+    //   this.esVisitante = data.toLowerCase() === 'visitante'
+    // }
   }
 }
 </script>
@@ -171,7 +202,9 @@ export default {
 
 @import '@/views/scss/_theme.scss';
 .opcion_activa{
-  border-bottom: 2px solid $main-color;
+  border-bottom: 3px solid $main-color;
+  font-weight: bold;
+  width: 50%;
 }
 .home{
   // z-index: 200;
@@ -237,7 +270,11 @@ export default {
   .btCancel:hover{
     color:$background-color;
   }
+  .buttonMenu{
+      width: 50%;
+      border-bottom: 1px solid $main-color;
 
+    }
   @media (max-width: 600px){
     .superior-bar{
       display: flex;
@@ -250,6 +287,10 @@ export default {
     .search{
       display: flex;
       justify-content: flex-end;
+    }
+    .buttonMenu{
+      font-size: 0.8em;
+
     }
   }
   .superior-bar{
@@ -278,15 +319,14 @@ export default {
     background-color:$secondary-color ;
   }
 .opciones{
-  width: 100%;
   display: flex;
   justify-content: space-around;
+  position: sticky;
+  top: 20px;
+  background:$background-color;
+  padding-bottom: 10px;
   // margin: 15px;
 
 }
-.opciones button{
 
-  width: 45%;
-  // background: black;
-}
 </style>
