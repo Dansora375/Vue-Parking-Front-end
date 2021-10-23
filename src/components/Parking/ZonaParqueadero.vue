@@ -120,6 +120,7 @@ import ModalContent from '@/components/modal/ModalContent.vue'
 import ModalInfResident from '@/components/Parking/ModalInfResident.vue'
 import ModalLlenarParking from '@/components/Parking/ModalLlenarparking.vue'
 import ModalVaciarParking from '@/components/Parking/ModalVaciarParking.vue'
+import { ref } from 'vue'
 
 // import { mapGetters, mapMutations } from 'vuex'
 
@@ -135,6 +136,7 @@ const resetDataIngreso = {
 
 export default {
   name: 'ZonaParqueadero',
+
   components: {
     Modal2,
     ModalContent,
@@ -145,6 +147,7 @@ export default {
     ModalVaciarParking
 
   },
+
   provide () {
     return {
       dataNewIngresoResi: () => this.dateIngrResident,
@@ -172,6 +175,8 @@ export default {
   },
 
   computed: {
+
+    ...mapGetters('inf_resident', ['resident_listNF'])
     //   ...mapGetters
     // dateIngrResi () {
     //   return new Date()
@@ -180,11 +185,23 @@ export default {
   methods: {
     ...mapActions('inf_resident', ['AgregarEntradaResi', 'AgregarSalidaResi']),
     llenarParqueadero () {
+      // Lo comentado serviria para implementar pruebas
+      // o para implmentar la actualiazacion de horas
+      // utilizando el emit
+
+      //   const result = this.AgregarEntradaResi(this.dateIngrResident)
       this.AgregarEntradaResi(this.dateIngrResident)
+      //   this.ejecutarEmit(result)
       this.resetDataEntrada()
     },
+    // ejecutarEmit (data) {
+    //   this.$emit('eventIngrResi', data)
+    // },
     resetDataEntrada () {
       this.dateIngrResident = resetDataIngreso
+    },
+    resetDataSalida () {
+      this.dateIngrResident = resetData
     },
     updateIngresoRes (values) {
       const { key, val } = values
@@ -192,7 +209,8 @@ export default {
     },
     VaciarParqueadero () {
       this.AgregarSalidaResi(this.dateSalidaResident)
-      this.resetDataEntrada()
+
+      this.resetDataSalida()
     },
     updateSalidaRes (values) {
       const { key, val } = values

@@ -128,7 +128,8 @@ export default {
       showVisitantIng: {
         type: Boolean,
         default: false
-      }
+      },
+      ResidentIngresos: this.residentIngresoList
     }
   },
   mounted () {

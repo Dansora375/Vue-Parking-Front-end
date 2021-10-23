@@ -18,17 +18,17 @@ export default {
     },
 
     AddIngResidentUpdated (state, entrada) {
-      const IngUpdated = entrada
-      const indiceDato = state.data_residentNF.findIndex(
-        el => el._id === IngUpdated._id
+      const indiceDato = state.data_residentNF.map(element => element._id).indexOf(
+        entrada._id
       )
+      // console.log(indiceDato)
       state.data_residentNF.splice(indiceDato, 1, entrada)
     },
     AddSaliResidentUpdated (state, entrada) {
-      const IngUpdated = entrada
-      const indiceDato = state.data_residentNF.findIndex(
-        el => el._id === IngUpdated._id
+      const indiceDato = state.data_residentNF.map(element => element._id).indexOf(
+        entrada._id
       )
+      // console.log(indiceDato)
       state.data_residentNF.splice(indiceDato, 1, entrada)
     },
     crearDataResidentParking (state, values) {
@@ -58,7 +58,10 @@ export default {
       if (result.data) {
         // console.log(values)
         // console.log(result)
-        context.commit('AddIngResidentUpdated', values)
+        context.commit('AddIngResidentUpdated', result.data)
+        // Este return se utilizaria en caso de querer
+        // implementar la actualizacion con el emit
+        // return result.data
       } else {
         alert('No se ha podido actualizar el dato a la base: ')
         console.error('Error al subir el dato  a la base : ', result.error)
@@ -69,10 +72,12 @@ export default {
       if (result.data) {
         // console.log(values)
         // console.log(result)
-        context.commit('AddSaliResidentUpdated', values)
+        context.commit('AddSaliResidentUpdated', result.data)
+        // Este return se utilizaria en caso de querer
+        // implementar la actualizacion con el emit
+        // return result.data
       } else {
-        alert('No se ha podido actualizar el dato a la base: ')
-        console.error('Error al subir el dato  a la base : ', result.error)
+        return alert('No se ha podido actualizar el dato a la base: ')
       }
     },
     async cargarListaResidentesParking (context) {
@@ -88,7 +93,7 @@ export default {
     async addNewResident (context, value) {
       const result = await controller.post_Resident(value)
       if (result.result) {
-        context.commit('add_resi', value)
+        context.commit('add_resi', result)
       } else {
         alert('No se ha podido subir el dato del residente a la base: ')
         console.log('Error al subir el dato del resiedente a la base : ', result.error)

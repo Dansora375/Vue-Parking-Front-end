@@ -23,7 +23,10 @@ export async function nuevoParqueadero (entrada) {
 export async function listaParqueaderosVisitantes () {
   try {
     const lista = await axios.get('/parqueaderoIngresoVis')
-    return lista.data
+    // console.log(lista)
+    // console.log(lista.data)
+    // return lista.data
+    return lista
   } catch (error) {
     return { data: `${error}`, completed: false }
   }

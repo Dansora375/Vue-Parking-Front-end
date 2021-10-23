@@ -155,10 +155,19 @@ export default {
       ButtonTwo.style.fontWeight = 'bold'
       ButtonTwo.style.borderBottom = '3px solid #22577A'
     }
-    // ...mapMutations('inf_resident', ['changeShowOptions']),
+    // Una posible forma para poder los cambios al momento
+    // de actualizar, usando emit sin usar los actions
 
-    // ...mapActions('inf_resident', ['cargar_data_resi']),
-    // ...mapActions('entrada_salida', ['cargar_parq_list'])
+    // para talcaso agregar este evento en el componente: @eventIngrResi="dateIngrResident"
+    // dateIngrResident (value) {
+    //   console.log(value)
+    //   console.log(this.resident_listNF)
+    //   const indiceDato = this.resident_listNF.indexOf(
+    //     value._id
+    //   )
+    //   console.log(indiceDato)
+    //   this.resident_listNF.splice(indiceDato, 1, value)
+    // }
 
   }
 }
