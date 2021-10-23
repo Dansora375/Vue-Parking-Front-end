@@ -5,17 +5,18 @@
     
 <div class="conteiner">
   <div class="icono">
-     <img :src= imgUser> 
+      
   </div>
   
-    <div class="nombre-user">{{Nombre}}
-
-    </div>
+    
     </div>
     
     <MenuDropDown>
         <template v-slot:toggler>
-          <img class="icon-menu" src="@/assets/menu.svg" alt="">
+          <div class="lisresi">
+            <img :src= imgUser>
+            <div class="nombre-user"><b>{{Nombre}}</b></div>
+          </div>
         </template>
          <MenuDropDownContent class="menu-options">
           <MenuDropDownItem class="opcion_menu">
@@ -122,8 +123,9 @@ a {
   color: #42b983;
 }
 .item{
-        margin-top: 50px ;
-        border-radius: 5px;
+        margin-top: 10px ;
+        margin-right: 15px;
+        border-radius: 10px;
         padding:10px ;
         position: relative;
         background:$third-color;
@@ -178,10 +180,13 @@ input{
 
 // }
 .nombre-user{
-  font-size: 1.5em;
+  font-size: 1em;
   color:$main-color ;
   margin: 5px;
 }
+// .lisresi{
+ 
+// }
 // Arreglando algunos detalles
 
 </style>
