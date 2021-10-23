@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="colum">
   <section class="item">
 
     <div class="conteiner">
@@ -10,7 +10,7 @@
         <div class="icono">
           <img :src= imgUser>
         </div>
-        <div class="nombre-user">{{Nombre}}
+        <div class="nombre-user"><b>{{Nombre}}</b>
         </div>
       </template>
       <MenuDropDownContent class="menu-options">
@@ -162,24 +162,26 @@ a {
   color: #42b983;
 }
 .item{
-        margin-top: 50px ;
-        border-radius: 5px;
+        margin-top: 10px ;
+        margin-right: 15px;
+        border-radius: 10px;
         padding:10px ;
+        width: 90px;
         position: relative;
         background:$third-color;
-
-        display: flex;
+        
         border: 2px solid $main-color;
-        align-items: center;
-        justify-content: space-between;
+        display: flex;
+        justify-content: center;
         align-items: center;
     }
 
 .container{
 
         display: flex;
-         flex-direction:column;
+        flex-direction:column;
         justify-content: space-between;
+        
         // flex-direction: column;
         align-items: center;
         width: 50%;
@@ -227,9 +229,8 @@ input{
 
 // }
 .nombre-user{
-  font-size: 1.5em;
+  font-size: 1em;
   color:$main-color ;
-  margin: 5px;
 }
 // Arreglando algunos detalles
 
