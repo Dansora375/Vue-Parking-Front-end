@@ -102,7 +102,7 @@ export default {
 @import '@/views/scss/_theme.scss';
 .fixed{
   position:fixed;
-  padding-top: 100px;
+  // padding-top: 100px;
   height: 100%;
   top: 0;
   width: 20%;
@@ -111,6 +111,7 @@ export default {
 
   display: flex;
   flex-direction: column;
+  padding-top: 100px;
   justify-content: space-between;
   background-color: $main-color;//Llamando a la variable del color
   // align-items: start;

@@ -41,12 +41,12 @@
       </div>
 
       <div class="listado" v-show="showResidentIng" >
-        <entrada-salida  class="lista" v-for="(itemEntradaResi, index) in residentIngresoList" :key="index" v-bind:date_ingreso="transformToDate(itemEntradaResi)" v-bind:placa="itemEntradaResi.residente.vehiculo[0].placa" v-bind:index="index" v-bind:tipo="itemEntradaResi.residente.vehiculo[0].tipo" v-bind:id="itemEntradaResi._id" v-bind:visitante="true">
+        <entrada-salida  class="lista" v-for="(itemEntradaResi, index) in residentIngresoList" :key="index" v-bind:date_ingreso="transformToDate(itemEntradaResi)" v-bind:placa="itemEntradaResi.residente.vehiculo[0].placa" v-bind:index="index" v-bind:tipo="itemEntradaResi.residente.vehiculo[0].tipo" v-bind:id="itemEntradaResi._id" tipoList="Residente">
         </entrada-salida>
       </div>
 
       <div class="listado" v-show="showVisitantIng" >
-        <entrada-salida  class="lista" v-for="(itemEntrada, index) in entradas" :key="index" v-bind:date_ingreso="transformToDate(itemEntrada)" v-bind:placa="itemEntrada.placa" v-bind:index="index" v-bind:tipo="itemEntrada.tipo" v-bind:id="itemEntrada._id" v-bind:visitante="false">
+        <entrada-salida  class="lista" v-for="(itemEntrada, index) in entradas" :key="index" v-bind:date_ingreso="transformToDate(itemEntrada)" v-bind:placa="itemEntrada.placa" v-bind:index="index" v-bind:tipo="itemEntrada.tipo" v-bind:id="itemEntrada._id" tipoList="Visitante">
         </entrada-salida>
       </div>
     </div>

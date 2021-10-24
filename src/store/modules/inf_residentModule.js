@@ -6,7 +6,7 @@ export default {
   state: {
     // Para enlistar ingreso residente
 
-    Entrada_data_resident: [],
+    // Entrada_data_resident: [],
     dataResidentParking: [],
     data_residentNF: []
 
@@ -33,10 +33,6 @@ export default {
     },
     crearDataResidentParking (state, values) {
       state.dataResidentParking = values
-    },
-
-    add_resi (state, data) {
-      state.Entrada_data_resident.push(data)
     }
 
   },
@@ -87,16 +83,6 @@ export default {
         context.commit('crearDataResidentParking', lista.data)
       } else {
         console.error(lista.data)
-      }
-    },
-
-    async addNewResident (context, value) {
-      const result = await controller.post_Resident(value)
-      if (result.result) {
-        context.commit('add_resi', result)
-      } else {
-        alert('No se ha podido subir el dato del residente a la base: ')
-        console.log('Error al subir el dato del resiedente a la base : ', result.error)
       }
     }
 

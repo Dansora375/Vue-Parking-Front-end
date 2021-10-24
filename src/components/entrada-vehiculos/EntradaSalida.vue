@@ -2,9 +2,11 @@
   <div >
     <section class="item">
       <!-- <img v-bind:src="img_route" class="vehicle"  alt="vehiculos"> -->
-      <img v-if="tipo === 'Carro'" v-bind:src="imgCarro" class="vehicle"  alt="vehiculos">
-      <img v-else-if="tipo === 'Moto'" v-bind:src="imgMoto" class="vehicle"  alt="vehiculos">
-      <img v-else v-bind:src="imgDefault" class="vehicle"  alt="vehiculos">
+
+        <img v-if="tipo === 'Carro'" v-bind:src="imgCarro" class="vehicle"  alt="vehiculos">
+        <img v-else-if="tipo === 'Moto'" v-bind:src="imgMoto" class="vehicle"  alt="vehiculos">
+        <img v-else v-bind:src="imgDefault" class="vehicle"  alt="vehiculos">
+
       <!-- <img v-bind:src="img_route" class="vehicle"  alt="vehiculos">
       <img v-bind:src="img_route" class="vehicle"  alt="vehiculos"> -->
       <div class="container-double">
@@ -38,14 +40,14 @@
         </template>
         <MenuDropDownContent class="menu-options">
 
-          <Modal2>
+          <!-- <Modal2>
             <template v-slot:toggler>
               <p class="opcion_menu">
                 Terminar parqueadero
               </p>
             </template>
             <ModalContent>
-              <Entradatarifa v-bind:index="this.index" @confirm="confirmar">
+              <Entradatarifa v-bind:index="this.index" :tipoList="this.tipoList">
               </Entradatarifa>
               <template v-slot:cancelar >
                 <button>
@@ -53,21 +55,67 @@
                 </button>
               </template>
               <template v-slot:confirmar v-if="estaConfirmado">
-                <button @click="deleteEntrada(index, id)">
+                <button >
                   Terminar proceso
                 </button>
               </template>
             </ModalContent>
-          </Modal2>
-
-          <Modal2>
+          </Modal2> -->
+          <!-- Modal para informacion de visitantes -->
+          <Modal2  v-if="tipoList==='Visitante'">
             <template v-slot:toggler>
               <p class="opcion_menu">
                 Mas informacion
               </p>
             </template>
             <ModalContent>
-              <EntradaInformation v-bind:index="this.index">
+              <EntradaInformation :index="this.index" :tipoList="this.tipoList" :tipoVehicle="infoVisitant.tipo" :nombre="infoVisitant.nombre" :placa="infoVisitant.placa" :HoraEntrada="infoVisitant.hora_entrada" :apartamento="infoVisitant.apto_num" :datosExtra="infoVisitant.datos_extra" :tower="infoVisitant.tower" :parqueadero="infoVisitant.parqueadero.nombre_Parqueadero">
+              </EntradaInformation>
+              <template v-slot:cancelar>
+                <button>
+                  Cancelar
+                </button>
+              </template>
+              <template v-slot:confirmar>
+                <button class="btAcept">
+                    OK
+                </button>
+              </template>
+            </ModalContent>
+          </Modal2>
+          <!-- Modal para informacion de residentes 1-->
+          <Modal2 v-if="tipoList=='Residente' && ComprobarHogarHabitando ">
+            <template v-slot:toggler>
+              <p class="opcion_menu">
+                Mas informacion
+              </p>
+            </template>
+            <ModalContent>
+              <EntradaInformation :tipoVehicle="infoResident.residente.vehiculo[0].tipo" :nombre="infoResident.residente.nombre" :placa="infoResident.residente.vehiculo[0].placa" :HoraEntrada="infoResident.hora_entrada" :apartamento="infoResident.residente.hogar_habitando.apto_num" :datosExtra="infoResident.residente.vehiculo[0].datos_extra" :tower="infoResident.residente.hogar_habitando.tower"
+              :parqueadero="infoResident.residente.vehiculo[0].parqueadero.nombre_Parqueadero ">
+              </EntradaInformation>
+              <template v-slot:cancelar>
+                <button>
+                  Cancelar
+                </button>
+              </template>
+              <template v-slot:confirmar>
+                <button class="btAcept">
+                    OK
+                </button>
+              </template>
+            </ModalContent>
+          </Modal2>
+
+          <!-- Modal para informacion de residentes 2-->
+          <Modal2 v-if="tipoList=='Residente' && ComprobarHogar && ComprobarHogarHabitando === false  ">
+            <template v-slot:toggler>
+              <p class="opcion_menu">
+                Mas informacion
+              </p>
+            </template>
+            <ModalContent>
+              <EntradaInformation :tipoVehicle="infoResident.residente.vehiculo[0].tipo" :nombre="infoResident.residente.nombre" :placa="infoResident.residente.vehiculo[0].placa" :HoraEntrada="infoResident.hora_entrada" :apartamento="infoResident.residente.hogar[0].apto_num" :datosExtra="infoResident.residente.vehiculo[0].datos_extra" :tower="infoResident.residente.hogar[0].tower" :parqueadero="infoResident.residente.vehiculo[0].parqueadero.nombre_Parqueadero" >
               </EntradaInformation>
               <template v-slot:cancelar>
                 <button>
@@ -147,9 +195,11 @@ export default {
       type: String
       // default: 'AAA000',
     },
+    tipoList: {
+      type: String
+    },
     tipo: {
-      type: String,
-      default: 'Default'
+      type: String
     },
     id: {
       type: String
@@ -157,35 +207,41 @@ export default {
   },
   computed: {
     ...mapGetters('entrada_salida', ['entradas']),
-    estaConfirmado () {
-      return this.dataForFinish
+    ...mapGetters('ResiIngreso', ['residentIngresoList']),
+    // estaConfirmado () {
+    //   return this.dataForFinish
+    // },
+    // getIndex () {
+    //   return this.index
+    // },
+    infoVisitant () {
+      return this.entradas[this.index]
     },
-    getIndex () {
-      return this.index
+    infoResident () {
+      return this.residentIngresoList[this.index]
+    },
+    ComprobarHogarHabitando () {
+      if (this.infoResident.residente.hogar_habitando) {
+        return true
+      } else {
+        return false
+      }
+    },
+    ComprobarHogar () {
+      if (this.infoResident.residente.hogar) {
+        return true
+      } else {
+        return false
+      }
     }
   },
   methods: {
-    ...mapActions('entrada_salida', ['deleteEntrada']),
-    confirmar (value) {
-      this.dataForFinish = value
-      console.log(value)
-    },
-    async deleteEntrada (ind, idd) {
-      if (this.estaConfirmado) {
-        // const id = this.id;
-        // console.log(this.entradas[ind], id);
-        const data = { index: ind, id: idd, hora_salida: this.estaConfirmado.horaSalida }
-        console.log(data)
-        const r = await this.deleteEntrada()
-        // const result = await this.deleteEntrada(data);
-        // if (!result.completed) {
-        //   alert("No se pudo modificar el dato en la base");
-        //   console.error(result.data);
-        // } else {
-        //   alert('Error modificando el dato en la base');
-        // }
-      }
-    }
+    // ...mapActions('entrada_salida', ['deleteEntrada']),
+    // confirmar (value) {
+    //   this.dataForFinish = value
+    //   console.log(value)
+    // }
+
   }
 }
 </script>

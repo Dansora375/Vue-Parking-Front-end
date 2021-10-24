@@ -20,6 +20,9 @@ export async function nuevoParqueadero (entrada) {
   }
 }
 
+// Get para obtener los parqueaderos que se usaran en los
+// select de los ingresos de vehiculos PARA VISITANTES; se filtraran por
+// aquellos que tengan el dato "Ocupado :false"
 export async function listaParqueaderosVisitantes () {
   try {
     const lista = await axios.get('/parqueaderoIngresoVis')

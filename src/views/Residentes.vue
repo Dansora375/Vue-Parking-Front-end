@@ -28,7 +28,7 @@
 
         <SearchBar class="search"></SearchBar>
       </div>
-    
+
     <div class="hogares">
     <lista-residentes v-for="(item, index) of getNewResidente" :key="index" v-bind:id="item._id" v-bind:Nombre="item.nombre">
     </lista-residentes>
@@ -39,17 +39,14 @@
 
 <script>
 // @ is an alias to /src
-import ListaResidentes from '@/components/ListaResidentes.vue';
-import Header from '@/components/Header.vue';
-import Nav from '@/components/Nav.vue';
-import NewResidente from '@/components/NewResidente.vue';
-import Modal2 from '@/components/modal/Modal2.vue';
-import ModalContent from '@/components/modal/ModalContent.vue';
+import ListaResidentes from '@/components/ListaResidentes.vue'
+import Header from '@/components/Header.vue'
+import Nav from '@/components/Nav.vue'
+import NewResidente from '@/components/NewResidente.vue'
+import Modal2 from '@/components/modal/Modal2.vue'
+import ModalContent from '@/components/modal/ModalContent.vue'
 import SearchBar from '@/components/SearchButton.vue'
 import { mapGetters, mapMutations, mapActions } from 'vuex'
-
-
-
 
 export default {
   name: 'Home',
@@ -63,43 +60,43 @@ export default {
     SearchBar
   },
 
-  created() {
+  created () {
     // console.log('inmounted: ');
-    this.$store.dispatch('New_Residente/cargarResidentes');
+    this.$store.dispatch('New_Residente/cargarResidentes')
   },
-  provide() {
+  provide () {
     return {
       dataResidente: () => this.dataNewResidente,
-      updateEntrada: this.updateEntrada,
-    };
+      updateEntrada: this.updateEntrada
+    }
   },
-  data() {
+  data () {
     return {
       dataNewResidente: {
-        nombre: "",
+        nombre: '',
         cedula: 0,
         telefono: 0,
-        apto_num:0,
-        tower: "",
-        
-      },
-    };
+        apto_num: 0,
+        tower: ''
+
+      }
+    }
   },
   computed: {
-    ...mapGetters('New_Residente', ['getNewResidente']),
+    ...mapGetters('New_Residente', ['getNewResidente'])
   },
   methods: {
-    updateEntrada(values) {
-      const { key, val } = values;
-      this.dataNewResidente[key] = val;
+    updateEntrada (values) {
+      const { key, val } = values
+      this.dataNewResidente[key] = val
     },
     ...mapActions('New_Residente', ['crearResidente']),
-    agregarResidente() {
-      console.log(this.dataNewResidente);
+    agregarResidente () {
+      console.log(this.dataNewResidente)
       this.crearResidente(this.dataNewResidente)
-    },
-  },
-};
+    }
+  }
+}
 
 </script>
 <style scoped lang="scss">
@@ -151,7 +148,6 @@ input{
   background-color:$secondary-color ;
   display:flex;
   flex-direction: row;
-  
 
 }
 .nombre-user{
@@ -160,8 +156,6 @@ input{
   margin: 5px;
 
 }
-
-
 
 .addImage{
   display:inline;

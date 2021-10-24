@@ -14,10 +14,15 @@ export async function resi_list_entradas (completadas = false) {
   }
 }
 
+function ResPost (completed, error, data) {
+  this.result = completed
+  this.error = error
+  this.data = data
+}
 // para llamar los parqueaderos de residentes
 export async function resiIngresolistNF () {
   try {
-    const listR = await axios.get('/viewParqueadero')
+    const listR = await axios.get('/viewParqueadero/Resident')
     // console.log(list_R.data);
     return listR.data
   } catch (e) {
@@ -25,11 +30,6 @@ export async function resiIngresolistNF () {
   }
 }
 
-function ResPost (completed, error, data) {
-  this.result = completed
-  this.error = error
-  this.data = data
-}
 // Actualizar lahora de entrada en un parqueadero de acuerdo
 // a su ingreso
 export async function addEntradaResi (entrada) {

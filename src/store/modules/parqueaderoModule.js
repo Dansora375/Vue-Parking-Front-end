@@ -29,7 +29,7 @@ export default {
       // console.log(value)
       const result = await controller.PostParqueadero(value)
       if (result.result) {
-        alert('Dato subido con exito')
+        // alert('Dato subido con exito')
         context.commit('addNewParqueadero', value)
       } else {
         alert('No se ha podido subir el dato a la base: ')
