@@ -208,7 +208,7 @@ input{
 }
 
 .opcion_menu {
-  font-size: 17px;
+  font-size: 0.9em;
   padding-bottom: 0px;
   padding-right: 0px;
   padding-left: 0px;

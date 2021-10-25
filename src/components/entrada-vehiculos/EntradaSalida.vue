@@ -44,7 +44,7 @@
                 Terminar parqueadero
               </p>
             </template>
-            <ModalContent>
+            <ModalContent2>
               <Entradatarifa v-bind:index="this.index" @confirm="confirmar">
               </Entradatarifa>
               <template v-slot:cancelar >
@@ -57,7 +57,7 @@
                   Terminar proceso
                 </button>
               </template>
-            </ModalContent>
+            </ModalContent2>
           </Modal2>
 
           <Modal2>
@@ -102,7 +102,7 @@ import MenuDropDownItem from '../dropDown/MenuDropDownItem.vue'
 
 import Modal2 from '@/components/modal/Modal2.vue'
 import ModalContent from '@/components/modal/ModalContent.vue'
-// import ModalContent2 from '@/components/modal/ModalContent2.vue';
+import ModalContent2 from '@/components/modal/ModalContent2.vue';
 import EntradaInformation from '@/components/entrada-vehiculos/EntradaInformation.vue'
 import Entradatarifa from '@/components/entrada-vehiculos/Entradatarifa.vue'
 import { mapGetters, mapActions } from 'vuex'
@@ -116,7 +116,7 @@ export default {
     MenuDropDownItem,
     Modal2,
     ModalContent,
-    // ModalContent2,
+    ModalContent2,
     EntradaInformation,
     Entradatarifa
   },

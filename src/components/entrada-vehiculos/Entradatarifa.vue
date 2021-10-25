@@ -52,9 +52,9 @@
                             <b>{{date_salida.getDate()+'/'+(Number(date_salida.getMonth())+1)+'/'+date_salida.getFullYear()}}</b>
                         </p>
                     </div>
-                        <button class="confirmar" @click="confirmar()">
+                        <!-- <button class="confirmar" @click="confirmar()">
                             Confirmar finalización
-                        </button>
+                        </button> -->
                     </div>
                 </div>
                 <h3>${{tarifas}}</h3>
