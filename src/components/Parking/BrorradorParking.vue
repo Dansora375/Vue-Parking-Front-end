@@ -17,17 +17,17 @@
       <p class="title">
         Nombre
       </p>
-      <p class="data" v-if="tipoList==='Residente' ">
-        {{info.residente.nombre}}
+      <p class="data" v-if="tipoList==='Residente' && info.vehiculo">
+        {{info.vehiculo.ResidentOwner.nombre}}
+      </p>
+      <p class="data" v-else-if="tipoList==='Residente' && info.vehiculo=== undefined">
+        No establecido
       </p>
       <p class="data" v-if="tipoList==='Visitante'">
         {{infoVisitant.nombre}}
       </p>
-      <p class="data" v-else>
-        No establecido
-      </p>
     </div>
-    <!-- <div class="info">
+    <div class="info">
       <p class="title">
         C.C.
       </p>
@@ -40,8 +40,8 @@
       <p class="data" v-if="tipoList==='Visitante'">
         {{infoVisitant.cedula}}
       </p>
-    </div> -->
-    <!-- <div class="info"  v-if="tipoList==='Residente'">
+    </div>
+    <div class="info"  v-if="tipoList==='Residente'">
       <p class="title">
         Telefono
       </p>
@@ -51,22 +51,22 @@
        <p class="data" v-else-if="tipoList==='Residente' && info.vehiculo=== undefined">
         No establecido
       </p>
-    </div> -->
+    </div>
     <div class="info">
       <p class="title">
         Placa
       </p>
-      <!-- <p class="data" v-if="tipoList==='Residente' && info.vehiculo">
+      <p class="data" v-if="tipoList==='Residente' && info.vehiculo">
         {{info.vehiculo.placa}}
       </p>
       <p class="data" v-else-if="tipoList==='Residente' && info.vehiculo=== undefined">
         No establecida
-      </p> -->
+      </p>
       <p class="data"  v-if="tipoList==='Visitante'">
         {{infoVisitant.placa}}
       </p>
     </div>
-    <!-- <div class="info"  v-if="tipoList==='Residente'">
+    <div class="info"  v-if="tipoList==='Residente'">
       <p class="title">
         Marca
       </p>
@@ -76,8 +76,8 @@
       <p class="data" v-else-if="tipoList==='Residente' && info.vehiculo=== undefined">
         No establecida
       </p>
-    </div> -->
-    <!-- <div class="info"  v-if="tipoList==='Residente'">
+    </div>
+    <div class="info"  v-if="tipoList==='Residente'">
       <p class="title">
         Color
       </p>
@@ -87,7 +87,7 @@
       <p class="data" v-else-if="tipoList==='Residente' && info.vehiculo=== undefined">
         No establecido
       </p>
-    </div> -->
+    </div>
     <div class="info"  >
       <p class="title">
         Hora entrada
@@ -97,16 +97,16 @@
         <br>
         {{getTimeVisitant.getDate()+'/'+(Number(getTimeVisitant.getMonth())+1)+'/'+getTimeVisitant.getFullYear()}}
       </p>
-      <!-- <p class="data" v-if="tipoList==='Residente' && info.hora_entrada">
+      <p class="data" v-if="tipoList==='Residente' && info.hora_entrada">
         {{getTimeResident.getHours()}}:{{getTimeResident.getMinutes()}}
         <br>
         {{getTimeResident.getDate()+'/'+(Number(getTimeResident.getMonth())+1)+'/'+getTimeResident.getFullYear()}}
       </p>
       <p class="data" v-else-if="tipoList==='Residente' && info.hora_entrada === undefined">
         No establecida
-      </p> -->
+      </p>
     </div>
-    <!-- <div class="info"  v-if="tipoList==='Residente'">
+    <div class="info"  v-if="tipoList==='Residente'">
       <p class="title">
         Hora salida
       </p>
@@ -118,17 +118,17 @@
       <p class="data" v-else-if="tipoList==='Residente' && info.hora_salida === undefined || info.hora_salida === null">
         No establecida
       </p>
-    </div> -->
+    </div>
     <div class="info">
       <p class="title">
         Apartamento
       </p>
-      <!-- <p class="data"  v-if="tipoList==='Residente' && info.hogar">
+      <p class="data"  v-if="tipoList==='Residente' && info.hogar">
          {{info.hogar.tower}} {{info.hogar.apto_num}}
       </p>
       <p class="data" v-else-if="tipoList==='Residente' && info.hogar=== undefined">
         No establecido
-      </p> -->
+      </p>
       <p class="data" v-if="tipoList=='Visitante'">
         {{infoVisitant.tower}} {{infoVisitant.apto_num}}
       </p>
@@ -137,20 +137,20 @@
       <p class="title">
         Parqueadero
       </p>
-      <!-- <p class="data"  v-if="tipoList==='Residente'">
+      <p class="data"  v-if="tipoList==='Residente'">
         {{info.nombre_Parqueadero}}
-      </p> -->
+      </p>
     </div>
     <div class="info">
       <p class="title">
         Datos extra
       </p>
-      <!-- <p class="data" v-if="tipoList==='Residente' && info.vehiculo">
+      <p class="data" v-if="tipoList==='Residente' && info.vehiculo">
         {{info.vehiculo.datos_extra}}
       </p>
       <p class="data" v-else-if="tipoList==='Residente' && info.vehiculo=== undefined">
         No establecido
-      </p> -->
+      </p>
       <p class="data"  v-if="tipoList==='Visitante'">
         {{infoVisitant.datos_extra}}
       </p>
@@ -167,7 +167,7 @@ import Moto from '@/assets/Motorcycle.svg'
 import DefaultVehicle from '@/assets/predefined_list.svg'
 
 export default {
-  name: 'EntradaInf',
+  name: 'MasInfResident',
   props: {
     index: {
       type: Number
@@ -186,11 +186,11 @@ export default {
   },
   computed: {
 
-    ...mapGetters('ResiIngreso', ['residentIngresoList']),
+    ...mapGetters('inf_resident', ['resident_listNF']),
     ...mapGetters('entrada_salida', ['entradas']),
     info () {
       // console.log(this.entradas);
-      return this.residentIngresoList[this.index]
+      return this.resident_listNF[this.index]
     },
     infoVisitant () {
       return this.entradas[this.index]
@@ -204,26 +204,22 @@ export default {
     },
     getTimeSalidaResident () {
       return new Date(this.info.hora_salida)
-    },
-    ComprobarHogarHabitando () {
-      if (this.info.residente.hogar_habitando) {
-        console.log('hay hogar habitando')
-        return true
-      } else {
-        console.log('no hay hogar habitando')
-        return false
-      }
-    },
-    ComprobarHogar () {
-      if (this.info.residente.hogar) {
-        console.log('hay hogar')
-        return true
-      } else {
-        console.log('no hay hogar')
-        return false
-      }
     }
-    // v-if="tipoList==='Residente' && ComprobarHogarHabitando && ComprobarHogar=== false "
+    // ComprobarHogarHabitando () {
+    //   if (this.info.residente.hogar_habitando) {
+    //     return true
+    //   } else {
+    //     return false
+    //   }
+    // },
+    // ComprobarHogar () {
+    //   if (this.info.residente.hogar) {
+    //     return true
+    //   } else {
+    //     return false
+    //   }
+    // }
+
   }
 }
 

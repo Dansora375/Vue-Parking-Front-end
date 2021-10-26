@@ -69,7 +69,7 @@
               </p>
             </template>
             <ModalContent>
-              <EntradaInformation :index="this.index" :tipoList="this.tipoList" :tipoVehicle="infoVisitant.tipo" :nombre="infoVisitant.nombre" :placa="infoVisitant.placa" :HoraEntrada="infoVisitant.hora_entrada" :apartamento="infoVisitant.apto_num" :datosExtra="infoVisitant.datos_extra" :tower="infoVisitant.tower" :parqueadero="infoVisitant.parqueadero.nombre_Parqueadero">
+              <EntradaInformation :index="this.index" :tipoList="this.tipoList" :tipoVehicle="infoVisitant.tipo" :nombre="infoVisitant.nombre" :placa="infoVisitant.placa" :HoraEntrada="infoVisitant.hora_entrada" :apartamento="infoVisitant.apto_num" :datosExtra="DatosExtraVisitant" :tower="TowerVisitant" :parqueadero="infoVisitant.parqueadero.nombre_Parqueadero">
               </EntradaInformation>
               <template v-slot:cancelar>
                 <button>
@@ -108,7 +108,7 @@
           </Modal2>
 
           <!-- Modal para informacion de residentes 2-->
-          <Modal2 v-if="tipoList=='Residente' && ComprobarHogar && ComprobarHogarHabitando === false  ">
+          <Modal2 v-if="tipoList==='Residente' && ComprobarHogar && ComprobarHogarHabitando === false  ">
             <template v-slot:toggler>
               <p class="opcion_menu">
                 Mas informacion
@@ -205,6 +205,10 @@ export default {
       type: String
     }
   },
+  mounted () {
+    // this.$store.dispatch('entrada_salida/cargarEntradas')
+    // this.$store.dispatch('ResiIngreso/cargar_data_resi')
+  },
   computed: {
     ...mapGetters('entrada_salida', ['entradas']),
     ...mapGetters('ResiIngreso', ['residentIngresoList']),
@@ -233,7 +237,25 @@ export default {
       } else {
         return false
       }
+    },
+    // Para  verificar si la lista de ingresoso no
+    // tiene algun dato definido
+
+    DatosExtraVisitant () {
+      if (this.infoVisitant.datos_extra) {
+        return this.infoVisitant.datos_extra
+      } else {
+        return 'No establecidos'
+      }
+    },
+    TowerVisitant () {
+      if (this.infoVisitant.tower) {
+        return this.infoVisitant.tower
+      } else {
+        return 'No establecida'
+      }
     }
+
   },
   methods: {
     // ...mapActions('entrada_salida', ['deleteEntrada']),

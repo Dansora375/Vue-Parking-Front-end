@@ -34,3 +34,48 @@ export async function listaParqueaderosVisitantes () {
     return { data: `${error}`, completed: false }
   }
 }
+
+// para llamar los parqueaderos de residentes
+export async function parkingResident () {
+  try {
+    const listR = await axios.get('/viewParqueadero/Resident')
+    // console.log(list_R.data);
+    return listR.data
+  } catch (e) {
+    return console.log(e.response)
+  }
+}
+// para llamar los parqueaderos de VISITANTES
+export async function parkingVisitant () {
+  try {
+    const listR = await axios.get('/viewParqueadero/Visitant')
+    // console.log(list_R.data);
+    return listR.data
+  } catch (e) {
+    return console.log(e.response)
+  }
+}
+
+// Actualizar lahora de entrada en un parqueadero de acuerdo
+// a su ingreso
+export async function addEntradaResi (entrada) {
+  try {
+    // console.log(entrada)
+    const ResidentEntrada = await axios.put('/parqueaderoIngresoResi', { id: entrada.id, horaEntrada: entrada.horaEntrada })
+    // recordar probar argegando el .data en el return
+    return ResidentEntrada
+  } catch (error) {
+    return console.log(error.response)
+  }
+}
+// Actualizar lahora de salida en un parqueadero de a cuerdo
+// a la finalizacion de su ingreso
+export async function addSalidaResi (entrada) {
+  try {
+    // console.log(entrada)
+    const ResidentEntrada = await axios.put('/parqueaderoSalidaResi', { id: entrada.id, horaSalida: entrada.horaSalida })
+    return ResidentEntrada
+  } catch (error) {
+    return console.log(error.response)
+  }
+}
