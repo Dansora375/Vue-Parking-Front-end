@@ -28,7 +28,7 @@
 
         <SearchBar class="search"></SearchBar>
       </div>
-    
+
     <div class="hogares">
     <lista-residentes v-for="(item, index) of getNewResidente" :key="index" v-bind:id="item._id" v-bind:Nombre="item.nombre">
     </lista-residentes>
@@ -39,17 +39,15 @@
 
 <script>
 // @ is an alias to /src
-import ListaResidentes from '@/components/ListaResidentes.vue';
-import Header from '@/components/Header.vue';
-import Nav from '@/components/Nav.vue';
-import NewResidente from '@/components/NewResidente.vue';
-import Modal2 from '@/components/modal/Modal2.vue';
-import ModalContent from '@/components/modal/ModalContent.vue';
+import ListaResidentes from '@/components/ListaResidentes.vue'
+import Header from '@/components/Header.vue'
+import Nav from '@/components/Nav.vue'
+import NewResidente from '@/components/NewResidente.vue'
+import Modal2 from '@/components/modal/Modal2.vue'
+import ModalContent from '@/components/modal/ModalContent.vue'
 import SearchBar from '@/components/SearchButton.vue'
+// eslint-disable-next-line no-unused-vars
 import { mapGetters, mapMutations, mapActions } from 'vuex'
-
-
-
 
 export default {
   name: 'Home',
@@ -63,43 +61,43 @@ export default {
     SearchBar
   },
 
-  created() {
+  created () {
     // console.log('inmounted: ');
-    this.$store.dispatch('New_Residente/cargarResidentes');
+    this.$store.dispatch('New_Residente/cargarResidentes')
   },
-  provide() {
+  provide () {
     return {
       dataResidente: () => this.dataNewResidente,
-      updateEntrada: this.updateEntrada,
-    };
+      updateEntrada: this.updateEntrada
+    }
   },
-  data() {
+  data () {
     return {
       dataNewResidente: {
-        nombre: "",
+        nombre: '',
         cedula: 0,
         telefono: 0,
-        apto_num:0,
-        tower: "",
-        
-      },
-    };
+        apto_num: 0,
+        tower: ''
+
+      }
+    }
   },
   computed: {
-    ...mapGetters('New_Residente', ['getNewResidente']),
+    ...mapGetters('New_Residente', ['getNewResidente'])
   },
   methods: {
-    updateEntrada(values) {
-      const { key, val } = values;
-      this.dataNewResidente[key] = val;
+    updateEntrada (values) {
+      const { key, val } = values
+      this.dataNewResidente[key] = val
     },
     ...mapActions('New_Residente', ['crearResidente']),
-    agregarResidente() {
-      console.log(this.dataNewResidente);
+    agregarResidente () {
+      console.log(this.dataNewResidente)
       this.crearResidente(this.dataNewResidente)
-    },
-  },
-};
+    }
+  }
+}
 
 </script>
 <style scoped lang="scss">
@@ -123,6 +121,7 @@ export default {
   display: flex;
   justify-content: space-around;
   flex-direction: column;
+  
 }
 .boton{
   margin-top: 5px;
@@ -157,14 +156,17 @@ input{
 .nombre-user{
   font-size: 1.5em;
   color:$main-color ;
-  margin: 5px;
 
 }
-
-
 
 .addImage{
   display:inline;
   width: 40px;
+  
+}
+.hogares{
+  display: flex;
+    flex-wrap: wrap;
+    
 }
 </style>

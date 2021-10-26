@@ -25,29 +25,24 @@
             </Modal2>
             <SearchBar class="search"></SearchBar>
         </div>
-            <div class="vehicle_list">
-                <ZonaParqueadero  v-for=" (ItemResi,index) in resident_list" :key="index" :inf_estado="ItemResi.ocupado ?  'Lleno':'Vacio'" :index="index" :parqueadero_numero="ItemResi.residente.vehiculo[0].parqueadero.nombre_Parqueadero" tipoList="Residente" >
-
+        <div class="subMenu">
+          <button class="buttonMenu" id="Bt_default" @click="showParkResi">Residentes</button>
+          <button class="buttonMenu" id="Bt_default2"  @click="showParkVisitant">Visitantes</button>
+        </div>
+        <div v-show="showResidentPark">
+            <div class="vehicle_list" >
+                <ZonaParqueadero  v-for=" (ItemResi,index) in resident_listNF" :key="index" :inf_estado="ItemResi.Ocupado ?  'Lleno':'Vacio'" :index="index" :parqueadero_numero="ItemResi.nombre_Parqueadero" tipoList="Residente" :tipoVehicle="ItemResi.tipoVehicle" >
                 </ZonaParqueadero>
             </div>
-
+        </div>
+        <div v-show="showVisitantPark">
             <div class="vehicle-list" >
-                <ZonaParqueadero v-for=" (ItemVisitant,index) in entradas" :key="index" :inf_estado="ItemVisitant.ocupado ?  'Lleno':'Vacio'" :parqueadero_numero="ItemVisitant.tower + ItemVisitant.apto_num + ' -V' "  >
+                <ZonaParqueadero v-for=" (ItemVisitant,index) in entradas" :key="index" :inf_estado="ItemVisitant.ocupado ?  'Lleno':'Vacio'" :index="index" :parqueadero_numero="ItemVisitant.tower + ItemVisitant.apto_num + ' -V' " tipoList="Visitante" :tipoVehicle="ItemVisitant.tower" >
 
                 </ZonaParqueadero>
             </div>
         </div>
-             <!-- <Options_zona_P>
-
-                                </Options_zona_P>   -->
-                <!-- <div class="modal"  >
-                     <info_parqueadero/>
-                </div>   -->
-                <!-- <div class="modal">
-                     <Ing_vclo_visitante/>
-                </div>
-            -->
-
+    </div>
     </div>
 
 </template>
@@ -68,7 +63,9 @@ import ModalContent from '@/components/modal/ModalContent.vue'
 
 // ---------------------------------------
 const resetData = {
-  NombreParqueadero: ''
+  nombreParqueadero: '',
+  tipoVehicle: '',
+  tipoPersonIngr: ''
 
 }
 export default {
@@ -85,46 +82,79 @@ export default {
     Modal2,
     ModalContent
   },
-  //   provide(){
-  //     dataEntrada: () => this.dataNewParking,
-  //     updateEntrada: this.updateEntrada
-  //   },
+  provide () {
+    return {
+      dataEntradaParking: () => this.dataNewParking,
+      updateEntradaParking: this.updateEntradaParking
+    }
+  },
   data () {
     return {
       dataNewParking: {
-        nombreParqueadero: ''
+        nombreParqueadero: '',
+        tipoVehicle: '',
+        tipoPersonIngr: ''
+      },
+      showResidentPark: {
+        type: Boolean,
+        default: true
+      },
+      showVisitantPark: {
+        type: Boolean,
+        default: false
       }
     }
   },
 
   mounted () {
     this.$store.dispatch('entrada_salida/cargarEntradas')
-    this.$store.dispatch('inf_resident/cargar_data_resi')
+    this.$store.dispatch('inf_resident/cargar_data_resiNF')
+    this.showParkResi()
   },
   computed: {
 
     // ...mapState('options_zona_p',['showOptions']),
-    ...mapGetters('inf_resident', ['resident_list']),
+    ...mapGetters('inf_resident', ['resident_listNF']),
     ...mapGetters('entrada_salida', ['entradas'])
   },
 
   methods: {
-    // ...mapActions('')
+    ...mapActions('parqueadero_module', ['addNewParking']),
 
-    // agregarEntrada () {
-    //   // console.log(this.dataNewEntrada);
-    //   this.addNewEntrada(this.dataNewEntrada)
-    //   this.resetDataEntrada()
-    //   // this.toggleModal(false);
-    // },
-    // resetDataEntrada () {
-    //   this.dataNewParking = resetData
+    agregarEntrada () {
+      // console.log(this.dataNewEntrada);
+      this.addNewParking(this.dataNewParking)
+      this.resetDataEntrada()
+      // this.toggleModal(false);
+    },
+    resetDataEntrada () {
+      this.dataNewParking = resetData
+    },
+    updateEntradaParking (values) {
+      const { key, val } = values
+      this.dataNewParking[key] = val
+    },
+    showParkResi () {
+      this.showResidentPark = true
+      this.showVisitantPark = false
+      const ButtonR = document.getElementById('Bt_default')
+      ButtonR.style.fontWeight = 'bold'
+      ButtonR.style.borderBottom = '3px solid #22577A'
+      const ButtonTwo = document.getElementById('Bt_default2')
+      ButtonTwo.style.fontWeight = null
+      ButtonTwo.style.borderBottom = null
+    },
+    showParkVisitant () {
+      this.showVisitantPark = true
+      this.showResidentPark = false
+      const ButtonR = document.getElementById('Bt_default')
+      ButtonR.style.fontWeight = null
+      ButtonR.style.borderBottom = null
 
-    // },
-    // updateEntrada (values) {
-    //   const { key, val } = values
-    //   this.dataNewParking[key] = val
-    // }
+      const ButtonTwo = document.getElementById('Bt_default2')
+      ButtonTwo.style.fontWeight = 'bold'
+      ButtonTwo.style.borderBottom = '3px solid #22577A'
+    }
     // ...mapMutations('inf_resident', ['changeShowOptions']),
 
     // ...mapActions('inf_resident', ['cargar_data_resi']),
@@ -154,6 +184,15 @@ export default {
     .prue{
 
         color: transparent;
+         /* background:white; */
+    }
+
+    #addImage{
+         width: 100%;
+        max-width: 40px;
+
+        /* background:red; */
+
     }
 
     .vehicle-list{
@@ -220,6 +259,22 @@ export default {
         width: 50px;
     }
 
+    .subMenu{
+      display: flex;
+      justify-content: space-around;
+      position: sticky;
+      top: 20px;
+      background:$background-color;
+      padding-bottom: 10px;
+      // background:Red;
+
+    }
+    .buttonMenu{
+      width: 50%;
+      border-bottom: 1px solid $main-color;
+
+    }
+
   @media (max-width: 600px){
     .superior-bar{
       display: flex;
@@ -231,6 +286,7 @@ export default {
     }
     .search{
         display: flex;
+        /* margin-left: 85px; */
         justify-content: flex-end;
 
     }
@@ -241,6 +297,10 @@ export default {
      .opcion_M{
         padding: 2.5px;
         font-size: 0.7em;
+    }
+    .buttonMenu{
+      font-size: 0.8em;
+
     }
   }
 

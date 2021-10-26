@@ -1,107 +1,147 @@
 <template>
-<div>
-<section class="item">
-    
-    
-<div class="conteiner">
-  <div class="icono">
-     <img :src= imgUser> 
-  </div>
-  
-    <div class="nombre-user">{{Nombre}}
+<div class="colum">
+  <section class="item">
 
-    </div>
-    </div>
-    
+    <div class="conteiner">
+
+      <!-- Mostrar las opciones del residente al cliquear el icono -->
     <MenuDropDown>
-        <template v-slot:toggler>
-          <img class="icon-menu" src="@/assets/menu.svg" alt="">
-        </template>
-         <MenuDropDownContent class="menu-options">
-          <MenuDropDownItem class="opcion_menu">
-            <Modal2>
+      <template v-slot:toggler>
+        <div class="icono">
+          <img :src= imgUser>
+        </div>
+        <div class="nombre-user"><b>{{Nombre}}</b>
+        </div>
+      </template>
+      <MenuDropDownContent class="menu-options">
+        <MenuDropDownItem class="opcion_menu">
+
+          <!-- Ver mas informacion del residente -->
+          <Modal2>
             <template v-slot:toggler>
-              <p class="opcion_menu">
+              <menu-drop-down-item>
                 Mas informacion
-              </p>
-              <p class="opcion_menu">
-                Editar Residente
-              </p>
-              <p class="opcion_menu">
-                Eliminar Residente
-              </p>
+              </menu-drop-down-item>
             </template>
-            
+            <ModalContent>
+              <div>
+                <h1>
+                  Aun no se tiene informacion de este residente
+                </h1>
+              </div>
+              <template v-slot:cancelar>
+                <button>
+                  Cancelar
+                </button>
+              </template>
+            </ModalContent>
           </Modal2>
-          </MenuDropDownItem>
-           </MenuDropDownContent>   
-      </MenuDropDown>
-      
-  
 
+          <!-- Editar la informacion del residente -->
+          <Modal2>
+            <template v-slot:toggler>
+              <menu-drop-down-item>
+                Editar Residente
+              </menu-drop-down-item>
+            </template>
+            <ModalContent>
+              <div>
+                <h1>
+                  De momento el residente no puede ser modificado
+                </h1>
+              </div>
+              <template v-slot:cancelar>
+                <button>
+                  Cancelar
+                </button>
+              </template>
+            </ModalContent>
+          </Modal2>
 
+          <!-- Eliminar a un residente -->
+          <Modal2>
+            <template v-slot:toggler>
+              <menu-drop-down-item >
+                Eliminar Residente
+              </menu-drop-down-item>
+            </template>
+            <ModalContent>
+              <div>
+                <h1>
+                  Porque lo quieres eliminar? :c
+                </h1>
+              </div>
+              <template v-slot:cancelar>
+                <button>
+                  Cancelar
+                </button>
+              </template>
+            </ModalContent>
+          </Modal2>
+        </MenuDropDownItem>
+        </MenuDropDownContent>
+    </MenuDropDown>
 
-          
-          <!-- <MenuDropDownItem class="opcion_menu" id="Bott_cancel">
-            Cancelar
-          </MenuDropDownItem> -->
-       
+    </div>
+
+    <!-- <MenuDropDownItem class="opcion_menu" id="Bott_cancel">
+      Cancelar
+    </MenuDropDownItem> -->
   </section>
 </div>
 
 </template>
 
 <script>
+// eslint-disable-next-line no-unused-vars
 import { mapGetters, mapMutations, mapActions } from 'vuex'
 import user from '@/assets/user.svg'
 
-import MenuDropDownContent from '@/components/dropDown/MenuDropDownContent.vue';
-import MenuDropDown from '@/components//dropDown/MenuDropdown.vue';
-import MenuDropDownItem from '@/components//dropDown/MenuDropDownItem.vue';
-;
-import NewResidente from '@/components/NewResidente.vue';
-import Modal2 from '@/components/modal/Modal2.vue';
-import ModalContent from '@/components/modal/ModalContent.vue';
+import MenuDropDownContent from '@/components/dropDown/MenuDropDownContent.vue'
+import MenuDropDown from '@/components//dropDown/MenuDropdown.vue'
+import MenuDropDownItem from '@/components//dropDown/MenuDropDownItem.vue'
+import NewResidente from '@/components/NewResidente.vue'
+import Modal2 from '@/components/modal/Modal2.vue'
+import ModalContent from '@/components/modal/ModalContent.vue'
 
 export default {
   name: 'ListaResidentes',
-  components:{
+  components: {
     MenuDropDownContent,
     MenuDropDown,
     MenuDropDownItem,
+    // eslint-disable-next-line vue/no-unused-components
     NewResidente,
     Modal2,
+    // eslint-disable-next-line vue/no-unused-components
     ModalContent
 
   },
-  data(){
+  data () {
+    return {
 
-   return{
+      imgUser: user
 
-      imgUser:user
-           
-            
-        }
-    },
-    props:{
-      index: {
-      type: Number,
+    }
+  },
+  props: {
+    index: {
+      type: Number
     },
     Nombre: {
-      type: String,
-      
-    },
-    
-    
-    },
-    computed: {
-    ...mapGetters('New_Residente', ['getNewResidente']),
-    residente() {
-      console.log(this.getNewResidente[this.index]);
-      return this.getNewResidente[this.index];
-    },
+      type: String
+
+    }
+
   },
-};
+  computed: {
+    ...mapGetters('New_Residente', ['getNewResidente']),
+    residente () {
+      console.log(this.getNewResidente[this.index])
+      return this.getNewResidente[this.index]
+    }
+  }
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -122,30 +162,30 @@ a {
   color: #42b983;
 }
 .item{
-        margin-top: 50px ;
-        border-radius: 5px;
+        margin-top: 10px ;
+        margin-right: 15px;
+        border-radius: 10px;
         padding:10px ;
+        width: 90px;
         position: relative;
         background:$third-color;
-
-        display: flex;
+        
         border: 2px solid $main-color;
-        align-items: center;
-        justify-content: space-between;
+        display: flex;
+        justify-content: center;
         align-items: center;
     }
 
 .container{
- 
 
         display: flex;
-         flex-direction:column;
+        flex-direction:column;
         justify-content: space-between;
+        
         // flex-direction: column;
         align-items: center;
         width: 50%;
 
-    
 }
 .boton{
   margin-top: 5px;
@@ -167,6 +207,18 @@ input{
   border-radius: 5px;
 }
 
+.opcion_menu {
+  font-size: 0.9em;
+  padding-bottom: 0px;
+  padding-right: 0px;
+  padding-left: 0px;
+}
+
+.model-opcions {
+  right: 60%;
+  top: 65%;
+}
+
 // .usuario{
 //   margin: 20px ;
 //   width: 500px;
@@ -174,13 +226,11 @@ input{
 //   background-color:$secondary-color ;
 //   display:flex;
 //   flex-direction: row;
-  
 
 // }
 .nombre-user{
-  font-size: 1.5em;
+  font-size: 1em;
   color:$main-color ;
-  margin: 5px;
 }
 // Arreglando algunos detalles
 
