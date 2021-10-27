@@ -31,13 +31,13 @@
         </div>
         <div v-show="showResidentPark">
             <div class="vehicle_list" >
-                <ZonaParqueadero  v-for=" (ItemResi,index) in resident_listParkings" :key="index" :inf_estado="ItemResi.Ocupado ?  'Lleno':'Vacio'" :index="index" :parqueadero_numero="ItemResi.nombre_Parqueadero" tipoList="Residente" :tipoVehicle="ItemResi.tipoVehicle" :id="ItemResi._id">
+                <ZonaParqueadero  v-for=" (ItemResi,index) in resident_listNF" :key="index" :inf_estado="ItemResi.Ocupado ?  'Lleno':'Vacio'" :index="index" :parqueadero_numero="ItemResi.nombre_Parqueadero" tipoList="Residente" :tipoVehicle="ItemResi.tipoVehicle" >
                 </ZonaParqueadero>
             </div>
         </div>
         <div v-show="showVisitantPark">
             <div class="vehicle-list" >
-                <ZonaParqueadero v-for=" (ItemVisitant,index) in Visitant_listParkings" :key="index" :inf_estado="ItemVisitant.Ocupado ?  'Lleno':'Vacio'" :index="index" :parqueadero_numero="ItemVisitant.nombre_Parqueadero" tipoList="Visitante" :tipoVehicle="ItemVisitant.tipoVehicle" :id="ItemVisitant._id">
+                <ZonaParqueadero v-for=" (ItemVisitant,index) in entradas" :key="index" :inf_estado="ItemVisitant.ocupado ?  'Lleno':'Vacio'" :index="index" :parqueadero_numero="ItemVisitant.tower + ItemVisitant.apto_num + ' -V' " tipoList="Visitante" :tipoVehicle="ItemVisitant.tower" >
 
                 </ZonaParqueadero>
             </div>
@@ -48,13 +48,15 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 
 import NewParking from '@/components/Parking/ModalNewParking.vue'
 import Header from '@/components/Header.vue'
 import Navbar from '@/components/Nav.vue'
 import SearchBar from '@/components/SearchButton.vue'
 import ZonaParqueadero from '@/components/Parking/ZonaParqueadero.vue'
+import info_parqueadero from '@/components/Modal_Info_parqueadero.vue'
+import Ing_vclo_visitante from '@/components/Mdl_Ingreso_vclo_visitante.vue'
 
 import Modal2 from '@/components/modal/Modal2.vue'
 import ModalContent from '@/components/modal/ModalContent.vue'
@@ -105,15 +107,15 @@ export default {
   },
 
   mounted () {
-    this.$store.dispatch('parqueadero_module/cargar_data_visitantParkig')
-    this.$store.dispatch('parqueadero_module/cargar_data_resiParkig')
+    this.$store.dispatch('entrada_salida/cargarEntradas')
+    this.$store.dispatch('inf_resident/cargar_data_resiNF')
     this.showParkResi()
   },
   computed: {
 
     // ...mapState('options_zona_p',['showOptions']),
-    ...mapGetters('parqueadero_module', ['resident_listParkings', 'Visitant_listParkings'])
-
+    ...mapGetters('inf_resident', ['resident_listNF']),
+    ...mapGetters('entrada_salida', ['entradas'])
   },
 
   methods: {
@@ -153,19 +155,10 @@ export default {
       ButtonTwo.style.fontWeight = 'bold'
       ButtonTwo.style.borderBottom = '3px solid #22577A'
     }
-    // Una posible forma para poder los cambios al momento
-    // de actualizar, usando emit sin usar los actions
+    // ...mapMutations('inf_resident', ['changeShowOptions']),
 
-    // para talcaso agregar este evento en el componente: @eventIngrResi="dateIngrResident"
-    // dateIngrResident (value) {
-    //   console.log(value)
-    //   console.log(this.resident_listParkings)
-    //   const indiceDato = this.resident_listParkings.indexOf(
-    //     value._id
-    //   )
-    //   console.log(indiceDato)
-    //   this.resident_listParkings.splice(indiceDato, 1, value)
-    // }
+    // ...mapActions('inf_resident', ['cargar_data_resi']),
+    // ...mapActions('entrada_salida', ['cargar_parq_list'])
 
   }
 }

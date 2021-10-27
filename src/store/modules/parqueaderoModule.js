@@ -110,7 +110,7 @@ export default {
       const result = await controller.AddIngresoResi(values)
       if (result.data) {
         // console.log(values)
-        console.log(result.data)
+        // console.log(result.data)
         context.commit('AddIngResidentUpdated', result.data)
         // Este return se utilizaria en caso de querer
         // implementar la actualizacion con el emit
@@ -124,7 +124,7 @@ export default {
       const result = await controller.AddSalidaResidente(values)
       if (result.data) {
         // console.log(values)
-        console.log(result.data)
+        // console.log(result.data)
         context.commit('AddSaliResidentUpdated', result.data)
         // Este return se utilizaria en caso de querer
         // implementar la actualizacion con el emit
@@ -140,7 +140,7 @@ export default {
       const result = await controller.AddIngresoResi(values)
       if (result.data) {
         // console.log(values)
-        console.log(result.data)
+        // console.log(result.data)
         context.commit('AddIngVisitantUpdated', result.data)
         // Este return se utilizaria en caso de querer
         // implementar la actualizacion con el emit
@@ -154,7 +154,7 @@ export default {
       const result = await controller.AddSalidaResidente(values)
       if (result.data) {
         // console.log(values)
-        console.log(result.data)
+        // console.log(result.data)
         context.commit('AddSaliVisitantUpdated', result.data)
         // Este return se utilizaria en caso de querer
         // implementar la actualizacion con el emit
