@@ -13,8 +13,8 @@ export default {
       'Moto'
     ],
     tipoPersonIngrOptions: [
-      { val: 'Residente' },
-      { val: 'Visitante' }
+      'Residente',
+      'Visitante'
     ],
     ParqueaderosVisitantes: [],
     ParqueaderosResidentes: []
@@ -22,9 +22,11 @@ export default {
   },
   mutations: {
     addNewParqueadero (state, entrada) {
+      // console.log(entrada)
       state.ParqueaderosResidentes.push(entrada)
     },
     addNewParkingVisi (state, entrada) {
+      // console.log(entrada)
       state.ParqueaderosVisitantes.push(entrada)
     },
 
@@ -75,7 +77,8 @@ export default {
       const result = await controller.PostParqueadero(value)
       if (result.result) {
         // alert('Dato subido con exito')
-        context.commit('addNewParqueadero', value)
+        // console.log(result.data)
+        context.commit('addNewParqueadero', result.data.data)
       } else {
         alert('No se ha podido subir el dato a la base: ')
         console.error('Error al subir el dato  a la base : ', result.error)
@@ -87,7 +90,8 @@ export default {
       const result = await controller.PostParqueadero(value)
       if (result.result) {
         // alert('Dato subido con exito')
-        context.commit('addNewParqueadero', value)
+        // console.log(result.data)
+        context.commit('addNewParkingVisi', result.data.data)
       } else {
         alert('No se ha podido subir el dato a la base: ')
         console.error('Error al subir el dato  a la base : ', result.error)

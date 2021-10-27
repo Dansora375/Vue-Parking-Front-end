@@ -17,7 +17,7 @@
                         </button>
                     </template>
                     <template v-slot:confirmar>
-                        <button @click="agregarEntrada" class="btAcept"> <!-- MIRAR LA FUNCIONALIDAD DEL BOTON -->
+                        <button @click="agregarEntrada(dataNewParking)" class="btAcept"> <!-- MIRAR LA FUNCIONALIDAD DEL BOTON -->
                         Aceptar
                         </button>
                     </template>
@@ -31,13 +31,13 @@
         </div>
         <div v-show="showResidentPark">
             <div class="vehicle_list" >
-                <ZonaParqueadero  v-for=" (ItemResi,index) in resident_listParkings" :key="index" :inf_estado="ItemResi.Ocupado ?  'Lleno':'Vacio'" :index="index" :parqueadero_numero="ItemResi.nombre_Parqueadero" tipoList="Residente" :tipoVehicle="ItemResi.tipoVehicle" :id="ItemResi._id">
+                <ZonaParqueadero  v-for=" (ItemResi,index) in infoResiListParking" :key="index" :inf_estado="ItemResi.Ocupado ?  'Lleno':'Vacio'" :index="index" :parqueadero_numero="ItemResi.nombre_Parqueadero" tipoList="Residente" :tipoVehicle="ItemResi.tipoVehicle" :id="ItemResi._id">
                 </ZonaParqueadero>
             </div>
         </div>
         <div v-show="showVisitantPark">
             <div class="vehicle-list" >
-                <ZonaParqueadero v-for=" (ItemVisitant,index) in Visitant_listParkings" :key="index" :inf_estado="ItemVisitant.Ocupado ?  'Lleno':'Vacio'" :index="index" :parqueadero_numero="ItemVisitant.nombre_Parqueadero" tipoList="Visitante" :tipoVehicle="ItemVisitant.tipoVehicle" :id="ItemVisitant._id">
+                <ZonaParqueadero v-for=" (ItemVisitant,index) in infoVisiListParking" :key="index" :inf_estado="ItemVisitant.Ocupado ?  'Lleno':'Vacio'" :index="index" :parqueadero_numero="ItemVisitant.nombre_Parqueadero" tipoList="Visitante" :tipoVehicle="ItemVisitant.tipoVehicle" :id="ItemVisitant._id">
 
                 </ZonaParqueadero>
             </div>
@@ -112,17 +112,43 @@ export default {
   computed: {
 
     // ...mapState('options_zona_p',['showOptions']),
-    ...mapGetters('parqueadero_module', ['resident_listParkings', 'Visitant_listParkings'])
+    ...mapGetters('parqueadero_module', ['resident_listParkings', 'Visitant_listParkings']),
+    infoResiListParking () {
+      return this.resident_listParkings
+    },
+    infoVisiListParking () {
+      return this.Visitant_listParkings
+    }
 
   },
 
   methods: {
-    ...mapActions('parqueadero_module', ['addNewParking']),
+    ...mapActions('parqueadero_module', ['addNewParking', 'addNewParkingVisit']),
 
-    agregarEntrada () {
+    agregarEntrada (data) {
       // console.log(this.dataNewEntrada);
-      this.addNewParking(this.dataNewParking)
-      this.resetDataEntrada()
+      // if (this.dataNewParking.tipoVehicle === 'Residente') {
+      //   console.log('Residente')
+      //   this.addNewParking(this.dataNewParking)
+      //   this.resetDataEntrada()
+      // } else if (this.dataNewParking.tipoVehicle === 'Visitante') {
+      //   console.log('Visitante')
+
+      //   this.addNewParkingVisit(this.dataNewParking)
+      //   this.resetDataEntrada()
+      if (data.tipoPersonIngr === 'Residente') {
+        console.log('Residente')
+        this.addNewParking(data)
+        this.resetDataEntrada()
+      } else if (data.tipoPersonIngr === 'Visitante') {
+        console.log('Visitante')
+        this.addNewParkingVisit(data)
+        this.resetDataEntrada()
+      }
+      // console.log(data.tipoVehicle)
+      // this.addNewParking(data)
+      // this.resetDataEntrada()
+
       // this.toggleModal(false);
     },
     resetDataEntrada () {
@@ -131,6 +157,7 @@ export default {
     updateEntradaParking (values) {
       const { key, val } = values
       this.dataNewParking[key] = val
+      console.log(this.dataNewParking)
     },
     showParkResi () {
       this.showResidentPark = true

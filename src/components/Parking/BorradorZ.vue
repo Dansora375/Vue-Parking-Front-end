@@ -16,6 +16,9 @@
           <input type="text" placeholder="Nombre del parqueadero" id="Parqueadero" v-model="Parqueadero">
         </div>
          <div class="Rows">
+           <!-- <h2>
+            Agregar nuevo parqueadero
+          </h2> -->
           <select v-model="selectedVehicle" class="S_Vehicle">
           <option v-for="option1 in tipoVehicle" :key="option1">
           {{option1}}
@@ -23,12 +26,15 @@
         </select>
         </div>
         <div class="Rows">
-          <select v-model="selectedPerson" class="S_Vehicle">
-          <option v-for="option in tipoPersonIngr" :key="option">
-          {{option}}
+          <!-- <h2>
+            Agregar nuevo parqueadero
+          </h2> -->
+          <select v-model="selectedPerson" class="S_Vehicle" @change="imprimerOpciom">
+          <option v-for="option in tipoPersonIngr" v-bind:value="option.val " :key="option">
+          {{option.val}}
           </option>
         </select>
-
+            <!-- <button @click="imprimerOpciom">impreimasld</button> -->
         </div>
         <!-- Podria implementarse el elegir si es parqueadero de moto o carro -->
         <!-- <div class="Rows">
@@ -58,12 +64,13 @@ export default {
     return {
 
       parqueaderoImg: ImgParking
+      // selectedPerson: ' '
     }
   },
   methods: {
     imprimerOpciom () {
-      console.log(this.selectedVehicle.value)
-      console.log(this.selectedPerson.value)
+      // console.log(this.selectedVehicle.value)
+      console.log(this.selectedPerson)
     }
   },
   computed: {
@@ -160,3 +167,4 @@ select{
 }
 
 </style>
+
