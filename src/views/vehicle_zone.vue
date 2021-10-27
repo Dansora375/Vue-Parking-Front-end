@@ -25,45 +25,50 @@
             </Modal2>
             <SearchBar class="search"></SearchBar>
         </div>
-        <div class="subMenu">
-          <button class="buttonMenu" id="Bt_default" @click="showParkResi">Residentes</button>
-          <button class="buttonMenu" id="Bt_default2"  @click="showParkVisitant">Visitantes</button>
-        </div>
-        <div v-show="showResidentPark">
-            <div class="vehicle_list" >
-                <ZonaParqueadero  v-for=" (ItemResi,index) in resident_listParkings" :key="index" :inf_estado="ItemResi.Ocupado ?  'Lleno':'Vacio'" :index="index" :parqueadero_numero="ItemResi.nombre_Parqueadero" tipoList="Residente" :tipoVehicle="ItemResi.tipoVehicle" :id="ItemResi._id">
+            <div class="vehicle_list">
+                <ZonaParqueadero  v-for=" (ItemResi,index) in resident_list" :key="index" :inf_estado="ItemResi.ocupado ?  'Lleno':'Vacio'" :index="index" :parqueadero_numero="ItemResi.residente.vehiculo[0].parqueadero.nombre_Parqueadero" tipoList="Residente" >
+
                 </ZonaParqueadero>
             </div>
-        </div>
-        <div v-show="showVisitantPark">
+
             <div class="vehicle-list" >
-                <ZonaParqueadero v-for=" (ItemVisitant,index) in Visitant_listParkings" :key="index" :inf_estado="ItemVisitant.Ocupado ?  'Lleno':'Vacio'" :index="index" :parqueadero_numero="ItemVisitant.nombre_Parqueadero" tipoList="Visitante" :tipoVehicle="ItemVisitant.tipoVehicle" :id="ItemVisitant._id">
+                <ZonaParqueadero v-for=" (ItemVisitant,index) in entradas" :key="index" :inf_estado="ItemVisitant.ocupado ?  'Lleno':'Vacio'" :parqueadero_numero="ItemVisitant.tower + ItemVisitant.apto_num + ' -V' "  >
 
                 </ZonaParqueadero>
             </div>
         </div>
-    </div>
+             <!-- <Options_zona_P>
+
+                                </Options_zona_P>   -->
+                <!-- <div class="modal"  >
+                     <info_parqueadero/>
+                </div>   -->
+                <!-- <div class="modal">
+                     <Ing_vclo_visitante/>
+                </div>
+            -->
+
     </div>
 
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 
 import NewParking from '@/components/Parking/ModalNewParking.vue'
 import Header from '@/components/Header.vue'
 import Navbar from '@/components/Nav.vue'
 import SearchBar from '@/components/SearchButton.vue'
 import ZonaParqueadero from '@/components/Parking/ZonaParqueadero.vue'
+import info_parqueadero from '@/components/Modal_Info_parqueadero.vue'
+import Ing_vclo_visitante from '@/components/Mdl_Ingreso_vclo_visitante.vue'
 
 import Modal2 from '@/components/modal/Modal2.vue'
 import ModalContent from '@/components/modal/ModalContent.vue'
 
 // ---------------------------------------
 const resetData = {
-  nombreParqueadero: '',
-  tipoVehicle: '',
-  tipoPersonIngr: ''
+  NombreParqueadero: ''
 
 }
 export default {
@@ -80,92 +85,50 @@ export default {
     Modal2,
     ModalContent
   },
-  provide () {
-    return {
-      dataEntradaParking: () => this.dataNewParking,
-      updateEntradaParking: this.updateEntradaParking
-    }
-  },
+  //   provide(){
+  //     dataEntrada: () => this.dataNewParking,
+  //     updateEntrada: this.updateEntrada
+  //   },
   data () {
     return {
       dataNewParking: {
-        nombreParqueadero: '',
-        tipoVehicle: '',
-        tipoPersonIngr: ''
-      },
-      showResidentPark: {
-        type: Boolean,
-        default: true
-      },
-      showVisitantPark: {
-        type: Boolean,
-        default: false
+        nombreParqueadero: ''
       }
     }
   },
 
   mounted () {
-    this.$store.dispatch('parqueadero_module/cargar_data_visitantParkig')
-    this.$store.dispatch('parqueadero_module/cargar_data_resiParkig')
-    this.showParkResi()
+    this.$store.dispatch('entrada_salida/cargarEntradas')
+    this.$store.dispatch('inf_resident/cargar_data_resi')
   },
   computed: {
 
     // ...mapState('options_zona_p',['showOptions']),
-    ...mapGetters('parqueadero_module', ['resident_listParkings', 'Visitant_listParkings'])
-
+    ...mapGetters('inf_resident', ['resident_list']),
+    ...mapGetters('entrada_salida', ['entradas'])
   },
 
   methods: {
-    ...mapActions('parqueadero_module', ['addNewParking']),
+    // ...mapActions('')
 
-    agregarEntrada () {
-      // console.log(this.dataNewEntrada);
-      this.addNewParking(this.dataNewParking)
-      this.resetDataEntrada()
-      // this.toggleModal(false);
-    },
-    resetDataEntrada () {
-      this.dataNewParking = resetData
-    },
-    updateEntradaParking (values) {
-      const { key, val } = values
-      this.dataNewParking[key] = val
-    },
-    showParkResi () {
-      this.showResidentPark = true
-      this.showVisitantPark = false
-      const ButtonR = document.getElementById('Bt_default')
-      ButtonR.style.fontWeight = 'bold'
-      ButtonR.style.borderBottom = '3px solid #22577A'
-      const ButtonTwo = document.getElementById('Bt_default2')
-      ButtonTwo.style.fontWeight = null
-      ButtonTwo.style.borderBottom = null
-    },
-    showParkVisitant () {
-      this.showVisitantPark = true
-      this.showResidentPark = false
-      const ButtonR = document.getElementById('Bt_default')
-      ButtonR.style.fontWeight = null
-      ButtonR.style.borderBottom = null
+    // agregarEntrada () {
+    //   // console.log(this.dataNewEntrada);
+    //   this.addNewEntrada(this.dataNewEntrada)
+    //   this.resetDataEntrada()
+    //   // this.toggleModal(false);
+    // },
+    // resetDataEntrada () {
+    //   this.dataNewParking = resetData
 
-      const ButtonTwo = document.getElementById('Bt_default2')
-      ButtonTwo.style.fontWeight = 'bold'
-      ButtonTwo.style.borderBottom = '3px solid #22577A'
-    }
-    // Una posible forma para poder los cambios al momento
-    // de actualizar, usando emit sin usar los actions
-
-    // para talcaso agregar este evento en el componente: @eventIngrResi="dateIngrResident"
-    // dateIngrResident (value) {
-    //   console.log(value)
-    //   console.log(this.resident_listParkings)
-    //   const indiceDato = this.resident_listParkings.indexOf(
-    //     value._id
-    //   )
-    //   console.log(indiceDato)
-    //   this.resident_listParkings.splice(indiceDato, 1, value)
+    // },
+    // updateEntrada (values) {
+    //   const { key, val } = values
+    //   this.dataNewParking[key] = val
     // }
+    // ...mapMutations('inf_resident', ['changeShowOptions']),
+
+    // ...mapActions('inf_resident', ['cargar_data_resi']),
+    // ...mapActions('entrada_salida', ['cargar_parq_list'])
 
   }
 }
@@ -191,15 +154,6 @@ export default {
     .prue{
 
         color: transparent;
-         /* background:white; */
-    }
-
-    #addImage{
-         width: 100%;
-        max-width: 40px;
-
-        /* background:red; */
-
     }
 
     .vehicle-list{
@@ -266,22 +220,6 @@ export default {
         width: 50px;
     }
 
-    .subMenu{
-      display: flex;
-      justify-content: space-around;
-      position: sticky;
-      top: 20px;
-      background:$background-color;
-      padding-bottom: 10px;
-      // background:Red;
-
-    }
-    .buttonMenu{
-      width: 50%;
-      border-bottom: 1px solid $main-color;
-
-    }
-
   @media (max-width: 600px){
     .superior-bar{
       display: flex;
@@ -293,7 +231,6 @@ export default {
     }
     .search{
         display: flex;
-        /* margin-left: 85px; */
         justify-content: flex-end;
 
     }
@@ -304,10 +241,6 @@ export default {
      .opcion_M{
         padding: 2.5px;
         font-size: 0.7em;
-    }
-    .buttonMenu{
-      font-size: 0.8em;
-
     }
   }
 
