@@ -2,13 +2,13 @@
   <div id="dialog-newParking">
     <div class="tableTI" id="title">
       <h3>
-      Llenar Parqueadero
+      {{title}}
     </h3>
     </div>
     <div class="table">
       <img src="@/assets/Warning.svg" alt="">
       <h1>
-        ¿Esta seguro que desea llenar el parqueadero?
+        {{SubTitle}}
       </h1>
     <div class="container">
       <div class="info">
@@ -17,38 +17,16 @@
         </p>
         <div class="fechaHora">
           <p class="data">
-            {{dateEntradaResi.getDate()+'/'+(Number(dateEntradaResi.getMonth())+1)+'/'+dateEntradaResi.getFullYear()}}
+            {{dateEntrada.getDate()+'/'+(Number(dateEntrada.getMonth())+1)+'/'+dateEntrada.getFullYear()}}
           </p>
           <p class="data">
-            {{dateEntradaResi.getHours()}}:{{dateEntradaResi.getMinutes()}}
+            {{dateEntrada.getHours()}}:{{dateEntrada.getMinutes()}}
           </p>
         </div>
       </div>
     </div>
-    <!-- Implementar lo del tipo list -->
-    <!-- <div class="container">
-      <div class="info">
-        <p class="title">
-          hora
-        </p>
-        <p class="data">
-          {{dateEntradaResi.getHours()}}:{{dateEntradaResi.getMinutes()}}
-        </p>
-      </div>
-    </div> -->
 
     <div>
-
-        <!-- Podria implementarse el elegir si es parqueadero de moto o carro -->
-        <!-- <div class="Rows">
-          <select name="">
-          <option selected disabled id="S_disabled">Tipo de vehiculo</option>
-          <option value="gerente">Carro</option>
-
-          <option value="supervisor">Moto</option>
-          <option value="celador">Ambos</option>
-        </select>
-        </div> -->
 
       </div>
     </div>
@@ -62,12 +40,12 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'LlenarParking',
-  inject: ['dataNewIngresoResi', 'updateIngresoRes'],
+  inject: ['updateIngreso', 'updateSalida'],
   data () {
     return {
 
       parqueaderoImg: ImgParking,
-      dateEntradaResi: new Date()
+      dateEntrada: new Date()
 
     }
   },
@@ -75,30 +53,42 @@ export default {
     index: {
       type: Number
     },
-    tipoList: {
+
+    inf_estado: {
+      type: String
+    },
+    id: {
+      type: String
+    },
+    title: {
+      type: String
+    },
+    SubTitle: {
       type: String
     }
-    // dateEntradaResi: {
-    //   type: Date
-    // }
 
   },
   mounted () {
-    this.updateIngresoRes({ key: 'horaEntrada', val: this.dateEntradaResi })
-    this.updateIngresoRes({ key: 'id', val: this.info._id })
+    if (this.inf_estado === 'Vacio') {
+      this.updateIngreso({ key: 'horaEntrada', val: this.dateEntrada })
+      this.updateIngreso({ key: 'id', val: this.id })
+    } if (this.inf_estado === 'Lleno') {
+      this.updateSalida({ key: 'horaSalida', val: this.dateEntrada })
+      this.updateSalida({ key: 'id', val: this.id })
+    }
   },
 
   computed: {
-    ...mapGetters('inf_resident', ['resident_listNF']),
-    ...mapGetters('entrada_salida', ['entradas']),
-    info () {
-      // console.log(this.entradas);
-      return this.resident_listNF[this.index]
-    },
+    // ...mapGetters('inf_resident', ['resident_listNF']),
+    // ...mapGetters('entrada_salida', ['entradas']),
+    // info () {
+    //   // console.log(this.entradas);
+    //   return this.resident_listNF[this.index]
+    // },
 
-    getTime () {
-      return new Date(this.info.hora_entrada)
-    }
+    // getTime () {
+    //   return new Date(this.info.hora_entrada)
+    // }
 
   }
 }

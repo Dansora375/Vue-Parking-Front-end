@@ -10,21 +10,21 @@ export async function listaResidentes () {
   }
 }
 
-export async function nuevoResidente (data) {
-  const {
-    nombre,
-    cedula,
-    telefono,
-    apto_num,
-    tower
-  } = data
-  try {
-    const result = await axios.post('/residentInf')
+// export async function nuevoResidente (data) {
+//   const {
+//     nombre,
+//     cedula,
+//     telefono,
+//     apto_num,
+//     tower
+//   } = data
+//   try {
+//     const result = await axios.post('/residentInf')
 
-    console.log(result)
-    return result.data
-  } catch (error) {
-    // console.error(error);
-    return { data: error, completed: false }
-  }
-}
+//     console.log(result)
+//     return result.data
+//   } catch (error) {
+//     // console.error(error);
+//     return { data: error, completed: false }
+//   }
+// }

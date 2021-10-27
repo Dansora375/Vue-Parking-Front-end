@@ -14,45 +14,12 @@ export async function resi_list_entradas (completadas = false) {
   }
 }
 
-// para llamar los parqueaderos de residentes
-export async function resiIngresolistNF () {
-  try {
-    const listR = await axios.get('/viewParqueadero')
-    // console.log(list_R.data);
-    return listR.data
-  } catch (e) {
-    return console.log(e.response)
-  }
-}
-
 function ResPost (completed, error, data) {
   this.result = completed
   this.error = error
   this.data = data
 }
-// Actualizar lahora de entrada en un parqueadero de acuerdo
-// a su ingreso
-export async function addEntradaResi (entrada) {
-  try {
-    // console.log(entrada)
-    const ResidentEntrada = await axios.put('/parqueaderoIngresoResi', { id: entrada.id, horaEntrada: entrada.horaEntrada })
-    // recordar probar argegando el .data en el return
-    return ResidentEntrada
-  } catch (error) {
-    return console.log(error.response)
-  }
-}
-// Actualizar lahora de salida en un parqueadero de a cuerdo
-// a la finalizacion de su ingreso
-export async function addSalidaResi (entrada) {
-  try {
-    // console.log(entrada)
-    const ResidentEntrada = await axios.put('/parqueaderoSalidaResi', { id: entrada.id, horaSalida: entrada.horaSalida })
-    return ResidentEntrada
-  } catch (error) {
-    return console.log(error.response)
-  }
-}
+
 
 // PODRIA SERVIR PARA CREAR RESIDENTES PARA RICARDO
 export async function nuevo_resi (entrada) {

@@ -121,7 +121,7 @@ export default {
   display: flex;
   justify-content: space-around;
   flex-direction: column;
-  
+
 }
 .boton{
   margin-top: 5px;
@@ -150,7 +150,6 @@ input{
   background-color:$secondary-color ;
   display:flex;
   flex-direction: row;
-  
 
 }
 .nombre-user{
@@ -162,11 +161,11 @@ input{
 .addImage{
   display:inline;
   width: 40px;
-  
+
 }
 .hogares{
   display: flex;
     flex-wrap: wrap;
-    
+
 }
 </style>

@@ -43,58 +43,58 @@
       <div>
         <button id="cerrar-sesion" @click="terminarSesionMethod">cerrar sesión</button>
       </div>
-      
+
     </div>
   </div>
-  
+
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'Navbar',
   computed: {
-    ...mapGetters(['getIsNotLogged','getUserData']),
-    isGerente ( ) {
-      const usuario = this.getUserData;
+    ...mapGetters(['getIsNotLogged', 'getUserData']),
+    isGerente () {
+      const usuario = this.getUserData
       try {
         // console.log('hola')
         // console.log(usuario.type.toLowerCase(), 'hola')
-        return usuario.type.toLowerCase() === 'gerente'; 
+        return usuario.type.toLowerCase() === 'gerente'
         // console.log(usuario);
         // return true;
       } catch (error) {
-        console.error(error);
+        console.error(error)
         return false
       }
-    },
+    }
   },
   methods: {
     ...mapActions(['terminarSesion']),
-    terminarSesionMethod() {
+    terminarSesionMethod () {
       // console.log(this.getUserData);
-      const val = 'Error, no se pudo cerrar sesión';
+      const val = 'Error, no se pudo cerrar sesión'
       try {
-        this.terminarSesion();
+        this.terminarSesion()
         // console.log(this.getIsNotLogged)
         if (!this.getIsNotLogged) {
-          alert(val);
-          console.error(val);
+          alert(val)
+          console.error(val)
         }
       } catch (error) {
-        alert(val);
-        console.error(error);
+        alert(val)
+        console.error(error)
       }
     }
-      
-  },
-  
+
+  }
+
   // data(){
   //   return {
   //     opciones_nav: options_nav,
   //   };
   // },
-};
+}
 </script>
 
 <style scoped lang="scss">
@@ -102,15 +102,16 @@ export default {
 @import '@/views/scss/_theme.scss';
 .fixed{
   position:fixed;
-  padding-top: 100px;
+  // padding-top: 100px;
   height: 100%;
   top: 0;
   width: 20%;
 }
 .navegation{
-  
+
   display: flex;
   flex-direction: column;
+  padding-top: 100px;
   justify-content: space-between;
   background-color: $main-color;//Llamando a la variable del color
   // align-items: start;
@@ -122,7 +123,10 @@ export default {
 
 }
 #cerrar-sesion{
-  color: black;
+  color: $third-color;
+}
+#cerrar-sesion:hover{
+  color: $background-color;
 }
 a{
   width: 100%;

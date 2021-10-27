@@ -28,17 +28,17 @@
                     <img class="icon-menu" src="@/assets/menu.svg" alt="">
                 </template>
                 <MenuDropDownContent class="menu-options">
-                    <Modal2 >
-                        <template v-slot:toggler>
-                            <p class="opcion_menu" >
+
+                    <Modal2 v-if="tipoList==='Residente'">
+                        <template v-slot:toggler >
+                            <p class="opcion_menu" @click="CheckHoras(this.tipoList)" >
                                 Mas informacion
                             </p>
                         </template>
-
                         <ModalContent class="prueba_content ">
-                            <ModalInfResident :index="this.index" :tipoList="this.tipoList">
+                            <ModalInfResident :tipoVehicle="infoResident.tipoVehicle" :nombre="nombre" :cedula="cedula" :telefono="telefono" :marca="telefono" :color="color" :placa="placa" :HoraEntrada="horaEntrada" :HoraSalida="horaSalida" :apartamento="apartamento" :datosExtra="datosExtra" :tower="tower"
+                            :parqueadero="infoResident.nombre_Parqueadero">
                             </ModalInfResident>
-
                             <template v-slot:cancelar>
                                 <button class="btCancel">
                                     Cancelar
@@ -50,7 +50,30 @@
                                 </button>
                          </template>
                         </ModalContent>
-                        <!-- </div> -->
+
+                    </Modal2>
+                    <Modal2 v-if="tipoList==='Visitante'">
+                        <template v-slot:toggler >
+                            <p class="opcion_menu"  @click="CheckHoras(this.tipoList)" >
+                                Mas informacion
+                            </p>
+                        </template>
+                        <ModalContent class="prueba_content ">
+                            <ModalInfResident :tipoVehicle="infoVisitant.tipoVehicle" :nombre="nombre" :cedula="cedula" :telefono="telefono" :marca="telefono" :color="color" :placa="placa" :HoraEntrada="horaEntrada" :HoraSalida="horaSalida" :apartamento="apartamento" :datosExtra="datosExtra" :tower="tower"
+                            :parqueadero="infoVisitant.nombre_Parqueadero">
+                            </ModalInfResident>
+                            <template v-slot:cancelar>
+                                <button class="btCancel">
+                                    Cancelar
+                                </button>
+                            </template>
+                            <template v-slot:confirmar>
+                                <button class="btAcept">
+                                    OK
+                                </button>
+                         </template>
+                        </ModalContent>
+
                     </Modal2>
                     <Modal2  v-if="inf_estado ==='Vacio'">
                         <template v-slot:toggler >
@@ -58,9 +81,11 @@
                                 Llenar parqueadero
                             </p>
                         </template>
-                        <!-- <div class="modal"> -->
-                        <ModalContent class="prueba_content ">
-                            <ModalLlenarParking :index="this.index" :tipoList="this.tipoList">
+
+                        <ModalContent class="prueba_content" v-if="tipoList==='Residente'">
+                            <ModalLlenarParking :index="this.index"
+                            :inf_estado="inf_estado" title="Llenar Parqueadero" SubTitle="¿Esta seguro que desea llenar el parqueadero?"
+                            :id="this.id">
                             </ModalLlenarParking>
 
                             <template v-slot:cancelar>
@@ -74,7 +99,23 @@
                                 </button>
                          </template>
                         </ModalContent>
-                        <!-- </div> -->
+                        <ModalContent class="prueba_content" v-if="tipoList==='Visitante'">
+                            <ModalLlenarParking :index="this.index"
+                            :inf_estado="inf_estado" title="Llenar Parqueadero" SubTitle="¿Esta seguro que desea llenar el parqueadero?"
+                            :id="this.id">
+                            </ModalLlenarParking>
+
+                            <template v-slot:cancelar>
+                                <button class="btCancel">
+                                    Cancelar
+                                </button>
+                            </template>
+                            <template v-slot:confirmar>
+                                <button class="btAcept" @click="llenarParkingVisi">
+                                    Confirmar
+                                </button>
+                         </template>
+                        </ModalContent>
                     </Modal2>
                     <Modal2 v-if="inf_estado ==='Lleno'">
                         <template v-slot:toggler >
@@ -82,10 +123,11 @@
                                 Vaciar parqueadero
                             </p>
                         </template>
-                        <!-- <div class="modal"> -->
-                        <ModalContent class="prueba_content ">
-                            <ModalVaciarParking :index="this.index" :tipoList="this.tipoList">
-                            </ModalVaciarParking>
+                       <ModalContent class="prueba_content" v-if="tipoList==='Residente'">
+                            <ModalLlenarParking :index="this.index"
+                            :inf_estado="inf_estado" title="Vaciar Parqueadero" SubTitle="¿Esta seguro que desea vaciar el parqueadero?"
+                            :id="this.id">
+                            </ModalLlenarParking>
 
                             <template v-slot:cancelar>
                                 <button class="btCancel">
@@ -98,7 +140,24 @@
                                 </button>
                          </template>
                         </ModalContent>
-                        <!-- </div> -->
+                        <ModalContent class="prueba_content" v-if="tipoList==='Visitante'">
+                            <ModalLlenarParking :index="this.index"
+                            :inf_estado="inf_estado" title="Vaciar Parqueadero" SubTitle="¿Esta seguro que desea vaciar el parqueadero?"
+                            :id="this.id">
+                            </ModalLlenarParking>
+
+                            <template v-slot:cancelar>
+                                <button class="btCancel">
+                                    Cancelar
+                                </button>
+                            </template>
+                            <template v-slot:confirmar>
+                                <button class="btAcept" @click="VaciarParqueaderoVisi">
+                                    Confirmar
+                                </button>
+                         </template>
+                        </ModalContent>
+
                     </Modal2>
                 </MenuDropDownContent>
             </MenuDropDown>
@@ -108,7 +167,7 @@
 
 <script>
 // import Options_zona_P from '@/components/Options_zona_P.vue';
-import { mapGetters, mapMutations, mapActions } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import ParqOcupado from '@/assets/P_ocupado.svg'
 import ParqVacio from '@/assets/P_vacio.svg'
 import ImgParkingMoto from '@/assets/ImgParkingMoto.svg'
@@ -120,6 +179,7 @@ import ModalContent from '@/components/modal/ModalContent.vue'
 import ModalInfResident from '@/components/Parking/ModalInfResident.vue'
 import ModalLlenarParking from '@/components/Parking/ModalLlenarparking.vue'
 import ModalVaciarParking from '@/components/Parking/ModalVaciarParking.vue'
+import { ref } from 'vue'
 
 // import { mapGetters, mapMutations } from 'vuex'
 
@@ -135,6 +195,7 @@ const resetDataIngreso = {
 
 export default {
   name: 'ZonaParqueadero',
+
   components: {
     Modal2,
     ModalContent,
@@ -145,12 +206,13 @@ export default {
     ModalVaciarParking
 
   },
+
   provide () {
     return {
-      dataNewIngresoResi: () => this.dateIngrResident,
-      dataNewSalidaResi: () => this.dateSalidaResident,
-      updateIngresoRes: this.updateIngresoRes,
-      updateSalida: this.updateSalidaRes
+      dataNewIngreso: () => this.EntryDate,
+      dataNewSalida: () => this.exitDate,
+      updateIngreso: this.updateIngreso,
+      updateSalida: this.updateSalida
     }
   },
   data () {
@@ -158,51 +220,182 @@ export default {
       Img_ocupado: ParqOcupado,
       Img_vacio: ParqVacio,
       Img_ocupadoMoto: ImgParkingMoto,
+      // datos
 
-      dateIngrResident: {
+      nombre: ' ',
+      cedula: '',
+      telefono: '',
+      marca: ' ',
+      color: ' ',
+      placa: ' ',
+      horaEntrada: ' ',
+      horaSalida: ' ',
+      tower: ' ',
+      apartamento: ' ',
+      datosExtra: ' ',
+
+      EntryDate: {
         id: '',
         horaEntrada: ''
       },
-      dateSalidaResident: {
+      exitDate: {
         id: '',
         horaSalida: ''
       }
 
     }
   },
+  mounted () {
+    this.loadComprobacion(this.tipoList)
+  },
 
   computed: {
-    //   ...mapGetters
-    // dateIngrResi () {
-    //   return new Date()
-    // }
-  },
-  methods: {
-    ...mapActions('inf_resident', ['AgregarEntradaResi', 'AgregarSalidaResi']),
-    llenarParqueadero () {
-      this.AgregarEntradaResi(this.dateIngrResident)
-      this.resetDataEntrada()
+    ...mapGetters('parqueadero_module', ['resident_listParkings', 'Visitant_listParkings']),
+
+    infoVisitant () {
+      return this.Visitant_listParkings[this.index]
     },
-    resetDataEntrada () {
-      this.dateIngrResident = resetDataIngreso
-    },
-    updateIngresoRes (values) {
-      const { key, val } = values
-      this.dateIngrResident[key] = val
-    },
-    VaciarParqueadero () {
-      this.AgregarSalidaResi(this.dateSalidaResident)
-      this.resetDataEntrada()
-    },
-    updateSalidaRes (values) {
-      const { key, val } = values
-      this.dateSalidaResident[key] = val
+    infoResident () {
+      return this.resident_listParkings[this.index]
     }
 
-    // newdateIngrResi () {
-    //   this.dateIngrResi()
-    // }
+  },
+  methods: {
+    ...mapActions('parqueadero_module', ['AgregarEntradaParking', 'AgregarSalidaparking', 'AgregarSalidaparkingVisi', 'AgregarEntradaParkingVisi']),
 
+    llenarParqueadero () {
+      // Lo comentado serviria para implementar pruebas
+      // o para implmentar la actualiazacion de horas
+      // utilizando el emit
+
+      //   const result = this.AgregarEntradaParking(this.EntryDate)
+      this.AgregarEntradaParking(this.EntryDate)
+      // this.ComprobarHoraEntrada(this.tipoList)
+      // this.ComprobarHoraSalida(this.tipoList)
+      //   this.ejecutarEmit(result)
+      this.resetDataEntrada()
+    },
+
+    llenarParkingVisi () {
+      // Lo comentado serviria para implementar pruebas
+      // o para implmentar la actualiazacion de horas
+      // utilizando el emit
+
+      //   const result = this.AgregarEntradaParking(this.EntryDate)
+      this.AgregarEntradaParkingVisi(this.EntryDate)
+      // this.ComprobarHoraEntrada(this.tipoList)
+      // this.ComprobarHoraSalida(this.tipoList)
+      //   this.ejecutarEmit(result)
+      this.resetDataEntrada()
+    },
+
+    VaciarParqueadero () {
+      this.AgregarSalidaparking(this.exitDate)
+      // this.ComprobarHoraEntrada(this.tipoList)
+      // this.ComprobarHoraSalida(this.tipoList)
+      this.resetDataSalida()
+    },
+    VaciarParqueaderoVisi () {
+      this.AgregarSalidaparkingVisi(this.exitDate)
+      // this.ComprobarHoraEntrada(this.tipoList)
+      // this.ComprobarHoraSalida(this.tipoList)
+      this.resetDataSalida()
+    },
+
+    // ejecutarEmit (data) {
+    //   this.$emit('eventIngrResi', data)
+    // },
+    resetDataEntrada () {
+      this.EntryDate = resetDataIngreso
+    },
+
+    resetDataSalida () {
+      this.EntryDate = resetData
+    },
+
+    updateIngreso (values) {
+      const { key, val } = values
+      this.EntryDate[key] = val
+    },
+
+    updateSalida (values) {
+      const { key, val } = values
+      this.exitDate[key] = val
+    },
+
+    // Para capturar error en caso de que el parqueadero
+    // no tenga vehiculo y/u hogar establecido
+    comprobarContenido (tipo) {
+      this.ComprobarVehiculo(tipo)
+      this.ComprobarHogar(tipo)
+      this.ComprobarHoraEntrada(tipo)
+      this.ComprobarHoraSalida(tipo)
+    },
+    ComprobarHogar (tipo) {
+      if (tipo.hogar) {
+        // console.log('hay hogar')
+        this.tower = tipo.hogar.tower
+        this.apartamento = tipo.hogar.apto_num
+      } else {
+        // console.log('no hay hogar')
+        this.tower = 'No establecida'
+        this.apartamento = 'No establecido'
+      }
+    },
+    ComprobarVehiculo (tipo) {
+      if (tipo.vehiculo) {
+        // console.log('hay vehiculo')
+        this.nombre = tipo.vehiculo.ResidentOwner.nombre
+        this.cedula = tipo.vehiculo.ResidentOwner.cedula
+        this.telefono = tipo.vehiculo.ResidentOwner.telefono
+        this.marca = tipo.vehiculo.marca
+        this.placa = tipo.vehiculo.placa
+        this.color = tipo.vehiculo.color
+        this.datosExtra = tipo.vehiculo.datos_extra
+      } else {
+        // console.log('no hay vehiculo')
+        this.nombre = 'No establecido'
+        this.cedula = 'No establecida'
+        this.telefono = 'No establecido'
+        this.marca = 'No establecida'
+        this.placa = 'No establecida'
+        this.color = 'No establecido'
+        this.datosExtra = 'No establecidos'
+      }
+    },
+    // para hacer la comprobacion cuando se
+    CheckHoras (tipoList) {
+      if (tipoList === 'Visitante') {
+        this.ComprobarHoraEntrada(this.infoVisitant)
+        this.ComprobarHoraSalida(this.infoVisitant)
+      } else if (tipoList === 'Residente') {
+        // this.comprobarContenido(this.infoResident)
+        this.ComprobarHoraEntrada(this.infoResident)
+        this.ComprobarHoraSalida(this.infoResident)
+      }
+    },
+    ComprobarHoraEntrada (tipo) {
+      if (tipo.hora_entrada) {
+        this.horaEntrada = tipo.hora_entrada
+      } else {
+        this.horaEntrada = 'No establecida'
+      }
+    },
+    ComprobarHoraSalida (tipo) {
+      if (tipo.hora_salida) {
+        this.horaSalida = tipo.hora_salida
+      } else {
+        this.horaSalida = 'No establecida'
+      }
+    },
+    // -----------------------------------------------
+    loadComprobacion (tipoList) {
+      if (tipoList === 'Visitante') {
+        this.comprobarContenido(this.infoVisitant)
+      } else if (tipoList === 'Residente') {
+        this.comprobarContenido(this.infoResident)
+      }
+    }
   },
 
   props: {
@@ -222,6 +415,9 @@ export default {
       type: String
     },
     tipoVehicle: {
+      type: String
+    },
+    id: {
       type: String
     }
 

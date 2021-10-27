@@ -1,43 +1,51 @@
-import * as controller from '@/Controladores/NewResidenteController';
-
+import * as controller from '@/Controladores/NewResidenteController'
+import * as controllerResi from '@/Controladores/ResidentController'
 
 export default {
   namespaced: true,
   state: {
-    
-    registrosResidente: [],
-      
-    },
-    // showModalNewEntrada: false,
-    
+
+    registrosResidente: []
+
+  },
+  // showModalNewEntrada: false,
 
   mutations: {
-    addResidente(state, residente) {
-      state.registrosResidente.push(residente);
+    addResidente (state, residente) {
+      state.registrosResidente.push(residente)
     },
-   
-    createListaResidentes(state, entradasr) {
-      state.registrosResidente = entradasr;
-      console.log('datos: ', state.registrosResidente);
 
+    createListaResidentes (state, entradasr) {
+      state.registrosResidente = entradasr
+      // console.log('datos: ', state.registrosResidente)
     },
+    add_resi (state, data) {
+      state.registrosResidente.push(data)
+    }
     // cambiarEstadoParking(state, index){
     // }
 
-    
   },
   actions: {
-    async cargarResidentes(context) {
-     
-      const listaResidentes = await controller.ObtainLista();
-      context.commit('createListaResidentes', listaResidentes.data);
-        
+    async cargarResidentes (context) {
+      const listaResidentes = await controller.ObtainLista()
+      context.commit('createListaResidentes', listaResidentes.data)
     },
 
-    async crearResidente(context, data) {
-      const result = await controller.nuevoResidente(data);
-      console.log('En module', result);
-    },
+    // async crearResidente (context, data) {
+    //   const result = await controller.nuevoResidente(data)
+    //   console.log('En module', result)
+    // },
+
+    async addNewResident (context, value) {
+      const result = await controllerResi.post_Resident(value)
+      if (result.result) {
+        context.commit('add_resi', result.data)
+      } else {
+        alert('No se ha podido subir el dato del residente a la base: ')
+        console.log('Error al subir el dato del resiedente a la base : ', result.error)
+      }
+    }
     // async cambiarEstadoParqueadero(context, index){
 
     // }
@@ -45,7 +53,7 @@ export default {
     // changeModalNewEntrada(context, value) {
     //   context.commit('changeShowModalNewEntrada', value);
     // },
-    
+
   },
   getters: {
     // getNombre(state) {
@@ -72,10 +80,10 @@ export default {
     // showModalNewEntrada(state) {
     //   return state.showModalNewEntrada;
     // },
-    
-    getNewResidente(state) {
-      return state.registrosResidente;
+
+    getNewResidente (state) {
+      return state.registrosResidente
       // return state.registrosEntrada;
-    },
-  },
-};
+    }
+  }
+}
