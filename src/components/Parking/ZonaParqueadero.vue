@@ -369,7 +369,7 @@ export default {
         this.ComprobarHoraEntrada(this.infoVisitant)
         this.ComprobarHoraSalida(this.infoVisitant)
       } else if (tipoList === 'Residente') {
-        this.comprobarContenido(this.infoResident)
+        // this.comprobarContenido(this.infoResident)
         this.ComprobarHoraEntrada(this.infoResident)
         this.ComprobarHoraSalida(this.infoResident)
       }

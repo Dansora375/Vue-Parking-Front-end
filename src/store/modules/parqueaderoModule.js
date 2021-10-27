@@ -13,8 +13,8 @@ export default {
       'Moto'
     ],
     tipoPersonIngrOptions: [
-      'Residente',
-      'Visitante'
+      { val: 'Residente' },
+      { val: 'Visitante' }
     ],
     ParqueaderosVisitantes: [],
     ParqueaderosResidentes: []
