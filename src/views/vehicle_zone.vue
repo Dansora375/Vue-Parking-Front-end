@@ -137,11 +137,11 @@ export default {
       //   this.addNewParkingVisit(this.dataNewParking)
       //   this.resetDataEntrada()
       if (data.tipoPersonIngr === 'Residente') {
-        console.log('Residente')
+        // console.log('Residente')
         this.addNewParking(data)
         this.resetDataEntrada()
       } else if (data.tipoPersonIngr === 'Visitante') {
-        console.log('Visitante')
+        // console.log('Visitante')
         this.addNewParkingVisit(data)
         this.resetDataEntrada()
       }
@@ -157,7 +157,7 @@ export default {
     updateEntradaParking (values) {
       const { key, val } = values
       this.dataNewParking[key] = val
-      console.log(this.dataNewParking)
+      // console.log(this.dataNewParking)
     },
     showParkResi () {
       this.showResidentPark = true
