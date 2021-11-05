@@ -16,6 +16,7 @@
           <input type="text" placeholder="Nombre del parqueadero" id="Parqueadero" v-model="Parqueadero">
         </div>
          <div class="Rows">
+           <label class="Sub_title" >Tipo de vehiculo : </label>
           <select v-model="selectedVehicle" class="S_Vehicle">
           <option v-for="option1 in tipoVehicle" :key="option1">
           {{option1}}
@@ -23,6 +24,7 @@
         </select>
         </div>
         <div class="Rows">
+          <label class="Sub_title" >Tipo de persona : </label>
           <select v-model="selectedPerson" class="S_Vehicle">
           <option v-for="option in tipoPersonIngr" :key="option">
           {{option}}
@@ -152,6 +154,10 @@ select{
   margin: 10px;
   // margin-bottom: 10px;
 
+}
+.Sub_title{
+   font-weight: 900;
+  font-size: 1.2em;
 }
 
 </style>

@@ -40,7 +40,7 @@
         </template>
         <MenuDropDownContent class="menu-options">
 
-          <!-- <Modal2>
+          <Modal2>
             <template v-slot:toggler>
               <p class="opcion_menu">
                 Terminar parqueadero
@@ -54,13 +54,13 @@
                   Cancelar
                 </button>
               </template>
-              <template v-slot:confirmar v-if="estaConfirmado">
-                <button >
-                  Terminar proceso
+              <template v-slot:confirmar >
+                <button class="btAcept">
+                  Confirmar finalización
                 </button>
               </template>
             </ModalContent>
-          </Modal2> -->
+          </Modal2>
           <!-- Modal para informacion de visitantes -->
           <Modal2  v-if="tipoList==='Visitante'">
             <template v-slot:toggler>

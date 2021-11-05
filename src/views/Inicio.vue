@@ -32,33 +32,33 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'Inicio',
-  data() {
+  data () {
     return {
       usuario: '',
-      contraseña: '',
-    };
+      contraseña: ''
+    }
   },
-  
+
   computed: {
-    ...mapGetters(['getUserData', 'getIsNotLogged']),
+    ...mapGetters(['getUserData', 'getIsNotLogged'])
   },
   methods: {
     ...mapActions(['loginWithUser']),
-    loguin() {
+    loguin () {
       try {
-        this.loginWithUser({ user: this.usuario, password: this.contraseña });
+        this.loginWithUser({ user: this.usuario, password: this.contraseña })
         // console.log(this.getUserData);
         // alert(this.getUserData);
       } catch (error) {
-        console.log(error);
+        console.log(error)
       }
-    },
-  },
-};
+    }
+  }
+}
 </script>
 
 <style scoped lang="scss" >
@@ -107,10 +107,11 @@ button {
 /*
 propiedad para responsive */
 .main {
+
   display: flex;
   flex-wrap: wrap-reverse;
   // vertical-align: middle;
- 
+
 }
 
 // input:-webkit-autofill,
@@ -156,8 +157,7 @@ NO es necesario ya que el anterior le da a los dos*/
 /* distancia de separacion entre titulo y logo y pantalla */
 .cont-flex div {
   padding-top: 75px;
-  
-  
+
 }
 
 .contenido__title {
@@ -189,7 +189,7 @@ NO es necesario ya que el anterior le da a los dos*/
 
   flex-direction: column;
   padding-top: 125px;
-  
+
 }
 
 .formulario input {
