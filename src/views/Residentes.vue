@@ -93,7 +93,7 @@ export default {
     },
     ...mapActions('New_Residente', ['addNewResidente']),
     agregarResidente () {
-      console.log(this.dataNewResidente)
+      //console.log(this.dataNewResidente)
       this.addNewResidente(this.dataNewResidente)
     }
   }

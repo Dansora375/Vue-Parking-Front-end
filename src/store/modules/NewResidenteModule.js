@@ -18,10 +18,8 @@ export default {
     createListaResidentes (state, entradasr) {
       state.registrosResidente = entradasr
       // console.log('datos: ', state.registrosResidente)
-    },
-    add_resi (state, data) {
-      state.registrosResidente.push(data)
     }
+
     // cambiarEstadoParking(state, index){
     // }
 
@@ -40,10 +38,10 @@ export default {
     async addNewResidente (context, value) {
       const result = await controllerResi.post_Resident(value)
       if (result.result) {
-        context.commit(' addNewResidente', result.data.data)
+        context.commit(' addNewResidente', result.data)
       } else {
         alert('No se ha podido subir el dato del residente a la base: ')
-        //console.log('Error al subir el dato del resiedente a la base : ', result.error)
+        // console.log('Error al subir el dato del resiedente a la base : ', result.error)
       }
     }
     // async cambiarEstadoParqueadero(context, index){
