@@ -20,11 +20,16 @@ function ResPost (completed, error, data) {
   this.data = data
 }
 
-
 // PODRIA SERVIR PARA CREAR RESIDENTES PARA RICARDO
 export async function nuevo_resi (entrada) {
   try {
-    const Resident_Entrada = await axios.post('/residentInf', { nombre: entrada.nombre, cedula: entrada.cedula, telefono: entrada.telefono, apto_num: entrada.apto_num, tower: entrada.tower, placa: entrada.placa, marca: entrada.marca, color: entrada.color, tipo: entrada.tipo, datos_extra: entrada.extra })
+    const Resident_Entrada = await axios.post('/residentInf', {
+      nombre: entrada.nombre,
+      cedula: entrada.cedula,
+      telefono: entrada.telefono,
+      apto_num: entrada.apto_num,
+      tower: entrada.tower
+    })
     return ResPost(true, {}, Resident_Entrada)
   } catch (error) {
     return new ResPost(false, error, {})

@@ -91,10 +91,10 @@ export default {
       const { key, val } = values
       this.dataNewResidente[key] = val
     },
-    ...mapActions('New_Residente', ['crearResidente']),
+    ...mapActions('New_Residente', ['addNewResidente']),
     agregarResidente () {
       console.log(this.dataNewResidente)
-      this.crearResidente(this.dataNewResidente)
+      this.addNewResidente(this.dataNewResidente)
     }
   }
 }

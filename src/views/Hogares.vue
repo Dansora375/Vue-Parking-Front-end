@@ -129,9 +129,9 @@ export default {
   },
   methods: {
     ...mapActions('hogares_module', ['crearHome', 'cambiarOwner']),
-    updateEntrada(values) {
-      const { key, val } = values;
-      this.dataNewHogar[key] = val;
+    updateEntrada (values) {
+      const { key, val } = values
+      this.dataNewHogar[key] = val
     },
     agregarHogar () {
       // eslint-disable-next-line max-len
@@ -228,7 +228,7 @@ select{
   padding-top: 10px;
   line-height: 0;
   color: $main-color;
-  
+
 }
 .bus{
   font-size: 20px;
@@ -245,7 +245,7 @@ input{
   width: 140px;
   // margin-left: 5px;
   border-radius: 5px;
-  
+
 }
 // .contenedor{
 //   margin-right: -70px;
@@ -271,7 +271,7 @@ input{
   width: 50px;
   margin-top: 15px;
   border-radius: 5px;
-  
+
 }
 .bus{
   font-size: 10px;

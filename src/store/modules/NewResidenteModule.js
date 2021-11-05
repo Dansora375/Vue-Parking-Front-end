@@ -11,7 +11,7 @@ export default {
   // showModalNewEntrada: false,
 
   mutations: {
-    addResidente (state, residente) {
+    addNewResidente (state, residente) {
       state.registrosResidente.push(residente)
     },
 
@@ -37,13 +37,13 @@ export default {
     //   console.log('En module', result)
     // },
 
-    async addNewResident (context, value) {
+    async addNewResidente (context, value) {
       const result = await controllerResi.post_Resident(value)
       if (result.result) {
-        context.commit('add_resi', result.data)
+        context.commit(' addNewResidente', result.data.data)
       } else {
         alert('No se ha podido subir el dato del residente a la base: ')
-        console.log('Error al subir el dato del resiedente a la base : ', result.error)
+        //console.log('Error al subir el dato del resiedente a la base : ', result.error)
       }
     }
     // async cambiarEstadoParqueadero(context, index){

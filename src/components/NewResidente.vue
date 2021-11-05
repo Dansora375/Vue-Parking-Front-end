@@ -2,7 +2,7 @@
 <template>
   <div class="residente">
       <h1>
-      Ingreso de nuevos residentes 
+      Ingreso de nuevos residentes
     </h1>
        <div class="Rows">
         <label for="nombre" >Nombre : </label>
@@ -25,80 +25,69 @@
         <input type="text" placeholder="Letra de la torre" v-model="tower" id="towerr">
       </div>
       <div class="Rows">
-        <label for="placa" >Placa : </label>
-        <input type="text" placeholder="Placa del vehiculo" v-model="placa"
-        id="placar">
+
       </div>
       </div>
 </template>
 
 <script>
-import { mapGetters, mapActions, mapMutations } from 'vuex';
-
+import { mapGetters, mapActions, mapMutations } from 'vuex'
 
 export default {
   name: 'NewResidente',
   inject: ['toggle', 'dataResidente', 'updateEntrada'],
-  data() {
+  data () {
     return {
-     
-    };
+
+    }
   },
   computed: {
     ...mapGetters('New_Residente', ['getNewResidente']),
     nombre: {
-      get() {
-        return this.dataResidente.nombre;
+      get () {
+        return this.dataResidente.nombre
       },
-      set(value) {
-        this.updateEntrada({ key: 'nombre', val: value });
-      },
+      set (value) {
+        this.updateEntrada({ key: 'nombre', val: value })
+      }
     },
     cedula: {
-      get() {
-        return this.dataResidente.cedula;
+      get () {
+        return this.dataResidente.cedula
       },
-      set(value) {
-        this.updateEntrada({ key: 'cedula', val: value });
-      },
+      set (value) {
+        this.updateEntrada({ key: 'cedula', val: value })
+      }
     },
 
     telefono: {
-      get() {
-        return this.dataResidente.telefono;
+      get () {
+        return this.dataResidente.telefono
       },
-      set(value) {
-        this.updateEntrada({ key: 'telefono', val: value });
-      },
+      set (value) {
+        this.updateEntrada({ key: 'telefono', val: value })
+      }
     },
     apto_num: {
-      get() {
-        return this.dataResidente.apto_num;
+      get () {
+        return this.dataResidente.apto_num
       },
-      set(value) {
-        this.updateEntrada({ key: 'apto_num', val: value });
-      },
+      set (value) {
+        this.updateEntrada({ key: 'apto_num', val: value })
+      }
     },
     tower: {
-      get() {
-        return this.dataResidente.tower;
+      get () {
+        return this.dataResidente.tower
       },
-      set(value) {
-        this.updateEntrada({ key: 'tower', val: value });
-      },
-    },
-    placa: {
-      get() {
-        return this.dataResidente.placa;
-      },
-      set(value) {
-        this.updateEntrada({ key: 'placa', val: value });
-      },
-    },
-    
-  },
-  
-};
+      set (value) {
+        this.updateEntrada({ key: 'tower', val: value })
+      }
+    }
+
+  }
+
+}
 </script>
 
 <style>
